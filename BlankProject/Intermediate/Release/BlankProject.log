@@ -1,0 +1,10 @@
+﻿  BlankProject.cpp
+D:\MyProgramming\RayEngine\E5\RayEngine\Ray\Source\Platform\Win32\SubObject.h(23,17): warning C4251: "Win32::SubObject::m_Class": class "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>" erfordert eine DLL-Schnittstelle, die von Clients von class "Win32::SubObject" verwendet wird
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5187): message : Siehe Deklaration von "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>"
+D:\MyProgramming\RayEngine\E5\RayEngine\Ray\Source\Platform\Win32\SubObject.h(24,17): warning C4251: "Win32::SubObject::m_Title": class "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>" erfordert eine DLL-Schnittstelle, die von Clients von class "Win32::SubObject" verwendet wird
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5187): message : Siehe Deklaration von "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>"
+  Code wird generiert.
+  Previous IPDB not found, fall back to full compilation.
+  All 9 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Codegenerierung ist abgeschlossen.
+  BlankProject.vcxproj -> D:\MyProgramming\RayEngine\E5\RayEngine\Build\Release\BlankProject.exe
