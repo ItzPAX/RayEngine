@@ -62,6 +62,18 @@
     <Filter Include="Source\pch">
       <UniqueIdentifier>{a27e7e1a-112f-4fcd-ae99-65ac7bf21ae4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Platform\glfw">
+      <UniqueIdentifier>{87d7986a-e1ca-4ef4-9337-39269c6daa60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Platform\glfw\Classes">
+      <UniqueIdentifier>{e659de84-66ca-4fec-899b-dc33b1931447}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Platform\glfw\Private">
+      <UniqueIdentifier>{7092d0ec-ddf4-4bdc-8669-5c04305117b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Platform\glfw\Public">
+      <UniqueIdentifier>{69acafb2-909b-40cc-9d4b-3710f63d139e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\PerGameSettings.cpp">
@@ -111,6 +123,9 @@
     </ClCompile>
     <ClCompile Include="Source\Ray.cpp">
       <Filter>Source\pch</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGL\Includes\glad\glad.c">
+      <Filter>Source\Core\Private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

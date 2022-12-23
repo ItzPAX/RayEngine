@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Ray",
+    "\\Ray\\OpenGL",
+    "\\Ray\\Source",
+    "\\Ray\\Source\\Platform"
   ],
-  "SelectedNode": "\\RayEngine.sln",
+  "SelectedNode": "\\Ray\\Source\\Platform\\GLAD",
   "PreviewInSolutionExplorer": false
 }

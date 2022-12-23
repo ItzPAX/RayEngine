@@ -11,4 +11,4 @@
 #include "../resource.h"
 
 // Core engine features
-#include "Core/CoreMinimal.h"
+#include "Core/Core.h"

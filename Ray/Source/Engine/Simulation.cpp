@@ -14,6 +14,11 @@ namespace Ray {
 	{
 	}
 
+	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+	{
+		glViewport(0, 0, width, height);
+	}
+
 	VOID Simulation::PreInitialize()
 	{
 		// log info about game
@@ -29,6 +34,30 @@ namespace Ray {
 
 		Win32::Window::RegisterNewClass();
 		Win32::Window::Initialize();
+
+		glfwInit();
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
+		GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+		glfwMakeContextCurrent(window);
+
+		// init glad before calling any opengl funcs
+		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+		}
+
+		glViewport(0, 0, 800, 600);
+
+		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+		while (!glfwWindowShouldClose(window))
+		{
+			glfwSwapBuffers(window);
+			glfwPollEvents();
+		}
+		glfwTerminate();
 	}
 
 	LRESULT Simulation::MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
