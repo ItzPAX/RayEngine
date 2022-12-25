@@ -1,6 +1,11 @@
 #include "BlankProject.h"
 #include "Engine/Simulation.h"
+
+// WindowsAPI
 #include "Platform/Win32/w32WinEntry.h"
+
+// GLFW (OpenGL)
+#include "Platform/glfw/glfwWinEntry.h"
 
 class BlankProject : public Ray::Simulation {
 
@@ -18,14 +23,18 @@ public:
 	/* Called to setup our per game settings  */
 	VOID SetupPerGameSettings();
 
-	/* Called to Initialize the Application  */
-	VOID Initialize() {};
+	// WINAPI Init
+	VOID w32Initialize() {};
+	// WINAPI Update
+	VOID w32Update() {};
 
-	/* Game Loop - Called on a loop while the Application is running */
-	VOID Update() {};
+	// GLFW Init
+	VOID glfwInitialize(GLFWwindow* window) {};
+	// GLFW Update
+	VOID glfwUpdate(GLFWwindow* window) {};
 };
 
-ENTRYAPP(BlankProject)
+ENTRYAPPGLFW(BlankProject)
 
 VOID BlankProject::SetupPerGameSettings()
 {

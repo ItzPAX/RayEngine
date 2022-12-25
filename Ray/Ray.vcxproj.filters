@@ -127,6 +127,21 @@
     <ClCompile Include="OpenGL\Includes\glad\glad.c">
       <Filter>Source\Core\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Platform\glfw\glfwIApplication.cpp">
+      <Filter>Source\Platform\glfw\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Platform\glfw\glfwWindow.cpp">
+      <Filter>Source\Platform\glfw\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Platform\glfw\glfwGlfwUtils.cpp">
+      <Filter>Source\Platform\glfw\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Platform\glfw\glfwCaption.cpp">
+      <Filter>Source\Platform\glfw\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Platform\glfw\glfwSubObject.cpp">
+      <Filter>Source\Platform\glfw\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\PerGameSettings.h">
@@ -153,9 +168,6 @@
     <ClInclude Include="Source\Common\Time.h">
       <Filter>Source\Common\Public</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Platform\WIN32\w32WinEntry.h">
-      <Filter>Source\Platform\Win32\Public</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Common\CmdLineArgs.h">
       <Filter>Source\Common\Public</Filter>
     </ClInclude>
@@ -179,6 +191,27 @@
     </ClInclude>
     <ClInclude Include="Source\Ray.h">
       <Filter>Source\pch</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Platform\glfw\glfwIApplication.h">
+      <Filter>Source\Platform\glfw\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Platform\glfw\glfwWinEntry.h">
+      <Filter>Source\Platform\glfw\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Platform\Win32\w32WinEntry.h">
+      <Filter>Source\Platform\Win32\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Platform\glfw\glfwWindow.h">
+      <Filter>Source\Platform\glfw\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Platform\glfw\glfwGlfwUtils.h">
+      <Filter>Source\Platform\glfw\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Platform\glfw\glfwCaption.h">
+      <Filter>Source\Platform\glfw\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Platform\glfw\glfwSubObject.h">
+      <Filter>Source\Platform\glfw\Classes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

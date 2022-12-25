@@ -59,7 +59,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>BUILD_DLL;_DEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;BUILD_DLL;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -83,7 +83,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>BUILD_DLL;NDEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;BUILD_DLL;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
@@ -118,6 +118,11 @@
     <ClCompile Include="Source\Engine\REngine.cpp" />
     <ClCompile Include="Source\Engine\Simulation.cpp" />
     <ClCompile Include="Source\Engine\Splashscreen.cpp" />
+    <ClCompile Include="Source\Platform\glfw\glfwCaption.cpp" />
+    <ClCompile Include="Source\Platform\glfw\glfwGlfwUtils.cpp" />
+    <ClCompile Include="Source\Platform\glfw\glfwIApplication.cpp" />
+    <ClCompile Include="Source\Platform\glfw\glfwSubObject.cpp" />
+    <ClCompile Include="Source\Platform\glfw\glfwWindow.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32Caption.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32IApplication.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32SubObject.cpp" />
@@ -136,11 +141,17 @@
     <ClInclude Include="Source\Engine\REngine.h" />
     <ClInclude Include="Source\Engine\Simulation.h" />
     <ClInclude Include="Source\Engine\Splashscreen.h" />
+    <ClInclude Include="Source\Platform\glfw\glfwCaption.h" />
+    <ClInclude Include="Source\Platform\glfw\glfwGlfwUtils.h" />
+    <ClInclude Include="Source\Platform\glfw\glfwIApplication.h" />
+    <ClInclude Include="Source\Platform\glfw\glfwSubObject.h" />
+    <ClInclude Include="Source\Platform\glfw\glfwWindow.h" />
+    <ClInclude Include="Source\Platform\glfw\glfwWinEntry.h" />
     <ClInclude Include="Source\Platform\Win32\w32IApplication.h" />
     <ClInclude Include="Source\Platform\Win32\w32SubObject.h" />
     <ClInclude Include="Source\Platform\Win32\w32Win32Utils.h" />
     <ClInclude Include="Source\Platform\Win32\w32Window.h" />
-    <ClInclude Include="Source\Platform\WIN32\w32WinEntry.h" />
+    <ClInclude Include="Source\Platform\Win32\w32WinEntry.h" />
     <ClInclude Include="Source\Ray.h" />
     <ClInclude Include="Source\Platform\Win32\w32Caption.h" />
   </ItemGroup>

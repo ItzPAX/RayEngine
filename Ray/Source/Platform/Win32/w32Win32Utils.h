@@ -1,8 +1,5 @@
 #pragma once
 
-#define DEFAULT_WIDTH 1000
-#define DEFAULT_HEIGHT 600
-
 namespace Win32 {
 
     enum WindowType : DWORD {

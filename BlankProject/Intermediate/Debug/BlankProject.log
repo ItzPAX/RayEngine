@@ -6,4 +6,9 @@ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.3162
 D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.h(9,72): warning C4275: class "Win32::Caption" ist keine DLL-Schnittstelle und wurde als Basisklasse für die DLL-Schnittstelle class "Win32::Window" verwendet
 D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Caption.h(8): message : Siehe Deklaration von "Win32::Caption"
 D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.h(9): message : Siehe Deklaration von "Win32::Window"
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwSubObject.h(16,13): warning C4251: "glfw::SubObject::m_Title": class "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" erfordert eine DLL-Schnittstelle, die von Clients von class "glfw::SubObject" verwendet wird
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5186): message : Siehe Deklaration von "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwWindow.h(5,45): warning C4275: class "glfw::Caption" ist keine DLL-Schnittstelle und wurde als Basisklasse für die DLL-Schnittstelle class "glfw::Window" verwendet
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwCaption.h(8): message : Siehe Deklaration von "glfw::Caption"
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwWindow.h(5): message : Siehe Deklaration von "glfw::Window"
   BlankProject.vcxproj -> D:\MyProgramming\OpenGL\RayEngine\Build\Debug\BlankProject.exe
