@@ -22,15 +22,18 @@ namespace Ray {
 		Logger::PrintLog(L"Game Name: %s\n", PerGameSettings::GameName());
 		Logger::PrintLog(L"Boot Time: %s\n", Time::GetDateTimeString().c_str());
 		Logger::PrintLog(L"Engine Mode: %s\n", Engine::EngineModeToString().c_str());
-		Logger::PrintLog(L"Starting in DirectX Mode...\n");
+		Logger::PrintLog(L"OpenGL Version: 4.6\n");
 		Logger::PrintDebugSeperator();
 
 		// start our splashscreen
 		SplashScreen::Open();
 
+		// create window
 		Win32::Window::RegisterNewClass();
 		Win32::Window::Initialize();
+		Win32::Window::MakeCurrentContext();
 	}
+
 	LRESULT Simulation::MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 		switch (message)

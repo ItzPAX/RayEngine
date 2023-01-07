@@ -20,6 +20,9 @@ int CALLBACK WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 	// start logger
 	Logger logger;
 
+	// start graphics
+	Graphics graphics;
+
 	// tell engine to initialize
 	EntryApp->PreInitialize();
 
@@ -41,6 +44,8 @@ int CALLBACK WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 			EntryApp->Update();
 		}
 	}
+
+	EntryApp->Quit();
 
 	return 0;
 }

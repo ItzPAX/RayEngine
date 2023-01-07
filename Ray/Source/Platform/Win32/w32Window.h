@@ -13,7 +13,10 @@ namespace Win32 {
 		~Window();
 
 		virtual VOID Initialize() override;
+		virtual VOID Present(bool bVsync) override;
 		virtual	LRESULT	MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) override;
+
+		VOID MakeCurrentContext();
 
 		// Message Handler functions
 		VOID OnNonClientCreate();
@@ -34,15 +37,19 @@ namespace Win32 {
 
 		BOOL		m_Active;
 
+		HGLRC		m_Context;
+
 		// Getters
 	public:
 		SIZE		Size() { return m_Size; }
 		BOOL		Active() { return m_Active; }
+		HGLRC		Context() { return m_Context; }
 
 		// Setters
 	public:
 		VOID		Size(SIZE size) { m_Size = size; }
 		VOID		Size(INT cx, INT cy) { m_Size.cx = cx; m_Size.cy = cy; }
 		VOID		Active(BOOL active) { m_Active = active; }
+		VOID		Context(HGLRC context) { m_Context = context; }
 	};
 }

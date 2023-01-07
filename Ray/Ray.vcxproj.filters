@@ -62,6 +62,24 @@
     <Filter Include="Source\pch">
       <UniqueIdentifier>{a27e7e1a-112f-4fcd-ae99-65ac7bf21ae4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\vendor">
+      <UniqueIdentifier>{48fbf6dd-8d36-4f06-bfa3-9c80d39d051a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\vendor\glad">
+      <UniqueIdentifier>{f42b9696-52ce-408e-a8c8-1fab2fa71c40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\vendor\glad\src">
+      <UniqueIdentifier>{62316965-c858-4258-98e3-c85fb4ac5263}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\vendor\glad\include">
+      <UniqueIdentifier>{abfb49f4-3359-4c7d-8b91-faa33798f775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\vendor\glad\include\glad">
+      <UniqueIdentifier>{a9d385b5-9493-4325-9d83-33971dbd6bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\vendor\glad\include\KHR">
+      <UniqueIdentifier>{8884a6e9-164a-485b-b967-a2a69c415220}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\PerGameSettings.cpp">
@@ -112,8 +130,14 @@
     <ClCompile Include="Source\Ray.cpp">
       <Filter>Source\pch</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGL\Includes\glad\glad.c">
-      <Filter>Source\Core\Private</Filter>
+    <ClCompile Include="..\vendor\glad\src\glad.c">
+      <Filter>Source\vendor\glad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\glad\src\glad_wgl.c">
+      <Filter>Source\vendor\glad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Graphics.cpp">
+      <Filter>Source\Engine\Private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +191,18 @@
     </ClInclude>
     <ClInclude Include="Source\Platform\Win32\w32WinEntry.h">
       <Filter>Source\Platform\Win32\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\glad\include\glad\glad.h">
+      <Filter>Source\vendor\glad\include\glad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\glad\include\glad\glad_wgl.h">
+      <Filter>Source\vendor\glad\include\glad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\glad\include\KHR\khrplatform.h">
+      <Filter>Source\vendor\glad\include\KHR</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine\Graphics.h">
+      <Filter>Source\Engine\Classes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

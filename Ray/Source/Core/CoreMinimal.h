@@ -28,5 +28,5 @@
 #endif
 
 // OpenGL libs
+#include <glad/glad_wgl.h>
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>

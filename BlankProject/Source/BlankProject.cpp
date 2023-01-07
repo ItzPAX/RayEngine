@@ -20,10 +20,18 @@ public:
 	/* Called to setup our per game settings  */
 	VOID SetupPerGameSettings();
 
-	// WINAPI Init
-	VOID Initialize() {};
-	// WINAPI Update
-	VOID Update() {};
+	// Init
+	VOID Initialize() {}
+
+	// Update
+	VOID Update() 
+	{
+		Graphics::Instance()->Clear(0.4f, 0.4f, 0.8f, 1.f);
+		Simulation::Present(true);
+	}
+
+	// Quit
+	VOID Quit() {}
 };
 
 ENTRYAPP(BlankProject)

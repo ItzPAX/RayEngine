@@ -11,6 +11,7 @@ namespace Win32 {
 		// create windows class and register it
 		virtual VOID RegisterNewClass();
 		virtual VOID Initialize() = 0;
+		virtual VOID Present(bool bVsync) = 0;
 
 	protected:
 		static			LRESULT CALLBACK	SetupMessageHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -21,9 +22,9 @@ namespace Win32 {
 		WSTRING		m_Class;
 		WSTRING		m_Title;
 					
-		HICON				m_hIcon;
+		HICON		m_hIcon;
 
-		HWND				m_Handle;
+		HWND		m_Handle;
 
 		// Getters
 	public:

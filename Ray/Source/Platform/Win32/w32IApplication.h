@@ -28,6 +28,9 @@ namespace Win32 {
 
 		/* Game Loop - Called on a loop while the Application is running */
 		virtual VOID Update() = 0;
+
+		/* Called on quitting the game */
+		virtual VOID Quit() = 0;
 	};
 
 	extern IApplication* EntryApplication();
