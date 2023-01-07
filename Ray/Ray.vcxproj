@@ -70,7 +70,7 @@
     <Link>
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -96,7 +96,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -118,11 +118,6 @@
     <ClCompile Include="Source\Engine\REngine.cpp" />
     <ClCompile Include="Source\Engine\Simulation.cpp" />
     <ClCompile Include="Source\Engine\Splashscreen.cpp" />
-    <ClCompile Include="Source\Platform\glfw\glfwCaption.cpp" />
-    <ClCompile Include="Source\Platform\glfw\glfwGlfwUtils.cpp" />
-    <ClCompile Include="Source\Platform\glfw\glfwIApplication.cpp" />
-    <ClCompile Include="Source\Platform\glfw\glfwSubObject.cpp" />
-    <ClCompile Include="Source\Platform\glfw\glfwWindow.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32Caption.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32IApplication.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32SubObject.cpp" />
@@ -141,12 +136,6 @@
     <ClInclude Include="Source\Engine\REngine.h" />
     <ClInclude Include="Source\Engine\Simulation.h" />
     <ClInclude Include="Source\Engine\Splashscreen.h" />
-    <ClInclude Include="Source\Platform\glfw\glfwCaption.h" />
-    <ClInclude Include="Source\Platform\glfw\glfwGlfwUtils.h" />
-    <ClInclude Include="Source\Platform\glfw\glfwIApplication.h" />
-    <ClInclude Include="Source\Platform\glfw\glfwSubObject.h" />
-    <ClInclude Include="Source\Platform\glfw\glfwWindow.h" />
-    <ClInclude Include="Source\Platform\glfw\glfwWinEntry.h" />
     <ClInclude Include="Source\Platform\Win32\w32IApplication.h" />
     <ClInclude Include="Source\Platform\Win32\w32SubObject.h" />
     <ClInclude Include="Source\Platform\Win32\w32Win32Utils.h" />

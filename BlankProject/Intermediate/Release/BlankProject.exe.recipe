@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\MyProgramming\RayEngine\E5\RayEngine\Build\Release\Ray.dll</FullPath>
+      <FullPath>D:\MyProgramming\OpenGL\RayEngine\Build\Release\Ray.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\MyProgramming\RayEngine\E5\RayEngine\Build\Release\BlankProject.exe</FullPath>
+      <FullPath>D:\MyProgramming\OpenGL\RayEngine\Build\Release\BlankProject.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

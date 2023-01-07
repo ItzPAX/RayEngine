@@ -23,7 +23,7 @@ namespace Engine {
 		case EngineMode::RELEASE:	return L"Release";
 		case EngineMode::SERVER:	return L"Server";
 		case EngineMode::EDITOR:	return L"Editor";
-		default:     return L"None";
+		default:					return L"None";
 		}
 	}
 }

@@ -62,18 +62,6 @@
     <Filter Include="Source\pch">
       <UniqueIdentifier>{a27e7e1a-112f-4fcd-ae99-65ac7bf21ae4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Platform\glfw">
-      <UniqueIdentifier>{87d7986a-e1ca-4ef4-9337-39269c6daa60}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Platform\glfw\Classes">
-      <UniqueIdentifier>{e659de84-66ca-4fec-899b-dc33b1931447}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Platform\glfw\Private">
-      <UniqueIdentifier>{7092d0ec-ddf4-4bdc-8669-5c04305117b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Platform\glfw\Public">
-      <UniqueIdentifier>{69acafb2-909b-40cc-9d4b-3710f63d139e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\PerGameSettings.cpp">
@@ -127,21 +115,6 @@
     <ClCompile Include="OpenGL\Includes\glad\glad.c">
       <Filter>Source\Core\Private</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Platform\glfw\glfwIApplication.cpp">
-      <Filter>Source\Platform\glfw\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Platform\glfw\glfwWindow.cpp">
-      <Filter>Source\Platform\glfw\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Platform\glfw\glfwGlfwUtils.cpp">
-      <Filter>Source\Platform\glfw\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Platform\glfw\glfwCaption.cpp">
-      <Filter>Source\Platform\glfw\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Platform\glfw\glfwSubObject.cpp">
-      <Filter>Source\Platform\glfw\Private</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\PerGameSettings.h">
@@ -192,26 +165,8 @@
     <ClInclude Include="Source\Ray.h">
       <Filter>Source\pch</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Platform\glfw\glfwIApplication.h">
-      <Filter>Source\Platform\glfw\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Platform\glfw\glfwWinEntry.h">
-      <Filter>Source\Platform\glfw\Public</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Platform\Win32\w32WinEntry.h">
       <Filter>Source\Platform\Win32\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Platform\glfw\glfwWindow.h">
-      <Filter>Source\Platform\glfw\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Platform\glfw\glfwGlfwUtils.h">
-      <Filter>Source\Platform\glfw\Public</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Platform\glfw\glfwCaption.h">
-      <Filter>Source\Platform\glfw\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Platform\glfw\glfwSubObject.h">
-      <Filter>Source\Platform\glfw\Classes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

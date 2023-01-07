@@ -1,5 +1,8 @@
 #pragma once
 
+// Disable dll / glfw warnings
+#pragma warning( disable : 4251 4275 4099 )
+
 // DLL Im/Export
 #ifdef BUILD_DLL
 	#define RAY_API __declspec(dllexport)
@@ -14,9 +17,6 @@
 // defines for windows
 #define DEFAULT_WIDTH 1000
 #define DEFAULT_HEIGHT 600
-
-//#define DirectX // Uncomment for DirectX implementation
-#define OpenGL	// Uncomment for OpenGL implementation
 
 typedef std::wstring WSTRING;
 typedef std::string  STRING;

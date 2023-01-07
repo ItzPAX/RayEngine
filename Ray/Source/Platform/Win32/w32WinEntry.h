@@ -4,12 +4,11 @@
 #include "Common/CmdLineArgs.h"
 #include "Engine/Splashscreen.h"
 
-extern Win32::IApplication* w32EntryApplication();
+extern Win32::IApplication* EntryApplication();
 
-#ifdef DirectX
 int CALLBACK WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 {
-	auto EntryApp = w32EntryApplication();
+	auto EntryApp = EntryApplication();
 
 	// fill game settings
 	PerGameSettings GameSettings;
@@ -22,10 +21,10 @@ int CALLBACK WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 	Logger logger;
 
 	// tell engine to initialize
-	EntryApp->w32PreInitialize();
+	EntryApp->PreInitialize();
 
 	// tell game to start initializing
-	EntryApp->w32Initialize();
+	EntryApp->Initialize();
 
 	MSG msg = { 0 };
 	while (msg.message != WM_QUIT)
@@ -39,10 +38,9 @@ int CALLBACK WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 		// Let the game update
 		else 
 		{
-			EntryApp->w32Update();
+			EntryApp->Update();
 		}
 	}
 
 	return 0;
 }
-#endif

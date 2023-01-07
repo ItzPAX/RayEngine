@@ -1,6 +1,6 @@
 #pragma once
 
-#define ENTRYAPPW32(x) Win32::IApplication* w32EntryApplication() { return new x; }
+#define ENTRYAPP(x) Win32::IApplication* EntryApplication() { return new x; }
 
 namespace Win32 {
 
@@ -21,14 +21,14 @@ namespace Win32 {
 		virtual VOID SetupPerGameSettings() = 0;
 
 		/* Called before Initializing the Application  */
-		virtual VOID w32PreInitialize() = 0;
+		virtual VOID PreInitialize() = 0;
 
 		/* Called to Initialize the Application  */
-		virtual VOID w32Initialize() = 0;
+		virtual VOID Initialize() = 0;
 
 		/* Game Loop - Called on a loop while the Application is running */
-		virtual VOID w32Update() = 0;
+		virtual VOID Update() = 0;
 	};
 
-	extern IApplication* w32EntryApplication();
+	extern IApplication* EntryApplication();
 }

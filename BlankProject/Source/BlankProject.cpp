@@ -4,9 +4,6 @@
 // WindowsAPI
 #include "Platform/Win32/w32WinEntry.h"
 
-// GLFW (OpenGL)
-#include "Platform/glfw/glfwWinEntry.h"
-
 class BlankProject : public Ray::Simulation {
 
 	// Application
@@ -24,17 +21,12 @@ public:
 	VOID SetupPerGameSettings();
 
 	// WINAPI Init
-	VOID w32Initialize() {};
+	VOID Initialize() {};
 	// WINAPI Update
-	VOID w32Update() {};
-
-	// GLFW Init
-	VOID glfwInitialize(GLFWwindow* window) {};
-	// GLFW Update
-	VOID glfwUpdate(GLFWwindow* window) {};
+	VOID Update() {};
 };
 
-ENTRYAPPGLFW(BlankProject)
+ENTRYAPP(BlankProject)
 
 VOID BlankProject::SetupPerGameSettings()
 {

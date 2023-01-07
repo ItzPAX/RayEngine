@@ -5,8 +5,7 @@
 namespace Ray {
 
 	Simulation::Simulation()
-		: glfw::Window("MainApplication", NULL),
-		  Win32::Window(L"MainApplication", NULL)
+		: Win32::Window(L"MainApplication", NULL)
 	{
 
 	}
@@ -15,7 +14,7 @@ namespace Ray {
 	{
 	}
 
-	VOID Simulation::w32PreInitialize()
+	VOID Simulation::PreInitialize()
 	{
 		// log info about game
 		Logger::PrintDebugSeperator();
@@ -39,25 +38,5 @@ namespace Ray {
 
 		}
 		return Win32::Window::MessageHandler(hwnd, message, wParam, lParam);
-	}
-
-
-	GLFWwindow* Simulation::glfwPreInitialize()
-	{
-		// log info about game
-		Logger::PrintDebugSeperator();
-		Logger::PrintLog(L"Application Starting...\n");
-		Logger::PrintLog(L"Game Name: %s\n", PerGameSettings::GameName());
-		Logger::PrintLog(L"Boot Time: %s\n", Time::GetDateTimeString().c_str());
-		Logger::PrintLog(L"Engine Mode: %s\n", Engine::EngineModeToString().c_str());
-		Logger::PrintLog(L"Starting in OpenGL Mode...\n");
-		Logger::PrintDebugSeperator();
-
-		// start our splashscreen
-		SplashScreen::Open();
-
-		glfw::Window::Initialize();
-
-		return glfw::Window::Handle();
 	}
 }

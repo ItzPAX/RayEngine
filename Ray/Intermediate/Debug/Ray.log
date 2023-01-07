@@ -1,69 +1,25 @@
-﻿  glfwIApplication.cpp
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32SubObject.h(21,12): warning C4251: "Win32::SubObject::m_Class": class "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>" erfordert eine DLL-Schnittstelle, die von Clients von class "Win32::SubObject" verwendet wird
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5187): message : Siehe Deklaration von "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32SubObject.h(22,12): warning C4251: "Win32::SubObject::m_Title": class "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>" erfordert eine DLL-Schnittstelle, die von Clients von class "Win32::SubObject" verwendet wird
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5187): message : Siehe Deklaration von "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.h(9,72): warning C4275: class "Win32::Caption" ist keine DLL-Schnittstelle und wurde als Basisklasse für die DLL-Schnittstelle class "Win32::Window" verwendet
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Caption.h(8): message : Siehe Deklaration von "Win32::Caption"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.h(9): message : Siehe Deklaration von "Win32::Window"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwSubObject.h(16,13): warning C4251: "glfw::SubObject::m_Title": class "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" erfordert eine DLL-Schnittstelle, die von Clients von class "glfw::SubObject" verwendet wird
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5186): message : Siehe Deklaration von "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwWindow.h(5,45): warning C4275: class "glfw::Caption" ist keine DLL-Schnittstelle und wurde als Basisklasse für die DLL-Schnittstelle class "glfw::Window" verwendet
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwCaption.h(8): message : Siehe Deklaration von "glfw::Caption"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwWindow.h(5): message : Siehe Deklaration von "glfw::Window"
-  glfwSubObject.cpp
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32SubObject.h(21,12): warning C4251: "Win32::SubObject::m_Class": class "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>" erfordert eine DLL-Schnittstelle, die von Clients von class "Win32::SubObject" verwendet wird
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5187): message : Siehe Deklaration von "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32SubObject.h(22,12): warning C4251: "Win32::SubObject::m_Title": class "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>" erfordert eine DLL-Schnittstelle, die von Clients von class "Win32::SubObject" verwendet wird
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5187): message : Siehe Deklaration von "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.h(9,72): warning C4275: class "Win32::Caption" ist keine DLL-Schnittstelle und wurde als Basisklasse für die DLL-Schnittstelle class "Win32::Window" verwendet
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Caption.h(8): message : Siehe Deklaration von "Win32::Caption"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.h(9): message : Siehe Deklaration von "Win32::Window"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwSubObject.h(16,13): warning C4251: "glfw::SubObject::m_Title": class "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" erfordert eine DLL-Schnittstelle, die von Clients von class "glfw::SubObject" verwendet wird
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5186): message : Siehe Deklaration von "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwWindow.h(5,45): warning C4275: class "glfw::Caption" ist keine DLL-Schnittstelle und wurde als Basisklasse für die DLL-Schnittstelle class "glfw::Window" verwendet
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwCaption.h(8): message : Siehe Deklaration von "glfw::Caption"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwWindow.h(5): message : Siehe Deklaration von "glfw::Window"
-  glfwWindow.cpp
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32SubObject.h(21,12): warning C4251: "Win32::SubObject::m_Class": class "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>" erfordert eine DLL-Schnittstelle, die von Clients von class "Win32::SubObject" verwendet wird
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5187): message : Siehe Deklaration von "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32SubObject.h(22,12): warning C4251: "Win32::SubObject::m_Title": class "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>" erfordert eine DLL-Schnittstelle, die von Clients von class "Win32::SubObject" verwendet wird
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5187): message : Siehe Deklaration von "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.h(9,72): warning C4275: class "Win32::Caption" ist keine DLL-Schnittstelle und wurde als Basisklasse für die DLL-Schnittstelle class "Win32::Window" verwendet
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Caption.h(8): message : Siehe Deklaration von "Win32::Caption"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.h(9): message : Siehe Deklaration von "Win32::Window"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwSubObject.h(16,13): warning C4251: "glfw::SubObject::m_Title": class "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" erfordert eine DLL-Schnittstelle, die von Clients von class "glfw::SubObject" verwendet wird
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5186): message : Siehe Deklaration von "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwWindow.h(5,45): warning C4275: class "glfw::Caption" ist keine DLL-Schnittstelle und wurde als Basisklasse für die DLL-Schnittstelle class "glfw::Window" verwendet
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwCaption.h(8): message : Siehe Deklaration von "glfw::Caption"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwWindow.h(5): message : Siehe Deklaration von "glfw::Window"
+﻿  CmdLineArgs.cpp
+  Logger.cpp
+  Time.cpp
+  Core.cpp
+  CoreDefinitions.cpp
+  CoreMinimal.cpp
+  PerGameSettings.cpp
+  REngine.cpp
+  Simulation.cpp
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Engine\Simulation.cpp(39,3): warning C4060: switch-Anweisung enthält weder "case"- noch "default"-Bezeichnungen
+  Splashscreen.cpp
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Engine\Splashscreen.cpp(63,91): warning C4267: "Argument": Konvertierung von "size_t" nach "int", Datenverlust möglich
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Engine\Splashscreen.cpp(68,87): warning C4267: "Argument": Konvertierung von "size_t" nach "int", Datenverlust möglich
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Engine\Splashscreen.cpp(49,12): warning C4101: "hmemdc": Unreferenzierte lokale Variable
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Engine\Splashscreen.cpp(48,11): warning C4101: "hbitmap": Unreferenzierte lokale Variable
+  w32Caption.cpp
+  w32IApplication.cpp
+  w32SubObject.cpp
+  w32Win32Utils.cpp
+  w32Window.cpp
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.cpp(129,105): warning C4267: "Argument": Konvertierung von "size_t" nach "int", Datenverlust möglich
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.cpp(158,129): warning C4267: "Argument": Konvertierung von "size_t" nach "int", Datenverlust möglich
   Ray.cpp
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32SubObject.h(21,12): warning C4251: "Win32::SubObject::m_Class": class "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>" erfordert eine DLL-Schnittstelle, die von Clients von class "Win32::SubObject" verwendet wird
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5187): message : Siehe Deklaration von "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32SubObject.h(22,12): warning C4251: "Win32::SubObject::m_Title": class "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>" erfordert eine DLL-Schnittstelle, die von Clients von class "Win32::SubObject" verwendet wird
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5187): message : Siehe Deklaration von "std::basic_string<wchar_t,std::char_traits<wchar_t>,std::allocator<wchar_t>>"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.h(9,72): warning C4275: class "Win32::Caption" ist keine DLL-Schnittstelle und wurde als Basisklasse für die DLL-Schnittstelle class "Win32::Window" verwendet
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Caption.h(8): message : Siehe Deklaration von "Win32::Caption"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.h(9): message : Siehe Deklaration von "Win32::Window"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwSubObject.h(16,13): warning C4251: "glfw::SubObject::m_Title": class "std::basic_string<char,std::char_traits<char>,std::allocator<char>>" erfordert eine DLL-Schnittstelle, die von Clients von class "glfw::SubObject" verwendet wird
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.33.31629\include\xstring(5186): message : Siehe Deklaration von "std::basic_string<char,std::char_traits<char>,std::allocator<char>>"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwWindow.h(5,45): warning C4275: class "glfw::Caption" ist keine DLL-Schnittstelle und wurde als Basisklasse für die DLL-Schnittstelle class "glfw::Window" verwendet
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwCaption.h(8): message : Siehe Deklaration von "glfw::Caption"
-D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\glfw\glfwWindow.h(5): message : Siehe Deklaration von "glfw::Window"
-glfw3.lib(init.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(init.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(window.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(window.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(context.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(context.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(input.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(input.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(win32_init.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(win32_init.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(win32_monitor.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(win32_monitor.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(win32_time.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(win32_time.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(win32_thread.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(win32_thread.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(monitor.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(monitor.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(vulkan.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(vulkan.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(win32_window.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(win32_window.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(win32_joystick.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(win32_joystick.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(wgl_context.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(wgl_context.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(egl_context.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(egl_context.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
-glfw3.lib(osmesa_context.obj) : warning LNK4099: PDB "glfw3.pdb" wurde nicht mit "glfw3.lib(osmesa_context.obj)" oder an "D:\MyProgramming\OpenGL\RayEngine\Build\Debug\glfw3.pdb" gefunden; Objekt wird verknüpft, als ob keine Debuginformationen vorhanden wären.
      Bibliothek "D:\MyProgramming\OpenGL\RayEngine\\Build\Debug\Ray.lib" und Objekt "D:\MyProgramming\OpenGL\RayEngine\\Build\Debug\Ray.exp" werden erstellt.
   Ray.vcxproj -> D:\MyProgramming\OpenGL\RayEngine\Build\Debug\Ray.dll
