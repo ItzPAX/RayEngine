@@ -7,6 +7,9 @@
 #include <string>
 #include <list>
 
+// Pointers
+#include <memory>
+
 // Resources (icons etc...)
 #include "../resource.h"
 

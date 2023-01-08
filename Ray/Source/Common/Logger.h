@@ -17,6 +17,11 @@ public:
 	// Print to Log File
 	static VOID PrintLog(const WCHAR* fmt, ...);
 
+	// OGL3D Messsages
+	static VOID PrintOGL3DError(const WCHAR* msg);
+	static VOID PrintOGL3DWarning(const WCHAR* msg);
+	static VOID PrintOGL3DInfo(const WCHAR* msg);
+
 	// Get Log Directory & File
 	static WSTRING LogDirectory();
 	static WSTRING LogFile();

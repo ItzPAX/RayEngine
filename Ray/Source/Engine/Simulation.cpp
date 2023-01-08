@@ -31,7 +31,10 @@ namespace Ray {
 		// create window
 		Win32::Window::RegisterNewClass();
 		Win32::Window::Initialize();
+
+		// make window opengl ready
 		Win32::Window::MakeCurrentContext();
+		Graphics::Instance()->SetViewport(GetInnerSize());
 	}
 
 	LRESULT Simulation::MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)

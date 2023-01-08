@@ -81,6 +81,7 @@ namespace Win32 {
 		case WM_NCPAINT:		{ OnNonClientPaint(reinterpret_cast<HRGN>(wParam));			}	return FALSE;
 		case WM_NCLBUTTONDOWN:	{ OnNonClientLeftMouseButtonDown();							}	break;
 		case WM_NCLBUTTONDBLCLK:{ Win32::Utils::MaximizeWindow(Handle());					}	return FALSE;
+		case WM_SIZE:			{ OnResize();												}	return FALSE;
 
 		case WM_PAINT:			{ OnPaint();												}	break;
 		case WM_GETMINMAXINFO:	{ OnGetMinMaxInfo(reinterpret_cast<MINMAXINFO*>(lParam));	}	return FALSE;
@@ -89,6 +90,13 @@ namespace Win32 {
 		}
 
 		return SubObject::MessageHandler(hwnd, message, wParam, lParam);
+	}
+
+	Rect Window::GetInnerSize()
+	{
+		RECT rc = {};
+		GetClientRect(Handle(), &rc);
+		return Rect(rc.right - rc.left, rc.bottom - rc.top);
 	}
 
 	VOID Window::MakeCurrentContext()
@@ -265,5 +273,10 @@ namespace Win32 {
 		DeleteObject(brush);
 
 		EndPaint(Handle(), &ps);
+	}
+
+	VOID Win32::Window::OnResize()
+	{
+		Graphics::Instance()->SetViewport(GetInnerSize());
 	}
 }

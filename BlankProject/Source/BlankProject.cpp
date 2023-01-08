@@ -4,6 +4,9 @@
 // WindowsAPI
 #include "Platform/Win32/w32WinEntry.h"
 
+VertexArrayObjectPtr m_VAO;
+ShaderProgramPtr m_Shader;
+
 class BlankProject : public Ray::Simulation {
 
 	// Application
@@ -21,12 +24,50 @@ public:
 	VOID SetupPerGameSettings();
 
 	// Init
-	VOID Initialize() {}
+	VOID Initialize() 
+	{
+		float triangleVertices[] = {
+			-0.5f, -0.5f, 0.f,		// POSITION
+			1,0,0,					// COLOR
+
+			0.5f, -0.5f, 0.f,
+			0,1,0,
+
+			0.f, 0.5f, 0.f,
+			0,0,1
+		};
+
+		VertexAttribute attribList[] = {
+			3,						// POSITION
+			3						// COLOR
+		};
+
+		m_VAO = Graphics::Instance()->CreateVertexArrayObject
+		({ 
+			triangleVertices, 
+			sizeof(float) * (3 + 3),
+			3,
+
+			attribList,
+			2
+		});
+
+		m_Shader = Graphics::Instance()->CreateShaderProgram
+		({
+			L"D:/MyProgramming/OpenGL/RayEngine/Build/Debug/Content/Engine/Shaders/ExampleShader.vert", 
+			L"D:/MyProgramming/OpenGL/RayEngine/Build/Debug/Content/Engine/Shaders/ExampleShader.frag"
+		});
+	}
 
 	// Update
 	VOID Update() 
 	{
-		Graphics::Instance()->Clear(0.4f, 0.4f, 0.8f, 1.f);
+		Graphics::Instance()->Clear(Vec4D(0.3f,0.3f,0.7f,0.5f));
+		Graphics::Instance()->SetShaderProgram(m_Shader);
+		Graphics::Instance()->SetVertexArrayObject(m_VAO);
+
+		Graphics::Instance()->DrawTriangles(m_VAO->GetVertexBufferSize(), 0);
+
 		Simulation::Present(true);
 	}
 

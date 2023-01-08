@@ -16,6 +16,7 @@ namespace Win32 {
 		virtual VOID Present(bool bVsync) override;
 		virtual	LRESULT	MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) override;
 
+		Rect GetInnerSize();
 		VOID MakeCurrentContext();
 
 		// Message Handler functions
@@ -27,6 +28,7 @@ namespace Win32 {
 		VOID OnGetMinMaxInfo(MINMAXINFO* minmax);
 		VOID OnExitSizeMove();
 		VOID OnPaint();
+		VOID OnResize();
 
 		// Window Title etc.
 		VOID PaintCaption(HDC hdc);

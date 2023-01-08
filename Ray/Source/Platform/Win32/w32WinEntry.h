@@ -45,6 +45,7 @@ int CALLBACK WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 		}
 	}
 
+	// let the game know we quit
 	EntryApp->Quit();
 
 	return 0;

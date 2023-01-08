@@ -44,6 +44,30 @@ VOID Logger::PrintLog(const WCHAR* fmt, ...)
 	}
 }
 
+VOID Logger::PrintOGL3DError(const WCHAR* msg)
+{
+	std::wstringstream m;
+	m << "OGL3D Error: " << msg << std::endl;
+	PrintLog(m.str().c_str());
+
+	_bstr_t b(m.str().c_str());
+	throw std::runtime_error(b);
+}
+
+VOID Logger::PrintOGL3DWarning(const WCHAR* msg)
+{
+	std::wstringstream m;
+	m << "OGL3D Warning: " << msg << std::endl;
+	PrintLog(m.str().c_str());
+}
+
+VOID Logger::PrintOGL3DInfo(const WCHAR* msg)
+{
+	std::wstringstream m;
+	m << "OGL3D Info: " << msg << std::endl;
+	PrintLog(m.str().c_str());
+}
+
 // Get and Create Log Directory in AppData/$ProjectName/Log
 WSTRING Logger::LogDirectory()
 {

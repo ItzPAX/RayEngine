@@ -8,6 +8,10 @@
 // defines the engine needs
 #include "CoreDefinitions.h"
 
+// Maths
+#include "Common/Math/Vec4D.h"
+#include "Common/Math/Triangle.h"
+
 // Critical engine features
 #include "Engine/REngine.h"
 
@@ -26,7 +30,3 @@
 	#include "Platform/Win32/w32Window.h"
 	#include "Platform/Win32/w32IApplication.h"
 #endif
-
-// OpenGL libs
-#include <glad/glad_wgl.h>
-#include <glad/glad.h>

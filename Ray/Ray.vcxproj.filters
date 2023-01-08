@@ -80,6 +80,24 @@
     <Filter Include="Source\vendor\glad\include\KHR">
       <UniqueIdentifier>{8884a6e9-164a-485b-b967-a2a69c415220}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Engine\Graphics">
+      <UniqueIdentifier>{4829785c-cd31-443f-9867-18d73d449825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Engine\Graphics\Private">
+      <UniqueIdentifier>{cef92f23-7c06-4fea-8db1-afa8d580f81d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Engine\Graphics\Public">
+      <UniqueIdentifier>{8db75097-be36-40a8-9853-80fbac1bddfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Common\Math">
+      <UniqueIdentifier>{148d717b-155a-46cf-8452-1b4c0c7b488f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Common\Math\Public">
+      <UniqueIdentifier>{feb4db51-d482-4e25-8ab4-498cccf0b5e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Common\Math\Private">
+      <UniqueIdentifier>{69bfa401-f19d-4cbd-b980-8370ddb39d7f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\PerGameSettings.cpp">
@@ -136,8 +154,20 @@
     <ClCompile Include="..\vendor\glad\src\glad_wgl.c">
       <Filter>Source\vendor\glad\src</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Engine\Graphics.cpp">
-      <Filter>Source\Engine\Private</Filter>
+    <ClCompile Include="Source\Engine\Graphics\Graphics.cpp">
+      <Filter>Source\Engine\Graphics\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Math\Triangle.cpp">
+      <Filter>Source\Common\Math\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Common\Math\Vec4D.cpp">
+      <Filter>Source\Common\Math\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Graphics\VAO.cpp">
+      <Filter>Source\Engine\Graphics\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Engine\Graphics\ShaderProgram.cpp">
+      <Filter>Source\Engine\Graphics\Private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -201,8 +231,23 @@
     <ClInclude Include="..\vendor\glad\include\KHR\khrplatform.h">
       <Filter>Source\vendor\glad\include\KHR</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Engine\Graphics.h">
-      <Filter>Source\Engine\Classes</Filter>
+    <ClInclude Include="Source\Engine\Graphics\Graphics.h">
+      <Filter>Source\Engine\Graphics\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Common\Math\Triangle.h">
+      <Filter>Source\Common\Math\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Common\Math\Vec4D.h">
+      <Filter>Source\Common\Math\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine\Graphics\VAO.h">
+      <Filter>Source\Engine\Graphics\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine\Graphics\ShaderProgram.h">
+      <Filter>Source\Engine\Graphics\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine\Graphics\GraphicsDefinitions.h">
+      <Filter>Source\Engine\Graphics\Public</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

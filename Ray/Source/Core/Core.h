@@ -8,4 +8,7 @@
 #include "CoreMinimal.h"
 
 // Graphics features
-#include "Engine/Graphics.h"
+#include "Engine/Graphics/GraphicsDefinitions.h"
+#include "Engine/Graphics/ShaderProgram.h"
+#include "Engine/Graphics/VAO.h"
+#include "Engine/Graphics/Graphics.h"
