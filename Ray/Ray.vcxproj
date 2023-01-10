@@ -123,6 +123,7 @@
     <ClCompile Include="Source\Core\PerGameSettings.cpp" />
     <ClCompile Include="Source\Engine\Graphics\Graphics.cpp" />
     <ClCompile Include="Source\Engine\Graphics\ShaderProgram.cpp" />
+    <ClCompile Include="Source\Engine\Graphics\UniformBuffer.cpp" />
     <ClCompile Include="Source\Engine\Graphics\VAO.cpp" />
     <ClCompile Include="Source\Engine\REngine.cpp" />
     <ClCompile Include="Source\Engine\Simulation.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Source\Engine\Graphics\Graphics.h" />
     <ClInclude Include="Source\Engine\Graphics\GraphicsDefinitions.h" />
     <ClInclude Include="Source\Engine\Graphics\ShaderProgram.h" />
+    <ClInclude Include="Source\Engine\Graphics\UniformBuffer.h" />
     <ClInclude Include="Source\Engine\Graphics\VAO.h" />
     <ClInclude Include="Source\Engine\REngine.h" />
     <ClInclude Include="Source\Engine\Simulation.h" />

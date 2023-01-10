@@ -18,6 +18,12 @@ ShaderProgram::~ShaderProgram()
 	glDeleteProgram(m_ProgramId);
 }
 
+void ShaderProgram::SetUniformBufferSlot(const char* name, UINT32 slot)
+{
+	UINT32 index = glGetUniformBlockIndex(m_ProgramId, name);
+	glUniformBlockBinding(m_ProgramId, index, slot);
+}
+
 void ShaderProgram::Attach(const wchar_t* shaderPath, const ShaderType& type)
 {
 	std::string shaderCode;

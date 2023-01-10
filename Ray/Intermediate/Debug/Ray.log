@@ -9,6 +9,7 @@
   PerGameSettings.cpp
   Graphics.cpp
   ShaderProgram.cpp
+  UniformBuffer.cpp
   VAO.cpp
 D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Engine\Graphics\VAO.cpp(19,20): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
   REngine.cpp
@@ -27,5 +28,4 @@ D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Engine\Splashscreen.cpp(48,11): war
 D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.cpp(183,105): warning C4267: "Argument": Konvertierung von "size_t" nach "int", Datenverlust möglich
 D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32Window.cpp(212,129): warning C4267: "Argument": Konvertierung von "size_t" nach "int", Datenverlust möglich
   Ray.cpp
-     Bibliothek "D:\MyProgramming\OpenGL\RayEngine\\Build\Debug\Ray.lib" und Objekt "D:\MyProgramming\OpenGL\RayEngine\\Build\Debug\Ray.exp" werden erstellt.
   Ray.vcxproj -> D:\MyProgramming\OpenGL\RayEngine\Build\Debug\Ray.dll

@@ -4,10 +4,7 @@
 // WindowsAPI
 #include "Platform/Win32/w32WinEntry.h"
 
-VertexArrayObjectPtr m_VAO;
-ShaderProgramPtr m_Shader;
-
-class BlankProject : public Ray::Simulation {
+class BlankProject : public Ray::Simulation, public Data {
 
 	// Application
 
@@ -26,15 +23,18 @@ public:
 	// Init
 	VOID Initialize() 
 	{
-		float triangleVertices[] = {
+		float polygonVertices[] = {
 			-0.5f, -0.5f, 0.f,		// POSITION
 			1,0,0,					// COLOR
 
-			0.5f, -0.5f, 0.f,
+			-0.5f, 0.5f, 0.f,
 			0,1,0,
 
-			0.f, 0.5f, 0.f,
-			0,0,1
+			0.5f, -0.5f, 0.f,
+			0,0,1,
+
+			0.5f, 0.5f, 0.f,
+			1,1,0
 		};
 
 		VertexAttribute attribList[] = {
@@ -44,12 +44,17 @@ public:
 
 		m_VAO = Graphics::Instance()->CreateVertexArrayObject
 		({ 
-			triangleVertices, 
+			polygonVertices,
 			sizeof(float) * (3 + 3),
-			3,
+			4,
 
 			attribList,
 			2
+		});
+
+		m_Uniform = Graphics::Instance()->CreateUniformBuffer
+		({
+			sizeof(UniformData)
 		});
 
 		m_Shader = Graphics::Instance()->CreateShaderProgram
@@ -57,18 +62,39 @@ public:
 			L"D:/MyProgramming/OpenGL/RayEngine/Build/Debug/Content/Engine/Shaders/ExampleShader.vert", 
 			L"D:/MyProgramming/OpenGL/RayEngine/Build/Debug/Content/Engine/Shaders/ExampleShader.frag"
 		});
+
+		m_Shader->SetUniformBufferSlot("UniformData", 0);
 	}
 
 	// Update
 	VOID Update() 
 	{
+		// compute delta time
+		auto currentTime = std::chrono::system_clock::now();
+		auto elapsedSeconds = std::chrono::duration<double>();
+
+		if (m_PreviousTime.time_since_epoch().count())
+			elapsedSeconds = currentTime - m_PreviousTime;
+
+		m_PreviousTime = currentTime;
+
+		auto deltaTime = (float)elapsedSeconds.count();
+
+		m_Scale += 6.28 * deltaTime;
+		auto currentScale = sin(m_Scale);
+
+		UniformData data = { currentScale };
+		m_Uniform->SetData(&data);
+
 		Graphics::Instance()->Clear(Vec4D(0.3f,0.3f,0.7f,0.5f));
-		Graphics::Instance()->SetShaderProgram(m_Shader);
+
 		Graphics::Instance()->SetVertexArrayObject(m_VAO);
+		Graphics::Instance()->SetUniformBuffer(m_Uniform, 0);
+		Graphics::Instance()->SetShaderProgram(m_Shader);
 
-		Graphics::Instance()->DrawTriangles(m_VAO->GetVertexBufferSize(), 0);
+		Graphics::Instance()->DrawTriangles(TRIANGLE_STRIP, m_VAO->GetVertexBufferSize(), 0);
 
-		Simulation::Present(true);
+		Simulation::Present(false);
 	}
 
 	// Quit

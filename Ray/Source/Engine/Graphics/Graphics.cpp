@@ -70,6 +70,11 @@ ShaderProgramPtr Graphics::CreateShaderProgram(const ShaderProgramDesc& desc)
 	return std::make_shared<ShaderProgram>(desc);
 }
 
+UniformBufferPtr Graphics::CreateUniformBuffer(const UniformBufferDesc& desc)
+{
+	return std::make_shared<UniformBuffer>(desc);
+}
+
 void Graphics::Clear(Vec4D col)
 {
 	glClearColor(col.x(), col.y(), col.z(), col.w());
@@ -91,7 +96,23 @@ void Graphics::SetShaderProgram(const ShaderProgramPtr& program)
 	glUseProgram(program->GetProgramId());
 }
 
-void Graphics::DrawTriangles(UINT32 vertexCount, UINT32 offset)
+void Graphics::SetUniformBuffer(const UniformBufferPtr& buffer, UINT32 slot)
 {
-	glDrawArrays(GL_TRIANGLES, offset, vertexCount);
+	glBindBufferBase(GL_UNIFORM_BUFFER, slot, buffer->GetBufferId());
+}
+
+void Graphics::DrawTriangles(const TriangleType& type, UINT32 vertexCount, UINT32 offset)
+{
+	auto glTriType = GL_TRIANGLES;
+
+	switch (type)
+	{
+	case TRIANGLE_LIST:  { glTriType = GL_TRIANGLES; break; }
+	case TRIANGLE_STRIP: { glTriType = GL_TRIANGLE_STRIP; break; }
+
+	default:
+		break;
+	}
+
+	glDrawArrays(glTriType, offset, vertexCount);
 }

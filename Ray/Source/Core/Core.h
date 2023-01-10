@@ -9,6 +9,7 @@
 
 // Graphics features
 #include "Engine/Graphics/GraphicsDefinitions.h"
+#include "Engine/Graphics/UniformBuffer.h"
 #include "Engine/Graphics/ShaderProgram.h"
 #include "Engine/Graphics/VAO.h"
 #include "Engine/Graphics/Graphics.h"

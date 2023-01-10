@@ -169,6 +169,9 @@
     <ClCompile Include="Source\Engine\Graphics\ShaderProgram.cpp">
       <Filter>Source\Engine\Graphics\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Engine\Graphics\UniformBuffer.cpp">
+      <Filter>Source\Engine\Graphics\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\PerGameSettings.h">
@@ -247,6 +250,9 @@
       <Filter>Source\Engine\Graphics\Public</Filter>
     </ClInclude>
     <ClInclude Include="Source\Engine\Graphics\GraphicsDefinitions.h">
+      <Filter>Source\Engine\Graphics\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine\Graphics\UniformBuffer.h">
       <Filter>Source\Engine\Graphics\Public</Filter>
     </ClInclude>
   </ItemGroup>

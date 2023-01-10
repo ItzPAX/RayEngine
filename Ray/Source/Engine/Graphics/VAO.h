@@ -15,7 +15,7 @@ struct VertexBufferDesc
 	UINT32 m_AttributeListSize;
 };
 
-class VertexArrayObject
+class RAY_API VertexArrayObject
 {
 public:
 	VertexArrayObject(const VertexBufferDesc& data);

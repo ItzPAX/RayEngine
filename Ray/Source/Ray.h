@@ -26,5 +26,8 @@
 #include <glad/glad_wgl.h>
 #include <glad/glad.h>
 
+// Time
+#include <chrono>
+
 // Core engine features
 #include "Core/Core.h"

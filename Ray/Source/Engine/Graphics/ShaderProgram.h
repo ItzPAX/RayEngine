@@ -12,11 +12,13 @@ enum ShaderType
 	FRAGMENT_SHADER
 };
 
-class ShaderProgram
+class RAY_API ShaderProgram
 {
 public:
 	ShaderProgram(const ShaderProgramDesc& desc);
 	~ShaderProgram();
+
+	void SetUniformBufferSlot(const char* name, UINT32 slot);
 
 private:
 	void Attach(const wchar_t* shaderPath, const ShaderType& type);
