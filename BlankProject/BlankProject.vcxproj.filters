@@ -19,10 +19,49 @@
     <Filter Include="Resources\Icons">
       <UniqueIdentifier>{3e99fa87-3c81-4f64-ba10-eaae9dd0fa70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="vendor">
+      <UniqueIdentifier>{5e9685f6-2a3c-4810-b291-13922be742f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\glad">
+      <UniqueIdentifier>{541a845b-8ed9-44b9-8aab-00028bfae3f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\glad\src">
+      <UniqueIdentifier>{0e470b32-029d-46f0-ab9b-0be99bfac068}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="vendor\imgui">
+      <UniqueIdentifier>{a07137c8-6bef-4781-8139-f29b28ad6cda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\BlankProject.cpp">
       <Filter>Source\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui.cpp">
+      <Filter>vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_demo.cpp">
+      <Filter>vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_draw.cpp">
+      <Filter>vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_impl_opengl3.cpp">
+      <Filter>vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_impl_win32.cpp">
+      <Filter>vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_tables.cpp">
+      <Filter>vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_widgets.cpp">
+      <Filter>vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\glad\src\glad.c">
+      <Filter>vendor\glad\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\glad\src\glad_wgl.c">
+      <Filter>vendor\glad\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

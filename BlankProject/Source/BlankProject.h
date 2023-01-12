@@ -19,7 +19,7 @@
 // Core engine features
 #include "Core/Core.h"
 
-
+/* DEPRECATED, JUST DO THIS IN SOME HEADER FILE*/
 // for defining variables used in the game
 class Data
 {
@@ -35,5 +35,12 @@ public:
 // Data for the uniform buffer
 struct UniformData
 {
-	float m_Scale;
+	Mat4 m_World;
+	Mat4 m_Projection;
+};
+
+struct Vertex
+{
+	Vec3D m_Position;
+	Vec2D m_TexCoord;
 };

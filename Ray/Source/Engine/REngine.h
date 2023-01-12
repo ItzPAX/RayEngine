@@ -4,8 +4,8 @@ class RAY_API REngine;
 
 namespace Engine {
 
-	enum EngineMode : INT {
-		NONE,
+	enum EngineMode {
+		NONE = 0,
 		DEBUG,		// extra info, slower but more checks
 		RELEASE,	// No extra debug info, optimized for runtime
 		EDITOR,		// Like game editor

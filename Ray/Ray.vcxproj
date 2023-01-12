@@ -47,13 +47,13 @@
     <OutDir>$(SolutionDir)\Build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)vendor\glad\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)vendor\imgui\;$(SolutionDir)vendor\glad\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\Build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)vendor\glad\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)vendor\imgui\;$(SolutionDir)vendor\glad\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -112,22 +112,53 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_demo.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_draw.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_impl_opengl3.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_impl_win32.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_tables.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_widgets.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Source\Common\CmdLineArgs.cpp" />
     <ClCompile Include="Source\Common\Logger.cpp" />
-    <ClCompile Include="Source\Common\Math\Triangle.cpp" />
-    <ClCompile Include="Source\Common\Math\Vec4D.cpp" />
     <ClCompile Include="Source\Common\Time.cpp" />
     <ClCompile Include="Source\Core\Core.cpp" />
     <ClCompile Include="Source\Core\CoreDefinitions.cpp" />
     <ClCompile Include="Source\Core\CoreMinimal.cpp" />
     <ClCompile Include="Source\Core\PerGameSettings.cpp" />
-    <ClCompile Include="Source\Engine\Graphics\Graphics.cpp" />
-    <ClCompile Include="Source\Engine\Graphics\ShaderProgram.cpp" />
-    <ClCompile Include="Source\Engine\Graphics\UniformBuffer.cpp" />
-    <ClCompile Include="Source\Engine\Graphics\VAO.cpp" />
     <ClCompile Include="Source\Engine\REngine.cpp" />
     <ClCompile Include="Source\Engine\Simulation.cpp" />
     <ClCompile Include="Source\Engine\Splashscreen.cpp" />
+    <ClCompile Include="Source\Graphics\Graphics.cpp" />
+    <ClCompile Include="Source\Graphics\ShaderProgram.cpp" />
+    <ClCompile Include="Source\Graphics\UniformBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\VAO.cpp" />
+    <ClCompile Include="Source\Math\Mat4.cpp" />
+    <ClCompile Include="Source\Math\Triangle.cpp" />
+    <ClCompile Include="Source\Math\Vec2D.cpp" />
+    <ClCompile Include="Source\Math\Vec3D.cpp" />
+    <ClCompile Include="Source\Math\Vec4D.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32Caption.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32IApplication.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32SubObject.cpp" />
@@ -139,23 +170,35 @@
     <ClInclude Include="..\vendor\glad\include\glad\glad.h" />
     <ClInclude Include="..\vendor\glad\include\glad\glad_wgl.h" />
     <ClInclude Include="..\vendor\glad\include\KHR\khrplatform.h" />
+    <ClInclude Include="..\vendor\imgui\imconfig.h" />
+    <ClInclude Include="..\vendor\imgui\imgui.h" />
+    <ClInclude Include="..\vendor\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="..\vendor\imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="..\vendor\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="..\vendor\imgui\imgui_internal.h" />
+    <ClInclude Include="..\vendor\imgui\imstb_rectpack.h" />
+    <ClInclude Include="..\vendor\imgui\imstb_textedit.h" />
+    <ClInclude Include="..\vendor\imgui\imstb_truetype.h" />
     <ClInclude Include="Source\Common\CmdLineArgs.h" />
     <ClInclude Include="Source\Common\Logger.h" />
-    <ClInclude Include="Source\Common\Math\Triangle.h" />
-    <ClInclude Include="Source\Common\Math\Vec4D.h" />
     <ClInclude Include="Source\Common\Time.h" />
     <ClInclude Include="Source\Core\Core.h" />
     <ClInclude Include="Source\Core\CoreDefinitions.h" />
     <ClInclude Include="Source\Core\CoreMinimal.h" />
     <ClInclude Include="Source\Core\PerGameSettings.h" />
-    <ClInclude Include="Source\Engine\Graphics\Graphics.h" />
-    <ClInclude Include="Source\Engine\Graphics\GraphicsDefinitions.h" />
-    <ClInclude Include="Source\Engine\Graphics\ShaderProgram.h" />
-    <ClInclude Include="Source\Engine\Graphics\UniformBuffer.h" />
-    <ClInclude Include="Source\Engine\Graphics\VAO.h" />
     <ClInclude Include="Source\Engine\REngine.h" />
     <ClInclude Include="Source\Engine\Simulation.h" />
     <ClInclude Include="Source\Engine\Splashscreen.h" />
+    <ClInclude Include="Source\Graphics\Graphics.h" />
+    <ClInclude Include="Source\Graphics\GraphicsDefinitions.h" />
+    <ClInclude Include="Source\Graphics\ShaderProgram.h" />
+    <ClInclude Include="Source\Graphics\UniformBuffer.h" />
+    <ClInclude Include="Source\Graphics\VAO.h" />
+    <ClInclude Include="Source\Math\Mat4.h" />
+    <ClInclude Include="Source\Math\Triangle.h" />
+    <ClInclude Include="Source\Math\Vec2D.h" />
+    <ClInclude Include="Source\Math\Vec3D.h" />
+    <ClInclude Include="Source\Math\Vec4D.h" />
     <ClInclude Include="Source\Platform\Win32\w32IApplication.h" />
     <ClInclude Include="Source\Platform\Win32\w32SubObject.h" />
     <ClInclude Include="Source\Platform\Win32\w32Win32Utils.h" />

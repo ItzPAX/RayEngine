@@ -80,23 +80,32 @@
     <Filter Include="Source\vendor\glad\include\KHR">
       <UniqueIdentifier>{8884a6e9-164a-485b-b967-a2a69c415220}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Engine\Graphics">
-      <UniqueIdentifier>{4829785c-cd31-443f-9867-18d73d449825}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Engine\Graphics\Private">
-      <UniqueIdentifier>{cef92f23-7c06-4fea-8db1-afa8d580f81d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Engine\Graphics\Public">
-      <UniqueIdentifier>{8db75097-be36-40a8-9853-80fbac1bddfb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Common\Math">
+    <Filter Include="Source\Math">
       <UniqueIdentifier>{148d717b-155a-46cf-8452-1b4c0c7b488f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Common\Math\Public">
+    <Filter Include="Source\Math\Public">
       <UniqueIdentifier>{feb4db51-d482-4e25-8ab4-498cccf0b5e9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Common\Math\Private">
+    <Filter Include="Source\Math\Private">
       <UniqueIdentifier>{69bfa401-f19d-4cbd-b980-8370ddb39d7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics">
+      <UniqueIdentifier>{4829785c-cd31-443f-9867-18d73d449825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\Private">
+      <UniqueIdentifier>{cef92f23-7c06-4fea-8db1-afa8d580f81d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\Public">
+      <UniqueIdentifier>{8db75097-be36-40a8-9853-80fbac1bddfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Graphics\Classes">
+      <UniqueIdentifier>{5826b2ac-310a-492f-9a2b-8a6dd0fae25e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Math\Classes">
+      <UniqueIdentifier>{2661f18f-d0e5-4609-b7d7-b8f63e606d19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\vendor\imgui">
+      <UniqueIdentifier>{c58181d5-7fa6-4a56-84d9-b388a28f8ed7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -154,23 +163,53 @@
     <ClCompile Include="..\vendor\glad\src\glad_wgl.c">
       <Filter>Source\vendor\glad\src</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Engine\Graphics\Graphics.cpp">
-      <Filter>Source\Engine\Graphics\Private</Filter>
+    <ClCompile Include="Source\Graphics\Graphics.cpp">
+      <Filter>Source\Graphics\Private</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\Math\Triangle.cpp">
-      <Filter>Source\Common\Math\Private</Filter>
+    <ClCompile Include="Source\Graphics\VAO.cpp">
+      <Filter>Source\Graphics\Private</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\Math\Vec4D.cpp">
-      <Filter>Source\Common\Math\Private</Filter>
+    <ClCompile Include="Source\Graphics\UniformBuffer.cpp">
+      <Filter>Source\Graphics\Private</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Engine\Graphics\VAO.cpp">
-      <Filter>Source\Engine\Graphics\Private</Filter>
+    <ClCompile Include="Source\Graphics\ShaderProgram.cpp">
+      <Filter>Source\Graphics\Private</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Engine\Graphics\ShaderProgram.cpp">
-      <Filter>Source\Engine\Graphics\Private</Filter>
+    <ClCompile Include="Source\Math\Mat4.cpp">
+      <Filter>Source\Math\Private</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Engine\Graphics\UniformBuffer.cpp">
-      <Filter>Source\Engine\Graphics\Private</Filter>
+    <ClCompile Include="Source\Math\Triangle.cpp">
+      <Filter>Source\Math\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Math\Vec4D.cpp">
+      <Filter>Source\Math\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Math\Vec3D.cpp">
+      <Filter>Source\Math\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Math\Vec2D.cpp">
+      <Filter>Source\Math\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui.cpp">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_demo.cpp">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_draw.cpp">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_impl_opengl3.cpp">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_impl_win32.cpp">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_tables.cpp">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\vendor\imgui\imgui_widgets.cpp">
+      <Filter>Source\vendor\imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -234,26 +273,62 @@
     <ClInclude Include="..\vendor\glad\include\KHR\khrplatform.h">
       <Filter>Source\vendor\glad\include\KHR</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Engine\Graphics\Graphics.h">
-      <Filter>Source\Engine\Graphics\Public</Filter>
+    <ClInclude Include="Source\Graphics\Graphics.h">
+      <Filter>Source\Graphics\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Common\Math\Triangle.h">
-      <Filter>Source\Common\Math\Public</Filter>
+    <ClInclude Include="Source\Graphics\ShaderProgram.h">
+      <Filter>Source\Graphics\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Common\Math\Vec4D.h">
-      <Filter>Source\Common\Math\Public</Filter>
+    <ClInclude Include="Source\Graphics\UniformBuffer.h">
+      <Filter>Source\Graphics\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Engine\Graphics\VAO.h">
-      <Filter>Source\Engine\Graphics\Public</Filter>
+    <ClInclude Include="Source\Graphics\VAO.h">
+      <Filter>Source\Graphics\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Engine\Graphics\ShaderProgram.h">
-      <Filter>Source\Engine\Graphics\Public</Filter>
+    <ClInclude Include="Source\Graphics\GraphicsDefinitions.h">
+      <Filter>Source\Graphics\Public</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Engine\Graphics\GraphicsDefinitions.h">
-      <Filter>Source\Engine\Graphics\Public</Filter>
+    <ClInclude Include="Source\Math\Vec4D.h">
+      <Filter>Source\Math\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Engine\Graphics\UniformBuffer.h">
-      <Filter>Source\Engine\Graphics\Public</Filter>
+    <ClInclude Include="Source\Math\Triangle.h">
+      <Filter>Source\Math\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Math\Mat4.h">
+      <Filter>Source\Math\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Math\Vec3D.h">
+      <Filter>Source\Math\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Math\Vec2D.h">
+      <Filter>Source\Math\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\imgui\imconfig.h">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\imgui\imgui.h">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\imgui\imgui_impl_opengl3.h">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\imgui\imgui_impl_opengl3_loader.h">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\imgui\imgui_impl_win32.h">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\imgui\imgui_internal.h">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\imgui\imstb_rectpack.h">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\imgui\imstb_textedit.h">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\vendor\imgui\imstb_truetype.h">
+      <Filter>Source\vendor\imgui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

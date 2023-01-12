@@ -1,0 +1,9 @@
+﻿  Simulation.cpp
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Engine\Simulation.cpp(45,3): warning C4060: switch-Anweisung enthält weder "case"- noch "default"-Bezeichnungen
+     Bibliothek "D:\MyProgramming\OpenGL\RayEngine\\Build\Release\Ray.lib" und Objekt "D:\MyProgramming\OpenGL\RayEngine\\Build\Release\Ray.exp" werden erstellt.
+  Code wird generiert.
+  178 of 1639 functions (10.9%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    37 functions had inline decision re-evaluated but remain unchanged
+  Codegenerierung ist abgeschlossen.
+  Ray.vcxproj -> D:\MyProgramming\OpenGL\RayEngine\Build\Release\Ray.dll

@@ -9,8 +9,11 @@
 #include "CoreDefinitions.h"
 
 // Maths
-#include "Common/Math/Vec4D.h"
-#include "Common/Math/Triangle.h"
+#include "Math/Vec2D.h"
+#include "Math/Vec3D.h"
+#include "Math/Vec4D.h"
+#include "Math/Triangle.h"
+#include "Math/Mat4.h"
 
 // Critical engine features
 #include "Engine/REngine.h"
