@@ -16,7 +16,7 @@ VertexArrayObject::VertexArrayObject(const VertexBufferDesc& vbDesc)
 	glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferId);
 	glBufferData(GL_ARRAY_BUFFER, vbDesc.m_ListSize * vbDesc.m_VertexSize, vbDesc.m_VerticesList, GL_STATIC_DRAW);
 
-	for (int i = 0; i < vbDesc.m_AttributeListSize; i++)
+	for (unsigned int i = 0; i < vbDesc.m_AttributeListSize; i++)
 	{
 		glVertexAttribPointer
 		(

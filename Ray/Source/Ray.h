@@ -10,6 +10,7 @@
 #include <sstream>
 #include <list>
 #include <comdef.h>
+#include <deque>
 
 // error handling
 #include <assert.h>

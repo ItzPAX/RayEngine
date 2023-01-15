@@ -78,6 +78,9 @@ namespace Win32 {
 
 	LRESULT Window::MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
+		if (ImGui_ImplWin32_WndProcHandler(hwnd, message, wParam, lParam))
+			return true;
+
 		switch (message)
 		{
 		case WM_NCCREATE:		{ OnNonClientCreate();										}	return TRUE;

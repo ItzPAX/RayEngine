@@ -6,6 +6,7 @@
 // STL Container
 #include <string>
 #include <list>
+#include <vector>
 
 // Pointers
 #include <memory>

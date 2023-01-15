@@ -8,7 +8,6 @@ public:
 	~UI();
 
 public:
-	VOID Initialize();
 	VOID RenderUI();
 	VOID SetContext();
 
@@ -16,8 +15,10 @@ private:
 	VOID RenderElements();
 
 private:
-	bool my_tool_active = true;
-	float my_color[4] = { 1,1,1,1 };
+	bool m_Initialized = false;
+
+	std::vector<float> m_Frametimes;
+	std::vector<float> m_TmpTimes;
 
 	ImGuiContext* m_Context;
 	HWND m_Handle;
