@@ -27,6 +27,7 @@ public:
 	VertexArrayObjectPtr m_VAO;
 	ShaderProgramPtr m_Shader;
 	UniformBufferPtr m_Uniform;
+	UIPtr m_UI;
 
 	std::chrono::system_clock::time_point m_PreviousTime;
 	float m_Scale = 0;

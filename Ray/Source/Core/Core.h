@@ -12,6 +12,10 @@
 #include <imgui_impl_win32.h>
 #include <imgui_impl_opengl3.h>
 
+// UI
+#include "UI/UIDefinitions.h"
+#include "UI/UI.h"
+
 // Graphics features
 #include "Graphics/GraphicsDefinitions.h"
 #include "Graphics/UniformBuffer.h"

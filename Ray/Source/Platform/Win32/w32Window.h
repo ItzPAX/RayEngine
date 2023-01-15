@@ -16,6 +16,7 @@ namespace Win32 {
 		virtual VOID Present(bool bVsync) override;
 		virtual	LRESULT	MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) override;
 
+		VOID SetTitle(LPCWSTR title);
 		Rect GetInnerSize();
 		VOID MakeCurrentContext();
 
@@ -40,6 +41,7 @@ namespace Win32 {
 		BOOL		m_Active;
 
 		HGLRC		m_Context;
+		HDC			m_DC;
 
 		// Getters
 	public:

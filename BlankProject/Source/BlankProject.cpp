@@ -23,12 +23,8 @@ public:
 	// Init
 	VOID Initialize() 
 	{
-		// init ImGui
-		ImGui::CreateContext();
-
-		ImGui_ImplWin32_Init(Simulation::Handle());
-		ImGui_ImplOpenGL3_Init("#version 130");
-
+		// Init ImGui
+		m_UI = std::make_shared<UI>(Handle());
 
 		Vec3D positionsList[] =
 		{
@@ -174,16 +170,15 @@ public:
 		// compute delta time
 		auto currentTime = std::chrono::system_clock::now();
 		auto elapsedSeconds = std::chrono::duration<double>();
-
 		if (m_PreviousTime.time_since_epoch().count())
 			elapsedSeconds = currentTime - m_PreviousTime;
-
 		m_PreviousTime = currentTime;
 
-		auto deltaTime = (float)elapsedSeconds.count();
 
-		m_Scale += 1.5f * deltaTime;
-		auto currentScale = sin(m_Scale);
+		auto deltaTime = elapsedSeconds.count();
+
+		m_Scale += 1.14f * deltaTime;
+		auto currentScale = abs(sin(m_Scale));
 
 		Mat4 world, projection, temp;
 
@@ -213,7 +208,7 @@ public:
 		UniformData data = { world, projection };
 		m_Uniform->SetData(&data);
 
-		Graphics::Instance()->Clear(Vec4D(0.3f,0.3f,0.7f,0.5f));
+		Graphics::Instance()->Clear(Vec4D(0.3f,0.3f,0.7f,1.f));
 
 		Graphics::Instance()->SetFaceCulling(CullType::BACK_FACE);
 		Graphics::Instance()->SetWindingOrder(WindingOrder::CLOCKWISE);
@@ -224,19 +219,8 @@ public:
 
 		Graphics::Instance()->DrawIndexedTriangles(TriangleType::TRIANGLE_LIST, 36);
 
-
-		// Render ImGui
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui_ImplWin32_NewFrame();
-		ImGui::NewFrame();
-
-		ImGui::Begin("Test", 0, ImGuiWindowFlags_NoCollapse);
-		ImGui::Text("Hello, world!");
-
-		ImGui::EndFrame();
-		ImGui::Render();
-
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		// render the ui before presenting the scene
+		m_UI->RenderUI();
 
 		Simulation::Present(false);
 	}

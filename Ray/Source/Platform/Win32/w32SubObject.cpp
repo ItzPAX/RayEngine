@@ -59,6 +59,11 @@ namespace Win32 {
 
 	LRESULT SubObject::MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
-		return DefWindowProc(hwnd, message, wParam, lParam);
+		auto res = DefWindowProc(hwnd, message, wParam, lParam);
+
+		// let imgui handle inputs as last part of the handler chain
+		ImGui_ImplWin32_WndProcHandler(hwnd, message, wParam, lParam);
+
+		return res;
 	}
 }

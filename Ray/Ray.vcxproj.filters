@@ -107,6 +107,18 @@
     <Filter Include="Source\vendor\imgui">
       <UniqueIdentifier>{c58181d5-7fa6-4a56-84d9-b388a28f8ed7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\UI">
+      <UniqueIdentifier>{47d6e610-3246-408a-9421-8063011ffa7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\UI\Classes">
+      <UniqueIdentifier>{61665aa6-4d31-4081-b511-2ba0c3910524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\UI\Private">
+      <UniqueIdentifier>{7964f4bc-c3f6-4d64-a4b2-8d813c1190b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\UI\Public">
+      <UniqueIdentifier>{45c952c8-92da-47ae-a846-672adda0d732}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\PerGameSettings.cpp">
@@ -210,6 +222,9 @@
     </ClCompile>
     <ClCompile Include="..\vendor\imgui\imgui_widgets.cpp">
       <Filter>Source\vendor\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\UI.cpp">
+      <Filter>Source\UI\Private</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -329,6 +344,12 @@
     </ClInclude>
     <ClInclude Include="..\vendor\imgui\imstb_truetype.h">
       <Filter>Source\vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\UI.h">
+      <Filter>Source\UI\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\UIDefinitions.h">
+      <Filter>Source\UI\Public</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -13,7 +13,11 @@ namespace Win32 {
 
 	Window::~Window()
 	{
+		wglDeleteContext(m_Context);
+		ReleaseDC(m_Handle, m_DC);
+		DestroyWindow(m_Handle);
 	}
+
 	VOID Window::Initialize()
 	{
 		RECT desktop;
@@ -33,7 +37,7 @@ namespace Win32 {
 
 		// Creating OpenGL Render Context
 
-		auto hDC = GetDC((HWND)m_Handle);
+		m_DC = GetDC(m_Handle);
 
 		int pixelFormatAttributes[] = {
 			WGL_DRAW_TO_WINDOW_ARB, GL_TRUE,
@@ -50,11 +54,11 @@ namespace Win32 {
 		int pixelFormat = 0;
 		UINT numFormats = 0;
 
-		wglChoosePixelFormatARB(hDC, pixelFormatAttributes, nullptr, 1, &pixelFormat, &numFormats);
+		wglChoosePixelFormatARB(m_DC, pixelFormatAttributes, nullptr, 1, &pixelFormat, &numFormats);
 
 		PIXELFORMATDESCRIPTOR pixelFormatDesc = {};
-		DescribePixelFormat(hDC, pixelFormat, sizeof(PIXELFORMATDESCRIPTOR), &pixelFormatDesc);
-		SetPixelFormat(hDC, pixelFormat, &pixelFormatDesc);
+		DescribePixelFormat(m_DC, pixelFormat, sizeof(PIXELFORMATDESCRIPTOR), &pixelFormatDesc);
+		SetPixelFormat(m_DC, pixelFormat, &pixelFormatDesc);
 
 		int openGLAttributes[] = {
 			WGL_CONTEXT_MAJOR_VERSION_ARB, 4,
@@ -63,13 +67,13 @@ namespace Win32 {
 			0
 		};
 
-		m_Context = wglCreateContextAttribsARB(hDC, NULL, openGLAttributes);
+		m_Context = wglCreateContextAttribsARB(m_DC, NULL, openGLAttributes);
 	}
 
 	VOID Window::Present(bool bVsync)
 	{
 		wglSwapIntervalEXT(bVsync);
-		wglSwapLayerBuffers(GetDC(Handle()), WGL_SWAP_MAIN_PLANE);
+		SwapBuffers(m_DC);
 	}
 
 	LRESULT Window::MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -92,6 +96,11 @@ namespace Win32 {
 		return SubObject::MessageHandler(hwnd, message, wParam, lParam);
 	}
 
+	VOID Window::SetTitle(LPCWSTR title)
+	{
+		SetWindowText(Handle(), title);
+	}
+
 	Rect Window::GetInnerSize()
 	{
 		RECT rc = {};
@@ -101,7 +110,7 @@ namespace Win32 {
 
 	VOID Window::MakeCurrentContext()
 	{
-		wglMakeCurrent(GetDC(Handle()), Context());
+		wglMakeCurrent(m_DC, Context());
 	}
 
 	VOID Window::OnNonClientCreate()

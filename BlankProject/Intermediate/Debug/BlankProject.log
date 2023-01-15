@@ -1,2 +1,7 @@
 ﻿  BlankProject.cpp
+D:\MyProgramming\OpenGL\RayEngine\BlankProject\Source\BlankProject.cpp(180,20): warning C4244: "+=": Konvertierung von "_Rep" in "float", möglicher Datenverlust
+          with
+          [
+              _Rep=double
+          ]
   BlankProject.vcxproj -> D:\MyProgramming\OpenGL\RayEngine\Build\Debug\BlankProject.exe

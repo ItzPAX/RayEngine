@@ -165,6 +165,7 @@
     <ClCompile Include="Source\Platform\Win32\w32Win32Utils.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32Window.cpp" />
     <ClCompile Include="Source\Ray.cpp" />
+    <ClCompile Include="Source\UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\vendor\glad\include\glad\glad.h" />
@@ -206,6 +207,8 @@
     <ClInclude Include="Source\Platform\Win32\w32WinEntry.h" />
     <ClInclude Include="Source\Ray.h" />
     <ClInclude Include="Source\Platform\Win32\w32Caption.h" />
+    <ClInclude Include="Source\UI\UI.h" />
+    <ClInclude Include="Source\UI\UIDefinitions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

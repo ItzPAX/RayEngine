@@ -10,7 +10,7 @@ ShaderProgram::ShaderProgram(const ShaderProgramDesc& desc)
 
 ShaderProgram::~ShaderProgram()
 {
-	for (int i = 0; i < 2; ++i)
+	for (int i = 0; i < 2; i++)
 	{
 		glDetachShader(m_ProgramId, m_AttachedShaders[i]);
 		glDeleteShader(m_AttachedShaders[i]);
