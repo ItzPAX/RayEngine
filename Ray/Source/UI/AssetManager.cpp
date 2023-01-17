@@ -34,18 +34,19 @@ void AssetManager::Initialize(std::string name, AssetManagerFlags flags)
 		// get the next drive
 		szSingleDrive += strlen(szSingleDrive) + 1;
 	}
+
+	GetFilesInPath();
 }
 
 void AssetManager::Render()
 {
-	GetFilesInPath();
-
 	ImGui::Begin(m_Name.c_str());
 	{
 		ImGui::TextWrapped(m_Path.c_str());
 		if (ImGui::Combo("Drive", &m_SelectedDrive, &m_DrivesVec[0], m_DrivesVec.size()))
 		{
 			m_Path = m_DrivesVec.at(m_SelectedDrive);
+			GetFilesInPath();
 		}
 
 		ImGui::Columns(max(GetButtonsInWindow(), 1), 0, 0);
@@ -53,31 +54,31 @@ void AssetManager::Render()
 		for (auto asset : m_Assets)
 		{
 			// menu screen for our asset
-			if (m_AssetActive[asset.m_Entry.path().string()])
+			if (m_AssetActive[asset.m_Path])
 			{
-				std::string label = asset.m_Entry.path().stem().string();
-				label.append("##");
-				label.append(asset.m_Entry.path().string());
-				ImGui::SetNextWindowSize(ImVec2(250, 600), ImGuiCond_Appearing);
-				ImGui::Begin(label.c_str(), &m_AssetActive[asset.m_Entry.path().string()]);
+				std::string label = asset.m_Stem + "##" + asset.m_Path;
+				ImGui::SetNextWindowPos(ImGui::GetItemRectMin(), ImGuiCond_Appearing);
+				ImGui::SetNextWindowSize(ImVec2(128, 192), ImGuiCond_Always);
+				ImGui::Begin(label.c_str(), &m_AssetActive[asset.m_Path], ImGuiWindowFlags_NoResize);
 				{
-					RenderFileMenu();
+					RenderFileMenu(asset);
 				}
 				ImGui::End();
 			}
 
-			std::string label = asset.m_Entry.is_directory() ? "[D]##" : "[F]##";
-			label.append(asset.m_Entry.path().string());
+			std::string label = asset.m_Dir ? "[D]##" : asset.m_Extension + "##" + asset.m_Path;
 
-			if (ImGui::Button(label.c_str(), ImVec2(64, 64)))
+			ImGui::Button(label.c_str(), ImVec2(64, 64));
+			if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
 			{
 				// dir
-				if (asset.m_Entry.is_directory() && asset.m_Entry.path().string() != m_Path)
+				if (asset.m_Dir && asset.m_Path != m_Path)
 				{
-					m_Path = asset.m_Entry.path().string();
+					m_Path = asset.m_Path;
+					GetFilesInPath();
 				}
 				// go back
-				else if (asset.m_Entry.path().string() == m_Path)
+				else if (asset.m_Path == m_Path)
 				{
 					std::stringstream test(m_Path);
 					std::string segment;
@@ -99,18 +100,30 @@ void AssetManager::Render()
 					}
 
 					m_Path = newpath;
+					GetFilesInPath();
 				}
 
 				// file
 				else
 				{
-					m_AssetActive[asset.m_Entry.path().string()] = !m_AssetActive[asset.m_Entry.path().string()];
+					m_AssetActive.clear();
+					m_AssetActive[asset.m_Path] = !m_AssetActive[asset.m_Path];
 				}
 			}
-			if (asset.m_Entry.path().string() == m_Path)
+
+			if (ImGui::IsItemClicked(ImGuiMouseButton_Right) && !asset.m_Dir)
+			{
+				m_AssetActive.clear();
+				m_AssetActive[asset.m_Path] = !m_AssetActive[asset.m_Path];
+			}
+
+			if (asset.m_Path == m_Path)
 				ImGui::TextWrapped("..");
 			else
-				ImGui::TextWrapped(asset.m_Entry.path().stem().string().c_str());
+			{
+				std::string str = asset.m_Stem + asset.m_Extension;
+				ImGui::TextWrapped(str.c_str());
+			}
 
 			ImGui::NextColumn();
 		}
@@ -125,26 +138,23 @@ void AssetManager::GetFilesInPath()
 	m_Assets.clear();
 
 	std::filesystem::directory_entry entry(m_Path);
-	Asset asset{ entry };
+	Asset asset{ entry, entry.is_directory(), entry.path().extension().string(), entry.path().string(), entry.path().stem().string() };
 	m_Assets.push_back(asset);
 
 	for (const auto& entry : std::filesystem::directory_iterator(m_Path))
 	{
-		Asset asset{ entry };
-		DWORD attributes = GetFileAttributes(entry.path().wstring().c_str());
-		
+		DWORD attributes = GetFileAttributes(entry.path().wstring().c_str());	
 		if (attributes & FILE_ATTRIBUTE_SYSTEM || attributes & FILE_ATTRIBUTE_ENCRYPTED || attributes & FILE_ATTRIBUTE_HIDDEN)
 			continue;
 
+		Asset asset{ entry, entry.is_directory(), entry.path().extension().string(), entry.path().string(), entry.path().stem().string() };
 		m_Assets.push_back(asset);
 	}
 }
 
-void AssetManager::RenderFileMenu()
+void AssetManager::RenderFileMenu(Asset asset)
 {
-	ImGui::Button("Delete", ImVec2(128,128));
-	ImGui::SameLine();
-	ImGui::Text("Delete object");
+	ImGui::Button("Delete", ImVec2(-1,0));
 }
 
 int AssetManager::GetButtonsInWindow()
@@ -153,12 +163,11 @@ int AssetManager::GetButtonsInWindow()
 
 	// Manually wrapping (we should eventually provide this as an automatic layout feature, but for now you can do it manually)
 	ImVec2 button_sz(64, 64);
-	ImGuiStyle& style = ImGui::GetStyle();
 	int buttons_count = m_Assets.size();
 	float window_visible_x2 = ImGui::GetWindowContentRegionMax().x;
 	for (int n = 0; n < buttons_count; n++)
 	{
-		float next_button_x2 = (64 * n) + style.ItemSpacing.x + button_sz.x; // Expected position if next button was on same line
+		float next_button_x2 = (64 * n) + button_sz.x; // Expected position if next button was on same line
 		if (n + 1 < buttons_count && next_button_x2 < window_visible_x2)
 			buttonspossible++;
 	}

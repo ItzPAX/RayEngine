@@ -12,6 +12,10 @@ struct Asset
 	std::filesystem::directory_entry m_Entry;
 
 	// additional info about asset can be stored here
+	bool m_Dir;
+	std::string m_Extension;
+	std::string m_Path;
+	std::string m_Stem;
 };
 
 class RAY_API AssetManager
@@ -26,7 +30,7 @@ public:
 
 private:
 	void GetFilesInPath();
-	void RenderFileMenu();
+	void RenderFileMenu(Asset asset);
 	int GetButtonsInWindow();
 
 private:

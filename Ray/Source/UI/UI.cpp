@@ -144,7 +144,7 @@ VOID UI::RenderLogMenu()
 
 	ImGui::Begin("Logs");
 	{
-		ImGui::ListBoxHeader("", ImVec2(-1,-1));
+		ImGui::ListBoxHeader("##LogBox", ImVec2(-1,-1));
 		for (auto ws : Logger::Instance()->m_Logs)
 		{
 			std::string s(ws.begin(), ws.end());
@@ -152,4 +152,5 @@ VOID UI::RenderLogMenu()
 		}
 		ImGui::ListBoxFooter();
 	}
+	ImGui::End();
 }
