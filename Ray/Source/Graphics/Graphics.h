@@ -37,6 +37,7 @@ public:
 	static VertexArrayObjectPtr CreateVertexArrayObject(const VertexBufferDesc& vbDesc, const IndexBufferDesc& ibDesc);
 	static ShaderProgramPtr CreateShaderProgram(const ShaderProgramDesc& desc);
 	static UniformBufferPtr CreateUniformBuffer(const UniformBufferDesc& desc);
+	static FrameBufferPtr CreateFrameBuffer(const Vec2D& size);
 
 public:
 	static void SetViewport(Rect size);

@@ -108,7 +108,15 @@ namespace Win32 {
 	{
 		RECT rc = {};
 		GetClientRect(Handle(), &rc);
-		return Rect(rc.right - rc.left, rc.bottom - rc.top);
+
+		RECT desktop;
+		const HWND hDesktop = GetDesktopWindow();
+		GetWindowRect(hDesktop, &desktop);
+
+		int width = rc.right - rc.left;
+		int height = rc.bottom - rc.top;
+
+		return Rect(((desktop.right / 2) - (width / 2)), ((desktop.bottom / 2) - (height / 2)), width, height);
 	}
 
 	VOID Window::MakeCurrentContext()
@@ -192,7 +200,7 @@ namespace Win32 {
 			SetBkMode(hdc, TRANSPARENT);
 			SetTextColor(hdc, Active() ? RGB(255, 255, 255) : RGB(92, 92, 92));
 
-			DrawText(hdc, m_Title.c_str(), wcslen(m_Title.c_str()), &rect, DT_SINGLELINE | DT_VCENTER | DT_CENTER);
+			DrawText(hdc, m_Title.c_str(), (int)wcslen(m_Title.c_str()), &rect, DT_SINGLELINE | DT_VCENTER | DT_CENTER);
 		}
 
 		POINT pt;
@@ -221,7 +229,7 @@ namespace Win32 {
 			else if (button->m_Text.compare(L"🗗") == 0 && !Win32::Utils::IsWindowFullscreen(Handle()))
 				button->m_Text = L"🗖";
 
-			DrawText(hdc, button->m_Text.c_str(), wcslen(button->m_Text.c_str()), &button->m_Rect, DT_SINGLELINE | DT_VCENTER | DT_CENTER);
+			DrawText(hdc, button->m_Text.c_str(), (int)wcslen(button->m_Text.c_str()), &button->m_Rect, DT_SINGLELINE | DT_VCENTER | DT_CENTER);
 		}
 	}
 
@@ -289,6 +297,7 @@ namespace Win32 {
 
 	VOID Win32::Window::OnResize()
 	{
-		Graphics::Instance()->SetViewport(GetInnerSize());
+		Rect r = GetInnerSize();
+		Graphics::Instance()->SetViewport(r);
 	}
 }

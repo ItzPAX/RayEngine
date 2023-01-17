@@ -150,6 +150,7 @@
     <ClCompile Include="Source\Engine\REngine.cpp" />
     <ClCompile Include="Source\Engine\Simulation.cpp" />
     <ClCompile Include="Source\Engine\Splashscreen.cpp" />
+    <ClCompile Include="Source\Graphics\FrameBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Graphics.cpp" />
     <ClCompile Include="Source\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="Source\Graphics\UniformBuffer.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="Source\Platform\Win32\w32Win32Utils.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32Window.cpp" />
     <ClCompile Include="Source\Ray.cpp" />
+    <ClCompile Include="Source\UI\AssetManager.cpp" />
     <ClCompile Include="Source\UI\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +192,7 @@
     <ClInclude Include="Source\Engine\REngine.h" />
     <ClInclude Include="Source\Engine\Simulation.h" />
     <ClInclude Include="Source\Engine\Splashscreen.h" />
+    <ClInclude Include="Source\Graphics\FrameBuffer.h" />
     <ClInclude Include="Source\Graphics\Graphics.h" />
     <ClInclude Include="Source\Graphics\GraphicsDefinitions.h" />
     <ClInclude Include="Source\Graphics\ShaderProgram.h" />
@@ -207,6 +210,7 @@
     <ClInclude Include="Source\Platform\Win32\w32WinEntry.h" />
     <ClInclude Include="Source\Ray.h" />
     <ClInclude Include="Source\Platform\Win32\w32Caption.h" />
+    <ClInclude Include="Source\UI\AssetManager.h" />
     <ClInclude Include="Source\UI\UI.h" />
     <ClInclude Include="Source\UI\UIDefinitions.h" />
   </ItemGroup>

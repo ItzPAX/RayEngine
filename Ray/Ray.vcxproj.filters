@@ -226,6 +226,12 @@
     <ClCompile Include="Source\UI\UI.cpp">
       <Filter>Source\UI\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\FrameBuffer.cpp">
+      <Filter>Source\Graphics\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UI\AssetManager.cpp">
+      <Filter>Source\UI\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\PerGameSettings.h">
@@ -350,6 +356,12 @@
     </ClInclude>
     <ClInclude Include="Source\UI\UIDefinitions.h">
       <Filter>Source\UI\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\FrameBuffer.h">
+      <Filter>Source\Graphics\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UI\AssetManager.h">
+      <Filter>Source\UI\Classes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -11,6 +11,7 @@
 #include <list>
 #include <comdef.h>
 #include <deque>
+#include <unordered_map>
 
 // error handling
 #include <assert.h>
@@ -22,6 +23,7 @@
 // I/O
 #include <fstream>
 #include <filesystem>
+#include <direct.h>
 
 // OpenGL libs
 #include <glad/glad_wgl.h>

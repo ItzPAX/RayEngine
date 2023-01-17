@@ -45,8 +45,8 @@ LRESULT SplashWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPA
 	{
 	case WM_PAINT:
 	{
-		HBITMAP hbitmap;
-		HDC hdc, hmemdc;
+		HBITMAP hbitmap = 0;
+		HDC hdc, hmemdc = 0;
 		PAINTSTRUCT ps;
 
 		hdc = BeginPaint(hwnd, &ps);
@@ -60,12 +60,12 @@ LRESULT SplashWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPA
 		{
 			WSTRING engineModeText = Engine::EngineModeToString() + L" Mode";
 			SetTextAlign(hdc, TA_RIGHT);
-			TextOut(hdc, Size().cx - 15, 15, engineModeText.c_str(), wcslen(engineModeText.c_str()));
+			TextOut(hdc, (int)Size().cx - 15, 15, engineModeText.c_str(), (int)wcslen(engineModeText.c_str()));
 		}
 
 		SetTextAlign(hdc, TA_CENTER);
 
-		TextOut(hdc, Size().cx / 2, Size().cy - 30, m_OutputMessage, wcslen(m_OutputMessage));
+		TextOut(hdc, (int)Size().cx / 2, (int)Size().cy - 30, m_OutputMessage, (int)wcslen(m_OutputMessage));
 		EndPaint(hwnd, &ps);
 	}
 	break;

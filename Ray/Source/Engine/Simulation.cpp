@@ -41,7 +41,8 @@ namespace Ray {
 	{
 		switch (message)
 		{
-
+		default:
+			break;
 		}
 		return Win32::Window::MessageHandler(hwnd, message, wParam, lParam);
 	}

@@ -34,4 +34,7 @@ public:
 
 	/* Start MTail Application */
 	static VOID StartMTail();
+
+public:
+	std::vector<WSTRING> m_Logs;
 };

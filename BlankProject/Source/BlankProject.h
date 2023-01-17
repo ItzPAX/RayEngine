@@ -28,6 +28,8 @@ public:
 	VertexArrayObjectPtr m_VAO;
 	ShaderProgramPtr m_Shader;
 	UniformBufferPtr m_Uniform;
+	FrameBufferPtr m_FrameBuffer;
+
 	UIPtr m_UI;
 
 	std::chrono::system_clock::time_point m_PreviousTime;

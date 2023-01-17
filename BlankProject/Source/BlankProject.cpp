@@ -162,18 +162,28 @@ public:
 		});
 
 		m_Shader->SetUniformBufferSlot("UniformData", 0);
+
+		// init a framebuffer based on window size
+		RECT desktop;
+		const HWND hDesktop = GetDesktopWindow();
+		GetWindowRect(hDesktop, &desktop);
+		m_FrameBuffer = Graphics::Instance()->CreateFrameBuffer(Vec2D(desktop.right, desktop.bottom));
 	}
 
 	// Update
 	VOID Update() 
 	{
+		Graphics::Instance()->Clear(Vec4D(0.26f, 0.26f, 0.26f, 0.5f));
+
+		// render the ui before presenting the scene
+		m_UI->RenderUI(m_FrameBuffer->Textures());
+
 		// compute delta time
 		auto currentTime = std::chrono::system_clock::now();
 		auto elapsedSeconds = std::chrono::duration<double>();
 		if (m_PreviousTime.time_since_epoch().count())
 			elapsedSeconds = currentTime - m_PreviousTime;
 		m_PreviousTime = currentTime;
-
 
 		auto deltaTime = elapsedSeconds.count();
 
@@ -205,22 +215,23 @@ public:
 		auto displaySize = Simulation::GetInnerSize();
 		projection.SetOrthoLH(displaySize.width() * 0.004f, displaySize.height() * 0.004f, 0.01f, 100.f);
 
+		m_FrameBuffer->Bind();
+
+		Graphics::Instance()->Clear(Vec4D(0.3f, 0.3f, 0.7f, 1.f));
+
 		UniformData data = { world, projection };
 		m_Uniform->SetData(&data);
-
-		Graphics::Instance()->Clear(Vec4D(0.3f,0.3f,0.7f,1.f));
-
+		
 		Graphics::Instance()->SetFaceCulling(CullType::BACK_FACE);
 		Graphics::Instance()->SetWindingOrder(WindingOrder::CLOCKWISE);
-
+		
 		Graphics::Instance()->SetVertexArrayObject(m_VAO);
 		Graphics::Instance()->SetUniformBuffer(m_Uniform, 0);
 		Graphics::Instance()->SetShaderProgram(m_Shader);
-
+		
 		Graphics::Instance()->DrawIndexedTriangles(TriangleType::TRIANGLE_LIST, 36);
 
-		// render the ui before presenting the scene
-		m_UI->RenderUI();
+		m_FrameBuffer->Unbind();
 
 		Simulation::Present(false);
 	}

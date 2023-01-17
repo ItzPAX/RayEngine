@@ -1,20 +1,7 @@
 ﻿  BlankProject.cpp
-D:\MyProgramming\OpenGL\RayEngine\BlankProject\Source\BlankProject.cpp(180,20): warning C4244: "+=": Konvertierung von "_Rep" in "float", möglicher Datenverlust
+D:\MyProgramming\OpenGL\RayEngine\BlankProject\Source\BlankProject.cpp(186,20): warning C4244: "+=": Konvertierung von "_Rep" in "float", möglicher Datenverlust
           with
           [
               _Rep=double
           ]
-  glad.c
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winbase.h(9531,5): warning C5105: Die Makroerweiterung, die "defined" erzeugt, weist ein nicht definiertes Verhalten auf.
-  glad_wgl.c
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winbase.h(9531,5): warning C5105: Die Makroerweiterung, die "defined" erzeugt, weist ein nicht definiertes Verhalten auf.
-  Code wird generiert...
-  imgui.cpp
-  imgui_demo.cpp
-  imgui_draw.cpp
-  imgui_impl_opengl3.cpp
-  imgui_impl_win32.cpp
-  imgui_tables.cpp
-  imgui_widgets.cpp
-  Code wird generiert...
   BlankProject.vcxproj -> D:\MyProgramming\OpenGL\RayEngine\Build\Debug\BlankProject.exe

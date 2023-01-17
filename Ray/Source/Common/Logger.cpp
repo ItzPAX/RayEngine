@@ -38,6 +38,8 @@ VOID Logger::PrintLog(const WCHAR* fmt, ...)
 		outfile << L"[" << Time::GetDateTimeString() << L"]  " << s;
 		outfile.close();
 		OutputDebugString(s.c_str());
+		if(Instance())
+			Instance()->m_Logs.push_back(s);
 	}
 	else {
 		MessageBox(NULL, L"Unable to open log file...", L"Log Error", MB_OK);

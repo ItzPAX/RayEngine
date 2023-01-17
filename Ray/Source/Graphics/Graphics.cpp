@@ -80,6 +80,11 @@ UniformBufferPtr Graphics::CreateUniformBuffer(const UniformBufferDesc& desc)
 	return std::make_shared<UniformBuffer>(desc);
 }
 
+FrameBufferPtr Graphics::CreateFrameBuffer(const Vec2D& size)
+{
+	return std::make_shared<FrameBuffer>(size);
+}
+
 void Graphics::Clear(Vec4D col)
 {
 	glClearColor(col.x(), col.y(), col.z(), col.w());
