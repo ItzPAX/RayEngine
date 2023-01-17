@@ -1,6 +1,6 @@
 #pragma once
 
-// Disable dll / glfw warnings
+// Disable dll / glad warnings
 #pragma warning( disable : 4251 4275 4099 )
 
 // DLL Im/Export

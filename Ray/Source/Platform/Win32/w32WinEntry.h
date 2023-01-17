@@ -25,7 +25,7 @@ int CALLBACK WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 
 	// tell engine to initialize
 	EntryApp->PreInitialize();
-
+	
 	// tell game to start initializing
 	EntryApp->Initialize();
 

@@ -132,7 +132,6 @@ VOID UI::RenderScene(UINT32 scene)
 		m_SceneSize = Vec2D(windowsize.x, windowsize.y);
 
 		ImVec2 wsize = ImGui::GetContentRegionAvail();
-		// Because I use the texture from OpenGL, I need to invert the V from the UV.
 		ImGui::Image((ImTextureID)scene, wsize, ImVec2(0, 1), ImVec2(1, 0));
 	}
 	ImGui::End();
@@ -147,8 +146,11 @@ VOID UI::RenderLogMenu()
 		ImGui::ListBoxHeader("##LogBox", ImVec2(-1,-1));
 		for (auto ws : Logger::Instance()->m_Logs)
 		{
-			std::string s(ws.begin(), ws.end());
-			ImGui::Selectable(s.c_str(), b);
+			std::string str;
+			std::transform(ws.begin(), ws.end(), std::back_inserter(str), [](wchar_t c) {
+				return (char)c;
+			});
+			ImGui::Selectable(str.c_str(), b);
 		}
 		ImGui::ListBoxFooter();
 	}

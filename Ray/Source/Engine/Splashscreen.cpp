@@ -17,11 +17,13 @@ namespace SplashScreen {
 
 	VOID Close()
 	{
-		return VOID RAY_API();
+		CloseWindow(m_SplashWindow->Handle());
+		DestroyWindow(m_SplashWindow->Handle());
 	}
 
 	VOID AddMessage(const WCHAR* message)
 	{
+		Logger::PrintLog(message);
 		PostMessage(m_SplashWindow->Handle(), WM_OUTPUTMESSAGE, (WPARAM)message, 0);
 	}
 }
@@ -76,6 +78,9 @@ LRESULT SplashWindow::MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPA
 		RedrawWindow();
 		return 0;
 	}
+	break;
+	default:
+		break;
 	}
 	return Window::MessageHandler(hwnd, message, wParam, lParam);
 }

@@ -38,7 +38,7 @@ private:
 	std::string m_Path;
 
 	int m_SelectedDrive = 0;
-	char m_Drives[MAX_NAME_STRING];
+	char m_Drives[MAX_NAME_STRING] = "";
 
 	std::string m_CurrentlySelected;
 

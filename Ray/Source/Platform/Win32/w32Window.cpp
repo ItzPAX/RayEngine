@@ -251,7 +251,12 @@ namespace Win32 {
 			{
 				switch (button->m_Command)
 				{
-				case CB_CLOSE: { SendMessage(Handle(), WM_CLOSE, 0, 0); } break;
+				case CB_CLOSE: { 
+					SendMessage(Handle(), WM_CLOSE, 0, 0);
+					SendMessage(Handle(), WM_QUIT, 0, 0);
+					PostQuitMessage(0);
+				} 
+					break;
 				case CB_MINIMIZE: { ShowWindow(Handle(), SW_MINIMIZE); } break;
 				case CB_MAXIMIZE: { Win32::Utils::MaximizeWindow(Handle()); } break;
 				}

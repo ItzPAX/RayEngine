@@ -43,7 +43,7 @@ namespace Win32 {
 
         inline BOOL RAY_API IsWindowFullscreen(HWND hWnd)
         {
-            WINDOWPLACEMENT placement;
+            WINDOWPLACEMENT placement = { };
             GetWindowPlacement(hWnd, &placement);
 
             if (placement.showCmd == SW_MAXIMIZE)
@@ -52,7 +52,7 @@ namespace Win32 {
         }
 
         inline VOID RAY_API MaximizeWindow(HWND hwnd) {
-            WINDOWPLACEMENT wPos;
+            WINDOWPLACEMENT wPos = { };
             GetWindowPlacement(hwnd, &wPos);
             if (wPos.showCmd == SW_MAXIMIZE) ShowWindow(hwnd, SW_NORMAL);
             else  ShowWindow(hwnd, SW_MAXIMIZE);

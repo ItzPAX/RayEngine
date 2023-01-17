@@ -115,20 +115,6 @@ public:
 			22,23,20
 		};
 
-		//float polygonVertices[] = {
-		//	-0.5f, -0.5f, 0.f,		// POSITION
-		//	1,0,0,					// COLOR
-
-		//	-0.5f, 0.5f, 0.f,
-		//	0,1,0,
-
-		//	0.5f, -0.5f, 0.f,
-		//	0,0,1,
-
-		//	0.5f, 0.5f, 0.f,
-		//	1,1,0
-		//};
-
 		VertexAttribute attribList[] = {
 			sizeof(Vec3D) / sizeof(FLOAT),		// POSITION
 			sizeof(Vec2D) / sizeof(FLOAT)		// TEXCOORD
@@ -163,11 +149,8 @@ public:
 
 		m_Shader->SetUniformBufferSlot("UniformData", 0);
 
-		// init a framebuffer based on window size
-		RECT desktop;
-		const HWND hDesktop = GetDesktopWindow();
-		GetWindowRect(hDesktop, &desktop);
-		m_FrameBuffer = Graphics::Instance()->CreateFrameBuffer(Vec2D(desktop.right, desktop.bottom));
+		// init a framebuffer
+		m_FrameBuffer = Graphics::Instance()->CreateFrameBuffer();
 	}
 
 	// Update
@@ -237,7 +220,10 @@ public:
 	}
 
 	// Quit
-	VOID Quit() {}
+	VOID Quit() 
+	{
+		
+	}
 };
 
 ENTRYAPP(BlankProject)

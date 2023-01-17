@@ -3,7 +3,7 @@
 class RAY_API FrameBuffer
 {
 public:
-	FrameBuffer(Vec2D size);
+	FrameBuffer();
 	~FrameBuffer();
 
 	void Bind();

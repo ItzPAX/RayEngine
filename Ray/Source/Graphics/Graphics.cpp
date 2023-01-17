@@ -80,9 +80,9 @@ UniformBufferPtr Graphics::CreateUniformBuffer(const UniformBufferDesc& desc)
 	return std::make_shared<UniformBuffer>(desc);
 }
 
-FrameBufferPtr Graphics::CreateFrameBuffer(const Vec2D& size)
+FrameBufferPtr Graphics::CreateFrameBuffer()
 {
-	return std::make_shared<FrameBuffer>(size);
+	return std::make_shared<FrameBuffer>();
 }
 
 void Graphics::Clear(Vec4D col)

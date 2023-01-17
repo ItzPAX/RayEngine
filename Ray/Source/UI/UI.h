@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning( disable : 4312 )
 
 class RAY_API UI
 {

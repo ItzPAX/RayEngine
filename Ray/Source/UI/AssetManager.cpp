@@ -1,6 +1,7 @@
 #include "Ray.h"
 
 AssetManager::AssetManager()
+	: m_Drives("")
 {
 	
 }
@@ -16,8 +17,10 @@ void AssetManager::Initialize(std::string name, AssetManagerFlags flags)
 
 	// init path to our working dir
 	char cCurrentPath[FILENAME_MAX];
-	_getcwd(cCurrentPath, sizeof(cCurrentPath));
-	m_Path = cCurrentPath;
+	if (!_getcwd(cCurrentPath, sizeof(cCurrentPath)))
+		m_Path = "C:\\";
+	else
+		m_Path = cCurrentPath;
 
 	// set bools according to flags etc.
 
@@ -43,7 +46,7 @@ void AssetManager::Render()
 	ImGui::Begin(m_Name.c_str());
 	{
 		ImGui::TextWrapped(m_Path.c_str());
-		if (ImGui::Combo("Drive", &m_SelectedDrive, &m_DrivesVec[0], m_DrivesVec.size()))
+		if (ImGui::Combo("Drive", &m_SelectedDrive, &m_DrivesVec[0], (int)m_DrivesVec.size()))
 		{
 			m_Path = m_DrivesVec.at(m_SelectedDrive);
 			GetFilesInPath();
@@ -91,7 +94,7 @@ void AssetManager::Render()
 
 					// make new string, but dont use the last segment
 					std::string newpath;
-					int tocopy = seglist.size() == 1 ? 1 : seglist.size() - 1;
+					int tocopy = (int)seglist.size() == 1 ? 1 : (int)seglist.size() - 1;
 
 					for (int i = 0; i < tocopy; i++)
 					{
@@ -154,7 +157,11 @@ void AssetManager::GetFilesInPath()
 
 void AssetManager::RenderFileMenu(Asset asset)
 {
-	ImGui::Button("Delete", ImVec2(-1,0));
+	if (ImGui::Button("Delete", ImVec2(-1, 0)))
+	{
+		remove(asset.m_Path.c_str());
+		GetFilesInPath();
+	}
 }
 
 int AssetManager::GetButtonsInWindow()
@@ -163,7 +170,7 @@ int AssetManager::GetButtonsInWindow()
 
 	// Manually wrapping (we should eventually provide this as an automatic layout feature, but for now you can do it manually)
 	ImVec2 button_sz(64, 64);
-	int buttons_count = m_Assets.size();
+	int buttons_count = (int)m_Assets.size();
 	float window_visible_x2 = ImGui::GetWindowContentRegionMax().x;
 	for (int n = 0; n < buttons_count; n++)
 	{
