@@ -8,15 +8,7 @@
 // defines the engine needs
 #include "CoreDefinitions.h"
 
-// Maths
-#include "Math/Math.h"
-#include "Math/Vec2D.h"
-#include "Math/Vec3D.h"
-#include "Math/Vec4D.h"
-#include "Math/Triangle.h"
-#include "Math/Mat4.h"
-
-// glm
+// glm [gl maths]
 #include <glm.hpp>
 #include <ext.hpp>
 

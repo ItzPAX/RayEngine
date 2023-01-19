@@ -156,8 +156,8 @@ public:
 		m_Camera = Graphics::Instance()->CreateCamera
 		({
 			90.f,
-			(float)display.width(),
-			(float)display.height(),
+			(float)display.x,
+			(float)display.y,
 		});
 		m_Camera->Translate(glm::vec3(0.0f, 2.0f, 8.0f));
 		m_Camera->Update();
@@ -166,7 +166,7 @@ public:
 	// Update
 	VOID Update(float deltatime)
 	{
-		Graphics::Instance()->Clear(Vec4D(0.26f, 0.26f, 0.26f, 0.5f));
+		Graphics::Instance()->Clear(glm::vec4(0.26f, 0.26f, 0.26f, 0.5f));
 
 		m_UI->RenderUI(m_FrameBuffer->Textures());
 
@@ -176,7 +176,7 @@ public:
 
 		m_FrameBuffer->Bind();
 
-		Graphics::Instance()->Clear(Vec4D(0.3f, 0.3f, 0.7f, 1.f));
+		Graphics::Instance()->Clear(glm::vec4(0.3f, 0.3f, 0.7f, 1.f));
 		
 		Graphics::Instance()->SetFaceCulling(CullType::FRONT_FACE);
 		Graphics::Instance()->SetWindingOrder(WindingOrder::CLOCKWISE);	

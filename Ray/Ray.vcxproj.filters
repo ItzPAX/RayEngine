@@ -80,15 +80,6 @@
     <Filter Include="Source\vendor\glad\include\KHR">
       <UniqueIdentifier>{8884a6e9-164a-485b-b967-a2a69c415220}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Math">
-      <UniqueIdentifier>{148d717b-155a-46cf-8452-1b4c0c7b488f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Math\Public">
-      <UniqueIdentifier>{feb4db51-d482-4e25-8ab4-498cccf0b5e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Math\Private">
-      <UniqueIdentifier>{69bfa401-f19d-4cbd-b980-8370ddb39d7f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source\Graphics">
       <UniqueIdentifier>{4829785c-cd31-443f-9867-18d73d449825}</UniqueIdentifier>
     </Filter>
@@ -100,9 +91,6 @@
     </Filter>
     <Filter Include="Source\Graphics\Classes">
       <UniqueIdentifier>{5826b2ac-310a-492f-9a2b-8a6dd0fae25e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source\Math\Classes">
-      <UniqueIdentifier>{2661f18f-d0e5-4609-b7d7-b8f63e606d19}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source\vendor\imgui">
       <UniqueIdentifier>{c58181d5-7fa6-4a56-84d9-b388a28f8ed7}</UniqueIdentifier>
@@ -186,21 +174,6 @@
     </ClCompile>
     <ClCompile Include="Source\Graphics\ShaderProgram.cpp">
       <Filter>Source\Graphics\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Math\Mat4.cpp">
-      <Filter>Source\Math\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Math\Triangle.cpp">
-      <Filter>Source\Math\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Math\Vec4D.cpp">
-      <Filter>Source\Math\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Math\Vec3D.cpp">
-      <Filter>Source\Math\Private</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Math\Vec2D.cpp">
-      <Filter>Source\Math\Private</Filter>
     </ClCompile>
     <ClCompile Include="..\vendor\imgui\imgui.cpp">
       <Filter>Source\vendor\imgui</Filter>
@@ -312,21 +285,6 @@
     <ClInclude Include="Source\Graphics\GraphicsDefinitions.h">
       <Filter>Source\Graphics\Public</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Math\Vec4D.h">
-      <Filter>Source\Math\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Math\Triangle.h">
-      <Filter>Source\Math\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Math\Mat4.h">
-      <Filter>Source\Math\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Math\Vec3D.h">
-      <Filter>Source\Math\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Math\Vec2D.h">
-      <Filter>Source\Math\Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\vendor\imgui\imconfig.h">
       <Filter>Source\vendor\imgui</Filter>
     </ClInclude>
@@ -368,9 +326,6 @@
     </ClInclude>
     <ClInclude Include="Source\Graphics\Camera.h">
       <Filter>Source\Graphics\Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Math\Math.h">
-      <Filter>Source\Math\Public</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

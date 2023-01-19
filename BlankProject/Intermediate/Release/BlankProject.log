@@ -5,8 +5,8 @@ D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,21)
               _Rep=double
           ]
   Code wird generiert.
-  7 of 827 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
+  4 of 825 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
     4 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
   BlankProject.vcxproj -> D:\MyProgramming\OpenGL\RayEngine\Build\Release\BlankProject.exe

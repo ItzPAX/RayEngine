@@ -14,7 +14,7 @@ public:
 
 	// getters
 public:
-	Vec2D SceneSize() { return m_SceneSize; }
+	glm::vec2 SceneSize() { return m_SceneSize; }
 
 private:
 	VOID RenderElements(UINT32 scene);
@@ -27,7 +27,7 @@ private:
 
 private:
 	bool m_Initialized = false;
-	Vec2D m_SceneSize;
+	glm::vec2 m_SceneSize;
 
 	AssetManager m_AssetManager;
 

@@ -90,15 +90,15 @@ FrameBufferPtr Graphics::CreateFrameBuffer()
 	return std::make_shared<FrameBuffer>();
 }
 
-void Graphics::Clear(Vec4D col)
+void Graphics::Clear(glm::vec4 col)
 {
-	glClearColor(col.x(), col.y(), col.z(), col.w());
+	glClearColor(col.x, col.y, col.z, col.w);
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void Graphics::SetViewport(Rect size)
+void Graphics::SetViewport(glm::vec4 size)
 {
-	glViewport(size.left(), size.top(), size.width(), size.height());
+	glViewport(size.x, size.y, size.z, size.w);
 }
 
 void Graphics::SetVertexArrayObject(const VertexArrayObjectPtr& vao)

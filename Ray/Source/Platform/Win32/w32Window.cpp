@@ -104,7 +104,7 @@ namespace Win32 {
 		SetWindowText(Handle(), title);
 	}
 
-	Rect Window::GetInnerSize()
+	glm::vec4 Window::GetInnerSize()
 	{
 		RECT rc = {};
 		GetClientRect(Handle(), &rc);
@@ -116,7 +116,7 @@ namespace Win32 {
 		int width = rc.right - rc.left;
 		int height = rc.bottom - rc.top;
 
-		return Rect(((desktop.right / 2) - (width / 2)), ((desktop.bottom / 2) - (height / 2)), width, height);
+		return glm::vec4(((desktop.right / 2) - (width / 2)), ((desktop.bottom / 2) - (height / 2)), width, height);
 	}
 
 	VOID Window::MakeCurrentContext()
@@ -302,7 +302,7 @@ namespace Win32 {
 
 	VOID Win32::Window::OnResize()
 	{
-		Rect r = GetInnerSize();
+		glm::vec4 r = GetInnerSize();
 		Graphics::Instance()->SetViewport(r);
 	}
 }

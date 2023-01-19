@@ -156,11 +156,6 @@
     <ClCompile Include="Source\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="Source\Graphics\UniformBuffer.cpp" />
     <ClCompile Include="Source\Graphics\VAO.cpp" />
-    <ClCompile Include="Source\Math\Mat4.cpp" />
-    <ClCompile Include="Source\Math\Triangle.cpp" />
-    <ClCompile Include="Source\Math\Vec2D.cpp" />
-    <ClCompile Include="Source\Math\Vec3D.cpp" />
-    <ClCompile Include="Source\Math\Vec4D.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32Caption.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32IApplication.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32SubObject.cpp" />
@@ -200,12 +195,6 @@
     <ClInclude Include="Source\Graphics\ShaderProgram.h" />
     <ClInclude Include="Source\Graphics\UniformBuffer.h" />
     <ClInclude Include="Source\Graphics\VAO.h" />
-    <ClInclude Include="Source\Math\Mat4.h" />
-    <ClInclude Include="Source\Math\Math.h" />
-    <ClInclude Include="Source\Math\Triangle.h" />
-    <ClInclude Include="Source\Math\Vec2D.h" />
-    <ClInclude Include="Source\Math\Vec3D.h" />
-    <ClInclude Include="Source\Math\Vec4D.h" />
     <ClInclude Include="Source\Platform\Win32\w32IApplication.h" />
     <ClInclude Include="Source\Platform\Win32\w32SubObject.h" />
     <ClInclude Include="Source\Platform\Win32\w32Win32Utils.h" />

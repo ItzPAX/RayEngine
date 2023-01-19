@@ -41,7 +41,7 @@ public:
 	static FrameBufferPtr CreateFrameBuffer();
 
 public:
-	static void SetViewport(Rect size);
+	static void SetViewport(glm::vec4 size);
 	static void SetVertexArrayObject(const VertexArrayObjectPtr& vao);
 	static void SetShaderProgram(const ShaderProgramPtr& program);
 	static void SetUniformBuffer(const UniformBufferPtr& buffer, UINT32 slot);
@@ -49,7 +49,7 @@ public:
 	static void SetWindingOrder(const WindingOrder& order);
 
 public:
-	static void Clear(Vec4D col);
+	static void Clear(glm::vec4 col);
 	static void DrawTriangles(const TriangleType& type, UINT32 vertexCount, UINT32 offset);
 	static void DrawIndexedTriangles(const TriangleType& type, UINT32 indicesCount);
 };

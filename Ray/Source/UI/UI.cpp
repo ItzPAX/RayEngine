@@ -118,7 +118,7 @@ VOID UI::RenderInfoMenu()
 	auto context = wglGetCurrentContext();
 	ImGui::Begin("Info");
 	ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-	ImGui::Text("Scene Ratio %f", m_SceneSize.x() / m_SceneSize.y());
+	ImGui::Text("Scene Ratio %f", m_SceneSize.x / m_SceneSize.y);
 	ImGui::Text("Context %x", context);
 	ImGui::End();
 }
@@ -129,7 +129,7 @@ VOID UI::RenderScene(UINT32 scene)
 	ImGui::Begin("Scene", 0);
 	{
 		ImVec2 windowsize = ImGui::GetWindowSize();
-		m_SceneSize = Vec2D(windowsize.x, windowsize.y);
+		m_SceneSize = glm::vec2(windowsize.x, windowsize.y);
 
 		ImVec2 wsize = ImGui::GetContentRegionAvail();
 		ImGui::Image((ImTextureID)scene, wsize, ImVec2(0, 1), ImVec2(1, 0));
