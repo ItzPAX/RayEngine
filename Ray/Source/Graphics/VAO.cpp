@@ -30,6 +30,8 @@ VertexArrayObject::VertexArrayObject(const VertexBufferDesc& vbDesc)
 		glEnableVertexAttribArray(i);
 	}
 
+	glEnableVertexAttribArray(0);
+
 	glBindVertexArray(NULL);
 
 	m_VertexBufferData = vbDesc;

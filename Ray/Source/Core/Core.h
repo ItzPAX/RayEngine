@@ -23,4 +23,5 @@
 #include "Graphics/FrameBuffer.h"
 #include "Graphics/ShaderProgram.h"
 #include "Graphics/VAO.h"
+#include "Graphics/Camera.h"
 #include "Graphics/Graphics.h"

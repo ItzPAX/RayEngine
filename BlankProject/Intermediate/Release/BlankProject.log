@@ -1,12 +1,12 @@
 ﻿  BlankProject.cpp
-D:\MyProgramming\OpenGL\RayEngine\BlankProject\Source\BlankProject.cpp(173,20): warning C4244: "+=": Konvertierung von "_Rep" in "float", möglicher Datenverlust
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,21): warning C4244: "Argument": Konvertierung von "_Rep" in "float", möglicher Datenverlust
           with
           [
               _Rep=double
           ]
   Code wird generiert.
-  0 of 830 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  7 of 827 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    4 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
   BlankProject.vcxproj -> D:\MyProgramming\OpenGL\RayEngine\Build\Release\BlankProject.exe

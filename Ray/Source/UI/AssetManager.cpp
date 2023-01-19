@@ -52,7 +52,7 @@ void AssetManager::Render()
 			GetFilesInPath();
 		}
 
-		ImGui::Columns(max(GetButtonsInWindow(), 1), 0, 0);
+		ImGui::Columns(glm::max(GetButtonsInWindow(), 1), 0, 0);
 
 		for (auto asset : m_Assets)
 		{

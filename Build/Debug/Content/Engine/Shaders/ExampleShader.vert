@@ -1,21 +1,17 @@
-#version 410 core
+#version 430 core
 
-layout (row_major) uniform UniformData
+uniform EngineData
 {
-	mat4 world;
-	mat4 projection;
+	mat4 u_ModelViewProj;
 };
 
 layout(location = 0) in vec3 position;
 layout(location = 1) in vec2 texcoord;
 
-layout(location = 0) out vec3 outColor;
+layout(location = 0) out vec3 vertOutColor;
 
 void main()
 {
-	vec4 pos = vec4(position, 1) * world;
-	pos = pos * projection;
-	gl_Position = pos;
-	
-	outColor = vec3(texcoord.x, texcoord.y, 0);
+	gl_Position = u_ModelViewProj * vec4(position, 1);
+	vertOutColor = vec3(texcoord.x,texcoord.y,1);
 }

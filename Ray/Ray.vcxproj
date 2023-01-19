@@ -47,13 +47,13 @@
     <OutDir>$(SolutionDir)\Build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)vendor\imgui\;$(SolutionDir)vendor\glad\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)vendor\glm\;$(SolutionDir)vendor\imgui\;$(SolutionDir)vendor\glad\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\Build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\Intermediate\$(Configuration)\</IntDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)vendor\imgui\;$(SolutionDir)vendor\glad\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)vendor\glm\;$(SolutionDir)vendor\imgui\;$(SolutionDir)vendor\glad\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -150,6 +150,7 @@
     <ClCompile Include="Source\Engine\REngine.cpp" />
     <ClCompile Include="Source\Engine\Simulation.cpp" />
     <ClCompile Include="Source\Engine\Splashscreen.cpp" />
+    <ClCompile Include="Source\Graphics\Camera.cpp" />
     <ClCompile Include="Source\Graphics\FrameBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Graphics.cpp" />
     <ClCompile Include="Source\Graphics\ShaderProgram.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Source\Engine\REngine.h" />
     <ClInclude Include="Source\Engine\Simulation.h" />
     <ClInclude Include="Source\Engine\Splashscreen.h" />
+    <ClInclude Include="Source\Graphics\Camera.h" />
     <ClInclude Include="Source\Graphics\FrameBuffer.h" />
     <ClInclude Include="Source\Graphics\Graphics.h" />
     <ClInclude Include="Source\Graphics\GraphicsDefinitions.h" />
@@ -199,6 +201,7 @@
     <ClInclude Include="Source\Graphics\UniformBuffer.h" />
     <ClInclude Include="Source\Graphics\VAO.h" />
     <ClInclude Include="Source\Math\Mat4.h" />
+    <ClInclude Include="Source\Math\Math.h" />
     <ClInclude Include="Source\Math\Triangle.h" />
     <ClInclude Include="Source\Math\Vec2D.h" />
     <ClInclude Include="Source\Math\Vec3D.h" />

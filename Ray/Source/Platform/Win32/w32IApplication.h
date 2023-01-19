@@ -27,7 +27,7 @@ namespace Win32 {
 		virtual VOID Initialize() = 0;
 
 		/* Game Loop - Called on a loop while the Application is running */
-		virtual VOID Update() = 0;
+		virtual VOID Update(float deltatime) = 0;
 
 		/* Called on quitting the game */
 		virtual VOID Quit() = 0;

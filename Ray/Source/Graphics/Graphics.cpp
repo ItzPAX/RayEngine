@@ -80,6 +80,11 @@ UniformBufferPtr Graphics::CreateUniformBuffer(const UniformBufferDesc& desc)
 	return std::make_shared<UniformBuffer>(desc);
 }
 
+CameraPtr Graphics::CreateCamera(const CameraDesc& desc)
+{
+	return std::make_shared<Camera>(desc);
+}
+
 FrameBufferPtr Graphics::CreateFrameBuffer()
 {
 	return std::make_shared<FrameBuffer>();

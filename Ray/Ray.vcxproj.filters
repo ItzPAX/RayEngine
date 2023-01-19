@@ -232,6 +232,9 @@
     <ClCompile Include="Source\UI\AssetManager.cpp">
       <Filter>Source\UI\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\Camera.cpp">
+      <Filter>Source\Graphics\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\PerGameSettings.h">
@@ -362,6 +365,12 @@
     </ClInclude>
     <ClInclude Include="Source\UI\AssetManager.h">
       <Filter>Source\UI\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Camera.h">
+      <Filter>Source\Graphics\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Math\Math.h">
+      <Filter>Source\Math\Public</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

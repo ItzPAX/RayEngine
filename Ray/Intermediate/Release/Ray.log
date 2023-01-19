@@ -1,7 +1,37 @@
-﻿  AssetManager.cpp
+﻿  CmdLineArgs.cpp
+  Logger.cpp
+  Time.cpp
+  Core.cpp
+  CoreDefinitions.cpp
+  CoreMinimal.cpp
+  PerGameSettings.cpp
+  REngine.cpp
+  Simulation.cpp
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Engine\Simulation.cpp(46,3): warning C4065: switch-Anweisung enthält "default", aber keine case-Bezeichnungen
+  Splashscreen.cpp
+  Camera.cpp
+  FrameBuffer.cpp
+  Graphics.cpp
+  ShaderProgram.cpp
+  UniformBuffer.cpp
+  VAO.cpp
+  Mat4.cpp
+  Triangle.cpp
+  Vec2D.cpp
+  Vec3D.cpp
+  Vec4D.cpp
+  w32Caption.cpp
+  w32IApplication.cpp
+  w32SubObject.cpp
+  w32Win32Utils.cpp
+  w32Window.cpp
+  Ray.cpp
+  AssetManager.cpp
+  UI.cpp
      Bibliothek "D:\MyProgramming\OpenGL\RayEngine\\Build\Release\Ray.lib" und Objekt "D:\MyProgramming\OpenGL\RayEngine\\Build\Release\Ray.exp" werden erstellt.
   Code wird generiert.
-  Previous IPDB and IOBJ mismatch, fall back to full compilation.
-  All 3713 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  10 of 3768 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    33 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
   Ray.vcxproj -> D:\MyProgramming\OpenGL\RayEngine\Build\Release\Ray.dll

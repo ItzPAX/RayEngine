@@ -26,27 +26,27 @@ public:
 		// Init ImGui
 		m_UI = std::make_shared<UI>(Handle());
 
-		Vec3D positionsList[] =
+		glm::vec3 positionsList[] =
 		{
 			//front face
-			Vec3D(-0.5f,-0.5f,-0.5f),
-			Vec3D(-0.5f,0.5f,-0.5f),
-			Vec3D(0.5f,0.5f,-0.5f),
-			Vec3D(0.5f,-0.5f,-0.5f),
-			
+			glm::vec3(-0.5f,-0.5f,-0.5f),
+			glm::vec3(-0.5f,0.5f,-0.5f),
+			glm::vec3(0.5f,0.5f,-0.5f),
+			glm::vec3(0.5f,-0.5f,-0.5f),
+
 			//back face
-			Vec3D(0.5f,-0.5f,0.5f),
-			Vec3D(0.5f,0.5f,0.5f),
-			Vec3D(-0.5f,0.5f,0.5f),
-			Vec3D(-0.5f,-0.5f,0.5f)
+			glm::vec3(0.5f,-0.5f,0.5f),
+			glm::vec3(0.5f,0.5f,0.5f),
+			glm::vec3(-0.5f,0.5f,0.5f),
+			glm::vec3(-0.5f,-0.5f,0.5f)
 		};
 
-		Vec2D texcoordsList[] = // RG Only
+		glm::vec2 texcoordsList[] =
 		{
-			Vec2D(0,0),
-			Vec2D(0,1),
-			Vec2D(1,0),
-			Vec2D(1,1)
+			glm::vec2(0,0),
+			glm::vec2(0,1),
+			glm::vec2(1,0),
+			glm::vec2(1,1)
 		};
 
 		Vertex verticesList[] =
@@ -116,8 +116,8 @@ public:
 		};
 
 		VertexAttribute attribList[] = {
-			sizeof(Vec3D) / sizeof(FLOAT),		// POSITION
-			sizeof(Vec2D) / sizeof(FLOAT)		// TEXCOORD
+			sizeof(glm::vec3) / sizeof(float),		// POSITION
+			sizeof(glm::vec2) / sizeof(float)		// TEXCOORD
 		};
 
 		m_VAO = Graphics::Instance()->CreateVertexArrayObject
@@ -131,15 +131,10 @@ public:
 				sizeof(attribList) / sizeof(VertexAttribute)
 			},
 			{
-				indicesList,
+				(void*)indicesList,
 				sizeof(indicesList)
 			}
 		);
-
-		m_Uniform = Graphics::Instance()->CreateUniformBuffer
-		({
-			sizeof(UniformData)
-		});
 
 		m_Shader = Graphics::Instance()->CreateShaderProgram
 		({
@@ -147,67 +142,44 @@ public:
 			L"D:/MyProgramming/OpenGL/RayEngine/Build/Debug/Content/Engine/Shaders/ExampleShader.frag"
 		});
 
-		m_Shader->SetUniformBufferSlot("UniformData", 0);
+		m_Uniform = Graphics::Instance()->CreateUniformBuffer
+		({
+			sizeof(UniformData)
+		});
+
+		m_Shader->SetUniformBufferSlot("EngineData", 0);
 
 		// init a framebuffer
 		m_FrameBuffer = Graphics::Instance()->CreateFrameBuffer();
+
+		auto display = GetInnerSize();
+		m_Camera = Graphics::Instance()->CreateCamera
+		({
+			90.f,
+			(float)display.width(),
+			(float)display.height(),
+		});
+		m_Camera->Translate(glm::vec3(0.0f, 2.0f, 8.0f));
+		m_Camera->Update();
 	}
 
 	// Update
-	VOID Update() 
+	VOID Update(float deltatime)
 	{
 		Graphics::Instance()->Clear(Vec4D(0.26f, 0.26f, 0.26f, 0.5f));
 
-		// render the ui before presenting the scene
 		m_UI->RenderUI(m_FrameBuffer->Textures());
 
-		// compute delta time
-		auto currentTime = std::chrono::system_clock::now();
-		auto elapsedSeconds = std::chrono::duration<double>();
-		if (m_PreviousTime.time_since_epoch().count())
-			elapsedSeconds = currentTime - m_PreviousTime;
-		m_PreviousTime = currentTime;
-
-		auto deltaTime = elapsedSeconds.count();
-
-		m_Scale += 1.14f * deltaTime;
-		auto currentScale = abs(sin(m_Scale));
-
-		Mat4 world, projection, temp;
-
-		temp.SetIdentity();
-		temp.SetScale(Vec3D(1, 1, 1));
-		world *= temp;
-
-		temp.SetIdentity();
-		temp.SetRotationX(m_Scale);
-		world *= temp;
-
-		temp.SetIdentity();
-		temp.SetRotationY(m_Scale);
-		world *= temp;
-
-		temp.SetIdentity();
-		temp.SetRotationZ(m_Scale);
-		world *= temp;
-
-		temp.SetIdentity();
-		temp.SetTranslation(Vec3D(0, 0, 0));
-		world *= temp;
-
-		auto displaySize = Simulation::GetInnerSize();
-		projection.SetOrthoLH(displaySize.width() * 0.004f, displaySize.height() * 0.004f, 0.01f, 100.f);
+		glm::mat4 u_ModelViewProjection = m_Camera->GetViewProj();
+		UniformData data = { u_ModelViewProjection };
+		m_Uniform->SetData(&data);
 
 		m_FrameBuffer->Bind();
 
 		Graphics::Instance()->Clear(Vec4D(0.3f, 0.3f, 0.7f, 1.f));
-
-		UniformData data = { world, projection };
-		m_Uniform->SetData(&data);
 		
-		Graphics::Instance()->SetFaceCulling(CullType::BACK_FACE);
-		Graphics::Instance()->SetWindingOrder(WindingOrder::CLOCKWISE);
-		
+		Graphics::Instance()->SetFaceCulling(CullType::FRONT_FACE);
+		Graphics::Instance()->SetWindingOrder(WindingOrder::CLOCKWISE);	
 		Graphics::Instance()->SetVertexArrayObject(m_VAO);
 		Graphics::Instance()->SetUniformBuffer(m_Uniform, 0);
 		Graphics::Instance()->SetShaderProgram(m_Shader);

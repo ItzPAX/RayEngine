@@ -29,6 +29,8 @@ int CALLBACK WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 	// tell game to start initializing
 	EntryApp->Initialize();
 
+	std::chrono::system_clock::time_point m_PreviousTime;
+
 	MSG msg = { 0 };
 	while (msg.message != WM_QUIT)
 	{
@@ -40,8 +42,17 @@ int CALLBACK WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 		}
 		else
 		{
+			// compute delta time
+			auto currentTime = std::chrono::system_clock::now();
+			auto elapsedSeconds = std::chrono::duration<double>();
+			if (m_PreviousTime.time_since_epoch().count())
+				elapsedSeconds = currentTime - m_PreviousTime;
+
+			m_PreviousTime = currentTime;
+			auto deltaTime = elapsedSeconds.count();
+
 			// Let the game update
-			EntryApp->Update();
+			EntryApp->Update(deltaTime);
 		}
 	}
 

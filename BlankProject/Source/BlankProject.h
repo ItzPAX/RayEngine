@@ -29,22 +29,19 @@ public:
 	ShaderProgramPtr m_Shader;
 	UniformBufferPtr m_Uniform;
 	FrameBufferPtr m_FrameBuffer;
-
+	CameraPtr m_Camera;
 	UIPtr m_UI;
-
-	std::chrono::system_clock::time_point m_PreviousTime;
-	float m_Scale = 0;
 };
 
 // Data for the uniform buffer
 struct UniformData
 {
-	Mat4 m_World;
-	Mat4 m_Projection;
+	glm::mat4 u_ModelViewProj;
 };
+
 
 struct Vertex
 {
-	Vec3D m_Position;
-	Vec2D m_TexCoord;
+	glm::vec3 m_Position;
+	glm::vec2 m_Color;
 };

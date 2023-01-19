@@ -18,6 +18,10 @@ public:
 
 	}
 
+	Vec3D operator * (const float& rhs)
+	{
+		return Vec3D(this->X * rhs, this->Y * rhs, this->Z * rhs);
+	}
 
 	// getters
 public:

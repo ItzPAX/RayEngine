@@ -9,11 +9,16 @@
 #include "CoreDefinitions.h"
 
 // Maths
+#include "Math/Math.h"
 #include "Math/Vec2D.h"
 #include "Math/Vec3D.h"
 #include "Math/Vec4D.h"
 #include "Math/Triangle.h"
 #include "Math/Mat4.h"
+
+// glm
+#include <glm.hpp>
+#include <ext.hpp>
 
 // Critical engine features
 #include "Engine/REngine.h"
