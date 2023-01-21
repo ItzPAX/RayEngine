@@ -80,9 +80,15 @@ UniformBufferPtr Graphics::CreateUniformBuffer(const UniformBufferDesc& desc)
 	return std::make_shared<UniformBuffer>(desc);
 }
 
-CameraPtr Graphics::CreateCamera(const CameraDesc& desc)
+FPSCameraPtr Graphics::CreateFPSCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc)
 {
-	return std::make_shared<Camera>(desc);
+	return std::make_shared<FPSCamera>(cdesc, fpsdesc);
+}
+
+// uses the same params as the fps camera, cuz it is basically a fps camera with added flying
+FloatingCameraPtr Graphics::CreateFloatingCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc)
+{
+	return std::make_shared<FloatingCamera>(cdesc, fpsdesc);
 }
 
 FrameBufferPtr Graphics::CreateFrameBuffer()
@@ -94,6 +100,26 @@ void Graphics::Clear(glm::vec4 col)
 {
 	glClearColor(col.x, col.y, col.z, col.w);
 	glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void Graphics::Clear(glm::vec4 col, bool enableGLDepth, bool clearImGuiFrame)
+{
+	glClearColor(col.x, col.y, col.z, col.w);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	if (clearImGuiFrame)
+	{
+		ImGui_ImplOpenGL3_NewFrame();
+	}
+	if (enableGLDepth)
+	{
+		glEnable(GL_DEPTH_TEST);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
+	else
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
 }
 
 void Graphics::SetViewport(glm::vec4 size)

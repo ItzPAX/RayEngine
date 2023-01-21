@@ -94,6 +94,7 @@ namespace Win32 {
 		case WM_GETMINMAXINFO:	{ OnGetMinMaxInfo(reinterpret_cast<MINMAXINFO*>(lParam));	}	return FALSE;
 		case WM_TIMER:			{ RedrawWindow();											}	break;
 		case WM_EXITSIZEMOVE:	{ OnExitSizeMove();											}	break;
+		case WM_INPUT:			{ OnInput(wParam, lParam);									}	return FALSE;
 		}
 
 		return SubObject::MessageHandler(hwnd, message, wParam, lParam);
@@ -264,7 +265,8 @@ namespace Win32 {
 		}
 	}
 
-	VOID Window::OnGetMinMaxInfo(MINMAXINFO* minmax) {
+	VOID Window::OnGetMinMaxInfo(MINMAXINFO* minmax) 
+	{
 		RECT WorkArea; SystemParametersInfo(SPI_GETWORKAREA, 0, &WorkArea, 0);
 		minmax->ptMaxSize.x = (WorkArea.right - WorkArea.left);
 		minmax->ptMaxSize.y = (WorkArea.bottom - WorkArea.top);
@@ -302,7 +304,22 @@ namespace Win32 {
 
 	VOID Win32::Window::OnResize()
 	{
-		glm::vec4 r = GetInnerSize();
-		Graphics::Instance()->SetViewport(r);
+		Graphics::Instance()->SetViewport(GetInnerSize());
+	}
+
+	VOID Win32::Window::OnInput(WPARAM wParam, LPARAM lParam)
+	{
+		auto inp = GET_RAWINPUT_CODE_WPARAM(wParam);
+		if (inp == RIM_INPUTSINK)
+			return;
+
+		RAWINPUT inputBuffer;
+		UINT rawInputSize = sizeof(inputBuffer);
+		GetRawInputData(reinterpret_cast<HRAWINPUT>(lParam), RID_INPUT, &inputBuffer, &rawInputSize, sizeof(RAWINPUTHEADER));
+
+		auto mouse = inputBuffer.data.mouse;
+		m_MouseSpeed = glm::vec2(mouse.lLastX, mouse.lLastY);
+
+		DefWindowProc(Handle(), WM_INPUT, wParam, lParam);
 	}
 }

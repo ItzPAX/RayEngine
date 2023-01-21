@@ -12,5 +12,9 @@ typedef std::shared_ptr<UniformBuffer> UniformBufferPtr;
 class FrameBuffer;
 typedef std::shared_ptr<FrameBuffer> FrameBufferPtr;
 
-class Camera;
-typedef std::shared_ptr<Camera> CameraPtr;
+// all cameras we have
+class FPSCamera;
+typedef std::shared_ptr<FPSCamera> FPSCameraPtr;
+
+class FloatingCamera;
+typedef std::shared_ptr<FloatingCamera> FloatingCameraPtr;

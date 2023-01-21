@@ -19,9 +19,11 @@
 
 // Graphics features
 #include "Graphics/GraphicsDefinitions.h"
+#include "Graphics/Camera.h"
+#include "Graphics/FPS_Camera.h"
+#include "Graphics/FloatingCamera.h"
 #include "Graphics/UniformBuffer.h"
 #include "Graphics/FrameBuffer.h"
 #include "Graphics/ShaderProgram.h"
 #include "Graphics/VAO.h"
-#include "Graphics/Camera.h"
 #include "Graphics/Graphics.h"

@@ -3,6 +3,7 @@
 // Windows API
 #ifdef WIN32
 	#include <Windows.h>
+	#include <windowsx.h>
 #endif
 
 // STL Container

@@ -35,6 +35,16 @@ namespace Ray {
 		// make window opengl ready
 		Win32::Window::MakeCurrentContext();
 		Graphics::Instance()->SetViewport(GetInnerSize());
+
+
+		// register mouse device for accurate input
+		RAWINPUTDEVICE rid;
+		rid.usUsagePage = 0x0001;
+		rid.usUsage = 0x0002;
+		rid.dwFlags = 0;
+		rid.hwndTarget = Handle();
+		if (!RegisterRawInputDevices(&rid, 1, sizeof(RAWINPUTDEVICE)))
+			Logger::PrintLog(L"Failed to register raw input device");
 	}
 
 	LRESULT Simulation::MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)

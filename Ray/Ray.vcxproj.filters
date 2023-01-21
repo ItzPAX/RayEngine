@@ -208,6 +208,12 @@
     <ClCompile Include="Source\Graphics\Camera.cpp">
       <Filter>Source\Graphics\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\FPS_Camera.cpp">
+      <Filter>Source\Graphics\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\FloatingCamera.cpp">
+      <Filter>Source\Graphics\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\PerGameSettings.h">
@@ -325,6 +331,12 @@
       <Filter>Source\UI\Classes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\Camera.h">
+      <Filter>Source\Graphics\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\FPS_Camera.h">
+      <Filter>Source\Graphics\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\FloatingCamera.h">
       <Filter>Source\Graphics\Classes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -153,30 +153,44 @@ public:
 		m_FrameBuffer = Graphics::Instance()->CreateFrameBuffer();
 
 		auto display = GetInnerSize();
-		m_Camera = Graphics::Instance()->CreateCamera
-		({
-			90.f,
-			(float)display.x,
-			(float)display.y,
-		});
-		m_Camera->Translate(glm::vec3(0.0f, 2.0f, 8.0f));
-		m_Camera->Update();
+		m_FloatingCamera = Graphics::Instance()->CreateFloatingCamera
+		(
+			{
+				90.f,
+				(float)display.x,
+				(float)display.y,
+				3.f
+			},
+			{
+				0.3f
+			}
+		);
+
+		m_FloatingCamera->Translate(glm::vec3(0.0f, 2.0f, 4.0f));
+		m_FloatingCamera->Update();
 	}
 
 	// Update
 	VOID Update(float deltatime)
 	{
-		Graphics::Instance()->Clear(glm::vec4(0.26f, 0.26f, 0.26f, 0.5f));
+		Graphics::Instance()->Clear(glm::vec4(0.26f, 0.26f, 0.26f, 0.5f), true, false);
 
-		m_UI->RenderUI(m_FrameBuffer->Textures());
+		m_UI->RenderUI(m_FrameBuffer->Textures(), { m_FloatingCamera->Position(), m_FloatingCamera->Pitch(), m_FloatingCamera->Yaw() });
 
-		glm::mat4 u_ModelViewProjection = m_Camera->GetViewProj();
+		RECT r = { m_UI->ScenePos().x, m_UI->ScenePos().y, m_UI->ScenePos().x + m_UI->SceneSize().x , m_UI->ScenePos().y + m_UI->SceneSize().y };
+		m_FloatingCamera->Think(MouseSpeed(), r, m_UI->SceneActive(), Handle(), deltatime);
+
+		m_Scale += 1.14 * deltatime;
+
+		glm::mat4 model(1.f);
+
+		glm::mat4 u_ModelViewProjection = m_FloatingCamera->GetViewProj() * model;
 		UniformData data = { u_ModelViewProjection };
 		m_Uniform->SetData(&data);
 
 		m_FrameBuffer->Bind();
 
-		Graphics::Instance()->Clear(glm::vec4(0.3f, 0.3f, 0.7f, 1.f));
+		Graphics::Instance()->Clear(glm::vec4(0.f, 0.f, 0.f, 1.f), true, false);
 		
 		Graphics::Instance()->SetFaceCulling(CullType::FRONT_FACE);
 		Graphics::Instance()->SetWindingOrder(WindingOrder::CLOCKWISE);	

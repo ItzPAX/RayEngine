@@ -30,6 +30,7 @@ namespace Win32 {
 		VOID OnExitSizeMove();
 		VOID OnPaint();
 		VOID OnResize();
+		VOID OnInput(WPARAM wParam, LPARAM lParam);
 
 		// Window Title etc.
 		VOID PaintCaption(HDC hdc);
@@ -43,11 +44,14 @@ namespace Win32 {
 		HGLRC		m_Context;
 		HDC			m_DC;
 
+		glm::vec2	m_MouseSpeed;
+
 		// Getters
 	public:
 		SIZE		Size() { return m_Size; }
 		BOOL		Active() { return m_Active; }
 		HGLRC		Context() { return m_Context; }
+		glm::vec2*	MouseSpeed() { return &m_MouseSpeed; }
 
 		// Setters
 	public:

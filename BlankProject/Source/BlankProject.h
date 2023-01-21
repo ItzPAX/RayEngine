@@ -29,8 +29,11 @@ public:
 	ShaderProgramPtr m_Shader;
 	UniformBufferPtr m_Uniform;
 	FrameBufferPtr m_FrameBuffer;
-	CameraPtr m_Camera;
+	FloatingCameraPtr m_FloatingCamera;
 	UIPtr m_UI;
+
+	float m_Scale;
+	bool m_SetMouse;
 };
 
 // Data for the uniform buffer

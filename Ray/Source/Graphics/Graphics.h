@@ -37,7 +37,8 @@ public:
 	static VertexArrayObjectPtr CreateVertexArrayObject(const VertexBufferDesc& vbDesc, const IndexBufferDesc& ibDesc);
 	static ShaderProgramPtr CreateShaderProgram(const ShaderProgramDesc& desc);
 	static UniformBufferPtr CreateUniformBuffer(const UniformBufferDesc& desc);
-	static CameraPtr CreateCamera(const CameraDesc& desc);
+	static FPSCameraPtr CreateFPSCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc);
+	static FloatingCameraPtr CreateFloatingCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc); // fps + flying
 	static FrameBufferPtr CreateFrameBuffer();
 
 public:
@@ -50,6 +51,7 @@ public:
 
 public:
 	static void Clear(glm::vec4 col);
+	static void Clear(glm::vec4 col, bool enableGLDepth, bool clearImGuiFrame);
 	static void DrawTriangles(const TriangleType& type, UINT32 vertexCount, UINT32 offset);
 	static void DrawIndexedTriangles(const TriangleType& type, UINT32 indicesCount);
 };

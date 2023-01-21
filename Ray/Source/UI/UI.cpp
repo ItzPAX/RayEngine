@@ -10,6 +10,8 @@ UI::UI(HWND handle)
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
+	m_IO = io;
+
 	ImGui::StyleColorsDark();
 
 	ImGuiStyle& style = ImGui::GetStyle();
@@ -34,7 +36,7 @@ UI::~UI()
 	ImGui::DestroyContext();
 }
 
-VOID UI::RenderUI(UINT32 scene)
+VOID UI::RenderUI(UINT32 scene, const CameraInfo& caminfo)
 {
 	HGLRC context = wglGetCurrentContext();
 	HDC hdc = wglGetCurrentDC();
@@ -43,7 +45,7 @@ VOID UI::RenderUI(UINT32 scene)
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	RenderElements(scene);
+	RenderElements(scene, caminfo);
 
 	ImGui::Render();
 
@@ -58,12 +60,12 @@ VOID UI::RenderUI(UINT32 scene)
 	wglMakeCurrent(hdc, context);
 }
 
-VOID UI::RenderElements(UINT32 scene)
+VOID UI::RenderElements(UINT32 scene, const CameraInfo& caminfo)
 {
 	MakeWindowDockspace();
 
 	RenderMainMenubar();
-	RenderInfoMenu();
+	RenderInfoMenu(caminfo);
 	RenderLogMenu();
 
 	// our asset manager
@@ -113,13 +115,15 @@ VOID UI::RenderMainMenubar()
 	}
 }
 
-VOID UI::RenderInfoMenu()
+VOID UI::RenderInfoMenu(const CameraInfo& caminfo)
 {
 	auto context = wglGetCurrentContext();
 	ImGui::Begin("Info");
 	ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::Text("Scene Ratio %f", m_SceneSize.x / m_SceneSize.y);
-	ImGui::Text("Context %x", context);
+	ImGui::Text("Context 0x%x", context);
+	ImGui::Text("Cam pos: x:%.1f y:%.1f z:%.1f", caminfo.m_Pos.x, caminfo.m_Pos.y, caminfo.m_Pos.z);
+	ImGui::Text("View: pitch:%.1f yaw:%.1f", caminfo.m_Pitch, caminfo.m_Yaw);
 	ImGui::End();
 }
 
@@ -128,8 +132,13 @@ VOID UI::RenderScene(UINT32 scene)
 	// our scene window
 	ImGui::Begin("Scene", 0);
 	{
+		m_SceneActive = ImGui::IsWindowFocused();
+
 		ImVec2 windowsize = ImGui::GetWindowSize();
+		ImVec2 windowpos = ImGui::GetWindowPos();
+
 		m_SceneSize = glm::vec2(windowsize.x, windowsize.y);
+		m_ScenePos = glm::vec2(windowpos.x, windowpos.y);
 
 		ImVec2 wsize = ImGui::GetContentRegionAvail();
 		ImGui::Image((ImTextureID)scene, wsize, ImVec2(0, 1), ImVec2(1, 0));

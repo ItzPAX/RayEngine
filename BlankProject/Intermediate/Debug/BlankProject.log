@@ -1,2 +1,48 @@
-﻿  imgui.cpp
+﻿  BlankProject.cpp
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,21): warning C4244: "Argument": Konvertierung von "_Rep" in "float", möglicher Datenverlust
+          with
+          [
+              _Rep=double
+          ]
+D:\MyProgramming\OpenGL\RayEngine\BlankProject\Source\BlankProject.cpp(180,30): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\BlankProject\Source\BlankProject.cpp(180,30): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\BlankProject\Source\BlankProject.cpp(180,50): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\BlankProject\Source\BlankProject.cpp(180,50): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\BlankProject\Source\BlankProject.cpp(180,73): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\BlankProject\Source\BlankProject.cpp(180,73): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\BlankProject\Source\BlankProject.cpp(180,116): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\BlankProject\Source\BlankProject.cpp(180,116): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\BlankProject\Source\BlankProject.cpp(183,19): warning C4244: "+=": Konvertierung von "double" in "float", möglicher Datenverlust
   BlankProject.vcxproj -> D:\MyProgramming\OpenGL\RayEngine\Build\Debug\BlankProject.exe
