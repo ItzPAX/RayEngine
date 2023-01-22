@@ -20,7 +20,6 @@ public:
 
 	// getters
 public:
-	glm::vec3 Position() { return m_Position; }
 	float Pitch() { return m_Pitch; }
 	float Yaw() { return m_Yaw; }
 

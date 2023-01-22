@@ -46,14 +46,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)\Build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\Intermediate\$(Configuration)\</IntDir>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)vendor\glm\;$(SolutionDir)vendor\imgui\;$(SolutionDir)vendor\glad\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)vendor\assimp\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)vendor\stb\;$(SolutionDir)vendor\assimp\include;$(SolutionDir)vendor\glm\;$(SolutionDir)vendor\imgui\;$(SolutionDir)vendor\glad\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\Build\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)\$(ProjectName)\Intermediate\$(Configuration)\</IntDir>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <IncludePath>$(SolutionDir)vendor\glm\;$(SolutionDir)vendor\imgui\;$(SolutionDir)vendor\glad\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)vendor\assimp\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)vendor\stb\;$(SolutionDir)vendor\assimp\include;$(SolutionDir)vendor\glm\;$(SolutionDir)vendor\imgui\;$(SolutionDir)vendor\glad\include\;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -70,7 +70,7 @@
     <Link>
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc143-mt.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -96,7 +96,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc143-mt.lib;opengl32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -156,6 +156,7 @@
     <ClCompile Include="Source\Graphics\FrameBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Graphics.cpp" />
     <ClCompile Include="Source\Graphics\ShaderProgram.cpp" />
+    <ClCompile Include="Source\Graphics\Texture.cpp" />
     <ClCompile Include="Source\Graphics\UniformBuffer.cpp" />
     <ClCompile Include="Source\Graphics\VAO.cpp" />
     <ClCompile Include="Source\Platform\Win32\w32Caption.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Source\Graphics\Graphics.h" />
     <ClInclude Include="Source\Graphics\GraphicsDefinitions.h" />
     <ClInclude Include="Source\Graphics\ShaderProgram.h" />
+    <ClInclude Include="Source\Graphics\Texture.h" />
     <ClInclude Include="Source\Graphics\UniformBuffer.h" />
     <ClInclude Include="Source\Graphics\VAO.h" />
     <ClInclude Include="Source\Platform\Win32\w32IApplication.h" />

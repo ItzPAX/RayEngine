@@ -20,3 +20,5 @@
 
 typedef std::wstring WSTRING;
 typedef std::string  STRING;
+
+#define STB_IMAGE_IMPLEMENTATION

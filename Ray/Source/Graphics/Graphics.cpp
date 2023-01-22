@@ -80,6 +80,21 @@ UniformBufferPtr Graphics::CreateUniformBuffer(const UniformBufferDesc& desc)
 	return std::make_shared<UniformBuffer>(desc);
 }
 
+FrameBufferPtr Graphics::CreateFrameBuffer()
+{
+	return std::make_shared<FrameBuffer>();
+}
+
+TexturePtr Graphics::CreateTexture(const char* path)
+{
+	return std::make_shared<Texture>(path);
+}
+
+CameraPtr Graphics::CreateCamera(const CameraDesc& cdesc)
+{
+	return std::make_shared<Camera>(cdesc);
+}
+
 FPSCameraPtr Graphics::CreateFPSCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc)
 {
 	return std::make_shared<FPSCamera>(cdesc, fpsdesc);
@@ -89,11 +104,6 @@ FPSCameraPtr Graphics::CreateFPSCamera(const CameraDesc& cdesc, const FPSCameraD
 FloatingCameraPtr Graphics::CreateFloatingCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc)
 {
 	return std::make_shared<FloatingCamera>(cdesc, fpsdesc);
-}
-
-FrameBufferPtr Graphics::CreateFrameBuffer()
-{
-	return std::make_shared<FrameBuffer>();
 }
 
 void Graphics::Clear(glm::vec4 col)
@@ -122,9 +132,12 @@ void Graphics::Clear(glm::vec4 col, bool enableGLDepth, bool clearImGuiFrame)
 	}
 }
 
-void Graphics::SetViewport(glm::vec4 size)
-{
-	glViewport(size.x, size.y, size.z, size.w);
+void Graphics::SetViewport()
+{ 
+	// SET THIS TO THE DESKTOP SIZE, MAYBE ADD THIS TO WINDOW MOVED EVENT, IN CASE WINDOW IS MOVED TO DIFFERENT SCREEN
+	HWND desktop = GetDesktopWindow();
+	RECT desktoprect; GetWindowRect(desktop, &desktoprect);
+	glViewport(0, 0, desktoprect.right - desktoprect.left, desktoprect.bottom - desktoprect.top);
 }
 
 void Graphics::SetVertexArrayObject(const VertexArrayObjectPtr& vao)
@@ -162,6 +175,11 @@ void Graphics::SetWindingOrder(const WindingOrder& order)
 	else if (order == WindingOrder::ANTI_CLOCKWISE) orderType = GL_CCW;
 
 	glFrontFace(orderType);
+}
+
+void Graphics::SetTexture(const TexturePtr& texture)
+{
+	glBindTexture(GL_TEXTURE_2D, texture->GetTextureID());
 }
 
 void Graphics::DrawTriangles(const TriangleType& type, UINT32 vertexCount, UINT32 offset)

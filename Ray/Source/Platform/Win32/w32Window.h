@@ -17,7 +17,7 @@ namespace Win32 {
 		virtual	LRESULT	MessageHandler(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) override;
 
 		VOID SetTitle(LPCWSTR title);
-		glm::vec4 GetInnerSize();
+		glm::vec2 GetInnerSize();
 		VOID MakeCurrentContext();
 
 		// Message Handler functions

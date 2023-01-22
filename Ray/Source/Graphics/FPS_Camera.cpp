@@ -15,7 +15,11 @@ FPSCamera::FPSCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc)
 
 void FPSCamera::Think(glm::vec2* mousevel, RECT clipr, bool sceneactive, HWND handle, float delta)
 {
+	if (GetForegroundWindow() != handle)
+		return;
+
 	ManageSpeed();
+	UpdateProjection(glm::vec2(clipr.right - clipr.left, clipr.bottom - clipr.top));
 
 	// input system to walk around
 	if (GetAsyncKeyState(0x57)) // W
@@ -28,7 +32,7 @@ void FPSCamera::Think(glm::vec2* mousevel, RECT clipr, bool sceneactive, HWND ha
 		MoveSideways(delta);
 
 
-	if (GetForegroundWindow() == handle && sceneactive && GetAsyncKeyState(VK_RBUTTON))
+	if (sceneactive && GetAsyncKeyState(VK_RBUTTON))
 	{
 		if (!m_ChangedCursorVis)
 		{

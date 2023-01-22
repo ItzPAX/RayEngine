@@ -12,7 +12,7 @@ struct VertexBufferDesc
 	UINT32 m_ListSize = 0;
 
 	VertexAttribute* m_AttributeList = nullptr;
-	UINT32 m_AttributeListSize;
+	UINT32 m_AttributeListSize = 0;
 };
 
 struct IndexBufferDesc

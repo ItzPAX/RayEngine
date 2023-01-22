@@ -34,8 +34,9 @@ namespace Ray {
 
 		// make window opengl ready
 		Win32::Window::MakeCurrentContext();
-		Graphics::Instance()->SetViewport(GetInnerSize());
 
+		// set our viewport
+		Graphics::Instance()->SetViewport();
 
 		// register mouse device for accurate input
 		RAWINPUTDEVICE rid;

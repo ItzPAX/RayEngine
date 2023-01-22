@@ -1,11 +1,13 @@
 #version 430 core
 
-layout(location = 0) in vec3 vertOutColor;
-layout(location = 0) out vec4 outColor;
+in vec3 vertOutColor;
+in vec2 outTexCoord;
 
+out vec4 outColor;
+
+uniform sampler2D ourTexture;
 
 void main()
 {
-	outColor = vec4(1,1,1,1);
-	outColor.rgb = vertOutColor;
+	outColor = texture(ourTexture, outTexCoord) * vec4(vertOutColor, 1);
 }

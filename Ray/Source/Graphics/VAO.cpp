@@ -16,28 +16,29 @@ VertexArrayObject::VertexArrayObject(const VertexBufferDesc& vbDesc)
 	glBindBuffer(GL_ARRAY_BUFFER, m_VertexBufferId);
 	glBufferData(GL_ARRAY_BUFFER, vbDesc.m_ListSize * vbDesc.m_VertexSize, vbDesc.m_VerticesList, GL_STATIC_DRAW);
 
+	int elements = 0;
 	for (unsigned int i = 0; i < vbDesc.m_AttributeListSize; i++)
 	{
 		glVertexAttribPointer
 		(
-			i, 
+			i,
 			vbDesc.m_AttributeList[i].m_NumElements,
-			GL_FLOAT, 
-			GL_FALSE, 
+			GL_FLOAT,
+			GL_FALSE,
 			vbDesc.m_VertexSize,
-			(void*)((i == 0) ? 0 : vbDesc.m_AttributeList[i - 1].m_NumElements * sizeof(float))
+			(void*)elements
 		);
+		elements += vbDesc.m_AttributeList[i].m_NumElements * sizeof(float);
 		glEnableVertexAttribArray(i);
 	}
-
-	glEnableVertexAttribArray(0);
 
 	glBindVertexArray(NULL);
 
 	m_VertexBufferData = vbDesc;
 }
 
-VertexArrayObject::VertexArrayObject(const VertexBufferDesc& vbDesc, const IndexBufferDesc& ibDesc) : VertexArrayObject(vbDesc)
+VertexArrayObject::VertexArrayObject(const VertexBufferDesc& vbDesc, const IndexBufferDesc& ibDesc) 
+	: VertexArrayObject(vbDesc)
 {
 	if (!ibDesc.m_ListSize)
 		Logger::PrintOGL3DError(L"VertexArrayObject->m_ListSize is NULL");

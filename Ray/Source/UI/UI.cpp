@@ -60,6 +60,12 @@ VOID UI::RenderUI(UINT32 scene, const CameraInfo& caminfo)
 	wglMakeCurrent(hdc, context);
 }
 
+RECT UI::SceneRect()
+{
+	RECT rect = { ScenePos().x, ScenePos().y, ScenePos().x + SceneSize().x , ScenePos().y + SceneSize().y };
+	return rect;
+}
+
 VOID UI::RenderElements(UINT32 scene, const CameraInfo& caminfo)
 {
 	MakeWindowDockspace();
@@ -120,7 +126,7 @@ VOID UI::RenderInfoMenu(const CameraInfo& caminfo)
 	auto context = wglGetCurrentContext();
 	ImGui::Begin("Info");
 	ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-	ImGui::Text("Scene Ratio %f", m_SceneSize.x / m_SceneSize.y);
+	ImGui::Text("Scene Ratio %.0f/%.0f = %f", m_SceneSize.x, m_SceneSize.y, m_SceneSize.x / m_SceneSize.y);
 	ImGui::Text("Context 0x%x", context);
 	ImGui::Text("Cam pos: x:%.1f y:%.1f z:%.1f", caminfo.m_Pos.x, caminfo.m_Pos.y, caminfo.m_Pos.z);
 	ImGui::Text("View: pitch:%.1f yaw:%.1f", caminfo.m_Pitch, caminfo.m_Yaw);

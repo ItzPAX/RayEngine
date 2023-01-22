@@ -17,6 +17,7 @@ public:
 
 public:
 	VOID RenderUI(UINT32 scene, const CameraInfo& caminfo);
+	RECT SceneRect();
 
 	// getters
 public:

@@ -214,6 +214,9 @@
     <ClCompile Include="Source\Graphics\FloatingCamera.cpp">
       <Filter>Source\Graphics\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\Texture.cpp">
+      <Filter>Source\Graphics\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\PerGameSettings.h">
@@ -337,6 +340,9 @@
       <Filter>Source\Graphics\Classes</Filter>
     </ClInclude>
     <ClInclude Include="Source\Graphics\FloatingCamera.h">
+      <Filter>Source\Graphics\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Texture.h">
       <Filter>Source\Graphics\Classes</Filter>
     </ClInclude>
   </ItemGroup>

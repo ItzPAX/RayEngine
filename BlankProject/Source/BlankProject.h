@@ -32,8 +32,7 @@ public:
 	FloatingCameraPtr m_FloatingCamera;
 	UIPtr m_UI;
 
-	float m_Scale;
-	bool m_SetMouse;
+	TexturePtr m_Texture;
 };
 
 // Data for the uniform buffer
@@ -46,5 +45,6 @@ struct UniformData
 struct Vertex
 {
 	glm::vec3 m_Position;
-	glm::vec2 m_Color;
+	glm::vec2 m_TexCoord;
+	glm::vec3 m_Color;
 };

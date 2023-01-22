@@ -13,6 +13,9 @@ void FloatingCamera::MoveUp(float amount)
 
 void FloatingCamera::Think(glm::vec2* mousevel, RECT clipr, bool sceneactive, HWND handle, float delta)
 {
+	if (GetForegroundWindow() != handle)
+		return;
+
 	if (GetAsyncKeyState(VK_SPACE))
 		MoveUp(delta);
 	if (GetAsyncKeyState(VK_SHIFT))

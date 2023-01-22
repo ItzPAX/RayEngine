@@ -7,11 +7,14 @@ uniform EngineData
 
 layout(location = 0) in vec3 position;
 layout(location = 1) in vec2 texcoord;
+layout(location = 2) in vec3 color;
 
-layout(location = 0) out vec3 vertOutColor;
+out vec3 vertOutColor;
+out vec2 outTexCoord;
 
 void main()
 {
 	gl_Position = u_ModelViewProj * vec4(position, 1);
-	vertOutColor = vec3(texcoord.x,texcoord.y,1);
+	vertOutColor = color;
+	outTexCoord = texcoord;
 }
