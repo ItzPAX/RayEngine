@@ -74,6 +74,9 @@ VOID UI::RenderElements(UINT32 scene, const CameraInfo& caminfo)
 	RenderInfoMenu(caminfo);
 	RenderLogMenu();
 
+	// API for graphics engine
+	RenderPrimitiveCreationWindow();
+
 	// our asset manager
 	m_AssetManager.Render();
 
@@ -110,24 +113,72 @@ VOID UI::RenderMainMenubar()
 	// menu bar
 	if (ImGui::BeginMainMenuBar())
 	{
-		if (ImGui::BeginMenu("File"))
-		{
-			if (ImGui::MenuItem("Open..", "Ctrl+O")) { /* Do stuff */ }
-			if (ImGui::MenuItem("Save", "Ctrl+S")) { /* Do stuff */ }
-			if (ImGui::MenuItem("Close", "Ctrl+W")) { /* Do stuff */ }
-			ImGui::EndMenu();
-		}
+
 		ImGui::EndMainMenuBar();
 	}
 }
 
+#pragma region Primitives
+VOID UI::RenderPrimitiveCreationWindow()
+{
+	static PrimitiveDesc desc;
+
+	ImGui::Begin("Add Primitive");
+	{
+		ImGui::Combo("Primitive Type", (int*)&m_CurrentPrimitive, m_PrimitiveTypes, IM_ARRAYSIZE(m_PrimitiveTypes));
+
+		ImGui::InputText("Texture", desc.m_Texture, MAX_PATH);
+		ImGui::InputText("Fragment Shader", desc.m_FragmentShader, MAX_PATH);
+		ImGui::InputText("Vertex Shader", desc.m_VertexShader, MAX_PATH);
+
+		ImGui::InputFloat("Pos: x", &desc.m_Pos.x);
+		ImGui::InputFloat("Pos: y", &desc.m_Pos.y);
+		ImGui::InputFloat("Pos: z", &desc.m_Pos.z);
+		ImGui::ColorEdit3("Color", &desc.m_Col[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+
+		if (ImGui::Button("Add Primitive", ImVec2(-1, 0)))
+			AddPrimitive(desc);
+	}
+	ImGui::End();
+}
+
+VOID UI::AddPrimitive(PrimitiveDesc& desc)
+{
+	switch (m_CurrentPrimitive)
+	{
+	case PrimitiveType::PRIMITIVE_CUBE:
+	{
+		Cube c(desc);
+		break;
+	}
+	case PrimitiveType::PRIMITIVE_PYRAMID:
+	{
+		Pyramid p(desc);
+		break;
+	}
+	case PrimitiveType::PRIMITIVE_SQUARE:
+	{
+		Square s(desc);
+		break;
+	}
+	case PrimitiveType::PRIMITIVE_TRIANGLE:
+	{
+		Triangle t(desc);
+		break;
+	}
+	default:
+		break;
+	}
+
+	desc = PrimitiveDesc();
+}
+#pragma endregion
+
 VOID UI::RenderInfoMenu(const CameraInfo& caminfo)
 {
-	auto context = wglGetCurrentContext();
 	ImGui::Begin("Info");
 	ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::Text("Scene Ratio %.0f/%.0f = %f", m_SceneSize.x, m_SceneSize.y, m_SceneSize.x / m_SceneSize.y);
-	ImGui::Text("Context 0x%x", context);
 	ImGui::Text("Cam pos: x:%.1f y:%.1f z:%.1f", caminfo.m_Pos.x, caminfo.m_Pos.y, caminfo.m_Pos.z);
 	ImGui::Text("View: pitch:%.1f yaw:%.1f", caminfo.m_Pitch, caminfo.m_Yaw);
 	ImGui::End();

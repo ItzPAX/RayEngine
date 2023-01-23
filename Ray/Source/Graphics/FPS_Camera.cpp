@@ -13,12 +13,12 @@ FPSCamera::FPSCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc)
 	Update();
 }
 
-void FPSCamera::Think(glm::vec2* mousevel, HWND handle, float delta)
+void FPSCamera::Think(glm::vec2* mousevel, float delta)
 {
 	RECT clipr = UI::Instance().SceneRect();
 	bool sceneactive = UI::Instance().SceneActive();
 
-	if (GetForegroundWindow() != handle || !sceneactive)
+	if (GetForegroundWindow() != m_Handle || !sceneactive)
 		return;
 
 	ManageSpeed();

@@ -1,4 +1,42 @@
-﻿  Camera.cpp
-  FPS_Camera.cpp
-  FloatingCamera.cpp
+﻿  UI.cpp
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(65,26): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(65,26): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(65,40): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(65,40): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(65,57): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(65,57): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(65,88): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(65,88): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
   Ray.vcxproj -> D:\MyProgramming\OpenGL\RayEngine\Build\Debug\Ray.dll

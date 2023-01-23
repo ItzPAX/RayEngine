@@ -1,19 +1,19 @@
 #include "Ray.h"
 
-void PrimitiveContainer::Render(glm::mat4 viewproj)
+void PrimitiveContainer::Render(glm::mat4 viewproj, float dt)
 {
 	// render all elements
 	for (auto p : m_Pyramids)
-		p.Render(viewproj);
+		p.Render(viewproj, dt);
 
 	for (auto p : m_Cubes)
-		p.Render(viewproj);
+		p.Render(viewproj, dt);
 
 	for (auto p : m_Squares)
-		p.Render(viewproj);
+		p.Render(viewproj, dt);
 
 	for (auto p : m_Triangles)
-		p.Render(viewproj);
+		p.Render(viewproj, dt);
 }
 
 
@@ -21,6 +21,13 @@ Primitive::Primitive(const PrimitiveDesc& desc)
 {
 	m_Description = desc;
 	m_Model = glm::mat4(1.f);
+	
+	// apply rotation
+	m_Model = glm::rotate(m_Model, desc.m_RotationInit.x, glm::vec3(1, 0, 0));
+	m_Model = glm::rotate(m_Model, desc.m_RotationInit.y, glm::vec3(0, 1, 0));
+	m_Model = glm::rotate(m_Model, desc.m_RotationInit.z, glm::vec3(0, 0, 1));
+
+
 	m_Model = glm::translate(m_Model, m_Description.m_Pos);
 
 	m_UniformBuffer = Graphics::Instance()->CreateUniformBuffer({sizeof(UniformData)});
@@ -40,7 +47,7 @@ Primitive::Primitive(const PrimitiveDesc& desc)
 		({
 			m_Description.m_VertexShader,
 			m_Description.m_FragmentShader
-			});
+		});
 
 		m_Shader->SetUniformBufferSlot("EngineData", 0);
 	}
@@ -54,7 +61,7 @@ Primitive::~Primitive()
 {
 }
 
-void Primitive::Render(glm::mat4 viewproj)
+void Primitive::Render(glm::mat4 viewproj, float dt)
 {
 	UniformData data = { viewproj * m_Model };
 	m_UniformBuffer->SetData(&data);
@@ -113,9 +120,9 @@ Square::Square(const PrimitiveDesc& desc)
 	PrimitiveContainer::Instance().Add(*this);
 }
 
-void Square::Render(glm::mat4 viewproj)
+void Square::Render(glm::mat4 viewproj, float dt)
 {
-	Primitive::Render(viewproj);
+	Primitive::Render(viewproj, dt);
 	Graphics::Instance()->DrawIndexedTriangles(TriangleType::TRIANGLE_LIST, 6);
 }
 
@@ -151,9 +158,9 @@ Triangle::Triangle(const PrimitiveDesc& desc)
 	PrimitiveContainer::Instance().Add(*this);
 }
 
-void Triangle::Render(glm::mat4 viewproj)
+void Triangle::Render(glm::mat4 viewproj, float dt)
 {
-	Primitive::Render(viewproj);
+	Primitive::Render(viewproj, dt);
 	Graphics::Instance()->DrawTriangles(TriangleType::TRIANGLE_LIST, 3, 0);
 }
 
@@ -275,9 +282,9 @@ Cube::Cube(const PrimitiveDesc& desc)
 	PrimitiveContainer::Instance().Add(*this);
 }
 
-void Cube::Render(glm::mat4 viewproj)
+void Cube::Render(glm::mat4 viewproj, float dt)
 {
-	Primitive::Render(viewproj);
+	Primitive::Render(viewproj, dt);
 	Graphics::Instance()->DrawIndexedTriangles(TriangleType::TRIANGLE_LIST, 36);
 }
 
@@ -338,8 +345,8 @@ Pyramid::Pyramid(const PrimitiveDesc& desc)
 	PrimitiveContainer::Instance().Add(*this);
 }
 
-void Pyramid::Render(glm::mat4 viewproj)
+void Pyramid::Render(glm::mat4 viewproj, float dt)
 {
-	Primitive::Render(viewproj);
+	Primitive::Render(viewproj, dt);
 	Graphics::Instance()->DrawTriangles(TriangleType::TRIANGLE_LIST, 18, 0);
 }

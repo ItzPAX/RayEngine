@@ -12,17 +12,17 @@ Camera::Camera(const CameraDesc& desc)
 
 	SetPosition(m_Position);
 
+	m_Handle = GetForegroundWindow();
 	m_ActualSpeed = desc.m_Speed;
-
 	m_Desc = desc;
 	Update();
 }
 
-void Camera::Think(glm::vec2* mousevel, HWND handle, float delta)
+void Camera::Think(glm::vec2* mousevel, float delta)
 {
 	ManageSpeed();
 
-	if (GetForegroundWindow() != handle || !UI::Instance().SceneActive())
+	if (GetForegroundWindow() != m_Handle || !UI::Instance().SceneActive())
 		return;
 
 	// input system to walk around

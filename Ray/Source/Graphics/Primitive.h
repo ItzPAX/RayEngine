@@ -15,11 +15,18 @@ struct RAY_API UniformData
 
 struct RAY_API PrimitiveDesc
 {
-	glm::vec3 m_Pos;
-	glm::vec3 m_Col;
-	const char* m_Texture;
-	const wchar_t* m_VertexShader;
-	const wchar_t* m_FragmentShader;
+	glm::vec3 m_Col = glm::vec3(1.f);
+
+	char m_Texture[MAX_PATH];
+	char m_VertexShader[MAX_PATH];
+	char m_FragmentShader[MAX_PATH];
+
+	// on init
+	glm::vec3 m_Pos = glm::vec3(0.f);
+	glm::vec3 m_RotationInit = glm::vec3(0.f);
+
+	// on update
+	glm::vec3 m_RotationUpdate = glm::vec3(0.f);
 };
 
 class RAY_API Primitive
@@ -28,7 +35,7 @@ public:
 	Primitive(const PrimitiveDesc& desc);
 	~Primitive();
 
-	virtual void Render(glm::mat4 viewproj);
+	virtual void Render(glm::mat4 viewproj, float dt);
 
 protected:
 	PrimitiveDesc m_Description;
@@ -45,7 +52,7 @@ class RAY_API Triangle : public Primitive
 {
 public:
 	Triangle(const PrimitiveDesc& desc);
-	virtual void Render(glm::mat4 viewproj) override;
+	virtual void Render(glm::mat4 viewproj, float dt) override;
 
 private:
 };
@@ -54,7 +61,7 @@ class RAY_API Square : public Primitive
 {
 public:
 	Square(const PrimitiveDesc& desc);
-	virtual void Render(glm::mat4 viewproj) override;
+	virtual void Render(glm::mat4 viewproj, float dt) override;
 
 private:
 };
@@ -63,7 +70,7 @@ class RAY_API Pyramid : public Primitive
 {
 public:
 	Pyramid(const PrimitiveDesc& desc);
-	virtual void Render(glm::mat4 viewproj) override;
+	virtual void Render(glm::mat4 viewproj, float dt) override;
 
 private:
 };
@@ -72,7 +79,7 @@ class RAY_API Cube : public Primitive
 {
 public:
 	Cube(const PrimitiveDesc& desc);
-	virtual void Render(glm::mat4 viewproj) override;
+	virtual void Render(glm::mat4 viewproj, float dt) override;
 
 private:
 };
@@ -94,7 +101,7 @@ public:
 	void operator=(PrimitiveContainer const&) = delete;
 
 public:
-	void Render(glm::mat4 viewproj);
+	void Render(glm::mat4 viewproj, float dt);
 
 	// add a primitive
 	void Add(Pyramid p) { m_Pyramids.push_back(p); }

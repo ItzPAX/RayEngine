@@ -2,8 +2,8 @@
 
 struct ShaderProgramDesc
 {
-	const wchar_t* m_VertexShaderFilePath;
-	const wchar_t* m_FragmentShaderFilePath;
+	const char* m_VertexShaderFilePath;
+	const char* m_FragmentShaderFilePath;
 };
 
 enum class ShaderType
@@ -21,7 +21,7 @@ public:
 	void SetUniformBufferSlot(const char* name, UINT32 slot);
 
 private:
-	void Attach(const wchar_t* shaderPath, const ShaderType& type);
+	void Attach(const char* shaderPath, const ShaderType& type);
 	void Link();
 
 	// getters

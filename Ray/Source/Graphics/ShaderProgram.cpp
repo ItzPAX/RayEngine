@@ -24,7 +24,7 @@ void ShaderProgram::SetUniformBufferSlot(const char* name, UINT32 slot)
 	glUniformBlockBinding(m_ProgramId, index, slot);
 }
 
-void ShaderProgram::Attach(const wchar_t* shaderPath, const ShaderType& type)
+void ShaderProgram::Attach(const char* shaderPath, const ShaderType& type)
 {
 	std::string shaderCode;
 

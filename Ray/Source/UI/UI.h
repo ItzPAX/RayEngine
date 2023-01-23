@@ -1,6 +1,8 @@
 #pragma once
 #pragma warning( disable : 4312 )
 
+struct PrimitiveDesc;
+
 struct CameraInfo
 {
 	glm::vec3 m_Pos;
@@ -47,9 +49,24 @@ private:
 	VOID RenderInfoMenu(const CameraInfo& caminfo);
 	VOID RenderLogMenu();
 
+#pragma region Primitives
+	enum PrimitiveType
+	{
+		PRIMITIVE_CUBE = 0,
+		PRIMITIVE_PYRAMID,
+		PRIMITIVE_SQUARE,
+		PRIMITIVE_TRIANGLE
+	};
+
+	VOID RenderPrimitiveCreationWindow();
+	VOID AddPrimitive(PrimitiveDesc& desc);
+#pragma endregion
+
 private:
 	bool m_Initialized = false;
 	bool m_SceneActive = false;
+
+	PrimitiveType m_CurrentPrimitive;
 
 	glm::vec2 m_SceneSize;
 	glm::vec2 m_ScenePos;
@@ -59,4 +76,12 @@ private:
 	ImGuiContext* m_Context;
 	ImGuiIO m_IO;
 	HWND m_Handle;
+
+	const char* m_PrimitiveTypes[4] =
+	{
+		"Cube",
+		"Pyramid",
+		"Square",
+		"Triangle"
+	};
 };
