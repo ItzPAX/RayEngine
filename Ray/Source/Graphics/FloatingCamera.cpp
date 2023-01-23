@@ -11,9 +11,9 @@ void FloatingCamera::MoveUp(float amount)
 	Translate(m_Up * amount);
 }
 
-void FloatingCamera::Think(glm::vec2* mousevel, RECT clipr, bool sceneactive, HWND handle, float delta)
+void FloatingCamera::Think(glm::vec2* mousevel, HWND handle, float delta)
 {
-	if (GetForegroundWindow() != handle)
+	if (GetForegroundWindow() != handle || !UI::Instance().SceneActive())
 		return;
 
 	if (GetAsyncKeyState(VK_SPACE))
@@ -21,5 +21,5 @@ void FloatingCamera::Think(glm::vec2* mousevel, RECT clipr, bool sceneactive, HW
 	if (GetAsyncKeyState(VK_SHIFT))
 		MoveUp(-delta);
 
-	FPSCamera::Think(mousevel, clipr, sceneactive, handle, delta);
+	FPSCamera::Think(mousevel, handle, delta);
 }

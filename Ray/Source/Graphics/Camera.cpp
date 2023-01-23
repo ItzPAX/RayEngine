@@ -18,11 +18,11 @@ Camera::Camera(const CameraDesc& desc)
 	Update();
 }
 
-void Camera::Think(glm::vec2* mousevel, RECT clipr, bool sceneactive, HWND handle, float delta)
+void Camera::Think(glm::vec2* mousevel, HWND handle, float delta)
 {
 	ManageSpeed();
 
-	if (GetForegroundWindow() != handle)
+	if (GetForegroundWindow() != handle || !UI::Instance().SceneActive())
 		return;
 
 	// input system to walk around
@@ -34,6 +34,8 @@ void Camera::Think(glm::vec2* mousevel, RECT clipr, bool sceneactive, HWND handl
 		Translate(glm::vec3(0.f, 0.f, 1.f) * delta);
 	if (GetAsyncKeyState(0x44)) // D
 		Translate(glm::vec3(1.f, 0.f, 0.f) * delta);
+
+	RECT clipr = UI::Instance().SceneRect();
 
 	UpdateProjection(glm::vec2(clipr.right - clipr.left, clipr.bottom - clipr.top));
 

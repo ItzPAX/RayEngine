@@ -7,5 +7,5 @@ public:
 	FloatingCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc);
 
 	void MoveUp(float amount);
-	void Think(glm::vec2* mousevel, RECT clipr, bool sceneactive, HWND handle, float delta) override;
+	void Think(glm::vec2* mousevel, HWND handle, float delta) override;
 };

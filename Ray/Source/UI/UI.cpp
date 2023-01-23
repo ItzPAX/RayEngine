@@ -1,7 +1,7 @@
 #include "Ray.h"
 
-UI::UI(HWND handle)
-	: m_Handle(handle)
+UI::UI()
+	: m_Handle(GetForegroundWindow())
 {
 	m_Context = ImGui::CreateContext();
 

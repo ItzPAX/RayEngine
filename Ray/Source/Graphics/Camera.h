@@ -21,7 +21,7 @@ public:
 	void UpdateProjection(glm::vec2 newsize);
 	void SetPosition(glm::vec3 position);
 
-	virtual void Think(glm::vec2* mousevel, RECT clipr, bool sceneactive, HWND handle, float delta);
+	virtual void Think(glm::vec2* mousevel, HWND handle, float delta);
 	virtual void Translate(glm::vec3 v);
 	virtual void Update();
 

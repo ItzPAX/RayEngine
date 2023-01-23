@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 struct RAY_API Vertex
 {
@@ -74,4 +75,36 @@ public:
 	virtual void Render(glm::mat4 viewproj) override;
 
 private:
+};
+
+class RAY_API PrimitiveContainer
+{
+public:
+	static PrimitiveContainer& Instance()
+	{
+		static PrimitiveContainer instance; // Guaranteed to be destroyed.
+		// Instantiated on first use.
+		return instance;
+	}
+private:
+	PrimitiveContainer() {}                    // Constructor? (the {} brackets) are needed here.
+
+public:
+	PrimitiveContainer(PrimitiveContainer const&) = delete;
+	void operator=(PrimitiveContainer const&) = delete;
+
+public:
+	void Render(glm::mat4 viewproj);
+
+	// add a primitive
+	void Add(Pyramid p) { m_Pyramids.push_back(p); }
+	void Add(Cube p) { m_Cubes.push_back(p); }
+	void Add(Square p) { m_Squares.push_back(p); }
+	void Add(Triangle p) { m_Triangles.push_back(p); }
+
+private:
+	std::vector<Pyramid> m_Pyramids;
+	std::vector<Cube> m_Cubes;
+	std::vector<Square> m_Squares;
+	std::vector<Triangle> m_Triangles;
 };

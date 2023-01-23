@@ -1,2 +1,4 @@
-﻿  Primitive.cpp
+﻿  Camera.cpp
+  FPS_Camera.cpp
+  FloatingCamera.cpp
   Ray.vcxproj -> D:\MyProgramming\OpenGL\RayEngine\Build\Debug\Ray.dll

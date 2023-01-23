@@ -1,5 +1,22 @@
 #include "Ray.h"
 
+void PrimitiveContainer::Render(glm::mat4 viewproj)
+{
+	// render all elements
+	for (auto p : m_Pyramids)
+		p.Render(viewproj);
+
+	for (auto p : m_Cubes)
+		p.Render(viewproj);
+
+	for (auto p : m_Squares)
+		p.Render(viewproj);
+
+	for (auto p : m_Triangles)
+		p.Render(viewproj);
+}
+
+
 Primitive::Primitive(const PrimitiveDesc& desc)
 {
 	m_Description = desc;
@@ -92,6 +109,8 @@ Square::Square(const PrimitiveDesc& desc)
 			sizeof(indices)
 		}
 	);
+
+	PrimitiveContainer::Instance().Add(*this);
 }
 
 void Square::Render(glm::mat4 viewproj)
@@ -128,6 +147,8 @@ Triangle::Triangle(const PrimitiveDesc& desc)
 			sizeof(attribList) / sizeof(VertexAttribute)
 		}
 	);
+
+	PrimitiveContainer::Instance().Add(*this);
 }
 
 void Triangle::Render(glm::mat4 viewproj)
@@ -250,6 +271,8 @@ Cube::Cube(const PrimitiveDesc& desc)
 			sizeof(indicesList)
 		}
 	);
+
+	PrimitiveContainer::Instance().Add(*this);
 }
 
 void Cube::Render(glm::mat4 viewproj)
@@ -311,6 +334,8 @@ Pyramid::Pyramid(const PrimitiveDesc& desc)
 			sizeof(attribList) / sizeof(VertexAttribute)
 		}
 	);
+
+	PrimitiveContainer::Instance().Add(*this);
 }
 
 void Pyramid::Render(glm::mat4 viewproj)

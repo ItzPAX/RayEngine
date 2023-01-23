@@ -24,11 +24,6 @@
 // for defining variables used in the game
 struct Data
 {
-	CubePtr m_Cube[2];
-	PyramidPtr m_Pyramid;
-
-
 	FrameBufferPtr m_FrameBuffer;
 	FloatingCameraPtr m_FloatingCamera;
-	UIPtr m_UI;
 };

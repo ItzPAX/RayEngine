@@ -10,9 +10,21 @@ struct CameraInfo
 
 class RAY_API UI
 {
+public:
+	static UI& Instance()
+	{
+		static UI instance; // Guaranteed to be destroyed.
+		// Instantiated on first use.
+		return instance;
+	}
+
+public:
+	UI(UI const&) = delete;
+	void operator=(UI const&) = delete;
+
 	//Constructor
 public:
-	UI(HWND handle);
+	UI();
 	~UI();
 
 public:
