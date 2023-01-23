@@ -155,6 +155,7 @@
     <ClCompile Include="Source\Graphics\FPS_Camera.cpp" />
     <ClCompile Include="Source\Graphics\FrameBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Graphics.cpp" />
+    <ClCompile Include="Source\Graphics\Primitive.cpp" />
     <ClCompile Include="Source\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="Source\Graphics\Texture.cpp" />
     <ClCompile Include="Source\Graphics\UniformBuffer.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Source\Graphics\FrameBuffer.h" />
     <ClInclude Include="Source\Graphics\Graphics.h" />
     <ClInclude Include="Source\Graphics\GraphicsDefinitions.h" />
+    <ClInclude Include="Source\Graphics\Primitive.h" />
     <ClInclude Include="Source\Graphics\ShaderProgram.h" />
     <ClInclude Include="Source\Graphics\Texture.h" />
     <ClInclude Include="Source\Graphics\UniformBuffer.h" />

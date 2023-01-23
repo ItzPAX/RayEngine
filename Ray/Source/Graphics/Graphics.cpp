@@ -90,6 +90,26 @@ TexturePtr Graphics::CreateTexture(const char* path)
 	return std::make_shared<Texture>(path);
 }
 
+SquarePtr Graphics::CreateSquare(const PrimitiveDesc& desc)
+{
+	return std::make_shared<Square>(desc);
+}
+
+TrianglePtr Graphics::CreateTriangle(const PrimitiveDesc& desc)
+{
+	return std::make_shared<Triangle>(desc);
+}
+
+PyramidPtr Graphics::CreatePyramid(const PrimitiveDesc& desc)
+{
+	return std::make_shared<Pyramid>(desc);
+}
+
+CubePtr Graphics::CreateCube(const PrimitiveDesc& desc)
+{
+	return std::make_shared<Cube>(desc);
+}
+
 CameraPtr Graphics::CreateCamera(const CameraDesc& cdesc)
 {
 	return std::make_shared<Camera>(cdesc);

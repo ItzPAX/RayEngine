@@ -22,29 +22,13 @@
 
 /* DEPRECATED, JUST DO THIS IN SOME HEADER FILE*/
 // for defining variables used in the game
-class Data
+struct Data
 {
-public:
-	VertexArrayObjectPtr m_VAO;
-	ShaderProgramPtr m_Shader;
-	UniformBufferPtr m_Uniform;
+	CubePtr m_Cube[2];
+	PyramidPtr m_Pyramid;
+
+
 	FrameBufferPtr m_FrameBuffer;
 	FloatingCameraPtr m_FloatingCamera;
 	UIPtr m_UI;
-
-	TexturePtr m_Texture;
-};
-
-// Data for the uniform buffer
-struct UniformData
-{
-	glm::mat4 u_ModelViewProj;
-};
-
-
-struct Vertex
-{
-	glm::vec3 m_Position;
-	glm::vec2 m_TexCoord;
-	glm::vec3 m_Color;
 };

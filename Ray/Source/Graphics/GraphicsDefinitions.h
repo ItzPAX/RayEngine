@@ -15,6 +15,19 @@ typedef std::shared_ptr<FrameBuffer> FrameBufferPtr;
 class Texture;
 typedef std::shared_ptr<Texture> TexturePtr;
 
+// primitives
+class Square;
+typedef std::shared_ptr<Square> SquarePtr;
+
+class Triangle;
+typedef std::shared_ptr<Triangle> TrianglePtr;
+
+class Pyramid;
+typedef std::shared_ptr<Pyramid> PyramidPtr;
+
+class Cube;
+typedef std::shared_ptr<Cube> CubePtr;
+
 // all cameras we have
 class Camera;
 typedef std::shared_ptr<Camera> CameraPtr;

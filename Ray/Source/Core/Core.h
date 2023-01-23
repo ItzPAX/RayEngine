@@ -32,4 +32,5 @@
 #include "Graphics/FrameBuffer.h"
 #include "Graphics/ShaderProgram.h"
 #include "Graphics/VAO.h"
+#include "Graphics/Primitive.h"
 #include "Graphics/Graphics.h"
