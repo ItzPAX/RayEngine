@@ -21,24 +21,38 @@ struct RAY_API PrimitiveDesc
 	char m_VertexShader[MAX_PATH];
 	char m_FragmentShader[MAX_PATH];
 
-	// on init
 	glm::vec3 m_Pos = glm::vec3(0.f);
-	glm::vec3 m_RotationInit = glm::vec3(0.f);
+	glm::vec3 m_Rotation = glm::vec3(0.f);
 
-	// on update
-	glm::vec3 m_RotationUpdate = glm::vec3(0.f);
+	glm::vec3 m_RotationVel = glm::vec3(0.f);
+	glm::vec3 m_Velocity = glm::vec3(0.f);
 };
+
+struct RAY_API InternalPrimitiveData
+{
+	glm::vec3 m_TranslationScale;
+	glm::vec3 m_RotationScale;
+};
+
+/* DONT USE THIS IF YOU DONT KNOW WHAT THIS IS */
+static std::unordered_map<std::string, InternalPrimitiveData> m_InternalData;
 
 class RAY_API Primitive
 {
 public:
 	Primitive(const PrimitiveDesc& desc);
-	~Primitive();
+	~Primitive() {}
 
 	virtual void Render(glm::mat4 viewproj, float dt);
 
-protected:
+	void UpdatePrimitive();
+
+public:
 	PrimitiveDesc m_Description;
+
+protected:
+	InternalPrimitiveData m_Data;
+	std::string m_InternalName;
 
 	glm::mat4 m_Model;
 
@@ -104,12 +118,14 @@ public:
 	void Render(glm::mat4 viewproj, float dt);
 
 	// add a primitive
-	void Add(Pyramid p) { m_Pyramids.push_back(p); }
-	void Add(Cube p) { m_Cubes.push_back(p); }
-	void Add(Square p) { m_Squares.push_back(p); }
-	void Add(Triangle p) { m_Triangles.push_back(p); }
+	void Add(Pyramid p) { m_Pyramids.push_back(p); m_PrimitiveCounter++; }
+	void Add(Cube p) { m_Cubes.push_back(p); m_PrimitiveCounter++; }
+	void Add(Square p) { m_Squares.push_back(p); m_PrimitiveCounter++; }
+	void Add(Triangle p) { m_Triangles.push_back(p); m_PrimitiveCounter++; }
 
-private:
+public:
+	int m_PrimitiveCounter;
+
 	std::vector<Pyramid> m_Pyramids;
 	std::vector<Cube> m_Cubes;
 	std::vector<Square> m_Squares;

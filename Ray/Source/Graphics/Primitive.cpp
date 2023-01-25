@@ -16,19 +16,24 @@ void PrimitiveContainer::Render(glm::mat4 viewproj, float dt)
 		p.Render(viewproj, dt);
 }
 
+void Primitive::UpdatePrimitive()
+{
+	m_Description.m_Pos += m_InternalData[m_InternalName].m_TranslationScale;
+	m_Model = glm::translate(m_Model, m_Description.m_Pos);
+
+	m_Description.m_Rotation += m_InternalData[m_InternalName].m_RotationScale;
+	m_Model = glm::rotate(m_Model, m_Description.m_Rotation.x, glm::vec3(1, 0, 0));
+	m_Model = glm::rotate(m_Model, m_Description.m_Rotation.y, glm::vec3(0, 1, 0));
+	m_Model = glm::rotate(m_Model, m_Description.m_Rotation.z, glm::vec3(0, 0, 1));
+}
 
 Primitive::Primitive(const PrimitiveDesc& desc)
 {
 	m_Description = desc;
 	m_Model = glm::mat4(1.f);
-	
-	// apply rotation
-	m_Model = glm::rotate(m_Model, desc.m_RotationInit.x, glm::vec3(1, 0, 0));
-	m_Model = glm::rotate(m_Model, desc.m_RotationInit.y, glm::vec3(0, 1, 0));
-	m_Model = glm::rotate(m_Model, desc.m_RotationInit.z, glm::vec3(0, 0, 1));
 
-
-	m_Model = glm::translate(m_Model, m_Description.m_Pos);
+	m_InternalName.append("Primitive");
+	m_InternalName.append(std::to_string(PrimitiveContainer::Instance().m_PrimitiveCounter));
 
 	m_UniformBuffer = Graphics::Instance()->CreateUniformBuffer({sizeof(UniformData)});
 
@@ -57,12 +62,10 @@ Primitive::Primitive(const PrimitiveDesc& desc)
 	}
 }
 
-Primitive::~Primitive()
-{
-}
-
 void Primitive::Render(glm::mat4 viewproj, float dt)
 {
+	UpdatePrimitive();
+
 	UniformData data = { viewproj * m_Model };
 	m_UniformBuffer->SetData(&data);
 
@@ -75,6 +78,9 @@ void Primitive::Render(glm::mat4 viewproj, float dt)
 
 	if (m_Shader)
 		Graphics::Instance()->SetShaderProgram(m_Shader);
+
+	m_InternalData[m_InternalName].m_RotationScale += (m_Description.m_RotationVel * dt);
+	m_InternalData[m_InternalName].m_TranslationScale += (m_Description.m_Velocity * dt);
 }
 
 Square::Square(const PrimitiveDesc& desc)
@@ -116,8 +122,6 @@ Square::Square(const PrimitiveDesc& desc)
 			sizeof(indices)
 		}
 	);
-
-	PrimitiveContainer::Instance().Add(*this);
 }
 
 void Square::Render(glm::mat4 viewproj, float dt)
@@ -154,8 +158,6 @@ Triangle::Triangle(const PrimitiveDesc& desc)
 			sizeof(attribList) / sizeof(VertexAttribute)
 		}
 	);
-
-	PrimitiveContainer::Instance().Add(*this);
 }
 
 void Triangle::Render(glm::mat4 viewproj, float dt)
@@ -278,8 +280,6 @@ Cube::Cube(const PrimitiveDesc& desc)
 			sizeof(indicesList)
 		}
 	);
-
-	PrimitiveContainer::Instance().Add(*this);
 }
 
 void Cube::Render(glm::mat4 viewproj, float dt)
@@ -341,8 +341,6 @@ Pyramid::Pyramid(const PrimitiveDesc& desc)
 			sizeof(attribList) / sizeof(VertexAttribute)
 		}
 	);
-
-	PrimitiveContainer::Instance().Add(*this);
 }
 
 void Pyramid::Render(glm::mat4 viewproj, float dt)

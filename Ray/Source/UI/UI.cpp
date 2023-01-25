@@ -24,6 +24,7 @@ UI::UI()
 	ImGui_ImplWin32_Init(m_Handle, wglGetCurrentContext());
 	ImGui_ImplOpenGL3_Init("#version 130");
 
+	InitFileBrowser();
 	m_AssetManager.Initialize("Asset Manager", AssetManagerFlags::NONE);
 
 	m_Initialized = true;
@@ -76,6 +77,7 @@ VOID UI::RenderElements(UINT32 scene, const CameraInfo& caminfo)
 
 	// API for graphics engine
 	RenderPrimitiveCreationWindow();
+	RenderPrimitiveUpdateWindow();
 
 	// our asset manager
 	m_AssetManager.Render();
@@ -127,50 +129,130 @@ VOID UI::RenderPrimitiveCreationWindow()
 	{
 		ImGui::Combo("Primitive Type", (int*)&m_CurrentPrimitive, m_PrimitiveTypes, IM_ARRAYSIZE(m_PrimitiveTypes));
 
-		ImGui::InputText("Texture", desc.m_Texture, MAX_PATH);
-		ImGui::InputText("Fragment Shader", desc.m_FragmentShader, MAX_PATH);
-		ImGui::InputText("Vertex Shader", desc.m_VertexShader, MAX_PATH);
+		ImGui::InputTextWithHint("##Texture", "Texture", desc.m_Texture, MAX_PATH); ImGui::SameLine();
+		if (ImGui::Button("..##TextureButton"))
+			m_FileBrowser[BROWSER_TEXTURE].Open();
+		ImGui::InputTextWithHint("##FragmentShader", "Fragment Shader", desc.m_FragmentShader, MAX_PATH); ImGui::SameLine();
+		if (ImGui::Button("..##FragmentShaderButton"))
+			m_FileBrowser[BROWSER_FRAGMENT].Open();
+		ImGui::InputTextWithHint("##VertexShader", "Vertex Shader", desc.m_VertexShader, MAX_PATH); ImGui::SameLine();
+		if (ImGui::Button("..##VertexShaderButton"))
+			m_FileBrowser[BROWSER_VERTEX].Open();
 
-		ImGui::InputFloat("Pos: x", &desc.m_Pos.x);
-		ImGui::InputFloat("Pos: y", &desc.m_Pos.y);
-		ImGui::InputFloat("Pos: z", &desc.m_Pos.z);
+		ImGui::InputFloat3("Pos", &desc.m_Pos.x);
+		ImGui::InputFloat3("Rot", &desc.m_Rotation.x);
+		ImGui::InputFloat3("Rot Vel", &desc.m_RotationVel.x);
+		ImGui::InputFloat3("Vel", &desc.m_Velocity.x);
 		ImGui::ColorEdit3("Color", &desc.m_Col[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
 
 		if (ImGui::Button("Add Primitive", ImVec2(-1, 0)))
 			AddPrimitive(desc);
 	}
 	ImGui::End();
+
+	ManageFileBrowser(desc);
 }
 
-VOID UI::AddPrimitive(PrimitiveDesc& desc)
+VOID UI::InitFileBrowser()
+{
+	m_FileBrowser[BROWSER_FRAGMENT].SetTitle("Fragment Shader");
+	m_FileBrowser[BROWSER_FRAGMENT].SetTypeFilters({ ".fs", ".fragment", ".glsl", ".frag" });
+
+	m_FileBrowser[BROWSER_VERTEX].SetTitle("Vertex Shader");
+	m_FileBrowser[BROWSER_VERTEX].SetTypeFilters({ ".vs", ".vertex", ".glsl", ".vert" });
+
+	m_FileBrowser[BROWSER_TEXTURE].SetTitle("Texture");
+	m_FileBrowser[BROWSER_TEXTURE].SetTypeFilters({ ".jpg", ".png", ".jpeg", ".bmp" });
+}
+
+VOID UI::ManageFileBrowser(PrimitiveDesc& desc)
+{
+	for (int i = 0; i < 3; i++)
+	{
+		m_FileBrowser[i].Display();
+		if (m_FileBrowser[i].HasSelected())
+		{
+			switch (i)
+			{
+			case BROWSER_FRAGMENT:
+				memcpy(desc.m_FragmentShader, m_FileBrowser[i].GetSelected().string().c_str(), m_FileBrowser[i].GetSelected().string().size());
+				break;
+			case BROWSER_VERTEX:
+				memcpy(desc.m_VertexShader, m_FileBrowser[i].GetSelected().string().c_str(), m_FileBrowser[i].GetSelected().string().size());
+				break;
+			case BROWSER_TEXTURE:
+				memcpy(desc.m_Texture, m_FileBrowser[i].GetSelected().string().c_str(), m_FileBrowser[i].GetSelected().string().size());
+				break;
+			}
+		}
+	}
+}
+
+VOID UI::AddPrimitive(const PrimitiveDesc& desc)
 {
 	switch (m_CurrentPrimitive)
 	{
 	case PrimitiveType::PRIMITIVE_CUBE:
 	{
-		Cube c(desc);
+		Graphics::Instance()->CreateCube(desc);
 		break;
 	}
 	case PrimitiveType::PRIMITIVE_PYRAMID:
 	{
-		Pyramid p(desc);
+		Graphics::Instance()->CreatePyramid(desc);
 		break;
 	}
 	case PrimitiveType::PRIMITIVE_SQUARE:
 	{
-		Square s(desc);
+		Graphics::Instance()->CreateSquare(desc);
 		break;
 	}
 	case PrimitiveType::PRIMITIVE_TRIANGLE:
 	{
-		Triangle t(desc);
+		Graphics::Instance()->CreateTriangle(desc);
 		break;
 	}
 	default:
 		break;
 	}
+}
 
-	desc = PrimitiveDesc();
+VOID UI::RenderPrimitiveUpdateWindow()
+{
+	ImGui::Begin("Primitives");
+	{
+		if (ImGui::CollapsingHeader("Cube(s)"))
+		{
+			int cubes = 0;
+			for (auto& e : PrimitiveContainer::Instance().m_Cubes)
+			{
+				std::string name = "Cube" + std::to_string(cubes);
+				if (ImGui::TreeNode(name.c_str()))
+				{
+					ImGui::InputFloat3("Pos", &e.m_Description.m_Pos.x);
+					ImGui::InputFloat3("Rot", &e.m_Description.m_Rotation.x);
+					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
+					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
+					ImGui::TreePop();
+					ImGui::Separator();
+				}
+				cubes++;
+			}
+		}
+		if (ImGui::CollapsingHeader("Pyramid(s)"))
+		{
+
+		}
+		if (ImGui::CollapsingHeader("Square(s)"))
+		{
+
+		}
+		if (ImGui::CollapsingHeader("Triangle(s)"))
+		{
+
+		}
+	}
+	ImGui::End();
 }
 #pragma endregion
 

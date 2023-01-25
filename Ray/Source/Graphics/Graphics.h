@@ -43,10 +43,10 @@ public:
 
 	static TexturePtr CreateTexture(const char* path);
 
-	static SquarePtr CreateSquare(const PrimitiveDesc& desc);
-	static TrianglePtr CreateTriangle(const PrimitiveDesc& desc);
-	static PyramidPtr CreatePyramid(const PrimitiveDesc& desc);
-	static CubePtr CreateCube(const PrimitiveDesc& desc);
+	static void CreateSquare(const PrimitiveDesc& desc);
+	static void CreateTriangle(const PrimitiveDesc& desc);
+	static void CreatePyramid(const PrimitiveDesc& desc);
+	static void CreateCube(const PrimitiveDesc& desc);
 
 	static CameraPtr CreateCamera(const CameraDesc& cdesc);
 	static FPSCameraPtr CreateFPSCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc);

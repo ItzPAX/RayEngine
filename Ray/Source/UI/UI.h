@@ -58,8 +58,20 @@ private:
 		PRIMITIVE_TRIANGLE
 	};
 
+	enum BrowserType
+	{
+		BROWSER_VERTEX = 0,
+		BROWSER_FRAGMENT,
+		BROWSER_TEXTURE
+	};
+
+	VOID RenderPrimitiveUpdateWindow();
+
 	VOID RenderPrimitiveCreationWindow();
-	VOID AddPrimitive(PrimitiveDesc& desc);
+	VOID AddPrimitive(const PrimitiveDesc& desc);
+
+	VOID InitFileBrowser();
+	VOID ManageFileBrowser(PrimitiveDesc& desc);
 #pragma endregion
 
 private:
@@ -72,6 +84,7 @@ private:
 	glm::vec2 m_ScenePos;
 
 	AssetManager m_AssetManager;
+	ImGui::FileBrowser m_FileBrowser[3];
 
 	ImGuiContext* m_Context;
 	ImGuiIO m_IO;

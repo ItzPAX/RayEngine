@@ -351,5 +351,8 @@
     <ClInclude Include="Source\Graphics\Primitive.h">
       <Filter>Source\Graphics\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\vendor\imgui\imfilebrowser.h">
+      <Filter>Source\vendor\imgui</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

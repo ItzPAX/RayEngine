@@ -90,24 +90,28 @@ TexturePtr Graphics::CreateTexture(const char* path)
 	return std::make_shared<Texture>(path);
 }
 
-SquarePtr Graphics::CreateSquare(const PrimitiveDesc& desc)
+/* ADDS THE  PRIMITIVE TO THE CONTAINER */
+void Graphics::CreateSquare(const PrimitiveDesc& desc)
 {
-	return std::make_shared<Square>(desc);
+	PrimitiveContainer::Instance().Add(Square(desc));
 }
 
-TrianglePtr Graphics::CreateTriangle(const PrimitiveDesc& desc)
+/* ADDS THE  PRIMITIVE TO THE CONTAINER */
+void Graphics::CreateTriangle(const PrimitiveDesc& desc)
 {
-	return std::make_shared<Triangle>(desc);
+	PrimitiveContainer::Instance().Add(Triangle(desc));
 }
 
-PyramidPtr Graphics::CreatePyramid(const PrimitiveDesc& desc)
+/* ADDS THE  PRIMITIVE TO THE CONTAINER */
+void Graphics::CreatePyramid(const PrimitiveDesc& desc)
 {
-	return std::make_shared<Pyramid>(desc);
+	PrimitiveContainer::Instance().Add(Pyramid(desc));
 }
 
-CubePtr Graphics::CreateCube(const PrimitiveDesc& desc)
+/* ADDS THE  PRIMITIVE TO THE CONTAINER */
+void Graphics::CreateCube(const PrimitiveDesc& desc)
 {
-	return std::make_shared<Cube>(desc);
+	PrimitiveContainer::Instance().Add(Cube(desc));
 }
 
 CameraPtr Graphics::CreateCamera(const CameraDesc& cdesc)
