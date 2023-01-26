@@ -83,6 +83,26 @@ void Primitive::Render(glm::mat4 viewproj, float dt)
 	m_InternalData[m_InternalName].m_TranslationScale += (m_Description.m_Velocity * dt);
 }
 
+glm::vec3 Primitive::GetTranslationScale()
+{
+	return m_InternalData[m_InternalName].m_TranslationScale;
+}
+
+glm::vec3 Primitive::GetRotationScale()
+{
+	return m_InternalData[m_InternalName].m_RotationScale;
+}
+
+void Primitive::SetTranslationScale(glm::vec3 s)
+{
+	m_InternalData[m_InternalName].m_TranslationScale = s;
+}
+
+void Primitive::SetRotationScale(glm::vec3 s)
+{
+	m_InternalData[m_InternalName].m_RotationScale = s;
+}
+
 Square::Square(const PrimitiveDesc& desc)
 	: Primitive(desc)
 {

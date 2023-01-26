@@ -48,11 +48,18 @@ public:
 	void UpdatePrimitive();
 
 public:
+	glm::vec3 GetTranslationScale();
+	glm::vec3 GetRotationScale();
+
+	void SetTranslationScale(glm::vec3 s);
+	void SetRotationScale(glm::vec3 s);
+
+public:
 	PrimitiveDesc m_Description;
+	std::string m_InternalName;
 
 protected:
 	InternalPrimitiveData m_Data;
-	std::string m_InternalName;
 
 	glm::mat4 m_Model;
 

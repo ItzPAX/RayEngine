@@ -229,8 +229,20 @@ VOID UI::RenderPrimitiveUpdateWindow()
 				std::string name = "Cube" + std::to_string(cubes);
 				if (ImGui::TreeNode(name.c_str()))
 				{
-					ImGui::InputFloat3("Pos", &e.m_Description.m_Pos.x);
-					ImGui::InputFloat3("Rot", &e.m_Description.m_Rotation.x);
+					glm::vec3 realPos = e.m_Description.m_Pos + e.GetTranslationScale();
+					if (ImGui::InputFloat3("Pos", &realPos.x))
+					{
+						e.m_Description.m_Pos = realPos;
+						e.SetTranslationScale(glm::vec3(0.f));
+					}
+
+					glm::vec3 realRotation = e.m_Description.m_Rotation + e.GetRotationScale();
+					if (ImGui::InputFloat3("Rot", &realRotation.x))
+					{
+						e.m_Description.m_Rotation = realRotation;
+						e.SetRotationScale(glm::vec3(0.f));
+					}
+
 					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
 					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
 					ImGui::TreePop();
