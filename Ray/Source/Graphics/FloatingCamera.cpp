@@ -1,7 +1,7 @@
 #include "Ray.h"
 
-FloatingCamera::FloatingCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc)
-	: FPSCamera(cdesc, fpsdesc)
+FloatingCamera::FloatingCamera()
+	: FPSCamera()
 {
 
 }

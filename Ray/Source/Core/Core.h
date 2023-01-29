@@ -26,6 +26,7 @@
 // Graphics features
 #include "Graphics/GraphicsDefinitions.h"
 #include "Graphics/Texture.h"
+#include "Graphics/LightingManager.h"
 #include "Graphics/Camera.h"
 #include "Graphics/FPS_Camera.h"
 #include "Graphics/FloatingCamera.h"

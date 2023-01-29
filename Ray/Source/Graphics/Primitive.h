@@ -5,12 +5,7 @@ struct RAY_API Vertex
 {
 	glm::vec3 m_Position;
 	glm::vec2 m_TexCoord;
-	glm::vec3 m_Color;
-};
-
-struct RAY_API UniformData
-{
-	glm::mat4 u_ModelViewProj;
+	glm::vec3 m_Normal;
 };
 
 struct RAY_API PrimitiveDesc
@@ -26,6 +21,8 @@ struct RAY_API PrimitiveDesc
 
 	glm::vec3 m_RotationVel = glm::vec3(0.f);
 	glm::vec3 m_Velocity = glm::vec3(0.f);
+
+	bool m_LightSource = false;
 };
 
 struct RAY_API InternalPrimitiveData
@@ -58,6 +55,8 @@ public:
 	PrimitiveDesc m_Description;
 	std::string m_InternalName;
 
+private:
+
 protected:
 	InternalPrimitiveData m_Data;
 
@@ -66,6 +65,7 @@ protected:
 	ShaderProgramPtr m_Shader;
 	TexturePtr m_Texture;
 	VertexArrayObjectPtr m_VAO;
+	
 	UniformBufferPtr m_UniformBuffer;
 };
 
@@ -126,7 +126,8 @@ public:
 
 	// add a primitive
 	void Add(Pyramid p) { m_Pyramids.push_back(p); m_PrimitiveCounter++; }
-	void Add(Cube p) { m_Cubes.push_back(p); m_PrimitiveCounter++; }
+	void Add(Cube p) { m_Cubes.push_back(p); m_PrimitiveCounter++; if (p.m_Description.m_LightSource) m_Lights.push_back(p); }
+
 	void Add(Square p) { m_Squares.push_back(p); m_PrimitiveCounter++; }
 	void Add(Triangle p) { m_Triangles.push_back(p); m_PrimitiveCounter++; }
 
@@ -137,4 +138,7 @@ public:
 	std::vector<Cube> m_Cubes;
 	std::vector<Square> m_Squares;
 	std::vector<Triangle> m_Triangles;
+
+	// only supporting cube lights as of rn
+	std::vector<Cube> m_Lights;
 };

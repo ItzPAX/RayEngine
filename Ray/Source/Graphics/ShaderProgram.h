@@ -28,6 +28,8 @@ private:
 public:
 	UINT32 GetProgramId() { return m_ProgramId; }
 
+	void SetVec3(const char* name, glm::vec3 val);
+
 private:
 	UINT32 m_ProgramId = 0;
 	UINT32 m_AttachedShaders[2] = {};

@@ -8,7 +8,19 @@ struct FPSCameraDesc
 class RAY_API FPSCamera : public Camera
 {
 public:
-	FPSCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc);
+	static FPSCamera& GetFPSCam()
+	{
+		static FPSCamera instance; // Guaranteed to be destroyed.
+		// Instantiated on first use.
+		return instance;
+	}
+
+public:
+	FPSCamera(FPSCamera const&) = delete;
+	void operator=(FPSCamera const&) = delete;
+
+public:
+	FPSCamera();
 
 	void Think(glm::vec2* mousevel, float delta) override;
 

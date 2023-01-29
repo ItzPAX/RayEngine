@@ -1,8 +1,15 @@
 #include "Ray.h"
 
-FPSCamera::FPSCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc)
-	: Camera(cdesc), m_Sensitivity(fpsdesc.m_Sensitivity)
+FPSCamera::FPSCamera()
+	: Camera()
 {
+	FPSCameraDesc fpsdesc =
+	{
+				0.2f							// MOUSE SENS
+	};
+
+	m_Sensitivity = fpsdesc.m_Sensitivity;
+
 	m_Up = glm::vec3(0.f, 1.f, 0.f);
 	m_Yaw = -90.f;
 	m_Pitch = 0.f;

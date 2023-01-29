@@ -220,6 +220,9 @@
     <ClCompile Include="Source\Graphics\Primitive.cpp">
       <Filter>Source\Graphics\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\LightingManager.cpp">
+      <Filter>Source\Graphics\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\PerGameSettings.h">
@@ -353,6 +356,9 @@
     </ClInclude>
     <ClInclude Include="..\vendor\imgui\imfilebrowser.h">
       <Filter>Source\vendor\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\LightingManager.h">
+      <Filter>Source\Graphics\Classes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

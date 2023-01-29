@@ -35,7 +35,7 @@ Primitive::Primitive(const PrimitiveDesc& desc)
 	m_InternalName.append("Primitive");
 	m_InternalName.append(std::to_string(PrimitiveContainer::Instance().m_PrimitiveCounter));
 
-	m_UniformBuffer = Graphics::Instance()->CreateUniformBuffer({sizeof(UniformData)});
+	m_UniformBuffer = Graphics::Instance()->CreateUniformBuffer({ sizeof(VertexData) });
 
 	if (m_Description.m_Texture)
 	{
@@ -54,7 +54,7 @@ Primitive::Primitive(const PrimitiveDesc& desc)
 			m_Description.m_FragmentShader
 		});
 
-		m_Shader->SetUniformBufferSlot("EngineData", 0);
+		m_Shader->SetUniformBufferSlot("VertexData", 0);
 	}
 	else
 	{
@@ -66,18 +66,16 @@ void Primitive::Render(glm::mat4 viewproj, float dt)
 {
 	UpdatePrimitive();
 
-	UniformData data = { viewproj * m_Model };
-	m_UniformBuffer->SetData(&data);
+	VertexData vdata = { viewproj * m_Model, m_Model, m_Description.m_Col };
+	m_UniformBuffer->SetData(&vdata);
 
-	if (m_Texture)
-		Graphics::Instance()->SetTexture(m_Texture);
-
+	if (m_Texture) Graphics::Instance()->SetTexture(m_Texture);
 	Graphics::Instance()->SetVertexArrayObject(m_VAO);
-
 	Graphics::Instance()->SetUniformBuffer(m_UniformBuffer, 0);
 
-	if (m_Shader)
-		Graphics::Instance()->SetShaderProgram(m_Shader);
+	LightingManager::Instance().ManageBasicLighting(m_Shader, { m_Description.m_Col, glm::vec3(1.f, 1.f, 1.f), FloatingCamera::GetFloatingCam().Position() });
+
+	if (m_Shader) Graphics::Instance()->SetShaderProgram(m_Shader);
 
 	m_InternalData[m_InternalName].m_RotationScale += (m_Description.m_RotationVel * dt);
 	m_InternalData[m_InternalName].m_TranslationScale += (m_Description.m_Velocity * dt);
@@ -108,10 +106,10 @@ Square::Square(const PrimitiveDesc& desc)
 {
 	Vertex vertices[] =
 	{
-		{ glm::vec3(0.5f, 0.5f, 0.f),   glm::vec2(1.f, 1.f),  m_Description.m_Col },
-		{ glm::vec3(0.5f, -0.5f, 0.f),  glm::vec2(1.f, 0.f),  m_Description.m_Col },
-		{ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec2(0.f, 0.f),  m_Description.m_Col },
-		{ glm::vec3(-0.5f, 0.5f, 0.f),  glm::vec2(0.f, 1.f),  m_Description.m_Col }
+		{ glm::vec3(0.5f, 0.5f, 0.f),   glm::vec2(1.f, 1.f) },
+		{ glm::vec3(0.5f, -0.5f, 0.f),  glm::vec2(1.f, 0.f) },
+		{ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec2(0.f, 0.f) },
+		{ glm::vec3(-0.5f, 0.5f, 0.f),  glm::vec2(0.f, 1.f) }
 	};
 
 	UINT32 indices[] =
@@ -124,7 +122,6 @@ Square::Square(const PrimitiveDesc& desc)
 	{
 		sizeof(glm::vec3) / sizeof(float),		// POSITION
 		sizeof(glm::vec2) / sizeof(float),		// TEXCOORD
-		sizeof(glm::vec3) / sizeof(float)		// COLOR
 	};
 
 	m_VAO = Graphics::Instance()->CreateVertexArrayObject
@@ -155,16 +152,15 @@ Triangle::Triangle(const PrimitiveDesc& desc)
 {
 	Vertex vertices[] =
 	{
-		{ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec2(0.f, 0.f),  m_Description.m_Col },
-		{ glm::vec3(0.5f, -0.5f, 0.f),  glm::vec2(1.f, 0.f),  m_Description.m_Col },
-		{ glm::vec3(0.f, 0.5f, 0.f),    glm::vec2(0.5f, 1.f), m_Description.m_Col }
+		{ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec2(0.f, 0.f) },
+		{ glm::vec3(0.5f, -0.5f, 0.f),  glm::vec2(1.f, 0.f) },
+		{ glm::vec3(0.f, 0.5f, 0.f),    glm::vec2(0.5f, 1.f) }
 	};
 
 	VertexAttribute attribList[] =
 	{
 		sizeof(glm::vec3) / sizeof(float),		// POSITION
 		sizeof(glm::vec2) / sizeof(float),		// TEXCOORD
-		sizeof(glm::vec3) / sizeof(float)		// COLOR
 	};
 
 	m_VAO = Graphics::Instance()->CreateVertexArrayObject
@@ -191,64 +187,65 @@ Cube::Cube(const PrimitiveDesc& desc)
 {
 	glm::vec3 positionsList[] =
 	{
-		//front face
+		//FRONT
 		glm::vec3(-0.5f,-0.5f,-0.5f),
 		glm::vec3(-0.5f,0.5f,-0.5f),
 		glm::vec3(0.5f,0.5f,-0.5f),
 		glm::vec3(0.5f,-0.5f,-0.5f),
 
-		//back face
+		//BACK
 		glm::vec3(0.5f,-0.5f,0.5f),
 		glm::vec3(0.5f,0.5f,0.5f),
 		glm::vec3(-0.5f,0.5f,0.5f),
 		glm::vec3(-0.5f,-0.5f,0.5f)
 	};
 
+
 	glm::vec2 texcoordsList[] =
 	{
-		glm::vec2(1,1),
-		glm::vec2(1,0),
+		glm::vec2(0,0),
 		glm::vec2(0,1),
-		glm::vec2(0,0)
+		glm::vec2(1,0),
+		glm::vec2(1,1)
 	};
 
 	Vertex verticesList[] =
 	{
 		//front face
-		{ positionsList[0],texcoordsList[1], m_Description.m_Col },
-		{ positionsList[1],texcoordsList[0], m_Description.m_Col },
-		{ positionsList[2],texcoordsList[2], m_Description.m_Col },
-		{ positionsList[3],texcoordsList[3], m_Description.m_Col },
+		{ positionsList[0],texcoordsList[1], glm::vec3(0.f, 0.f, -1.f) },
+		{ positionsList[1],texcoordsList[0], glm::vec3(0.f, 0.f, -1.f) },
+		{ positionsList[2],texcoordsList[2], glm::vec3(0.f, 0.f, -1.f) },
+		{ positionsList[3],texcoordsList[3], glm::vec3(0.f, 0.f, -1.f) },
 
 		//back face
-		{ positionsList[4],texcoordsList[1], m_Description.m_Col },
-		{ positionsList[5],texcoordsList[0], m_Description.m_Col },
-		{ positionsList[6],texcoordsList[2], m_Description.m_Col },
-		{ positionsList[7],texcoordsList[3], m_Description.m_Col },
+		{ positionsList[4],texcoordsList[1], glm::vec3(0.f, 0.f, 1.f) },
+		{ positionsList[5],texcoordsList[0], glm::vec3(0.f, 0.f, 1.f) },
+		{ positionsList[6],texcoordsList[2], glm::vec3(0.f, 0.f, 1.f) },
+		{ positionsList[7],texcoordsList[3], glm::vec3(0.f, 0.f, 1.f) },
 
 		//top face
-		{ positionsList[1],texcoordsList[1], m_Description.m_Col },
-		{ positionsList[6],texcoordsList[0], m_Description.m_Col },
-		{ positionsList[5],texcoordsList[2], m_Description.m_Col },
-		{ positionsList[2],texcoordsList[3], m_Description.m_Col },
+		{ positionsList[1],texcoordsList[1], glm::vec3(0.f, 1.f, 0.f) },
+		{ positionsList[6],texcoordsList[0], glm::vec3(0.f, 1.f, 0.f) },
+		{ positionsList[5],texcoordsList[2], glm::vec3(0.f, 1.f, 0.f) },
+		{ positionsList[2],texcoordsList[3], glm::vec3(0.f, 1.f, 0.f) },
 
 		//bottom face
-		{ positionsList[7],texcoordsList[1], m_Description.m_Col },
-		{ positionsList[0],texcoordsList[0], m_Description.m_Col },
-		{ positionsList[3],texcoordsList[2], m_Description.m_Col },
-		{ positionsList[4],texcoordsList[3], m_Description.m_Col },
+		{ positionsList[7],texcoordsList[1], glm::vec3(0.f, -1.f, 0.f) },
+		{ positionsList[0],texcoordsList[0], glm::vec3(0.f, -1.f, 0.f) },
+		{ positionsList[3],texcoordsList[2], glm::vec3(0.f, -1.f, 0.f) },
+		{ positionsList[4],texcoordsList[3], glm::vec3(0.f, -1.f, 0.f) },
 
 		//right face
-		{ positionsList[3],texcoordsList[1], m_Description.m_Col },
-		{ positionsList[2],texcoordsList[0], m_Description.m_Col },
-		{ positionsList[5],texcoordsList[2], m_Description.m_Col },
-		{ positionsList[4],texcoordsList[3], m_Description.m_Col },
+		{ positionsList[3],texcoordsList[1], glm::vec3(1.f, 0.f, 0.f) },
+		{ positionsList[2],texcoordsList[0], glm::vec3(1.f, 0.f, 0.f) },
+		{ positionsList[5],texcoordsList[2], glm::vec3(1.f, 0.f, 0.f) },
+		{ positionsList[4],texcoordsList[3], glm::vec3(1.f, 0.f, 0.f) },
 
 		//left face
-		{ positionsList[7],texcoordsList[1], m_Description.m_Col },
-		{ positionsList[6],texcoordsList[0], m_Description.m_Col },
-		{ positionsList[1],texcoordsList[2], m_Description.m_Col },
-		{ positionsList[0],texcoordsList[3], m_Description.m_Col }
+		{ positionsList[7],texcoordsList[1], glm::vec3(-1.f, 0.f, 0.f) },
+		{ positionsList[6],texcoordsList[0], glm::vec3(-1.f, 0.f, 0.f) },
+		{ positionsList[1],texcoordsList[2], glm::vec3(-1.f, 0.f, 0.f) },
+		{ positionsList[0],texcoordsList[3], glm::vec3(-1.f, 0.f, 0.f) }
 	};
 
 	UINT32 indicesList[] =
@@ -282,7 +279,7 @@ Cube::Cube(const PrimitiveDesc& desc)
 	{
 		sizeof(glm::vec3) / sizeof(float),		// POSITION
 		sizeof(glm::vec2) / sizeof(float),		// TEXCOORD
-		sizeof(glm::vec3) / sizeof(float)		// COLOR
+		sizeof(glm::vec3) / sizeof(float)		// NORMAL
 	};
 
 	m_VAO = Graphics::Instance()->CreateVertexArrayObject
@@ -319,35 +316,34 @@ Pyramid::Pyramid(const PrimitiveDesc& desc)
 
 	Vertex verticesList[]
 	{
-		{ p00, glm::vec2(0.0f, 0.0f), m_Description.m_Col },
-		{ p10, glm::vec2(1.0f, 0.0f), m_Description.m_Col },
-		{ p11, glm::vec2(1.0f, 1.0f), m_Description.m_Col },
-		{ p00, glm::vec2(0.0f, 0.0f), m_Description.m_Col },
-		{ p11, glm::vec2(1.0f, 1.0f), m_Description.m_Col },
-		{ p01, glm::vec2(0.0f, 1.0f), m_Description.m_Col },
+		{ p00, glm::vec2(0.0f, 0.0f) },
+		{ p10, glm::vec2(1.0f, 0.0f) },
+		{ p11, glm::vec2(1.0f, 1.0f) },
+		{ p00, glm::vec2(0.0f, 0.0f) },
+		{ p11, glm::vec2(1.0f, 1.0f) },
+		{ p01, glm::vec2(0.0f, 1.0f) },
 
-		{ p00, glm::vec2(0.0f, 0.0f), m_Description.m_Col },
-		{ p10, glm::vec2(1.0f, 0.0f), m_Description.m_Col },
-		{ top, glm::vec2(0.5f, 1.0f), m_Description.m_Col },
+		{ p00, glm::vec2(0.0f, 0.0f) },
+		{ p10, glm::vec2(1.0f, 0.0f) },
+		{ top, glm::vec2(0.5f, 1.0f) },
 
-		{ p10, glm::vec2(0.0f, 0.0f), m_Description.m_Col },
-		{ p11, glm::vec2(1.0f, 0.0f), m_Description.m_Col },
-		{ top, glm::vec2(0.5f, 1.0f), m_Description.m_Col },
+		{ p10, glm::vec2(0.0f, 0.0f) },
+		{ p11, glm::vec2(1.0f, 0.0f) },
+		{ top, glm::vec2(0.5f, 1.0f) },
 
-		{ p11, glm::vec2(0.0f, 0.0f), m_Description.m_Col },
-		{ p01, glm::vec2(1.0f, 0.0f), m_Description.m_Col },
-		{ top, glm::vec2(0.5f, 1.0f), m_Description.m_Col },
+		{ p11, glm::vec2(0.0f, 0.0f) },
+		{ p01, glm::vec2(1.0f, 0.0f) },
+		{ top, glm::vec2(0.5f, 1.0f) },
 
-		{ p01, glm::vec2(0.0f, 0.0f), m_Description.m_Col },
-		{ p00, glm::vec2(1.0f, 0.0f), m_Description.m_Col },
-		{ top, glm::vec2(0.5f, 1.0f), m_Description.m_Col }
+		{ p01, glm::vec2(0.0f, 0.0f) },
+		{ p00, glm::vec2(1.0f, 0.0f) },
+		{ top, glm::vec2(0.5f, 1.0f) }
 	};
 
 	VertexAttribute attribList[] =
 	{
 		sizeof(glm::vec3) / sizeof(float),		// POSITION
 		sizeof(glm::vec2) / sizeof(float),		// TEXCOORD
-		sizeof(glm::vec3) / sizeof(float)		// COLOR
 	};
 
 	m_VAO = Graphics::Instance()->CreateVertexArrayObject

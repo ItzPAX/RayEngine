@@ -90,44 +90,24 @@ TexturePtr Graphics::CreateTexture(const char* path)
 	return std::make_shared<Texture>(path);
 }
 
-/* ADDS THE  PRIMITIVE TO THE CONTAINER */
 void Graphics::CreateSquare(const PrimitiveDesc& desc)
 {
 	PrimitiveContainer::Instance().Add(Square(desc));
 }
 
-/* ADDS THE  PRIMITIVE TO THE CONTAINER */
 void Graphics::CreateTriangle(const PrimitiveDesc& desc)
 {
 	PrimitiveContainer::Instance().Add(Triangle(desc));
 }
 
-/* ADDS THE  PRIMITIVE TO THE CONTAINER */
 void Graphics::CreatePyramid(const PrimitiveDesc& desc)
 {
 	PrimitiveContainer::Instance().Add(Pyramid(desc));
 }
 
-/* ADDS THE  PRIMITIVE TO THE CONTAINER */
 void Graphics::CreateCube(const PrimitiveDesc& desc)
 {
 	PrimitiveContainer::Instance().Add(Cube(desc));
-}
-
-CameraPtr Graphics::CreateCamera(const CameraDesc& cdesc)
-{
-	return std::make_shared<Camera>(cdesc);
-}
-
-FPSCameraPtr Graphics::CreateFPSCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc)
-{
-	return std::make_shared<FPSCamera>(cdesc, fpsdesc);
-}
-
-// uses the same params as the fps camera, cuz it is basically a fps camera with added flying
-FloatingCameraPtr Graphics::CreateFloatingCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc)
-{
-	return std::make_shared<FloatingCamera>(cdesc, fpsdesc);
 }
 
 void Graphics::Clear(glm::vec4 col)

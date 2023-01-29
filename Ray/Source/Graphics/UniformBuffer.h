@@ -1,5 +1,12 @@
 #pragma once
 
+struct RAY_API VertexData
+{
+	glm::mat4 u_ModelViewProj;
+	glm::mat4 u_Model;
+	glm::vec3 u_ObjectColor;
+};
+
 struct UniformBufferDesc
 {
 	UINT32 m_Size = 0;

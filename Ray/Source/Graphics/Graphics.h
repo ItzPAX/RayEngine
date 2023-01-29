@@ -43,14 +43,12 @@ public:
 
 	static TexturePtr CreateTexture(const char* path);
 
+	/* ADDS THE  PRIMITIVE TO THE CONTAINER */
 	static void CreateSquare(const PrimitiveDesc& desc);
 	static void CreateTriangle(const PrimitiveDesc& desc);
 	static void CreatePyramid(const PrimitiveDesc& desc);
 	static void CreateCube(const PrimitiveDesc& desc);
-
-	static CameraPtr CreateCamera(const CameraDesc& cdesc);
-	static FPSCameraPtr CreateFPSCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc);
-	static FloatingCameraPtr CreateFloatingCamera(const CameraDesc& cdesc, const FPSCameraDesc& fpsdesc); // fps + flying
+	/* ----------------------------------- */
 
 public:
 	static void SetViewport();

@@ -144,6 +144,7 @@ VOID UI::RenderPrimitiveCreationWindow()
 		ImGui::InputFloat3("Rot Vel", &desc.m_RotationVel.x);
 		ImGui::InputFloat3("Vel", &desc.m_Velocity.x);
 		ImGui::ColorEdit3("Color", &desc.m_Col[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+		ImGui::Checkbox("Light", &desc.m_LightSource);
 
 		if (ImGui::Button("Add Primitive", ImVec2(-1, 0)))
 			AddPrimitive(desc);
@@ -175,12 +176,15 @@ VOID UI::ManageFileBrowser(PrimitiveDesc& desc)
 			switch (i)
 			{
 			case BROWSER_FRAGMENT:
+				ZeroMemory(desc.m_FragmentShader, MAX_PATH);
 				memcpy(desc.m_FragmentShader, m_FileBrowser[i].GetSelected().string().c_str(), m_FileBrowser[i].GetSelected().string().size());
 				break;
 			case BROWSER_VERTEX:
+				ZeroMemory(desc.m_VertexShader, MAX_PATH);
 				memcpy(desc.m_VertexShader, m_FileBrowser[i].GetSelected().string().c_str(), m_FileBrowser[i].GetSelected().string().size());
 				break;
 			case BROWSER_TEXTURE:
+				ZeroMemory(desc.m_Texture, MAX_PATH);
 				memcpy(desc.m_Texture, m_FileBrowser[i].GetSelected().string().c_str(), m_FileBrowser[i].GetSelected().string().size());
 				break;
 			}
@@ -223,10 +227,10 @@ VOID UI::RenderPrimitiveUpdateWindow()
 	{
 		if (ImGui::CollapsingHeader("Cube(s)"))
 		{
-			int cubes = 0;
+			int primcount = 0;
 			for (auto& e : PrimitiveContainer::Instance().m_Cubes)
 			{
-				std::string name = "Cube" + std::to_string(cubes);
+				std::string name = "Cube" + std::to_string(primcount);
 				if (ImGui::TreeNode(name.c_str()))
 				{
 					glm::vec3 realPos = e.m_Description.m_Pos + e.GetTranslationScale();
@@ -245,23 +249,105 @@ VOID UI::RenderPrimitiveUpdateWindow()
 
 					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
 					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
+					ImGui::Checkbox("Light", &e.m_Description.m_LightSource);
 					ImGui::TreePop();
 					ImGui::Separator();
 				}
-				cubes++;
+				primcount++;
 			}
 		}
 		if (ImGui::CollapsingHeader("Pyramid(s)"))
 		{
+			int primcount = 0;
+			for (auto& e : PrimitiveContainer::Instance().m_Pyramids)
+			{
+				std::string name = "Pyramid" + std::to_string(primcount);
+				if (ImGui::TreeNode(name.c_str()))
+				{
+					glm::vec3 realPos = e.m_Description.m_Pos + e.GetTranslationScale();
+					if (ImGui::InputFloat3("Pos", &realPos.x))
+					{
+						e.m_Description.m_Pos = realPos;
+						e.SetTranslationScale(glm::vec3(0.f));
+					}
 
+					glm::vec3 realRotation = e.m_Description.m_Rotation + e.GetRotationScale();
+					if (ImGui::InputFloat3("Rot", &realRotation.x))
+					{
+						e.m_Description.m_Rotation = realRotation;
+						e.SetRotationScale(glm::vec3(0.f));
+					}
+
+					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
+					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
+					ImGui::Checkbox("Light", &e.m_Description.m_LightSource);
+					ImGui::TreePop();
+					ImGui::Separator();
+				}
+				primcount++;
+			}
 		}
 		if (ImGui::CollapsingHeader("Square(s)"))
 		{
+			int primcount = 0;
+			for (auto& e : PrimitiveContainer::Instance().m_Squares)
+			{
+				std::string name = "Square" + std::to_string(primcount);
+				if (ImGui::TreeNode(name.c_str()))
+				{
+					glm::vec3 realPos = e.m_Description.m_Pos + e.GetTranslationScale();
+					if (ImGui::InputFloat3("Pos", &realPos.x))
+					{
+						e.m_Description.m_Pos = realPos;
+						e.SetTranslationScale(glm::vec3(0.f));
+					}
 
+					glm::vec3 realRotation = e.m_Description.m_Rotation + e.GetRotationScale();
+					if (ImGui::InputFloat3("Rot", &realRotation.x))
+					{
+						e.m_Description.m_Rotation = realRotation;
+						e.SetRotationScale(glm::vec3(0.f));
+					}
+
+					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
+					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
+					ImGui::Checkbox("Light", &e.m_Description.m_LightSource);
+					ImGui::TreePop();
+					ImGui::Separator();
+				}
+				primcount++;
+			}
 		}
 		if (ImGui::CollapsingHeader("Triangle(s)"))
 		{
+			int primcount = 0;
+			for (auto& e : PrimitiveContainer::Instance().m_Triangles)
+			{
+				std::string name = "Triangle" + std::to_string(primcount);
+				if (ImGui::TreeNode(name.c_str()))
+				{
+					glm::vec3 realPos = e.m_Description.m_Pos + e.GetTranslationScale();
+					if (ImGui::InputFloat3("Pos", &realPos.x))
+					{
+						e.m_Description.m_Pos = realPos;
+						e.SetTranslationScale(glm::vec3(0.f));
+					}
 
+					glm::vec3 realRotation = e.m_Description.m_Rotation + e.GetRotationScale();
+					if (ImGui::InputFloat3("Rot", &realRotation.x))
+					{
+						e.m_Description.m_Rotation = realRotation;
+						e.SetRotationScale(glm::vec3(0.f));
+					}
+
+					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
+					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
+					ImGui::Checkbox("Light", &e.m_Description.m_LightSource);
+					ImGui::TreePop();
+					ImGui::Separator();
+				}
+				primcount++;
+			}
 		}
 	}
 	ImGui::End();

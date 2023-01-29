@@ -1,9 +1,18 @@
 #include "Ray.h"
 
-Camera::Camera(const CameraDesc& desc)
+Camera::Camera()
 {
 	HWND desktop = GetDesktopWindow();
 	RECT desktoprect; GetWindowRect(desktop, &desktoprect);
+
+	CameraDesc desc = 
+	{
+				90.f,							// FOV
+				3.f,							// SPEED
+				0.1f,							// NEAR
+				1000.f,							// FAR
+				glm::vec3(0.f, 2.f, 8.f)		// START POS
+	};
 
 	m_Projection = glm::mat4(1.f);
 	m_Projection = glm::perspective(desc.m_Fov / 2.f, float(desktoprect.right - desktoprect.left) / float(desktoprect.bottom - desktoprect.top), desc.m_Near, desc.m_Far);

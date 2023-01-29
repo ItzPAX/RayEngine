@@ -24,6 +24,12 @@ void ShaderProgram::SetUniformBufferSlot(const char* name, UINT32 slot)
 	glUniformBlockBinding(m_ProgramId, index, slot);
 }
 
+void ShaderProgram::SetVec3(const char* name, glm::vec3 val)
+{
+	UINT32 index = glGetUniformLocation(m_ProgramId, name);
+	glUniform3f(index, val.x, val.y, val.z);
+}
+
 void ShaderProgram::Attach(const char* shaderPath, const ShaderType& type)
 {
 	std::string shaderCode;

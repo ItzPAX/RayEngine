@@ -13,7 +13,19 @@ struct CameraDesc
 class RAY_API Camera
 {
 public:
-	Camera(const CameraDesc& desc);
+	static Camera& GetCam()
+	{
+		static Camera instance; // Guaranteed to be destroyed.
+		// Instantiated on first use.
+		return instance;
+	}
+
+public:
+	Camera(Camera const&) = delete;
+	void operator=(Camera const&) = delete;
+
+public:
+	Camera();
 	void ManageSpeed();
 
 	glm::vec3 Position() { return m_Position; }

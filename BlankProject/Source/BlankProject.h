@@ -25,5 +25,4 @@
 struct Data
 {
 	FrameBufferPtr m_FrameBuffer;
-	FloatingCameraPtr m_FloatingCamera;
 };
