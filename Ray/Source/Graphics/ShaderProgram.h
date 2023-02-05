@@ -16,6 +16,7 @@ class RAY_API ShaderProgram
 {
 public:
 	ShaderProgram(const ShaderProgramDesc& desc);
+	ShaderProgram() = default;
 	~ShaderProgram();
 
 	void SetUniformBufferSlot(const char* name, UINT32 slot);
@@ -33,4 +34,7 @@ public:
 private:
 	UINT32 m_ProgramId = 0;
 	UINT32 m_AttachedShaders[2] = {};
+
+	const char* m_FragmentPath;
+	const char* m_VertexPath;
 };

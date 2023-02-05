@@ -44,10 +44,10 @@ public:
 	static TexturePtr CreateTexture(const char* path);
 
 	/* ADDS THE  PRIMITIVE TO THE CONTAINER */
-	static void CreateSquare(const PrimitiveDesc& desc);
-	static void CreateTriangle(const PrimitiveDesc& desc);
-	static void CreatePyramid(const PrimitiveDesc& desc);
-	static void CreateCube(const PrimitiveDesc& desc);
+	static Square CreateSquare(const PrimitiveDesc& desc);
+	static Triangle CreateTriangle(const PrimitiveDesc& desc);
+	static Pyramid CreatePyramid(const PrimitiveDesc& desc);
+	static Cube CreateCube(const PrimitiveDesc& desc);
 	/* ----------------------------------- */
 
 public:

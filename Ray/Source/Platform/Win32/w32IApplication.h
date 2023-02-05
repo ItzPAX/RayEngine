@@ -23,6 +23,9 @@ namespace Win32 {
 		/* Called before Initializing the Application  */
 		virtual VOID PreInitialize() = 0;
 
+		/* Calls the update function and manages engine stuff */
+		virtual VOID EngineUpdate(float deltatime) = 0;
+
 		/* Called to Initialize the Application  */
 		virtual VOID Initialize() = 0;
 

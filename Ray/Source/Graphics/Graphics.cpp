@@ -90,24 +90,32 @@ TexturePtr Graphics::CreateTexture(const char* path)
 	return std::make_shared<Texture>(path);
 }
 
-void Graphics::CreateSquare(const PrimitiveDesc& desc)
+Square Graphics::CreateSquare(const PrimitiveDesc& desc)
 {
-	PrimitiveContainer::Instance().Add(Square(desc));
+	Square s(desc);
+	PrimitiveContainer::Instance().Add(s);
+	return s;
 }
 
-void Graphics::CreateTriangle(const PrimitiveDesc& desc)
+Triangle Graphics::CreateTriangle(const PrimitiveDesc& desc)
 {
-	PrimitiveContainer::Instance().Add(Triangle(desc));
+	Triangle t(desc);
+	PrimitiveContainer::Instance().Add(t);
+	return t;
 }
 
-void Graphics::CreatePyramid(const PrimitiveDesc& desc)
+Pyramid Graphics::CreatePyramid(const PrimitiveDesc& desc)
 {
+	Pyramid p(desc);
 	PrimitiveContainer::Instance().Add(Pyramid(desc));
+	return p;
 }
 
-void Graphics::CreateCube(const PrimitiveDesc& desc)
+Cube Graphics::CreateCube(const PrimitiveDesc& desc)
 {
+	Cube c(desc);
 	PrimitiveContainer::Instance().Add(Cube(desc));
+	return c;
 }
 
 void Graphics::Clear(glm::vec4 col)

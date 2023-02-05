@@ -1,3 +1,72 @@
-﻿  LightingManager.cpp
+﻿  CmdLineArgs.cpp
+  Logger.cpp
+  Time.cpp
+  Core.cpp
+  CoreDefinitions.cpp
+  CoreMinimal.cpp
+  PerGameSettings.cpp
+  REngine.cpp
+  Simulation.cpp
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\Engine\Simulation.cpp(57,3): warning C4065: switch-Anweisung enthält "default", aber keine case-Bezeichnungen
+  Splashscreen.cpp
+  Camera.cpp
+  FPS_Camera.cpp
+  FloatingCamera.cpp
+  FrameBuffer.cpp
+  Graphics.cpp
+  LightingManager.cpp
   Primitive.cpp
+  ShaderProgram.cpp
+  Texture.cpp
+  UniformBuffer.cpp
+  VAO.cpp
+  w32Caption.cpp
+  w32IApplication.cpp
+  w32SubObject.cpp
+  w32Win32Utils.cpp
+  w32Window.cpp
+  Ray.cpp
+  AssetManager.cpp
+  UI.cpp
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(66,26): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(66,26): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(66,40): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(66,40): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(66,57): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(66,57): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(66,88): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+          with
+          [
+              T=float
+          ]
+D:\MyProgramming\OpenGL\RayEngine\Ray\Source\UI\UI.cpp(66,88): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+          with
+          [
+              T=float
+          ]
+     Bibliothek "D:\MyProgramming\OpenGL\RayEngine\\Build\Debug\Ray.lib" und Objekt "D:\MyProgramming\OpenGL\RayEngine\\Build\Debug\Ray.exp" werden erstellt.
   Ray.vcxproj -> D:\MyProgramming\OpenGL\RayEngine\Build\Debug\Ray.dll

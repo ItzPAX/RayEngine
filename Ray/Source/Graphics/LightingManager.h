@@ -4,7 +4,6 @@ struct RAY_API LightingDesc
 {
 	glm::vec3 m_ObjectColor;
 	glm::vec3 m_LightColor;
-
 	glm::vec3 m_CameraPos;
 };
 

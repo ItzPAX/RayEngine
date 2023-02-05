@@ -1,4 +1,4 @@
-#version 330 core
+#version 420 core
 
 in vec3 vertOutFragPos;
 in vec3 vertOutNormal;
@@ -31,4 +31,5 @@ void main()
 	
 	vec3 result = (ambient + diffuse + specular) * u_ObjectColor;
 	color = vec4(result, 1);
+	//color = vec4(u_ObjectColor, 1);
 }

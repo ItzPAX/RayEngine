@@ -206,6 +206,7 @@
     <ClInclude Include="Source\Graphics\Texture.h" />
     <ClInclude Include="Source\Graphics\UniformBuffer.h" />
     <ClInclude Include="Source\Graphics\VAO.h" />
+    <ClInclude Include="Source\Platform\Win32\w32Data.h" />
     <ClInclude Include="Source\Platform\Win32\w32IApplication.h" />
     <ClInclude Include="Source\Platform\Win32\w32SubObject.h" />
     <ClInclude Include="Source\Platform\Win32\w32Win32Utils.h" />

@@ -37,7 +37,7 @@ UI::~UI()
 	ImGui::DestroyContext();
 }
 
-VOID UI::RenderUI(UINT32 scene, const CameraInfo& caminfo)
+VOID UI::RenderUI(UINT32 scene, UI::CameraType type)
 {
 	HGLRC context = wglGetCurrentContext();
 	HDC hdc = wglGetCurrentDC();
@@ -46,7 +46,7 @@ VOID UI::RenderUI(UINT32 scene, const CameraInfo& caminfo)
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	RenderElements(scene, caminfo);
+	RenderElements(scene, type);
 
 	ImGui::Render();
 
@@ -67,12 +67,12 @@ RECT UI::SceneRect()
 	return rect;
 }
 
-VOID UI::RenderElements(UINT32 scene, const CameraInfo& caminfo)
+VOID UI::RenderElements(UINT32 scene, UI::CameraType type)
 {
 	MakeWindowDockspace();
 
 	RenderMainMenubar();
-	RenderInfoMenu(caminfo);
+	RenderInfoMenu(type);
 	RenderLogMenu();
 
 	// API for graphics engine
@@ -144,7 +144,6 @@ VOID UI::RenderPrimitiveCreationWindow()
 		ImGui::InputFloat3("Rot Vel", &desc.m_RotationVel.x);
 		ImGui::InputFloat3("Vel", &desc.m_Velocity.x);
 		ImGui::ColorEdit3("Color", &desc.m_Col[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
-		ImGui::Checkbox("Light", &desc.m_LightSource);
 
 		if (ImGui::Button("Add Primitive", ImVec2(-1, 0)))
 			AddPrimitive(desc);
@@ -249,7 +248,6 @@ VOID UI::RenderPrimitiveUpdateWindow()
 
 					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
 					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
-					ImGui::Checkbox("Light", &e.m_Description.m_LightSource);
 					ImGui::TreePop();
 					ImGui::Separator();
 				}
@@ -280,7 +278,6 @@ VOID UI::RenderPrimitiveUpdateWindow()
 
 					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
 					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
-					ImGui::Checkbox("Light", &e.m_Description.m_LightSource);
 					ImGui::TreePop();
 					ImGui::Separator();
 				}
@@ -311,7 +308,6 @@ VOID UI::RenderPrimitiveUpdateWindow()
 
 					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
 					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
-					ImGui::Checkbox("Light", &e.m_Description.m_LightSource);
 					ImGui::TreePop();
 					ImGui::Separator();
 				}
@@ -342,7 +338,6 @@ VOID UI::RenderPrimitiveUpdateWindow()
 
 					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
 					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
-					ImGui::Checkbox("Light", &e.m_Description.m_LightSource);
 					ImGui::TreePop();
 					ImGui::Separator();
 				}
@@ -354,13 +349,29 @@ VOID UI::RenderPrimitiveUpdateWindow()
 }
 #pragma endregion
 
-VOID UI::RenderInfoMenu(const CameraInfo& caminfo)
+VOID UI::RenderInfoMenu(UI::CameraType type)
 {
+	glm::vec3 pos(0.f); glm::vec2 view(0.f);
+	switch (type)
+	{
+	case CameraType::CAMERA_NORMAL:
+		pos = Camera::GetCam().Position();
+		break;
+	case CameraType::CAMERA_FPS:
+		pos = FPSCamera::GetFPSCam().Position();
+		view = FPSCamera::GetFPSCam().View();
+		break;
+	case CameraType::CAMERA_FLOATING:
+		pos = FloatingCamera::GetFloatingCam().Position();
+		view = FloatingCamera::GetFloatingCam().View();
+		break;
+	}
+
 	ImGui::Begin("Info");
 	ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::Text("Scene Ratio %.0f/%.0f = %f", m_SceneSize.x, m_SceneSize.y, m_SceneSize.x / m_SceneSize.y);
-	ImGui::Text("Cam pos: x:%.1f y:%.1f z:%.1f", caminfo.m_Pos.x, caminfo.m_Pos.y, caminfo.m_Pos.z);
-	ImGui::Text("View: pitch:%.1f yaw:%.1f", caminfo.m_Pitch, caminfo.m_Yaw);
+	ImGui::Text("Cam pos: x:%.1f y:%.1f z:%.1f", pos.x, pos.y, pos.z);
+	ImGui::Text("View: pitch:%.1f yaw:%.1f", view.x, view.y);
 	ImGui::End();
 }
 

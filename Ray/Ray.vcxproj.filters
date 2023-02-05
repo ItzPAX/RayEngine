@@ -360,5 +360,8 @@
     <ClInclude Include="Source\Graphics\LightingManager.h">
       <Filter>Source\Graphics\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Platform\Win32\w32Data.h">
+      <Filter>Source\Platform\Win32\Classes</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

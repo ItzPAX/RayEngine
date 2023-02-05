@@ -3,15 +3,16 @@
 
 struct PrimitiveDesc;
 
-struct CameraInfo
-{
-	glm::vec3 m_Pos;
-	float m_Pitch;
-	float m_Yaw;
-};
-
 class RAY_API UI
 {
+public:
+	enum class CameraType
+	{
+		CAMERA_NORMAL,
+		CAMERA_FPS,
+		CAMERA_FLOATING
+	};
+
 public:
 	static UI& Instance()
 	{
@@ -30,7 +31,7 @@ public:
 	~UI();
 
 public:
-	VOID RenderUI(UINT32 scene, const CameraInfo& caminfo);
+	VOID RenderUI(UINT32 scene, UI::CameraType type);
 	RECT SceneRect();
 
 	// getters
@@ -41,12 +42,12 @@ public:
 	bool SceneActive() { return m_SceneActive; }
 
 private:
-	VOID RenderElements(UINT32 scene, const CameraInfo& caminfo);
+	VOID RenderElements(UINT32 scene, UI::CameraType type);
 	
 	VOID MakeWindowDockspace();
 	VOID RenderMainMenubar();
 	VOID RenderScene(UINT32 scene);
-	VOID RenderInfoMenu(const CameraInfo& caminfo);
+	VOID RenderInfoMenu(UI::CameraType type);
 	VOID RenderLogMenu();
 
 #pragma region Primitives

@@ -38,6 +38,8 @@ namespace Ray {
 		// set our viewport
 		Graphics::Instance()->SetViewport();
 
+		m_FrameBuffer = Graphics::Instance()->CreateFrameBuffer();
+
 		// register mouse device for accurate input
 		RAWINPUTDEVICE rid;
 		rid.usUsagePage = 0x0001;

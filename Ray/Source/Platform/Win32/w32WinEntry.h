@@ -52,7 +52,7 @@ int CALLBACK WinMain(HINSTANCE, HINSTANCE, LPSTR, INT)
 			auto deltaTime = elapsedSeconds.count();
 
 			// Let the game update
-			EntryApp->Update(deltaTime);
+			EntryApp->EngineUpdate(deltaTime);
 		}
 	}
 

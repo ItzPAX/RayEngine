@@ -1,19 +1,27 @@
 #include "Ray.h"
 
-void PrimitiveContainer::Render(glm::mat4 viewproj, float dt)
+void PrimitiveContainer::Render(float dt)
 {
 	// render all elements
 	for (auto p : m_Pyramids)
-		p.Render(viewproj, dt);
+	{
+		p.Render(dt);
+	}
 
 	for (auto p : m_Cubes)
-		p.Render(viewproj, dt);
+	{
+		p.Render(dt);
+	}
 
 	for (auto p : m_Squares)
-		p.Render(viewproj, dt);
+	{
+		p.Render(dt);
+	}
 
 	for (auto p : m_Triangles)
-		p.Render(viewproj, dt);
+	{
+		p.Render(dt);
+	}
 }
 
 void Primitive::UpdatePrimitive()
@@ -37,45 +45,30 @@ Primitive::Primitive(const PrimitiveDesc& desc)
 
 	m_UniformBuffer = Graphics::Instance()->CreateUniformBuffer({ sizeof(VertexData) });
 
-	if (m_Description.m_Texture)
-	{
-		m_Texture = Graphics::Instance()->CreateTexture(m_Description.m_Texture);
-	}
-	else
-	{
-		Logger::PrintOGL3DWarning(L"No texture provided for primitive\n");
-	}
+	m_Texture = Graphics::Instance()->CreateTexture(m_Description.m_Texture);
 
-	if (m_Description.m_VertexShader && m_Description.m_FragmentShader)
-	{
-		m_Shader = Graphics::Instance()->CreateShaderProgram
-		({
-			m_Description.m_VertexShader,
-			m_Description.m_FragmentShader
-		});
+	m_Shader = Graphics::Instance()->CreateShaderProgram
+	({
+		m_Description.m_VertexShader,
+		m_Description.m_FragmentShader
+	});
 
-		m_Shader->SetUniformBufferSlot("VertexData", 0);
-	}
-	else
-	{
-		Logger::PrintOGL3DWarning(L"No shader info provided for primitive\n");
-	}
+	m_Shader->SetUniformBufferSlot("VertexData", 0);
 }
 
-void Primitive::Render(glm::mat4 viewproj, float dt)
+void Primitive::Render(float dt)
 {
 	UpdatePrimitive();
 
-	VertexData vdata = { viewproj * m_Model, m_Model, m_Description.m_Col };
+	VertexData vdata = { FloatingCamera::GetFloatingCam().GetViewProj() * m_Model, m_Model, m_Description.m_Col};
 	m_UniformBuffer->SetData(&vdata);
 
-	if (m_Texture) Graphics::Instance()->SetTexture(m_Texture);
+	Graphics::Instance()->SetTexture(m_Texture);
 	Graphics::Instance()->SetVertexArrayObject(m_VAO);
+		
+	Graphics::Instance()->SetShaderProgram(m_Shader);
 	Graphics::Instance()->SetUniformBuffer(m_UniformBuffer, 0);
-
 	LightingManager::Instance().ManageBasicLighting(m_Shader, { m_Description.m_Col, glm::vec3(1.f, 1.f, 1.f), FloatingCamera::GetFloatingCam().Position() });
-
-	if (m_Shader) Graphics::Instance()->SetShaderProgram(m_Shader);
 
 	m_InternalData[m_InternalName].m_RotationScale += (m_Description.m_RotationVel * dt);
 	m_InternalData[m_InternalName].m_TranslationScale += (m_Description.m_Velocity * dt);
@@ -101,9 +94,29 @@ void Primitive::SetRotationScale(glm::vec3 s)
 	m_InternalData[m_InternalName].m_RotationScale = s;
 }
 
+PrimitiveDesc* Primitive::GetDescription()
+{
+	switch (m_Type)
+	{
+	case SQUARE:
+		return &PrimitiveContainer::Instance().m_Squares[m_Index].m_Description;
+	case TRIANGLE:
+		return &PrimitiveContainer::Instance().m_Triangles[m_Index].m_Description;
+	case CUBE:
+		return &PrimitiveContainer::Instance().m_Cubes[m_Index].m_Description;
+	case PYRAMID:
+		return &PrimitiveContainer::Instance().m_Pyramids[m_Index].m_Description;
+	default:
+		return NULL;
+	}
+}
+
 Square::Square(const PrimitiveDesc& desc)
 	: Primitive(desc)
 {
+	m_Index = PrimitiveContainer::Instance().m_Squares.size();
+	m_Type = SQUARE;
+
 	Vertex vertices[] =
 	{
 		{ glm::vec3(0.5f, 0.5f, 0.f),   glm::vec2(1.f, 1.f) },
@@ -141,15 +154,18 @@ Square::Square(const PrimitiveDesc& desc)
 	);
 }
 
-void Square::Render(glm::mat4 viewproj, float dt)
+void Square::Render(float dt)
 {
-	Primitive::Render(viewproj, dt);
+	Primitive::Render(dt);
 	Graphics::Instance()->DrawIndexedTriangles(TriangleType::TRIANGLE_LIST, 6);
 }
 
 Triangle::Triangle(const PrimitiveDesc& desc)
 	: Primitive(desc)
 {
+	m_Index = PrimitiveContainer::Instance().m_Triangles.size();
+	m_Type = TRIANGLE;
+
 	Vertex vertices[] =
 	{
 		{ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec2(0.f, 0.f) },
@@ -176,15 +192,18 @@ Triangle::Triangle(const PrimitiveDesc& desc)
 	);
 }
 
-void Triangle::Render(glm::mat4 viewproj, float dt)
+void Triangle::Render(float dt)
 {
-	Primitive::Render(viewproj, dt);
+	Primitive::Render(dt);
 	Graphics::Instance()->DrawTriangles(TriangleType::TRIANGLE_LIST, 3, 0);
 }
 
 Cube::Cube(const PrimitiveDesc& desc)
 	: Primitive(desc)
 {
+	m_Index = PrimitiveContainer::Instance().m_Cubes.size();
+	m_Type = CUBE;
+
 	glm::vec3 positionsList[] =
 	{
 		//FRONT
@@ -299,15 +318,18 @@ Cube::Cube(const PrimitiveDesc& desc)
 	);
 }
 
-void Cube::Render(glm::mat4 viewproj, float dt)
+void Cube::Render(float dt)
 {
-	Primitive::Render(viewproj, dt);
+	Primitive::Render(dt);
 	Graphics::Instance()->DrawIndexedTriangles(TriangleType::TRIANGLE_LIST, 36);
 }
 
 Pyramid::Pyramid(const PrimitiveDesc& desc)
 	: Primitive(desc)
 {
+	m_Index = PrimitiveContainer::Instance().m_Pyramids.size();
+	m_Type = PYRAMID;
+
 	glm::vec3 top(0.f, 0.5f, 0.f);
 	glm::vec3 p01(-0.5f, -0.5f, 0.5f);
 	glm::vec3 p11(0.5f, -0.5f, 0.5f);
@@ -359,8 +381,8 @@ Pyramid::Pyramid(const PrimitiveDesc& desc)
 	);
 }
 
-void Pyramid::Render(glm::mat4 viewproj, float dt)
+void Pyramid::Render(float dt)
 {
-	Primitive::Render(viewproj, dt);
+	Primitive::Render(dt);
 	Graphics::Instance()->DrawTriangles(TriangleType::TRIANGLE_LIST, 18, 0);
 }

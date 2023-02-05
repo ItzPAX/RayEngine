@@ -1,6 +1,6 @@
-#version 330 core
+#version 420 core
 
-uniform VertexData
+layout(std140, binding=0) uniform VertexData
 {
 	mat4 u_ModelViewProj;
 	mat4 u_Model;

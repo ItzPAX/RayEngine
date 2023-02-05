@@ -21,8 +21,6 @@ struct RAY_API PrimitiveDesc
 
 	glm::vec3 m_RotationVel = glm::vec3(0.f);
 	glm::vec3 m_Velocity = glm::vec3(0.f);
-
-	bool m_LightSource = false;
 };
 
 struct RAY_API InternalPrimitiveData
@@ -37,10 +35,19 @@ static std::unordered_map<std::string, InternalPrimitiveData> m_InternalData;
 class RAY_API Primitive
 {
 public:
+	enum TYPE : INT
+	{
+		SQUARE,
+		TRIANGLE,
+		CUBE,
+		PYRAMID
+	};
+
+	Primitive() = default;
 	Primitive(const PrimitiveDesc& desc);
 	~Primitive() {}
 
-	virtual void Render(glm::mat4 viewproj, float dt);
+	virtual void Render(float dt);
 
 	void UpdatePrimitive();
 
@@ -51,13 +58,17 @@ public:
 	void SetTranslationScale(glm::vec3 s);
 	void SetRotationScale(glm::vec3 s);
 
+	PrimitiveDesc* GetDescription();
+
 public:
 	PrimitiveDesc m_Description;
 	std::string m_InternalName;
 
-private:
-
 protected:
+	// used for finding the primitive later on
+	int m_Index;
+	TYPE m_Type;
+
 	InternalPrimitiveData m_Data;
 
 	glm::mat4 m_Model;
@@ -72,8 +83,9 @@ protected:
 class RAY_API Triangle : public Primitive
 {
 public:
+	Triangle() = default;
 	Triangle(const PrimitiveDesc& desc);
-	virtual void Render(glm::mat4 viewproj, float dt) override;
+	virtual void Render(float dt) override;
 
 private:
 };
@@ -81,8 +93,9 @@ private:
 class RAY_API Square : public Primitive
 {
 public:
+	Square() = default;
 	Square(const PrimitiveDesc& desc);
-	virtual void Render(glm::mat4 viewproj, float dt) override;
+	virtual void Render(float dt) override;
 
 private:
 };
@@ -90,8 +103,9 @@ private:
 class RAY_API Pyramid : public Primitive
 {
 public:
+	Pyramid() = default;
 	Pyramid(const PrimitiveDesc& desc);
-	virtual void Render(glm::mat4 viewproj, float dt) override;
+	virtual void Render(float dt) override;
 
 private:
 };
@@ -99,8 +113,9 @@ private:
 class RAY_API Cube : public Primitive
 {
 public:
+	Cube() = default;
 	Cube(const PrimitiveDesc& desc);
-	virtual void Render(glm::mat4 viewproj, float dt) override;
+	virtual void Render(float dt) override;
 
 private:
 };
@@ -122,11 +137,11 @@ public:
 	void operator=(PrimitiveContainer const&) = delete;
 
 public:
-	void Render(glm::mat4 viewproj, float dt);
+	void Render(float dt);
 
 	// add a primitive
 	void Add(Pyramid p) { m_Pyramids.push_back(p); m_PrimitiveCounter++; }
-	void Add(Cube p) { m_Cubes.push_back(p); m_PrimitiveCounter++; if (p.m_Description.m_LightSource) m_Lights.push_back(p); }
+	void Add(Cube p) { m_Cubes.push_back(p); m_PrimitiveCounter++; }
 
 	void Add(Square p) { m_Squares.push_back(p); m_PrimitiveCounter++; }
 	void Add(Triangle p) { m_Triangles.push_back(p); m_PrimitiveCounter++; }
@@ -138,7 +153,4 @@ public:
 	std::vector<Cube> m_Cubes;
 	std::vector<Square> m_Squares;
 	std::vector<Triangle> m_Triangles;
-
-	// only supporting cube lights as of rn
-	std::vector<Cube> m_Lights;
 };

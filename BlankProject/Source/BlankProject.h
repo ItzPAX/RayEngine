@@ -19,10 +19,3 @@
 
 // Core engine features
 #include "Core/Core.h"
-
-/* DEPRECATED, JUST DO THIS IN SOME HEADER FILE*/
-// for defining variables used in the game
-struct Data
-{
-	FrameBufferPtr m_FrameBuffer;
-};

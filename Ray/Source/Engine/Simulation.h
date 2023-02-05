@@ -2,7 +2,7 @@
 
 namespace Ray  {
 
-	class RAY_API Simulation : public Win32::IApplication, public Win32::Window {
+	class RAY_API Simulation : public Win32::IApplication, public Win32::Window, public Win32::EngineData {
 	public:
 		Simulation();
 		~Simulation();

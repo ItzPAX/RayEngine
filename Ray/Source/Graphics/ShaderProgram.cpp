@@ -6,6 +6,9 @@ ShaderProgram::ShaderProgram(const ShaderProgramDesc& desc)
 	Attach(desc.m_VertexShaderFilePath, ShaderType::VERTEX_SHADER);
 	Attach(desc.m_FragmentShaderFilePath, ShaderType::FRAGMENT_SHADER);
 	Link();
+
+	m_FragmentPath = desc.m_FragmentShaderFilePath;
+	m_VertexPath = desc.m_VertexShaderFilePath;
 }
 
 ShaderProgram::~ShaderProgram()
@@ -27,6 +30,9 @@ void ShaderProgram::SetUniformBufferSlot(const char* name, UINT32 slot)
 void ShaderProgram::SetVec3(const char* name, glm::vec3 val)
 {
 	UINT32 index = glGetUniformLocation(m_ProgramId, name);
+	if (index == -1)
+		return;
+
 	glUniform3f(index, val.x, val.y, val.z);
 }
 

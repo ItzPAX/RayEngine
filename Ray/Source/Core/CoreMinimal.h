@@ -28,5 +28,6 @@
 	#include "Platform/Win32/w32SubObject.h"
 	#include "Platform/Win32/w32Caption.h"
 	#include "Platform/Win32/w32Window.h"
+	#include "Platform/Win32/w32Data.h"
 	#include "Platform/Win32/w32IApplication.h"
 #endif
