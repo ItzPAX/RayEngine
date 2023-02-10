@@ -18,13 +18,14 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+#include "Graphics/GraphicsDefinitions.h"
+
 // UI
 #include "UI/UIDefinitions.h"
 #include "UI/AssetManager.h"
 #include "UI/UI.h"
 
 // Graphics features
-#include "Graphics/GraphicsDefinitions.h"
 #include "Graphics/Texture.h"
 #include "Graphics/LightingManager.h"
 #include "Graphics/Camera.h"

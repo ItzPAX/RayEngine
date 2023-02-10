@@ -51,14 +51,6 @@ private:
 	VOID RenderLogMenu();
 
 #pragma region Primitives
-	enum PrimitiveType
-	{
-		PRIMITIVE_CUBE = 0,
-		PRIMITIVE_PYRAMID,
-		PRIMITIVE_SQUARE,
-		PRIMITIVE_TRIANGLE
-	};
-
 	enum BrowserType
 	{
 		BROWSER_VERTEX = 0,
@@ -79,7 +71,7 @@ private:
 	bool m_Initialized = false;
 	bool m_SceneActive = false;
 
-	PrimitiveType m_CurrentPrimitive;
+	PRIMITIVE_TYPE m_CurrentPrimitive;
 
 	glm::vec2 m_SceneSize;
 	glm::vec2 m_ScenePos;

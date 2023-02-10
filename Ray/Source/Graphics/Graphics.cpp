@@ -90,32 +90,9 @@ TexturePtr Graphics::CreateTexture(const char* path)
 	return std::make_shared<Texture>(path);
 }
 
-Square Graphics::CreateSquare(const PrimitiveDesc& desc)
+void Graphics::CreatePrimitive(PRIMITIVE_TYPE type, const PrimitiveDesc& desc)
 {
-	Square s(desc);
-	PrimitiveContainer::Instance().Add(s);
-	return s;
-}
-
-Triangle Graphics::CreateTriangle(const PrimitiveDesc& desc)
-{
-	Triangle t(desc);
-	PrimitiveContainer::Instance().Add(t);
-	return t;
-}
-
-Pyramid Graphics::CreatePyramid(const PrimitiveDesc& desc)
-{
-	Pyramid p(desc);
-	PrimitiveContainer::Instance().Add(Pyramid(desc));
-	return p;
-}
-
-Cube Graphics::CreateCube(const PrimitiveDesc& desc)
-{
-	Cube c(desc);
-	PrimitiveContainer::Instance().Add(Cube(desc));
-	return c;
+	PrimitiveContainer::Instance().Add(type, desc);
 }
 
 void Graphics::Clear(glm::vec4 col)
@@ -144,12 +121,18 @@ void Graphics::Clear(glm::vec4 col, bool enableGLDepth, bool clearImGuiFrame)
 	}
 }
 
-void Graphics::SetViewport()
+void Graphics::SetViewport(glm::vec2 innerrect)
 { 
 	// SET THIS TO THE DESKTOP SIZE, MAYBE ADD THIS TO WINDOW MOVED EVENT, IN CASE WINDOW IS MOVED TO DIFFERENT SCREEN
 	HWND desktop = GetDesktopWindow();
 	RECT desktoprect; GetWindowRect(desktop, &desktoprect);
-	glViewport(0, 0, desktoprect.right - desktoprect.left, desktoprect.bottom - desktoprect.top);
+
+	
+
+	if (Engine::GetMode() == EDITOR)
+		glViewport(0, 0, desktoprect.right - desktoprect.left, desktoprect.bottom - desktoprect.top);
+	else
+		glViewport(0, 0, innerrect.x, innerrect.y);
 }
 
 void Graphics::SetVertexArrayObject(const VertexArrayObjectPtr& vao)

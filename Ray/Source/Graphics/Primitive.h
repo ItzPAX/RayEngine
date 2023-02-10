@@ -16,6 +16,8 @@ struct RAY_API PrimitiveDesc
 	char m_VertexShader[MAX_PATH];
 	char m_FragmentShader[MAX_PATH];
 
+	bool m_LightSource = false;
+
 	glm::vec3 m_Pos = glm::vec3(0.f);
 	glm::vec3 m_Rotation = glm::vec3(0.f);
 
@@ -35,14 +37,6 @@ static std::unordered_map<std::string, InternalPrimitiveData> m_InternalData;
 class RAY_API Primitive
 {
 public:
-	enum TYPE : INT
-	{
-		SQUARE,
-		TRIANGLE,
-		CUBE,
-		PYRAMID
-	};
-
 	Primitive() = default;
 	Primitive(const PrimitiveDesc& desc);
 	~Primitive() {}
@@ -63,11 +57,10 @@ public:
 public:
 	PrimitiveDesc m_Description;
 	std::string m_InternalName;
+	PRIMITIVE_TYPE m_Type;
 
 protected:
-	// used for finding the primitive later on
 	int m_Index;
-	TYPE m_Type;
 
 	InternalPrimitiveData m_Data;
 
@@ -123,9 +116,24 @@ private:
 class RAY_API PrimitiveContainer
 {
 public:
+	struct PrimitiveRenderData
+	{
+		PrimitiveDesc m_Desc;
+		PRIMITIVE_TYPE m_Type;
+
+
+		Cube c;
+		Pyramid p;
+		Square s;
+		Triangle t;
+
+		bool Initialized = false;
+	};
+
+public:
 	static PrimitiveContainer& Instance()
 	{
-		static PrimitiveContainer instance; // Guaranteed to be destroyed.
+		static PrimitiveContainer instance;	   // Guaranteed to be destroyed.
 		// Instantiated on first use.
 		return instance;
 	}
@@ -140,17 +148,9 @@ public:
 	void Render(float dt);
 
 	// add a primitive
-	void Add(Pyramid p) { m_Pyramids.push_back(p); m_PrimitiveCounter++; }
-	void Add(Cube p) { m_Cubes.push_back(p); m_PrimitiveCounter++; }
-
-	void Add(Square p) { m_Squares.push_back(p); m_PrimitiveCounter++; }
-	void Add(Triangle p) { m_Triangles.push_back(p); m_PrimitiveCounter++; }
+	void Add(PRIMITIVE_TYPE type, const PrimitiveDesc& desc);
 
 public:
-	int m_PrimitiveCounter;
-
-	std::vector<Pyramid> m_Pyramids;
-	std::vector<Cube> m_Cubes;
-	std::vector<Square> m_Squares;
-	std::vector<Triangle> m_Triangles;
+	std::vector<PrimitiveRenderData> m_Primitives;
+	std::vector<glm::vec3> m_LightPositions;
 };

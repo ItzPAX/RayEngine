@@ -1,5 +1,13 @@
 #pragma once
 
+enum class PRIMITIVE_TYPE
+{
+	PRIMITIVE_CUBE = 0,
+	PRIMITIVE_PYRAMID,
+	PRIMITIVE_SQUARE,
+	PRIMITIVE_TRIANGLE
+};
+
 class VertexArrayObject;
 typedef std::shared_ptr<VertexArrayObject> VertexArrayObjectPtr;
 

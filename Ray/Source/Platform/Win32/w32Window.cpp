@@ -299,7 +299,7 @@ namespace Win32 {
 
 	VOID Win32::Window::OnResize()
 	{
-		Graphics::Instance()->SetViewport();
+		Graphics::Instance()->SetViewport(GetInnerSize());
 	}
 
 	VOID Win32::Window::OnInput(WPARAM wParam, LPARAM lParam)

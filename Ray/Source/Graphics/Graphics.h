@@ -43,15 +43,10 @@ public:
 
 	static TexturePtr CreateTexture(const char* path);
 
-	/* ADDS THE  PRIMITIVE TO THE CONTAINER */
-	static Square CreateSquare(const PrimitiveDesc& desc);
-	static Triangle CreateTriangle(const PrimitiveDesc& desc);
-	static Pyramid CreatePyramid(const PrimitiveDesc& desc);
-	static Cube CreateCube(const PrimitiveDesc& desc);
-	/* ----------------------------------- */
+	static void CreatePrimitive(PRIMITIVE_TYPE type, const PrimitiveDesc& desc);
 
 public:
-	static void SetViewport();
+	static void SetViewport(glm::vec2 innerrect);
 	static void SetVertexArrayObject(const VertexArrayObjectPtr& vao);
 	static void SetShaderProgram(const ShaderProgramPtr& program);
 	static void SetUniformBuffer(const UniformBufferPtr& buffer, UINT32 slot);

@@ -193,35 +193,12 @@ VOID UI::ManageFileBrowser(PrimitiveDesc& desc)
 
 VOID UI::AddPrimitive(const PrimitiveDesc& desc)
 {
-	switch (m_CurrentPrimitive)
-	{
-	case PrimitiveType::PRIMITIVE_CUBE:
-	{
-		Graphics::Instance()->CreateCube(desc);
-		break;
-	}
-	case PrimitiveType::PRIMITIVE_PYRAMID:
-	{
-		Graphics::Instance()->CreatePyramid(desc);
-		break;
-	}
-	case PrimitiveType::PRIMITIVE_SQUARE:
-	{
-		Graphics::Instance()->CreateSquare(desc);
-		break;
-	}
-	case PrimitiveType::PRIMITIVE_TRIANGLE:
-	{
-		Graphics::Instance()->CreateTriangle(desc);
-		break;
-	}
-	default:
-		break;
-	}
+	Graphics::Instance()->CreatePrimitive(m_CurrentPrimitive, desc);
 }
 
 VOID UI::RenderPrimitiveUpdateWindow()
 {
+	/*
 	ImGui::Begin("Primitives");
 	{
 		if (ImGui::CollapsingHeader("Cube(s)"))
@@ -345,7 +322,7 @@ VOID UI::RenderPrimitiveUpdateWindow()
 			}
 		}
 	}
-	ImGui::End();
+	ImGui::End();*/
 }
 #pragma endregion
 

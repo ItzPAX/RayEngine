@@ -36,7 +36,7 @@ namespace Ray {
 		Win32::Window::MakeCurrentContext();
 
 		// set our viewport
-		Graphics::Instance()->SetViewport();
+		Graphics::Instance()->SetViewport(GetInnerSize());
 
 		m_FrameBuffer = Graphics::Instance()->CreateFrameBuffer();
 

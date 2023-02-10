@@ -25,7 +25,10 @@ void FPSCamera::Think(glm::vec2* mousevel, float delta)
 	RECT clipr = UI::Instance().SceneRect();
 	bool sceneactive = UI::Instance().SceneActive();
 
-	if (GetForegroundWindow() != m_Handle || !sceneactive)
+	if (!sceneactive && Engine::GetMode() == EDITOR)
+		return;
+
+	if (GetForegroundWindow() != m_Handle)
 		return;
 
 	ManageSpeed();
@@ -42,7 +45,7 @@ void FPSCamera::Think(glm::vec2* mousevel, float delta)
 		MoveSideways(delta);
 
 
-	if (sceneactive && GetAsyncKeyState(VK_RBUTTON))
+	if ((sceneactive && GetAsyncKeyState(VK_RBUTTON)) || Engine::GetMode() != EDITOR)
 	{
 		if (!m_ChangedCursorVis)
 		{

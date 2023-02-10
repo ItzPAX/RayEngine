@@ -3,24 +3,48 @@
 void PrimitiveContainer::Render(float dt)
 {
 	// render all elements
-	for (auto p : m_Pyramids)
+	for (auto& p : m_Primitives)
 	{
-		p.Render(dt);
+		if (!p.Initialized)
+		{
+			switch (p.m_Type)
+			{
+			case PRIMITIVE_TYPE::PRIMITIVE_CUBE:
+				p.c = Cube(p.m_Desc);
+				break;
+			case PRIMITIVE_TYPE::PRIMITIVE_PYRAMID:
+				p.p = Pyramid(p.m_Desc);
+				break;
+			case PRIMITIVE_TYPE::PRIMITIVE_SQUARE:
+				p.s = Square(p.m_Desc);
+				break;
+			case PRIMITIVE_TYPE::PRIMITIVE_TRIANGLE:
+				p.t = Triangle(p.m_Desc);
+				break;
+			}
+
+			p.Initialized = true;
+			continue;
+		}
 	}
 
-	for (auto p : m_Cubes)
+	for (auto p : m_Primitives)
 	{
-		p.Render(dt);
-	}
-
-	for (auto p : m_Squares)
-	{
-		p.Render(dt);
-	}
-
-	for (auto p : m_Triangles)
-	{
-		p.Render(dt);
+		switch (p.m_Type)
+		{
+		case PRIMITIVE_TYPE::PRIMITIVE_CUBE:
+			p.c.Render(dt);
+			break;
+		case PRIMITIVE_TYPE::PRIMITIVE_PYRAMID:
+			p.p.Render(dt);
+			break;
+		case PRIMITIVE_TYPE::PRIMITIVE_SQUARE:
+			p.s.Render(dt);
+			break;
+		case PRIMITIVE_TYPE::PRIMITIVE_TRIANGLE:
+			p.t.Render(dt);
+			break;
+		}
 	}
 }
 
@@ -41,7 +65,7 @@ Primitive::Primitive(const PrimitiveDesc& desc)
 	m_Model = glm::mat4(1.f);
 
 	m_InternalName.append("Primitive");
-	m_InternalName.append(std::to_string(PrimitiveContainer::Instance().m_PrimitiveCounter));
+	m_InternalName.append(std::to_string(PrimitiveContainer::Instance().m_Primitives.size()));
 
 	m_UniformBuffer = Graphics::Instance()->CreateUniformBuffer({ sizeof(VertexData) });
 
@@ -54,6 +78,8 @@ Primitive::Primitive(const PrimitiveDesc& desc)
 	});
 
 	m_Shader->SetUniformBufferSlot("VertexData", 0);
+
+	m_Index = PrimitiveContainer::Instance().m_Primitives.size();
 }
 
 void Primitive::Render(float dt)
@@ -68,7 +94,7 @@ void Primitive::Render(float dt)
 		
 	Graphics::Instance()->SetShaderProgram(m_Shader);
 	Graphics::Instance()->SetUniformBuffer(m_UniformBuffer, 0);
-	LightingManager::Instance().ManageBasicLighting(m_Shader, { m_Description.m_Col, glm::vec3(1.f, 1.f, 1.f), FloatingCamera::GetFloatingCam().Position() });
+	LightingManager::Instance().ManageBasicLighting(m_Shader, { m_Description.m_Col, glm::vec3(1.f, 1.f, 1.f) });
 
 	m_InternalData[m_InternalName].m_RotationScale += (m_Description.m_RotationVel * dt);
 	m_InternalData[m_InternalName].m_TranslationScale += (m_Description.m_Velocity * dt);
@@ -96,27 +122,12 @@ void Primitive::SetRotationScale(glm::vec3 s)
 
 PrimitiveDesc* Primitive::GetDescription()
 {
-	switch (m_Type)
-	{
-	case SQUARE:
-		return &PrimitiveContainer::Instance().m_Squares[m_Index].m_Description;
-	case TRIANGLE:
-		return &PrimitiveContainer::Instance().m_Triangles[m_Index].m_Description;
-	case CUBE:
-		return &PrimitiveContainer::Instance().m_Cubes[m_Index].m_Description;
-	case PYRAMID:
-		return &PrimitiveContainer::Instance().m_Pyramids[m_Index].m_Description;
-	default:
-		return NULL;
-	}
+	return &PrimitiveContainer::Instance().m_Primitives[m_Index].m_Desc;
 }
 
 Square::Square(const PrimitiveDesc& desc)
 	: Primitive(desc)
 {
-	m_Index = PrimitiveContainer::Instance().m_Squares.size();
-	m_Type = SQUARE;
-
 	Vertex vertices[] =
 	{
 		{ glm::vec3(0.5f, 0.5f, 0.f),   glm::vec2(1.f, 1.f) },
@@ -152,6 +163,8 @@ Square::Square(const PrimitiveDesc& desc)
 			sizeof(indices)
 		}
 	);
+
+	m_Type = PRIMITIVE_TYPE::PRIMITIVE_SQUARE;
 }
 
 void Square::Render(float dt)
@@ -163,9 +176,6 @@ void Square::Render(float dt)
 Triangle::Triangle(const PrimitiveDesc& desc)
 	: Primitive(desc)
 {
-	m_Index = PrimitiveContainer::Instance().m_Triangles.size();
-	m_Type = TRIANGLE;
-
 	Vertex vertices[] =
 	{
 		{ glm::vec3(-0.5f, -0.5f, 0.f), glm::vec2(0.f, 0.f) },
@@ -190,6 +200,8 @@ Triangle::Triangle(const PrimitiveDesc& desc)
 			sizeof(attribList) / sizeof(VertexAttribute)
 		}
 	);
+
+	m_Type = PRIMITIVE_TYPE::PRIMITIVE_TRIANGLE;
 }
 
 void Triangle::Render(float dt)
@@ -201,9 +213,6 @@ void Triangle::Render(float dt)
 Cube::Cube(const PrimitiveDesc& desc)
 	: Primitive(desc)
 {
-	m_Index = PrimitiveContainer::Instance().m_Cubes.size();
-	m_Type = CUBE;
-
 	glm::vec3 positionsList[] =
 	{
 		//FRONT
@@ -316,6 +325,8 @@ Cube::Cube(const PrimitiveDesc& desc)
 			sizeof(indicesList)
 		}
 	);
+
+	m_Type = PRIMITIVE_TYPE::PRIMITIVE_CUBE;
 }
 
 void Cube::Render(float dt)
@@ -327,9 +338,6 @@ void Cube::Render(float dt)
 Pyramid::Pyramid(const PrimitiveDesc& desc)
 	: Primitive(desc)
 {
-	m_Index = PrimitiveContainer::Instance().m_Pyramids.size();
-	m_Type = PYRAMID;
-
 	glm::vec3 top(0.f, 0.5f, 0.f);
 	glm::vec3 p01(-0.5f, -0.5f, 0.5f);
 	glm::vec3 p11(0.5f, -0.5f, 0.5f);
@@ -379,10 +387,22 @@ Pyramid::Pyramid(const PrimitiveDesc& desc)
 			sizeof(attribList) / sizeof(VertexAttribute)
 		}
 	);
+
+	m_Type = PRIMITIVE_TYPE::PRIMITIVE_PYRAMID;
 }
 
 void Pyramid::Render(float dt)
 {
 	Primitive::Render(dt);
 	Graphics::Instance()->DrawTriangles(TriangleType::TRIANGLE_LIST, 18, 0);
+}
+
+void PrimitiveContainer::Add(PRIMITIVE_TYPE type, const PrimitiveDesc& desc)
+{
+	m_Primitives.push_back({ desc, type});
+
+	if (desc.m_LightSource)
+	{
+		m_LightPositions.push_back(desc.m_Pos);
+	}
 }

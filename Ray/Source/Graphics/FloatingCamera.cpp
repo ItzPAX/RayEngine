@@ -13,7 +13,10 @@ void FloatingCamera::MoveUp(float amount)
 
 void FloatingCamera::Think(glm::vec2* mousevel, float delta)
 {
-	if (GetForegroundWindow() != m_Handle || !UI::Instance().SceneActive())
+	if (!UI::Instance().SceneActive() && Engine::GetMode() == EDITOR)
+		return;
+
+	if (GetForegroundWindow() != m_Handle)
 		return;
 
 	if (GetAsyncKeyState(VK_SPACE))
