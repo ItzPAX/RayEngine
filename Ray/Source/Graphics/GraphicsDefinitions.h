@@ -22,3 +22,6 @@ typedef std::shared_ptr<FrameBuffer> FrameBufferPtr;
 
 class Texture;
 typedef std::shared_ptr<Texture> TexturePtr;
+
+class PrimitiveRenderData;
+typedef std::shared_ptr<PrimitiveRenderData> PrimitivePtr;

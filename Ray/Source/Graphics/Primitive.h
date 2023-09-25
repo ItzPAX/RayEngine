@@ -21,18 +21,9 @@ struct RAY_API PrimitiveDesc
 	glm::vec3 m_Pos = glm::vec3(0.f);
 	glm::vec3 m_Rotation = glm::vec3(0.f);
 
-	glm::vec3 m_RotationVel = glm::vec3(0.f);
 	glm::vec3 m_Velocity = glm::vec3(0.f);
+	glm::vec3 m_RotationVel = glm::vec3(0.f);
 };
-
-struct RAY_API InternalPrimitiveData
-{
-	glm::vec3 m_TranslationScale;
-	glm::vec3 m_RotationScale;
-};
-
-/* DONT USE THIS IF YOU DONT KNOW WHAT THIS IS */
-static std::unordered_map<std::string, InternalPrimitiveData> m_InternalData;
 
 class RAY_API Primitive
 {
@@ -43,7 +34,7 @@ public:
 
 	virtual void Render(float dt);
 
-	void UpdatePrimitive();
+	void UpdatePrimitive(float dt);
 
 public:
 	glm::vec3 GetTranslationScale();
@@ -53,16 +44,14 @@ public:
 	void SetRotationScale(glm::vec3 s);
 
 	PrimitiveDesc* GetDescription();
+	PRIMITIVE_TYPE GetType();
 
-public:
+protected:
 	PrimitiveDesc m_Description;
-	std::string m_InternalName;
 	PRIMITIVE_TYPE m_Type;
 
 protected:
 	int m_Index;
-
-	InternalPrimitiveData m_Data;
 
 	glm::mat4 m_Model;
 
@@ -113,23 +102,20 @@ public:
 private:
 };
 
+struct PrimitiveRenderData
+{
+	PRIMITIVE_TYPE m_Type;
+	void* m_Data;
+
+	template<typename T>
+	T get_primitive()
+	{
+		return (T)m_Data;
+	}
+};
+
 class RAY_API PrimitiveContainer
 {
-public:
-	struct PrimitiveRenderData
-	{
-		PrimitiveDesc m_Desc;
-		PRIMITIVE_TYPE m_Type;
-
-
-		Cube c;
-		Pyramid p;
-		Square s;
-		Triangle t;
-
-		bool Initialized = false;
-	};
-
 public:
 	static PrimitiveContainer& Instance()
 	{
@@ -147,8 +133,7 @@ public:
 public:
 	void Render(float dt);
 
-	// add a primitive
-	void Add(PRIMITIVE_TYPE type, const PrimitiveDesc& desc);
+	std::shared_ptr<PrimitiveRenderData> Add(PRIMITIVE_TYPE type, const PrimitiveDesc& desc);
 
 public:
 	std::vector<PrimitiveRenderData> m_Primitives;

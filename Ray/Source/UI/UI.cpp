@@ -193,38 +193,42 @@ VOID UI::ManageFileBrowser(PrimitiveDesc& desc)
 
 VOID UI::AddPrimitive(const PrimitiveDesc& desc)
 {
-	Graphics::Instance()->CreatePrimitive(m_CurrentPrimitive, desc);
+	// will automatically discard itself
+	PrimitivePtr prim = Graphics::Instance()->CreatePrimitive(m_CurrentPrimitive, desc);
 }
 
 VOID UI::RenderPrimitiveUpdateWindow()
 {
-	/*
 	ImGui::Begin("Primitives");
 	{
 		if (ImGui::CollapsingHeader("Cube(s)"))
 		{
 			int primcount = 0;
-			for (auto& e : PrimitiveContainer::Instance().m_Cubes)
+			for (auto& e : PrimitiveContainer::Instance().m_Primitives)
 			{
+				if (e.m_Type != PRIMITIVE_TYPE::PRIMITIVE_CUBE)
+					continue;
+				Cube* c = (Cube*)e.m_Data;
+
 				std::string name = "Cube" + std::to_string(primcount);
 				if (ImGui::TreeNode(name.c_str()))
 				{
-					glm::vec3 realPos = e.m_Description.m_Pos + e.GetTranslationScale();
+					glm::vec3 realPos = c->GetDescription()->m_Pos;
 					if (ImGui::InputFloat3("Pos", &realPos.x))
 					{
-						e.m_Description.m_Pos = realPos;
-						e.SetTranslationScale(glm::vec3(0.f));
+						c->GetDescription()->m_Pos = realPos;
+						c->SetTranslationScale(glm::vec3(0.f));
 					}
 
-					glm::vec3 realRotation = e.m_Description.m_Rotation + e.GetRotationScale();
+					glm::vec3 realRotation = c->GetDescription()->m_Rotation;
 					if (ImGui::InputFloat3("Rot", &realRotation.x))
 					{
-						e.m_Description.m_Rotation = realRotation;
-						e.SetRotationScale(glm::vec3(0.f));
+						c->GetDescription()->m_Rotation = realRotation;
+						c->SetRotationScale(glm::vec3(0.f));
 					}
 
-					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
-					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
+					ImGui::InputFloat3("Vel", &c->GetDescription()->m_Velocity.x);
+					ImGui::InputFloat3("Rot Vel", &c->GetDescription()->m_RotationVel.x);
 					ImGui::TreePop();
 					ImGui::Separator();
 				}
@@ -234,27 +238,31 @@ VOID UI::RenderPrimitiveUpdateWindow()
 		if (ImGui::CollapsingHeader("Pyramid(s)"))
 		{
 			int primcount = 0;
-			for (auto& e : PrimitiveContainer::Instance().m_Pyramids)
+			for (auto& e : PrimitiveContainer::Instance().m_Primitives)
 			{
+				if (e.m_Type != PRIMITIVE_TYPE::PRIMITIVE_PYRAMID)
+					continue;
+				Pyramid* p = (Pyramid*)e.m_Data;
+
 				std::string name = "Pyramid" + std::to_string(primcount);
 				if (ImGui::TreeNode(name.c_str()))
 				{
-					glm::vec3 realPos = e.m_Description.m_Pos + e.GetTranslationScale();
+					glm::vec3 realPos = p->GetDescription()->m_Pos + p->GetTranslationScale();
 					if (ImGui::InputFloat3("Pos", &realPos.x))
 					{
-						e.m_Description.m_Pos = realPos;
-						e.SetTranslationScale(glm::vec3(0.f));
+						p->GetDescription()->m_Pos = realPos;
+						p->SetTranslationScale(glm::vec3(0.f));
 					}
 
-					glm::vec3 realRotation = e.m_Description.m_Rotation + e.GetRotationScale();
+					glm::vec3 realRotation = p->GetDescription()->m_Rotation + p->GetRotationScale();
 					if (ImGui::InputFloat3("Rot", &realRotation.x))
 					{
-						e.m_Description.m_Rotation = realRotation;
-						e.SetRotationScale(glm::vec3(0.f));
+						p->GetDescription()->m_Rotation = realRotation;
+						p->SetRotationScale(glm::vec3(0.f));
 					}
 
-					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
-					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
+					ImGui::InputFloat3("Vel", &p->GetDescription()->m_Velocity.x);
+					ImGui::InputFloat3("Rot Vel", &p->GetDescription()->m_RotationVel.x);
 					ImGui::TreePop();
 					ImGui::Separator();
 				}
@@ -264,27 +272,31 @@ VOID UI::RenderPrimitiveUpdateWindow()
 		if (ImGui::CollapsingHeader("Square(s)"))
 		{
 			int primcount = 0;
-			for (auto& e : PrimitiveContainer::Instance().m_Squares)
+			for (auto& e : PrimitiveContainer::Instance().m_Primitives)
 			{
+				if (e.m_Type != PRIMITIVE_TYPE::PRIMITIVE_SQUARE)
+					continue;
+				Square* s = (Square*)e.m_Data;
+
 				std::string name = "Square" + std::to_string(primcount);
 				if (ImGui::TreeNode(name.c_str()))
 				{
-					glm::vec3 realPos = e.m_Description.m_Pos + e.GetTranslationScale();
+					glm::vec3 realPos = s->GetDescription()->m_Pos + s->GetTranslationScale();
 					if (ImGui::InputFloat3("Pos", &realPos.x))
 					{
-						e.m_Description.m_Pos = realPos;
-						e.SetTranslationScale(glm::vec3(0.f));
+						s->GetDescription()->m_Pos = realPos;
+						s->SetTranslationScale(glm::vec3(0.f));
 					}
 
-					glm::vec3 realRotation = e.m_Description.m_Rotation + e.GetRotationScale();
+					glm::vec3 realRotation = s->GetDescription()->m_Rotation + s->GetRotationScale();
 					if (ImGui::InputFloat3("Rot", &realRotation.x))
 					{
-						e.m_Description.m_Rotation = realRotation;
-						e.SetRotationScale(glm::vec3(0.f));
+						s->GetDescription()->m_Rotation = realRotation;
+						s->SetRotationScale(glm::vec3(0.f));
 					}
 
-					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
-					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
+					ImGui::InputFloat3("Vel", &s->GetDescription()->m_Velocity.x);
+					ImGui::InputFloat3("Rot Vel", &s->GetDescription()->m_RotationVel.x);
 					ImGui::TreePop();
 					ImGui::Separator();
 				}
@@ -294,27 +306,31 @@ VOID UI::RenderPrimitiveUpdateWindow()
 		if (ImGui::CollapsingHeader("Triangle(s)"))
 		{
 			int primcount = 0;
-			for (auto& e : PrimitiveContainer::Instance().m_Triangles)
+			for (auto& e : PrimitiveContainer::Instance().m_Primitives)
 			{
+				if (e.m_Type != PRIMITIVE_TYPE::PRIMITIVE_TRIANGLE)
+					continue;
+				Triangle* t = (Triangle*)e.m_Data;
+
 				std::string name = "Triangle" + std::to_string(primcount);
 				if (ImGui::TreeNode(name.c_str()))
 				{
-					glm::vec3 realPos = e.m_Description.m_Pos + e.GetTranslationScale();
+					glm::vec3 realPos = t->GetDescription()->m_Pos + t->GetTranslationScale();
 					if (ImGui::InputFloat3("Pos", &realPos.x))
 					{
-						e.m_Description.m_Pos = realPos;
-						e.SetTranslationScale(glm::vec3(0.f));
+						t->GetDescription()->m_Pos = realPos;
+						t->SetTranslationScale(glm::vec3(0.f));
 					}
 
-					glm::vec3 realRotation = e.m_Description.m_Rotation + e.GetRotationScale();
+					glm::vec3 realRotation = t->GetDescription()->m_Rotation + t->GetRotationScale();
 					if (ImGui::InputFloat3("Rot", &realRotation.x))
 					{
-						e.m_Description.m_Rotation = realRotation;
-						e.SetRotationScale(glm::vec3(0.f));
+						t->GetDescription()->m_Rotation = realRotation;
+						t->SetRotationScale(glm::vec3(0.f));
 					}
 
-					ImGui::InputFloat3("Vel", &e.m_Description.m_Velocity.x);
-					ImGui::InputFloat3("Rot Vel", &e.m_Description.m_RotationVel.x);
+					ImGui::InputFloat3("Vel", &t->GetDescription()->m_Velocity.x);
+					ImGui::InputFloat3("Rot Vel", &t->GetDescription()->m_RotationVel.x);
 					ImGui::TreePop();
 					ImGui::Separator();
 				}
@@ -322,7 +338,7 @@ VOID UI::RenderPrimitiveUpdateWindow()
 			}
 		}
 	}
-	ImGui::End();*/
+	ImGui::End();
 }
 #pragma endregion
 

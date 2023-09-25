@@ -47,27 +47,19 @@ public:
 	}
 
 	// Init
+	PrimitivePtr prim;
+
 	VOID Initialize()
 	{
-		Graphics::Instance()->CreatePrimitive(
+		prim = Graphics::Instance()->CreatePrimitive(
 			PRIMITIVE_TYPE::PRIMITIVE_CUBE,
 			{
 				glm::vec3(1.f),
 				"",
-				"D:/MyProgramming/OpenGL/RayEngine/Build/Debug/Content/Engine/Shaders/BasicShader.vert",
-				"D:/MyProgramming/OpenGL/RayEngine/Build/Debug/Content/Engine/Shaders/BasicShader.frag",
+				"D:/myprogramming2/RayEngine/Build/Debug/Content/Engine/Shaders/BasicShader.vert",
+				"D:/myprogramming2/RayEngine/Build/Debug/Content/Engine/Shaders/BasicShader.frag",
 				true,
 				glm::vec3(1,1,1)
-			}
-		);
-
-		Graphics::Instance()->CreatePrimitive(
-			PRIMITIVE_TYPE::PRIMITIVE_CUBE,
-			{
-				glm::vec3(1.f),
-				"",
-				"D:/MyProgramming/OpenGL/RayEngine/Build/Debug/Content/Engine/Shaders/BasicShader.vert",
-				"D:/MyProgramming/OpenGL/RayEngine/Build/Debug/Content/Engine/Shaders/BasicShaderLight.frag",
 			}
 		);
 	}
@@ -75,7 +67,7 @@ public:
 	// Update
 	VOID Update(float deltatime)
 	{
-
+		prim.get()->get_primitive<Cube*>()->SetRotationScale(glm::vec3(1, 2, 3));
 	}
 
 	// Quit

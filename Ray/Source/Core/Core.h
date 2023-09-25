@@ -20,11 +20,6 @@
 
 #include "Graphics/GraphicsDefinitions.h"
 
-// UI
-#include "UI/UIDefinitions.h"
-#include "UI/AssetManager.h"
-#include "UI/UI.h"
-
 // Graphics features
 #include "Graphics/Texture.h"
 #include "Graphics/LightingManager.h"
@@ -37,3 +32,8 @@
 #include "Graphics/VAO.h"
 #include "Graphics/Primitive.h"
 #include "Graphics/Graphics.h"
+
+// UI
+#include "UI/UIDefinitions.h"
+#include "UI/AssetManager.h"
+#include "UI/UI.h"

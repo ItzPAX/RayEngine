@@ -43,7 +43,7 @@ public:
 
 	static TexturePtr CreateTexture(const char* path);
 
-	static void CreatePrimitive(PRIMITIVE_TYPE type, const PrimitiveDesc& desc);
+	PrimitivePtr CreatePrimitive(PRIMITIVE_TYPE type, const PrimitiveDesc& desc);
 
 public:
 	static void SetViewport(glm::vec2 innerrect);

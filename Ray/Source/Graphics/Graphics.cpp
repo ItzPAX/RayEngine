@@ -90,9 +90,9 @@ TexturePtr Graphics::CreateTexture(const char* path)
 	return std::make_shared<Texture>(path);
 }
 
-void Graphics::CreatePrimitive(PRIMITIVE_TYPE type, const PrimitiveDesc& desc)
+PrimitivePtr Graphics::CreatePrimitive(PRIMITIVE_TYPE type, const PrimitiveDesc& desc)
 {
-	PrimitiveContainer::Instance().Add(type, desc);
+	return PrimitiveContainer::Instance().Add(type, desc);
 }
 
 void Graphics::Clear(glm::vec4 col)

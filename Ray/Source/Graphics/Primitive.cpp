@@ -5,55 +5,33 @@ void PrimitiveContainer::Render(float dt)
 	// render all elements
 	for (auto& p : m_Primitives)
 	{
-		if (!p.Initialized)
-		{
-			switch (p.m_Type)
-			{
-			case PRIMITIVE_TYPE::PRIMITIVE_CUBE:
-				p.c = Cube(p.m_Desc);
-				break;
-			case PRIMITIVE_TYPE::PRIMITIVE_PYRAMID:
-				p.p = Pyramid(p.m_Desc);
-				break;
-			case PRIMITIVE_TYPE::PRIMITIVE_SQUARE:
-				p.s = Square(p.m_Desc);
-				break;
-			case PRIMITIVE_TYPE::PRIMITIVE_TRIANGLE:
-				p.t = Triangle(p.m_Desc);
-				break;
-			}
-
-			p.Initialized = true;
-			continue;
-		}
-	}
-
-	for (auto p : m_Primitives)
-	{
 		switch (p.m_Type)
 		{
 		case PRIMITIVE_TYPE::PRIMITIVE_CUBE:
-			p.c.Render(dt);
+			((Cube*)p.m_Data)->Render(dt);
 			break;
 		case PRIMITIVE_TYPE::PRIMITIVE_PYRAMID:
-			p.p.Render(dt);
+			((Pyramid*)p.m_Data)->Render(dt);
 			break;
 		case PRIMITIVE_TYPE::PRIMITIVE_SQUARE:
-			p.s.Render(dt);
+			((Square*)p.m_Data)->Render(dt);
 			break;
 		case PRIMITIVE_TYPE::PRIMITIVE_TRIANGLE:
-			p.t.Render(dt);
+			((Triangle*)p.m_Data)->Render(dt);
 			break;
 		}
 	}
 }
 
-void Primitive::UpdatePrimitive()
+void Primitive::UpdatePrimitive(float dt)
 {
-	m_Description.m_Pos += m_InternalData[m_InternalName].m_TranslationScale;
+	m_Description.m_Rotation += (m_Description.m_RotationVel * dt);
+	m_Description.m_Pos += (m_Description.m_Velocity * dt);
+
+	m_Model = glm::mat4(1.0f);
+
 	m_Model = glm::translate(m_Model, m_Description.m_Pos);
 
-	m_Description.m_Rotation += m_InternalData[m_InternalName].m_RotationScale;
 	m_Model = glm::rotate(m_Model, m_Description.m_Rotation.x, glm::vec3(1, 0, 0));
 	m_Model = glm::rotate(m_Model, m_Description.m_Rotation.y, glm::vec3(0, 1, 0));
 	m_Model = glm::rotate(m_Model, m_Description.m_Rotation.z, glm::vec3(0, 0, 1));
@@ -63,9 +41,6 @@ Primitive::Primitive(const PrimitiveDesc& desc)
 {
 	m_Description = desc;
 	m_Model = glm::mat4(1.f);
-
-	m_InternalName.append("Primitive");
-	m_InternalName.append(std::to_string(PrimitiveContainer::Instance().m_Primitives.size()));
 
 	m_UniformBuffer = Graphics::Instance()->CreateUniformBuffer({ sizeof(VertexData) });
 
@@ -84,7 +59,7 @@ Primitive::Primitive(const PrimitiveDesc& desc)
 
 void Primitive::Render(float dt)
 {
-	UpdatePrimitive();
+	UpdatePrimitive(dt);
 
 	VertexData vdata = { FloatingCamera::GetFloatingCam().GetViewProj() * m_Model, m_Model, m_Description.m_Col};
 	m_UniformBuffer->SetData(&vdata);
@@ -95,34 +70,36 @@ void Primitive::Render(float dt)
 	Graphics::Instance()->SetShaderProgram(m_Shader);
 	Graphics::Instance()->SetUniformBuffer(m_UniformBuffer, 0);
 	LightingManager::Instance().ManageBasicLighting(m_Shader, { m_Description.m_Col, glm::vec3(1.f, 1.f, 1.f) });
-
-	m_InternalData[m_InternalName].m_RotationScale += (m_Description.m_RotationVel * dt);
-	m_InternalData[m_InternalName].m_TranslationScale += (m_Description.m_Velocity * dt);
 }
 
 glm::vec3 Primitive::GetTranslationScale()
 {
-	return m_InternalData[m_InternalName].m_TranslationScale;
+	return m_Description.m_Velocity;
 }
 
 glm::vec3 Primitive::GetRotationScale()
 {
-	return m_InternalData[m_InternalName].m_RotationScale;
+	return m_Description.m_RotationVel;
 }
 
 void Primitive::SetTranslationScale(glm::vec3 s)
 {
-	m_InternalData[m_InternalName].m_TranslationScale = s;
+	m_Description.m_Velocity = s;
 }
 
 void Primitive::SetRotationScale(glm::vec3 s)
 {
-	m_InternalData[m_InternalName].m_RotationScale = s;
+	m_Description.m_RotationVel = s;
 }
 
 PrimitiveDesc* Primitive::GetDescription()
 {
-	return &PrimitiveContainer::Instance().m_Primitives[m_Index].m_Desc;
+	return &m_Description;
+}
+
+PRIMITIVE_TYPE Primitive::GetType()
+{
+	return m_Type;
 }
 
 Square::Square(const PrimitiveDesc& desc)
@@ -397,12 +374,29 @@ void Pyramid::Render(float dt)
 	Graphics::Instance()->DrawTriangles(TriangleType::TRIANGLE_LIST, 18, 0);
 }
 
-void PrimitiveContainer::Add(PRIMITIVE_TYPE type, const PrimitiveDesc& desc)
+std::shared_ptr<PrimitiveRenderData> PrimitiveContainer::Add(PRIMITIVE_TYPE type, const PrimitiveDesc& desc)
 {
-	m_Primitives.push_back({ desc, type});
+	switch (type)
+	{
+	case PRIMITIVE_TYPE::PRIMITIVE_CUBE:
+		m_Primitives.push_back({ type, new Cube(desc) });
+		break;
+	case PRIMITIVE_TYPE::PRIMITIVE_PYRAMID:
+		m_Primitives.push_back({ type, new Pyramid(desc) });
+		break;
+	case PRIMITIVE_TYPE::PRIMITIVE_SQUARE:
+		m_Primitives.push_back({ type, new Square(desc) });
+		break;
+	case PRIMITIVE_TYPE::PRIMITIVE_TRIANGLE:
+		m_Primitives.push_back({ type, new Triangle(desc) });
+		break;
+	}
 
+	/* TODO: WTF IS THIS LMAO */
 	if (desc.m_LightSource)
 	{
 		m_LightPositions.push_back(desc.m_Pos);
 	}
+
+	return std::make_shared<PrimitiveRenderData>(m_Primitives.back());
 }
