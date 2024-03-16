@@ -36,6 +36,15 @@ void ShaderProgram::SetVec3(const char* name, glm::vec3 val)
 	glUniform3f(index, val.x, val.y, val.z);
 }
 
+void ShaderProgram::SetFloat(const char* name, float val)
+{
+	UINT32 index = glGetUniformLocation(m_ProgramId, name);
+	if (index == -1)
+		return;
+
+	glUniform1f(index, val);
+}
+
 void ShaderProgram::Attach(const char* shaderPath, const ShaderType& type)
 {
 	std::string shaderCode;
@@ -51,7 +60,7 @@ void ShaderProgram::Attach(const char* shaderPath, const ShaderType& type)
 	else
 	{
 		std::wstringstream ss;
-		ss << L"ShaderProgram->" << shaderPath << " not found" << std::endl;
+		ss << L"ShaderProgram->" << shaderPath << " not found";
 		Logger::PrintOGL3DWarning(ss.str().c_str());
 		return;
 	}
@@ -78,7 +87,7 @@ void ShaderProgram::Attach(const char* shaderPath, const ShaderType& type)
 		mbstowcs(wc, &errorMessage[0], errorMessage.size());
 
 		std::wstringstream ss;
-		ss << "ShaderProgram->" << shaderPath << " couldn't compile: " << std::endl << wc;
+		ss << "ShaderProgram->" << shaderPath << " couldn't compile: " << wc;
 
 		Logger::PrintOGL3DWarning(ss.str().c_str());
 	}

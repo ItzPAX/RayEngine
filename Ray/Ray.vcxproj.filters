@@ -363,5 +363,8 @@
     <ClInclude Include="Source\Platform\Win32\w32Data.h">
       <Filter>Source\Platform\Win32\Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Graphics\Materials.h">
+      <Filter>Source\Graphics\Public</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

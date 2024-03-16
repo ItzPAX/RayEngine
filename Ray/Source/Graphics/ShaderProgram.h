@@ -30,6 +30,7 @@ public:
 	UINT32 GetProgramId() { return m_ProgramId; }
 
 	void SetVec3(const char* name, glm::vec3 val);
+	void SetFloat(const char* name, float val);
 
 private:
 	UINT32 m_ProgramId = 0;

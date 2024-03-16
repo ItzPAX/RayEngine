@@ -17,7 +17,7 @@ Texture::Texture(const char* path)
 	else
 	{
 		std::wstringstream ss;
-		ss << L"Couldnt load texture " << path << std::endl;
+		ss << L"Couldnt load texture " << path;
 		Logger::PrintOGL3DWarning(ss.str().c_str());
 	}
 

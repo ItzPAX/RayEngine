@@ -201,6 +201,7 @@
     <ClInclude Include="Source\Graphics\Graphics.h" />
     <ClInclude Include="Source\Graphics\GraphicsDefinitions.h" />
     <ClInclude Include="Source\Graphics\LightingManager.h" />
+    <ClInclude Include="Source\Graphics\Materials.h" />
     <ClInclude Include="Source\Graphics\Primitive.h" />
     <ClInclude Include="Source\Graphics\ShaderProgram.h" />
     <ClInclude Include="Source\Graphics\Texture.h" />

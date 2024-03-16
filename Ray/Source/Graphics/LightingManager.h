@@ -2,8 +2,19 @@
 
 struct RAY_API LightingDesc
 {
-	glm::vec3 m_ObjectColor;
-	glm::vec3 m_LightColor;
+	glm::vec3 m_Position;
+
+	glm::vec3 m_Ambient;
+	glm::vec3 m_Diffuse;
+	glm::vec3 m_Specular;
+};
+
+struct RAY_API MaterialDesc
+{
+	glm::vec3 m_Ambient;
+	glm::vec3 m_Diffuse;
+	glm::vec3 m_Specular;
+	float m_Shininess;
 };
 
 class RAY_API LightingManager
@@ -23,7 +34,8 @@ public:
 	void operator=(LightingManager const&) = delete;
 
 public:
-	void ManageBasicLighting(ShaderProgramPtr shader, const LightingDesc& desc);
+	void ManageBasicLighting(ShaderProgramPtr shader, const LightingDesc& light, glm::vec3 objectcolor, const MaterialDesc& material);
+	LightingDesc m_StudioLight;
 
 private:
 

@@ -23,6 +23,7 @@
 // Graphics features
 #include "Graphics/Texture.h"
 #include "Graphics/LightingManager.h"
+#include "Graphics/Materials.h"
 #include "Graphics/Camera.h"
 #include "Graphics/FPS_Camera.h"
 #include "Graphics/FloatingCamera.h"

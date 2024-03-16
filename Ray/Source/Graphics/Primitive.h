@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <unordered_map>
 
 struct RAY_API Vertex
 {
@@ -10,15 +11,13 @@ struct RAY_API Vertex
 
 struct RAY_API PrimitiveDesc
 {
-	glm::vec3 m_Col = glm::vec3(1.f);
-
 	char m_Texture[MAX_PATH];
 	char m_VertexShader[MAX_PATH];
 	char m_FragmentShader[MAX_PATH];
 
-	bool m_LightSource = false;
+	glm::vec3 m_ObjectColor = glm::vec3(1.f);
 
-	glm::vec3 m_Pos = glm::vec3(0.f);
+	glm::vec3 m_Position = glm::vec3(0.f);
 	glm::vec3 m_Rotation = glm::vec3(0.f);
 
 	glm::vec3 m_Velocity = glm::vec3(0.f);
@@ -29,12 +28,13 @@ class RAY_API Primitive
 {
 public:
 	Primitive() = default;
-	Primitive(const PrimitiveDesc& desc);
+	Primitive(const PrimitiveDesc& desc, const MaterialDesc& material);
 	~Primitive() {}
 
 	virtual void Render(float dt);
 
 	void UpdatePrimitive(float dt);
+	void Delete();
 
 public:
 	glm::vec3 GetTranslationScale();
@@ -44,9 +44,11 @@ public:
 	void SetRotationScale(glm::vec3 s);
 
 	PrimitiveDesc* GetDescription();
+	MaterialDesc* GetMaterial();
 	PRIMITIVE_TYPE GetType();
 
 protected:
+	MaterialDesc m_Material;
 	PrimitiveDesc m_Description;
 	PRIMITIVE_TYPE m_Type;
 
@@ -66,7 +68,7 @@ class RAY_API Triangle : public Primitive
 {
 public:
 	Triangle() = default;
-	Triangle(const PrimitiveDesc& desc);
+	Triangle(const PrimitiveDesc& desc, const MaterialDesc& material);
 	virtual void Render(float dt) override;
 
 private:
@@ -76,7 +78,7 @@ class RAY_API Square : public Primitive
 {
 public:
 	Square() = default;
-	Square(const PrimitiveDesc& desc);
+	Square(const PrimitiveDesc& desc, const MaterialDesc& material);
 	virtual void Render(float dt) override;
 
 private:
@@ -86,7 +88,7 @@ class RAY_API Pyramid : public Primitive
 {
 public:
 	Pyramid() = default;
-	Pyramid(const PrimitiveDesc& desc);
+	Pyramid(const PrimitiveDesc& desc, const MaterialDesc& material);
 	virtual void Render(float dt) override;
 
 private:
@@ -96,7 +98,7 @@ class RAY_API Cube : public Primitive
 {
 public:
 	Cube() = default;
-	Cube(const PrimitiveDesc& desc);
+	Cube(const PrimitiveDesc& desc, const MaterialDesc& material);
 	virtual void Render(float dt) override;
 
 private:
@@ -133,9 +135,8 @@ public:
 public:
 	void Render(float dt);
 
-	std::shared_ptr<PrimitiveRenderData> Add(PRIMITIVE_TYPE type, const PrimitiveDesc& desc);
+	std::shared_ptr<PrimitiveRenderData> Add(PRIMITIVE_TYPE type, const PrimitiveDesc& desc, const MaterialDesc& material);
 
 public:
-	std::vector<PrimitiveRenderData> m_Primitives;
-	std::vector<glm::vec3> m_LightPositions;
+	std::unordered_map<int, PrimitiveRenderData> m_Primitives;
 };

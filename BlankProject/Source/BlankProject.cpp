@@ -34,7 +34,10 @@ public:
 			Graphics::Instance()->Clear(glm::vec4(0.f, 0.f, 0.f, 1.f), true, false);
 		}
 
-		Update(deltatime);
+		static float elapsed = 0;
+		elapsed += deltatime;
+
+		Update(deltatime, elapsed);
 
 		PrimitiveContainer::Instance().Render(deltatime);
 
@@ -47,27 +50,47 @@ public:
 	}
 
 	// Init
-	PrimitivePtr prim;
+	PrimitivePtr prim[2];
 
 	VOID Initialize()
 	{
-		prim = Graphics::Instance()->CreatePrimitive(
+		prim[0] = Graphics::Instance()->CreatePrimitive(
 			PRIMITIVE_TYPE::PRIMITIVE_CUBE,
 			{
+				"",																							
+				"C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.vert",
+				"C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShaderLight.frag",
 				glm::vec3(1.f),
-				"",
-				"D:/myprogramming2/RayEngine/Build/Debug/Content/Engine/Shaders/BasicShader.vert",
-				"D:/myprogramming2/RayEngine/Build/Debug/Content/Engine/Shaders/BasicShader.frag",
-				true,
-				glm::vec3(1,1,1)
-			}
+				glm::vec3(1.f)
+			},
+			Materials::debug
 		);
+
+		prim[1] = Graphics::Instance()->CreatePrimitive(
+			PRIMITIVE_TYPE::PRIMITIVE_CUBE,
+			{
+				"",																							// texture
+				"C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.vert",	// vertex
+				"C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.frag",	// fragment
+				glm::vec3(1.f),																				// color
+				glm::vec3(1.f)																				// pos
+			},
+			Materials::debug
+		);
+
+		LightingManager::Instance().m_StudioLight = LightingDesc{
+			glm::vec3(1.f),						// position
+			glm::vec3(0.2f, 0.2f, 0.2f),		// ambient
+			glm::vec3(0.5f, 0.5f, 0.5f),		// diffuse
+			glm::vec3(1.0f, 1.0f, 1.0f),		// specular
+		};
 	}
 
 	// Update
-	VOID Update(float deltatime)
+	VOID Update(float deltatime, float elapsedtime)
 	{
-		prim.get()->get_primitive<Cube*>()->SetRotationScale(glm::vec3(1, 2, 3));
+		LightingManager::Instance().m_StudioLight.m_Position = glm::vec3(sin(elapsedtime) * 5, 0, 0);
+		prim[1].get()->get_primitive<Cube*>()->GetDescription()->m_Position = glm::vec3(sin(elapsedtime) * 5, 0, 0);
 	}
 
 	// Quit

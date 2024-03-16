@@ -121,32 +121,44 @@ VOID UI::RenderMainMenubar()
 }
 
 #pragma region Primitives
+inline void UI::RenderPrimitiveDescriptionEditor(PrimitiveDesc* pdesc, MaterialDesc* pmat)
+{
+	ImGui::Text("Primitive");
+	ImGui::InputTextWithHint("##Texture", "Texture", pdesc->m_Texture, MAX_PATH); ImGui::SameLine();
+	if (ImGui::Button("..##TextureButton"))
+		m_FileBrowser[BROWSER_TEXTURE].Open();
+	ImGui::InputTextWithHint("##FragmentShader", "Fragment Shader", pdesc->m_FragmentShader, MAX_PATH); ImGui::SameLine();
+	if (ImGui::Button("..##FragmentShaderButton"))
+		m_FileBrowser[BROWSER_FRAGMENT].Open();
+	ImGui::InputTextWithHint("##VertexShader", "Vertex Shader", pdesc->m_VertexShader, MAX_PATH); ImGui::SameLine();
+	if (ImGui::Button("..##VertexShaderButton"))
+		m_FileBrowser[BROWSER_VERTEX].Open();
+
+	ImGui::InputFloat3("Pos", &pdesc->m_Position.x);
+	ImGui::InputFloat3("Rot", &pdesc->m_Rotation.x);
+	ImGui::InputFloat3("Rot Vel", &pdesc->m_RotationVel.x);
+	ImGui::InputFloat3("Vel", &pdesc->m_Velocity.x);
+
+	ImGui::ColorEdit3("Object Color", &pdesc->m_ObjectColor[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+
+	ImGui::Text("Material");
+	ImGui::ColorEdit3("Ambient", &pmat->m_Ambient[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+	ImGui::ColorEdit3("Diffuse", &pmat->m_Diffuse[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+	ImGui::ColorEdit3("Specular", &pmat->m_Specular[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+	ImGui::InputFloat("Shininess", &pmat->m_Shininess);
+}
+
 VOID UI::RenderPrimitiveCreationWindow()
 {
 	static PrimitiveDesc desc;
+	static MaterialDesc mat;
 
 	ImGui::Begin("Add Primitive");
 	{
 		ImGui::Combo("Primitive Type", (int*)&m_CurrentPrimitive, m_PrimitiveTypes, IM_ARRAYSIZE(m_PrimitiveTypes));
-
-		ImGui::InputTextWithHint("##Texture", "Texture", desc.m_Texture, MAX_PATH); ImGui::SameLine();
-		if (ImGui::Button("..##TextureButton"))
-			m_FileBrowser[BROWSER_TEXTURE].Open();
-		ImGui::InputTextWithHint("##FragmentShader", "Fragment Shader", desc.m_FragmentShader, MAX_PATH); ImGui::SameLine();
-		if (ImGui::Button("..##FragmentShaderButton"))
-			m_FileBrowser[BROWSER_FRAGMENT].Open();
-		ImGui::InputTextWithHint("##VertexShader", "Vertex Shader", desc.m_VertexShader, MAX_PATH); ImGui::SameLine();
-		if (ImGui::Button("..##VertexShaderButton"))
-			m_FileBrowser[BROWSER_VERTEX].Open();
-
-		ImGui::InputFloat3("Pos", &desc.m_Pos.x);
-		ImGui::InputFloat3("Rot", &desc.m_Rotation.x);
-		ImGui::InputFloat3("Rot Vel", &desc.m_RotationVel.x);
-		ImGui::InputFloat3("Vel", &desc.m_Velocity.x);
-		ImGui::ColorEdit3("Color", &desc.m_Col[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
-
+		RenderPrimitiveDescriptionEditor(&desc, &mat);
 		if (ImGui::Button("Add Primitive", ImVec2(-1, 0)))
-			AddPrimitive(desc);
+			AddPrimitive(desc, mat);
 	}
 	ImGui::End();
 
@@ -191,152 +203,47 @@ VOID UI::ManageFileBrowser(PrimitiveDesc& desc)
 	}
 }
 
-VOID UI::AddPrimitive(const PrimitiveDesc& desc)
+VOID UI::AddPrimitive(const PrimitiveDesc& desc, const MaterialDesc& material)
 {
 	// will automatically discard itself
-	PrimitivePtr prim = Graphics::Instance()->CreatePrimitive(m_CurrentPrimitive, desc);
+	PrimitivePtr prim = Graphics::Instance()->CreatePrimitive(m_CurrentPrimitive, desc, material);
+}
+
+template <typename T>
+inline VOID UI::RenderPrimitiveTreeView(std::string primitive, PRIMITIVE_TYPE type)
+{
+	if (ImGui::CollapsingHeader((primitive + "(s)").c_str()))
+	{
+		int primcount = 0;
+		for (auto& entry : PrimitiveContainer::Instance().m_Primitives)
+		{
+			auto& e = entry.second;
+			if (e.m_Type != type)
+				continue;
+			T* c = (T*)e.m_Data;
+
+			std::string name = primitive + std::to_string(primcount);
+			if (ImGui::TreeNode(name.c_str()))
+			{
+				RenderPrimitiveDescriptionEditor(c->GetDescription(), c->GetMaterial());
+				if (ImGui::Button("Delete"))
+					c->Delete();
+				ImGui::TreePop();
+				ImGui::Separator();
+			}
+			primcount++;
+		}
+	}
 }
 
 VOID UI::RenderPrimitiveUpdateWindow()
 {
 	ImGui::Begin("Primitives");
 	{
-		if (ImGui::CollapsingHeader("Cube(s)"))
-		{
-			int primcount = 0;
-			for (auto& e : PrimitiveContainer::Instance().m_Primitives)
-			{
-				if (e.m_Type != PRIMITIVE_TYPE::PRIMITIVE_CUBE)
-					continue;
-				Cube* c = (Cube*)e.m_Data;
-
-				std::string name = "Cube" + std::to_string(primcount);
-				if (ImGui::TreeNode(name.c_str()))
-				{
-					glm::vec3 realPos = c->GetDescription()->m_Pos;
-					if (ImGui::InputFloat3("Pos", &realPos.x))
-					{
-						c->GetDescription()->m_Pos = realPos;
-						c->SetTranslationScale(glm::vec3(0.f));
-					}
-
-					glm::vec3 realRotation = c->GetDescription()->m_Rotation;
-					if (ImGui::InputFloat3("Rot", &realRotation.x))
-					{
-						c->GetDescription()->m_Rotation = realRotation;
-						c->SetRotationScale(glm::vec3(0.f));
-					}
-
-					ImGui::InputFloat3("Vel", &c->GetDescription()->m_Velocity.x);
-					ImGui::InputFloat3("Rot Vel", &c->GetDescription()->m_RotationVel.x);
-					ImGui::TreePop();
-					ImGui::Separator();
-				}
-				primcount++;
-			}
-		}
-		if (ImGui::CollapsingHeader("Pyramid(s)"))
-		{
-			int primcount = 0;
-			for (auto& e : PrimitiveContainer::Instance().m_Primitives)
-			{
-				if (e.m_Type != PRIMITIVE_TYPE::PRIMITIVE_PYRAMID)
-					continue;
-				Pyramid* p = (Pyramid*)e.m_Data;
-
-				std::string name = "Pyramid" + std::to_string(primcount);
-				if (ImGui::TreeNode(name.c_str()))
-				{
-					glm::vec3 realPos = p->GetDescription()->m_Pos + p->GetTranslationScale();
-					if (ImGui::InputFloat3("Pos", &realPos.x))
-					{
-						p->GetDescription()->m_Pos = realPos;
-						p->SetTranslationScale(glm::vec3(0.f));
-					}
-
-					glm::vec3 realRotation = p->GetDescription()->m_Rotation + p->GetRotationScale();
-					if (ImGui::InputFloat3("Rot", &realRotation.x))
-					{
-						p->GetDescription()->m_Rotation = realRotation;
-						p->SetRotationScale(glm::vec3(0.f));
-					}
-
-					ImGui::InputFloat3("Vel", &p->GetDescription()->m_Velocity.x);
-					ImGui::InputFloat3("Rot Vel", &p->GetDescription()->m_RotationVel.x);
-					ImGui::TreePop();
-					ImGui::Separator();
-				}
-				primcount++;
-			}
-		}
-		if (ImGui::CollapsingHeader("Square(s)"))
-		{
-			int primcount = 0;
-			for (auto& e : PrimitiveContainer::Instance().m_Primitives)
-			{
-				if (e.m_Type != PRIMITIVE_TYPE::PRIMITIVE_SQUARE)
-					continue;
-				Square* s = (Square*)e.m_Data;
-
-				std::string name = "Square" + std::to_string(primcount);
-				if (ImGui::TreeNode(name.c_str()))
-				{
-					glm::vec3 realPos = s->GetDescription()->m_Pos + s->GetTranslationScale();
-					if (ImGui::InputFloat3("Pos", &realPos.x))
-					{
-						s->GetDescription()->m_Pos = realPos;
-						s->SetTranslationScale(glm::vec3(0.f));
-					}
-
-					glm::vec3 realRotation = s->GetDescription()->m_Rotation + s->GetRotationScale();
-					if (ImGui::InputFloat3("Rot", &realRotation.x))
-					{
-						s->GetDescription()->m_Rotation = realRotation;
-						s->SetRotationScale(glm::vec3(0.f));
-					}
-
-					ImGui::InputFloat3("Vel", &s->GetDescription()->m_Velocity.x);
-					ImGui::InputFloat3("Rot Vel", &s->GetDescription()->m_RotationVel.x);
-					ImGui::TreePop();
-					ImGui::Separator();
-				}
-				primcount++;
-			}
-		}
-		if (ImGui::CollapsingHeader("Triangle(s)"))
-		{
-			int primcount = 0;
-			for (auto& e : PrimitiveContainer::Instance().m_Primitives)
-			{
-				if (e.m_Type != PRIMITIVE_TYPE::PRIMITIVE_TRIANGLE)
-					continue;
-				Triangle* t = (Triangle*)e.m_Data;
-
-				std::string name = "Triangle" + std::to_string(primcount);
-				if (ImGui::TreeNode(name.c_str()))
-				{
-					glm::vec3 realPos = t->GetDescription()->m_Pos + t->GetTranslationScale();
-					if (ImGui::InputFloat3("Pos", &realPos.x))
-					{
-						t->GetDescription()->m_Pos = realPos;
-						t->SetTranslationScale(glm::vec3(0.f));
-					}
-
-					glm::vec3 realRotation = t->GetDescription()->m_Rotation + t->GetRotationScale();
-					if (ImGui::InputFloat3("Rot", &realRotation.x))
-					{
-						t->GetDescription()->m_Rotation = realRotation;
-						t->SetRotationScale(glm::vec3(0.f));
-					}
-
-					ImGui::InputFloat3("Vel", &t->GetDescription()->m_Velocity.x);
-					ImGui::InputFloat3("Rot Vel", &t->GetDescription()->m_RotationVel.x);
-					ImGui::TreePop();
-					ImGui::Separator();
-				}
-				primcount++;
-			}
-		}
+		RenderPrimitiveTreeView<Cube>("Cube", PRIMITIVE_TYPE::PRIMITIVE_CUBE);
+		RenderPrimitiveTreeView<Pyramid>("Pyramid", PRIMITIVE_TYPE::PRIMITIVE_PYRAMID);
+		RenderPrimitiveTreeView<Square>("Square", PRIMITIVE_TYPE::PRIMITIVE_SQUARE);
+		RenderPrimitiveTreeView<Triangle>("Triangle", PRIMITIVE_TYPE::PRIMITIVE_TRIANGLE);
 	}
 	ImGui::End();
 }

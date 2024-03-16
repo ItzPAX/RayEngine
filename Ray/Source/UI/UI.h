@@ -58,10 +58,14 @@ private:
 		BROWSER_TEXTURE
 	};
 
+	void RenderPrimitiveDescriptionEditor(PrimitiveDesc* pdesc, MaterialDesc* pmat);
+
+	template <typename T>
+	VOID RenderPrimitiveTreeView(std::string primitive, PRIMITIVE_TYPE type);
 	VOID RenderPrimitiveUpdateWindow();
 
 	VOID RenderPrimitiveCreationWindow();
-	VOID AddPrimitive(const PrimitiveDesc& desc);
+	VOID AddPrimitive(const PrimitiveDesc& desc, const MaterialDesc& material);
 
 	VOID InitFileBrowser();
 	VOID ManageFileBrowser(PrimitiveDesc& desc);
