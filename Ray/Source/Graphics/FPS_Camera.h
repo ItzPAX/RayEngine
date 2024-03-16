@@ -35,6 +35,7 @@ public:
 	float Pitch() { return m_Pitch; }
 	float Yaw() { return m_Yaw; }
 	glm::vec2 View() { return glm::vec2(m_Pitch, m_Yaw); }
+	glm::vec3 Front() { return m_LookAt; }
 
 private:
 	void NormalizePitch();

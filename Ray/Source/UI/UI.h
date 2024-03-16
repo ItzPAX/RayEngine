@@ -64,6 +64,14 @@ private:
 	VOID RenderPrimitiveTreeView(std::string primitive, PRIMITIVE_TYPE type);
 	VOID RenderPrimitiveUpdateWindow();
 
+	VOID RenderSpotLightTreeView();
+	VOID RenderDirectionalLightTreeView();
+	VOID RenderPointLightEditor(PointLight& pl);
+	VOID RenderPointLightTreeView();
+	VOID RenderLightUpdateWindow();
+
+	VOID RenderPointLightCreationWindow();
+
 	VOID RenderPrimitiveCreationWindow();
 	VOID AddPrimitive(const PrimitiveDesc& desc, const MaterialDesc& material);
 
@@ -93,5 +101,12 @@ private:
 		"Pyramid",
 		"Square",
 		"Triangle"
+	};
+
+	const char* m_LightTypes[3] =
+	{
+		"Point",
+		"Directional",
+		"Spotlight"
 	};
 };

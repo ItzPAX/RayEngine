@@ -29,8 +29,13 @@ private:
 public:
 	UINT32 GetProgramId() { return m_ProgramId; }
 
+public:
 	void SetVec3(const char* name, glm::vec3 val);
+	void SetVec4(const char* name, glm::vec4 val);
 	void SetFloat(const char* name, float val);
+	void SetInt(const char* name, int val);
+
+	std::string GetIndexedArrayUniformName(int index, const char* name);
 
 private:
 	UINT32 m_ProgramId = 0;

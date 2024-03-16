@@ -4,6 +4,8 @@ Graphics* Graphics::inst;
 
 Graphics::Graphics()
 {
+	m_DrawCallsThisFrame = 0;
+	m_TrianglesThisFrame = 0;
 	inst = this;
 
 	WNDCLASSEX wc = {};
@@ -127,8 +129,6 @@ void Graphics::SetViewport(glm::vec2 innerrect)
 	HWND desktop = GetDesktopWindow();
 	RECT desktoprect; GetWindowRect(desktop, &desktoprect);
 
-	
-
 	if (Engine::GetMode() == EDITOR)
 		glViewport(0, 0, desktoprect.right - desktoprect.left, desktoprect.bottom - desktoprect.top);
 	else
@@ -189,7 +189,9 @@ void Graphics::DrawTriangles(const TriangleType& type, UINT32 vertexCount, UINT3
 	default:
 		break;
 	}
-
+	
+	Graphics::Instance()->m_DrawCallsThisFrame++;
+	Graphics::Instance()->m_TrianglesThisFrame += vertexCount;
 	glDrawArrays(glTriType, offset, vertexCount);
 }
 
@@ -206,5 +208,7 @@ void Graphics::DrawIndexedTriangles(const TriangleType& type, UINT32 indicesCoun
 		break;
 	}
 
+	Graphics::Instance()->m_DrawCallsThisFrame++;
+	Graphics::Instance()->m_TrianglesThisFrame += indicesCount;
 	glDrawElements(glTriType, indicesCount, GL_UNSIGNED_INT, nullptr);
 }

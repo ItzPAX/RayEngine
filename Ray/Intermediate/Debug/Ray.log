@@ -1,2 +1,94 @@
 ﻿  CmdLineArgs.cpp
   Logger.cpp
+  Time.cpp
+  Core.cpp
+  CoreDefinitions.cpp
+  CoreMinimal.cpp
+  PerGameSettings.cpp
+  REngine.cpp
+  Simulation.cpp
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Engine\Simulation.cpp(59,3): warning C4065: switch-Anweisung enthält "default", aber keine case-Bezeichnungen
+  Splashscreen.cpp
+  Camera.cpp
+  FloatingCamera.cpp
+  FPS_Camera.cpp
+  FrameBuffer.cpp
+  Graphics.cpp
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Graphics.cpp(135,42): warning C4244: "Argument": Konvertierung von "T" in "GLsizei", möglicher Datenverlust
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Graphics.cpp(135,42): warning C4244:         with
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Graphics.cpp(135,42): warning C4244:         [
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Graphics.cpp(135,42): warning C4244:             T=float
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Graphics.cpp(135,42): warning C4244:         ]
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Graphics.cpp(135,29): warning C4244: "Argument": Konvertierung von "T" in "GLsizei", möglicher Datenverlust
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Graphics.cpp(135,29): warning C4244:         with
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Graphics.cpp(135,29): warning C4244:         [
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Graphics.cpp(135,29): warning C4244:             T=float
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Graphics.cpp(135,29): warning C4244:         ]
+  LightingManager.cpp
+  Primitive.cpp
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Primitive.cpp(64,60): warning C4267: "=": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Primitive.cpp(391,12): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+  ShaderProgram.cpp
+  Texture.cpp
+  UniformBuffer.cpp
+  VAO.cpp
+  w32Caption.cpp
+  w32IApplication.cpp
+  w32SubObject.cpp
+  w32Win32Utils.cpp
+  w32Window.cpp
+  Ray.cpp
+  AssetManager.cpp
+  UI.cpp
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,26): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,26): warning C4838:         with
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,26): warning C4838:         [
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,26): warning C4838:             T=float
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,26): warning C4838:         ]
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,26): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,26): warning C4244:         with
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,26): warning C4244:         [
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,26): warning C4244:             T=float
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,26): warning C4244:         ]
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,40): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,40): warning C4838:         with
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,40): warning C4838:         [
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,40): warning C4838:             T=float
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,40): warning C4838:         ]
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,40): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,40): warning C4244:         with
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,40): warning C4244:         [
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,40): warning C4244:             T=float
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,40): warning C4244:         ]
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,57): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,57): warning C4838:         with
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,57): warning C4838:         [
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,57): warning C4838:             T=float
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,57): warning C4838:         ]
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,57): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,57): warning C4244:         with
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,57): warning C4244:         [
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,57): warning C4244:             T=float
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,57): warning C4244:         ]
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,88): warning C4838: Konvertierung von "T" zu "LONG" erfordert eine einschränkende Konvertierung
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,88): warning C4838:         with
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,88): warning C4838:         [
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,88): warning C4838:             T=float
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,88): warning C4838:         ]
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,88): warning C4244: "Initialisierung": Konvertierung von "T" in "LONG", möglicher Datenverlust
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,88): warning C4244:         with
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,88): warning C4244:         [
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,88): warning C4244:             T=float
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\UI\UI.cpp(66,88): warning C4244:         ]
+  glad.c
+  glad_wgl.c
+  Code wird generiert...
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_opengl3.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  Code wird generiert...
+LINK : fatal error LNK1104: Datei "assimp-vc143-mt.lib" kann nicht geöffnet werden.

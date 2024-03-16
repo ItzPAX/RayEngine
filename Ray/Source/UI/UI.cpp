@@ -76,8 +76,10 @@ VOID UI::RenderElements(UINT32 scene, UI::CameraType type)
 	RenderLogMenu();
 
 	// API for graphics engine
+	RenderPointLightCreationWindow();
 	RenderPrimitiveCreationWindow();
 	RenderPrimitiveUpdateWindow();
+	RenderLightUpdateWindow();
 
 	// our asset manager
 	m_AssetManager.Render();
@@ -115,7 +117,8 @@ VOID UI::RenderMainMenubar()
 	// menu bar
 	if (ImGui::BeginMainMenuBar())
 	{
-
+		static bool test;
+		ImGui::MenuItem("Test", "test", &test);
 		ImGui::EndMainMenuBar();
 	}
 }
@@ -123,7 +126,6 @@ VOID UI::RenderMainMenubar()
 #pragma region Primitives
 inline void UI::RenderPrimitiveDescriptionEditor(PrimitiveDesc* pdesc, MaterialDesc* pmat)
 {
-	ImGui::Text("Primitive");
 	ImGui::InputTextWithHint("##Texture", "Texture", pdesc->m_Texture, MAX_PATH); ImGui::SameLine();
 	if (ImGui::Button("..##TextureButton"))
 		m_FileBrowser[BROWSER_TEXTURE].Open();
@@ -134,14 +136,12 @@ inline void UI::RenderPrimitiveDescriptionEditor(PrimitiveDesc* pdesc, MaterialD
 	if (ImGui::Button("..##VertexShaderButton"))
 		m_FileBrowser[BROWSER_VERTEX].Open();
 
-	ImGui::InputFloat3("Pos", &pdesc->m_Position.x);
-	ImGui::InputFloat3("Rot", &pdesc->m_Rotation.x);
-	ImGui::InputFloat3("Rot Vel", &pdesc->m_RotationVel.x);
-	ImGui::InputFloat3("Vel", &pdesc->m_Velocity.x);
+	ImGui::InputFloat3("Position", &pdesc->m_Position.x);
+	ImGui::InputFloat3("Rotation", &pdesc->m_Rotation.x);
+	ImGui::InputFloat3("Velocity", &pdesc->m_Velocity.x);
+	ImGui::InputFloat3("Rotation Velocity", &pdesc->m_RotationVel.x);
 
 	ImGui::ColorEdit3("Object Color", &pdesc->m_ObjectColor[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
-
-	ImGui::Text("Material");
 	ImGui::ColorEdit3("Ambient", &pmat->m_Ambient[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
 	ImGui::ColorEdit3("Diffuse", &pmat->m_Diffuse[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
 	ImGui::ColorEdit3("Specular", &pmat->m_Specular[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
@@ -249,6 +249,89 @@ VOID UI::RenderPrimitiveUpdateWindow()
 }
 #pragma endregion
 
+#pragma region Light
+VOID UI::RenderSpotLightTreeView()
+{
+	if (ImGui::CollapsingHeader("Spotlight"))
+	{
+		ImGui::InputFloat3("Position##Spotlight", &LightingManager::Instance().m_SpotLight.m_Position.x);
+		ImGui::InputFloat3("Direction##Spotlight", &LightingManager::Instance().m_SpotLight.m_Direction.x);
+		ImGui::InputFloat("Outer cut off##Spotlight", &LightingManager::Instance().m_SpotLight.m_OuterCutOff);
+		ImGui::InputFloat("Inner cut off##Spotlight", &LightingManager::Instance().m_SpotLight.m_InnerCutOff);
+
+		ImGui::ColorEdit3("Ambient##Spotlight", &LightingManager::Instance().m_SpotLight.m_Ambient[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+		ImGui::ColorEdit3("Diffuse##Spotlight", &LightingManager::Instance().m_SpotLight.m_Diffuse[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+		ImGui::ColorEdit3("Specular##Spotlight", &LightingManager::Instance().m_SpotLight.m_Specular[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+
+		ImGui::InputFloat("Constant##Spotlight", &LightingManager::Instance().m_SpotLight.m_Constant);
+		ImGui::InputFloat("Linear##Spotlight", &LightingManager::Instance().m_SpotLight.m_Linear);
+		ImGui::InputFloat("Quadratic##Spotlight", &LightingManager::Instance().m_SpotLight.m_Quadratic);
+
+	}
+}
+VOID UI::RenderDirectionalLightTreeView()
+{
+	if (ImGui::CollapsingHeader("Directional light"))
+	{
+		ImGui::InputFloat3("Direction##DirectionalLight", &LightingManager::Instance().m_DirectionalLight.m_Direction.x);
+
+		ImGui::ColorEdit3("Ambient##DirectionalLight", &LightingManager::Instance().m_DirectionalLight.m_Ambient[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+		ImGui::ColorEdit3("Diffuse##DirectionalLight", &LightingManager::Instance().m_DirectionalLight.m_Diffuse[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+		ImGui::ColorEdit3("Specular##DirectionalLight", &LightingManager::Instance().m_DirectionalLight.m_Specular[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+	}
+}
+
+VOID UI::RenderPointLightEditor(PointLight& pl)
+{
+	ImGui::InputFloat3("Position##PointLight", &pl.m_Position.x);
+
+	ImGui::ColorEdit3("Ambient##PointLight", &pl.m_Ambient[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+	ImGui::ColorEdit3("Diffuse##PointLight", &pl.m_Diffuse[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+	ImGui::ColorEdit3("Specular##PointLight", &pl.m_Specular[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+
+	ImGui::InputFloat("Constant##PointLight", &pl.m_Constant);
+	ImGui::InputFloat("Linear##PointLight", &pl.m_Linear);
+	ImGui::InputFloat("Quadratic##PointLight", &pl.m_Quadratic);
+}
+
+VOID UI::RenderPointLightTreeView()
+{
+	if (ImGui::CollapsingHeader("Point light(s)"))
+	{
+		for (auto& pointlight_map : LightingManager::Instance().m_PointLights)
+		{
+			RenderPointLightEditor(pointlight_map.second);
+
+			if (ImGui::Button("Delete"))
+				LightingManager::Instance().DeletePointLight(pointlight_map.second);
+		}
+	}
+}
+
+VOID UI::RenderLightUpdateWindow()
+{
+	ImGui::Begin("Lights");
+	{
+		RenderSpotLightTreeView();
+		RenderDirectionalLightTreeView();
+		RenderPointLightTreeView();
+	}
+	ImGui::End();
+}
+VOID UI::RenderPointLightCreationWindow()
+{
+	static PointLight light;
+
+	ImGui::Begin("Add PointLight");
+	{
+		RenderPointLightEditor(light);
+		if (ImGui::Button("Add Light", ImVec2(-1, 0)))
+			LightingManager::Instance().AddPointLight(light);
+	}
+	ImGui::End();
+}
+#pragma endregion
+
 VOID UI::RenderInfoMenu(UI::CameraType type)
 {
 	glm::vec3 pos(0.f); glm::vec2 view(0.f);
@@ -269,6 +352,11 @@ VOID UI::RenderInfoMenu(UI::CameraType type)
 
 	ImGui::Begin("Info");
 	ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+	ImGui::Text("Vertices this frame: %d", Graphics::Instance()->m_TrianglesThisFrame);
+	ImGui::Text("Draw calls this frame: %d", Graphics::Instance()->m_DrawCallsThisFrame);
+
+	ImGui::NewLine();
+
 	ImGui::Text("Scene Ratio %.0f/%.0f = %f", m_SceneSize.x, m_SceneSize.y, m_SceneSize.x / m_SceneSize.y);
 	ImGui::Text("Cam pos: x:%.1f y:%.1f z:%.1f", pos.x, pos.y, pos.z);
 	ImGui::Text("View: pitch:%.1f yaw:%.1f", view.x, view.y);

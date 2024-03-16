@@ -2,6 +2,14 @@
 #include <vector>
 #include <unordered_map>
 
+enum class PRIMITIVE_TYPE
+{
+	PRIMITIVE_CUBE = 0,
+	PRIMITIVE_PYRAMID,
+	PRIMITIVE_SQUARE,
+	PRIMITIVE_TRIANGLE
+};
+
 struct RAY_API Vertex
 {
 	glm::vec3 m_Position;

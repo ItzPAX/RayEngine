@@ -39,6 +39,9 @@ public:
 
 		Update(deltatime, elapsed);
 
+		Graphics::Instance()->m_DrawCallsThisFrame = 0;
+		Graphics::Instance()->m_TrianglesThisFrame = 0;
+
 		PrimitiveContainer::Instance().Render(deltatime);
 
 		if (Engine::GetMode() == EDITOR)
@@ -50,36 +53,41 @@ public:
 	}
 
 	// Init
-	PrimitivePtr prim[2];
+	PrimitivePtr prim[10];
 
 	VOID Initialize()
 	{
-		prim[0] = Graphics::Instance()->CreatePrimitive(
-			PRIMITIVE_TYPE::PRIMITIVE_CUBE,
-			{
-				"",																							
-				"C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.vert",
-				"C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShaderLight.frag",
-				glm::vec3(1.f),
-				glm::vec3(1.f)
-			},
-			Materials::debug
-		);
+		for (int i = 0; i < 10; i++)
+		{
+			prim[i] = Graphics::Instance()->CreatePrimitive(
+				PRIMITIVE_TYPE::PRIMITIVE_CUBE,
+				{
+					"",																								// texture
+					"C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.vert",		// vertex
+					"C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShaderLight.frag",	// fragment
+					glm::vec3(1.f),																					// color
+					glm::vec3(rand() % 20 - 10, rand() % 20 - 10, rand() % 20 - 10),																					// position
+					glm::vec3(rand() % 360, rand() % 360, rand() % 360),																					// rotation
+				},
+				Materials::debug
+			);
+		}
 
-		prim[1] = Graphics::Instance()->CreatePrimitive(
-			PRIMITIVE_TYPE::PRIMITIVE_CUBE,
-			{
-				"",																							// texture
-				"C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.vert",	// vertex
-				"C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.frag",	// fragment
-				glm::vec3(1.f),																				// color
-				glm::vec3(1.f)																				// pos
-			},
-			Materials::debug
-		);
+		LightingManager::Instance().m_SpotLight = SpotLight{
+			glm::vec3(1.f, 1.f, 1.f),			// position
+			glm::vec3(1.f, 1.f, 1.f),			// direction
+			glm::vec3(0.2f, 0.2f, 0.2f),		// ambient
+			glm::vec3(0.5f, 0.5f, 0.5f),		// diffuse
+			glm::vec3(1.0f, 1.0f, 1.0f),		// specular
+			glm::cos(glm::radians(17.5f)),		// outer cutoff
+			glm::cos(glm::radians(12.5f)),		// inner cutoff
+			1.f,								// constant
+			0.09f,								// linear
+			0.032f								// quadratic
+		};
 
-		LightingManager::Instance().m_StudioLight = LightingDesc{
-			glm::vec3(1.f),						// position
+		LightingManager::Instance().m_DirectionalLight = DirectionalLight{
+			glm::vec3(-0.2f, -1.0f, -0.3f),		// direction
 			glm::vec3(0.2f, 0.2f, 0.2f),		// ambient
 			glm::vec3(0.5f, 0.5f, 0.5f),		// diffuse
 			glm::vec3(1.0f, 1.0f, 1.0f),		// specular
@@ -89,8 +97,8 @@ public:
 	// Update
 	VOID Update(float deltatime, float elapsedtime)
 	{
-		LightingManager::Instance().m_StudioLight.m_Position = glm::vec3(sin(elapsedtime) * 5, 0, 0);
-		prim[1].get()->get_primitive<Cube*>()->GetDescription()->m_Position = glm::vec3(sin(elapsedtime) * 5, 0, 0);
+		LightingManager::Instance().m_SpotLight.m_Position = FloatingCamera::GetFloatingCam().Position();
+		LightingManager::Instance().m_SpotLight.m_Direction = FloatingCamera::GetFloatingCam().Front();
 	}
 
 	// Quit

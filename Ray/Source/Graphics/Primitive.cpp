@@ -76,7 +76,7 @@ void Primitive::Render(float dt)
 		
 	Graphics::Instance()->SetShaderProgram(m_Shader);
 	Graphics::Instance()->SetUniformBuffer(m_UniformBuffer, 0);
-	LightingManager::Instance().ManageBasicLighting(m_Shader, LightingManager::Instance().m_StudioLight, m_Description.m_ObjectColor, m_Material);
+	LightingManager::Instance().ManageBasicLighting(m_Shader, m_Description.m_ObjectColor, m_Material);
 }
 
 glm::vec3 Primitive::GetTranslationScale()

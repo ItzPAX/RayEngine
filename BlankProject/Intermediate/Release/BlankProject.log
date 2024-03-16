@@ -8,7 +8,7 @@ C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27):
   
   Code wird generiert.
   Previous IPDB and IOBJ mismatch, fall back to full compilation.
-  All 739 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 738 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Codegenerierung ist abgeschlossen.
   BlankProject.vcxproj -> C:\Users\Deniz\Desktop\RayEngine\Build\Release\BlankProject.exe
   Der Befehl "pwsh.exe" ist entweder falsch geschrieben oder

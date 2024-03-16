@@ -59,4 +59,8 @@ public:
 	static void Clear(glm::vec4 col, bool enableGLDepth, bool clearImGuiFrame);
 	static void DrawTriangles(const TriangleType& type, UINT32 vertexCount, UINT32 offset);
 	static void DrawIndexedTriangles(const TriangleType& type, UINT32 indicesCount);
+
+public:
+	UINT64 m_DrawCallsThisFrame;
+	UINT64 m_TrianglesThisFrame;
 };

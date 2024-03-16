@@ -36,6 +36,15 @@ void ShaderProgram::SetVec3(const char* name, glm::vec3 val)
 	glUniform3f(index, val.x, val.y, val.z);
 }
 
+void ShaderProgram::SetVec4(const char* name, glm::vec4 val)
+{
+	UINT32 index = glGetUniformLocation(m_ProgramId, name);
+	if (index == -1)
+		return;
+
+	glUniform4f(index, val.x, val.y, val.z, val.w);
+}
+
 void ShaderProgram::SetFloat(const char* name, float val)
 {
 	UINT32 index = glGetUniformLocation(m_ProgramId, name);
@@ -43,6 +52,24 @@ void ShaderProgram::SetFloat(const char* name, float val)
 		return;
 
 	glUniform1f(index, val);
+}
+
+void ShaderProgram::SetInt(const char* name, int val)
+{
+	UINT32 index = glGetUniformLocation(m_ProgramId, name);
+	if (index == -1)
+		return;
+
+	glUniform1i(index, val);
+}
+
+std::string ShaderProgram::GetIndexedArrayUniformName(int index, const char* name)
+{
+	std::string original(name);
+	original.push_back('[');
+	original.append(std::to_string(index));
+	original.push_back(']');
+	return original;
 }
 
 void ShaderProgram::Attach(const char* shaderPath, const ShaderType& type)

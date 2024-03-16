@@ -1,1 +1,20 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.Cpp.WindowsSDK.targets(46,5): error MSB8036: Die Windows SDK-Version 10.0.19041.0 wurde nicht gefunden. Installieren Sie die erforderliche Version des Windows SDK, oder ändern Sie die SDK-Version auf den Eigenschaftenseiten des Projekts. Sie können auch mit der rechten Maustaste auf die Projektmappe klicken und dann "Projektmappe neu zuweisen" auswählen.
+﻿  BlankProject.cpp
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244: "Argument": Konvertierung von "_Rep" in "float", möglicher Datenverlust
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:         with
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:         [
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:             _Rep=double
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:         ]
+  (Quelldatei „Source/BlankProject.cpp“ wird kompiliert)
+  
+  glad.c
+  glad_wgl.c
+  Code wird generiert...
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_opengl3.cpp
+  imgui_impl_win32.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  Code wird generiert...
+LINK : fatal error LNK1104: Datei "C:\Users\Deniz\Desktop\RayEngine\Build\Debug\Ray.lib" kann nicht geöffnet werden.
