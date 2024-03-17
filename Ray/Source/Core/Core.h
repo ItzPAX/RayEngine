@@ -32,6 +32,8 @@
 #include "Graphics/ShaderProgram.h"
 #include "Graphics/VAO.h"
 #include "Graphics/Primitive.h"
+#include "Graphics/Mesh.h"
+#include "Graphics/Model.h"
 #include "Graphics/Graphics.h"
 
 // UI

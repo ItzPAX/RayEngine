@@ -45,6 +45,15 @@ void ShaderProgram::SetVec4(const char* name, glm::vec4 val)
 	glUniform4f(index, val.x, val.y, val.z, val.w);
 }
 
+void ShaderProgram::SetMat4(const char* name, glm::mat4 val)
+{
+	UINT32 index = glGetUniformLocation(m_ProgramId, name);
+	if (index == -1)
+		return;
+
+	glUniformMatrix4fv(index, 1, GL_FALSE, &val[0][0]);
+}
+
 void ShaderProgram::SetFloat(const char* name, float val)
 {
 	UINT32 index = glGetUniformLocation(m_ProgramId, name);
@@ -113,8 +122,10 @@ void ShaderProgram::Attach(const char* shaderPath, const ShaderType& type)
 		wchar_t* wc = new wchar_t[errorMessage.size()];
 		mbstowcs(wc, &errorMessage[0], errorMessage.size());
 
+		wc[errorMessage.size() - 4] = 0;
+
 		std::wstringstream ss;
-		ss << "ShaderProgram->" << shaderPath << " couldn't compile: " << wc;
+		ss << "ShaderProgram->" << shaderPath << " couldn't compile: \n" << wc;
 
 		Logger::PrintOGL3DWarning(ss.str().c_str());
 	}
@@ -137,6 +148,8 @@ void ShaderProgram::Link()
 
 		wchar_t* wc = new wchar_t[errorMessage.size()];
 		mbstowcs(wc, &errorMessage[0], errorMessage.size());
+
+		wc[errorMessage.size() - 4] = 0;
 
 		std::wstringstream ss;
 		ss << "ShaderProgram->" << wc;

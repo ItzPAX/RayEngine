@@ -10,13 +10,6 @@ enum class PRIMITIVE_TYPE
 	PRIMITIVE_TRIANGLE
 };
 
-struct RAY_API Vertex
-{
-	glm::vec3 m_Position;
-	glm::vec2 m_TexCoord;
-	glm::vec3 m_Normal;
-};
-
 struct RAY_API PrimitiveDesc
 {
 	char m_Texture[MAX_PATH];

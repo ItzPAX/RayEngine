@@ -32,6 +32,7 @@ public:
 public:
 	void SetVec3(const char* name, glm::vec3 val);
 	void SetVec4(const char* name, glm::vec4 val);
+	void SetMat4(const char* name, glm::mat4 val);
 	void SetFloat(const char* name, float val);
 	void SetInt(const char* name, int val);
 

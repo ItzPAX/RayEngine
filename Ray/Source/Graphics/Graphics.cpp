@@ -87,14 +87,24 @@ FrameBufferPtr Graphics::CreateFrameBuffer()
 	return std::make_shared<FrameBuffer>();
 }
 
-TexturePtr Graphics::CreateTexture(const char* path)
+TexturePtr Graphics::CreateTexture(const char* path, bool flip)
 {
-	return std::make_shared<Texture>(path);
+	return std::make_shared<Texture>(path, flip);
 }
 
 PrimitivePtr Graphics::CreatePrimitive(PRIMITIVE_TYPE type, const PrimitiveDesc& desc, const MaterialDesc& material)
 {
 	return PrimitiveContainer::Instance().Add(type, desc, material);
+}
+
+PointLightPtr Graphics::CreatePointLight(PointLight& pl)
+{
+	return LightingManager::Instance().AddPointLight(pl);
+}
+
+ModelPtr Graphics::CreateModel(const char* path, const char* vertex, const char* fragment)
+{
+	return std::make_shared<Model>(path, ShaderProgramDesc{ vertex, fragment });
 }
 
 void Graphics::Clear(glm::vec4 col)

@@ -26,53 +26,32 @@ public:
 		Graphics::Instance()->Clear(glm::vec4(0.f, 0.f, 0.f, 1.f), true, false);
 		FloatingCamera::GetFloatingCam().Think(MouseSpeed(), deltatime);
 
-		if (Engine::GetMode() == EDITOR)
-		{
-			UI::Instance().RenderUI(m_FrameBuffer->Textures(), UI::CameraType::CAMERA_FLOATING);
-			Simulation::m_FrameBuffer->Bind();
+		UI::Instance().RenderUI(m_FrameBuffer->Textures(), UI::CameraType::CAMERA_FLOATING);
+		Simulation::m_FrameBuffer->Bind();
 
-			Graphics::Instance()->Clear(glm::vec4(0.f, 0.f, 0.f, 1.f), true, false);
-		}
+		Graphics::Instance()->Clear(glm::vec4(0.f, 0.f, 0.f, 1.f), true, false);
 
 		static float elapsed = 0;
 		elapsed += deltatime;
 
-		Update(deltatime, elapsed);
-
 		Graphics::Instance()->m_DrawCallsThisFrame = 0;
 		Graphics::Instance()->m_TrianglesThisFrame = 0;
 
+		Update(deltatime, elapsed);
+
 		PrimitiveContainer::Instance().Render(deltatime);
 
-		if (Engine::GetMode() == EDITOR)
-		{
-			Simulation::m_FrameBuffer->Unbind();
-		}
+		Simulation::m_FrameBuffer->Unbind();
 
 		Simulation::Present(false);
 	}
 
 	// Init
 	PrimitivePtr prim[10];
+	ModelPtr model;
 
 	VOID Initialize()
 	{
-		for (int i = 0; i < 10; i++)
-		{
-			prim[i] = Graphics::Instance()->CreatePrimitive(
-				PRIMITIVE_TYPE::PRIMITIVE_CUBE,
-				{
-					"",																								// texture
-					"C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.vert",		// vertex
-					"C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShaderLight.frag",	// fragment
-					glm::vec3(1.f),																					// color
-					glm::vec3(rand() % 20 - 10, rand() % 20 - 10, rand() % 20 - 10),																					// position
-					glm::vec3(rand() % 360, rand() % 360, rand() % 360),																					// rotation
-				},
-				Materials::debug
-			);
-		}
-
 		LightingManager::Instance().m_SpotLight = SpotLight{
 			glm::vec3(1.f, 1.f, 1.f),			// position
 			glm::vec3(1.f, 1.f, 1.f),			// direction
@@ -92,6 +71,8 @@ public:
 			glm::vec3(0.5f, 0.5f, 0.5f),		// diffuse
 			glm::vec3(1.0f, 1.0f, 1.0f),		// specular
 		};
+
+		//model = Graphics::Instance()->CreateModel("C:\\Users\\Deniz\\Downloads\\backpack\\backpack.obj", "C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.vert", "C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.frag");
 	}
 
 	// Update
@@ -99,6 +80,8 @@ public:
 	{
 		LightingManager::Instance().m_SpotLight.m_Position = FloatingCamera::GetFloatingCam().Position();
 		LightingManager::Instance().m_SpotLight.m_Direction = FloatingCamera::GetFloatingCam().Front();
+
+		//model->Draw();
 	}
 
 	// Quit

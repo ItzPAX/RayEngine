@@ -156,6 +156,8 @@
     <ClCompile Include="Source\Graphics\FrameBuffer.cpp" />
     <ClCompile Include="Source\Graphics\Graphics.cpp" />
     <ClCompile Include="Source\Graphics\LightingManager.cpp" />
+    <ClCompile Include="Source\Graphics\Mesh.cpp" />
+    <ClCompile Include="Source\Graphics\Model.cpp" />
     <ClCompile Include="Source\Graphics\Primitive.cpp" />
     <ClCompile Include="Source\Graphics\ShaderProgram.cpp" />
     <ClCompile Include="Source\Graphics\Texture.cpp" />
@@ -202,6 +204,8 @@
     <ClInclude Include="Source\Graphics\GraphicsDefinitions.h" />
     <ClInclude Include="Source\Graphics\LightingManager.h" />
     <ClInclude Include="Source\Graphics\Materials.h" />
+    <ClInclude Include="Source\Graphics\Mesh.h" />
+    <ClInclude Include="Source\Graphics\Model.h" />
     <ClInclude Include="Source\Graphics\Primitive.h" />
     <ClInclude Include="Source\Graphics\ShaderProgram.h" />
     <ClInclude Include="Source\Graphics\Texture.h" />

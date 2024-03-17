@@ -9,9 +9,6 @@ void LightingManager::ManageBasicLighting(ShaderProgramPtr shader, glm::vec3 obj
 	shader->SetVec3("u_ViewPos", FloatingCamera::GetFloatingCam().Position());
 
 	// object material
-	shader->SetVec3("u_Material.ambient", material.m_Ambient);
-	shader->SetVec3("u_Material.diffuse", material.m_Diffuse);
-	shader->SetVec3("u_Material.specular", material.m_Specular);
 	shader->SetFloat("u_Material.shininess", 32.0f);
 
 	// directional light
@@ -56,8 +53,10 @@ void LightingManager::DeletePointLight(const PointLight& light)
 	m_PointLights.erase(light.m_Index);
 }
 
-void LightingManager::AddPointLight(PointLight& light)
+PointLightPtr LightingManager::AddPointLight(PointLight& light)
 {
 	light.m_Index = m_PointLights.size();
 	m_PointLights[light.m_Index] = light;
+
+	return std::make_shared<PointLight>(light);
 }

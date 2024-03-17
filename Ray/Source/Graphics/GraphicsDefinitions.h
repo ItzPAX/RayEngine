@@ -17,3 +17,9 @@ typedef std::shared_ptr<Texture> TexturePtr;
 
 class PrimitiveRenderData;
 typedef std::shared_ptr<PrimitiveRenderData> PrimitivePtr;
+
+class PointLight;
+typedef std::shared_ptr<PointLight> PointLightPtr;
+
+class Model;
+typedef std::shared_ptr<Model> ModelPtr;

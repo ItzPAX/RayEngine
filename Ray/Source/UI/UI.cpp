@@ -326,7 +326,7 @@ VOID UI::RenderPointLightCreationWindow()
 	{
 		RenderPointLightEditor(light);
 		if (ImGui::Button("Add Light", ImVec2(-1, 0)))
-			LightingManager::Instance().AddPointLight(light);
+			Graphics::Instance()->CreatePointLight(light);
 	}
 	ImGui::End();
 }

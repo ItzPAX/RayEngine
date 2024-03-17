@@ -223,6 +223,12 @@
     <ClCompile Include="Source\Graphics\LightingManager.cpp">
       <Filter>Source\Graphics\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Graphics\Mesh.cpp">
+      <Filter>Source\Graphics\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Graphics\Model.cpp">
+      <Filter>Source\Graphics\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\PerGameSettings.h">
@@ -365,6 +371,12 @@
     </ClInclude>
     <ClInclude Include="Source\Graphics\Materials.h">
       <Filter>Source\Graphics\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Mesh.h">
+      <Filter>Source\Graphics\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\Model.h">
+      <Filter>Source\Graphics\Classes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

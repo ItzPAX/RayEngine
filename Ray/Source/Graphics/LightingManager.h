@@ -68,7 +68,7 @@ public:
 
 public:
 	void ManageBasicLighting(ShaderProgramPtr shader, glm::vec3 objectcolor, const MaterialDesc& material);
-	void AddPointLight(PointLight& light);
+	PointLightPtr AddPointLight(PointLight& light);
 	void DeletePointLight(const PointLight& light);
 
 	DirectionalLight m_DirectionalLight;

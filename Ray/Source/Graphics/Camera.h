@@ -37,14 +37,15 @@ public:
 	virtual void Translate(glm::vec3 v);
 	virtual void Update();
 
+public:
+	CameraDesc m_Desc;
+	glm::mat4 m_View;
+
 protected:
 	glm::vec3 m_Position;
 
 	glm::mat4 m_Projection;
-	glm::mat4 m_View;
 	glm::mat4 m_ViewProj;
-
-	CameraDesc m_Desc;
 
 	float m_ActualSpeed;
 

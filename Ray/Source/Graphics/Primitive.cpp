@@ -68,7 +68,7 @@ void Primitive::Render(float dt)
 {
 	UpdatePrimitive(dt);
 
-	VertexData vdata = { FloatingCamera::GetFloatingCam().GetViewProj() * m_Model, m_Model, m_Description.m_ObjectColor};
+	VertexData vdata = { FloatingCamera::GetFloatingCam().GetViewProj() * m_Model, m_Model};
 	m_UniformBuffer->SetData(&vdata);
 
 	Graphics::Instance()->SetTexture(m_Texture);
