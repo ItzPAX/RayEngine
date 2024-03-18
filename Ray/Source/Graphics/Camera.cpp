@@ -8,9 +8,9 @@ Camera::Camera()
 	CameraDesc desc = 
 	{
 				90.f,							// FOV
-				3.f,							// SPEED
+				150.f,							// SPEED
 				0.1f,							// NEAR
-				1000.f,							// FAR
+				100000.f,						// FAR
 				glm::vec3(0.f, 2.f, 8.f)		// START POS
 	};
 

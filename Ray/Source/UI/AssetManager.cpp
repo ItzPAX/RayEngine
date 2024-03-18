@@ -43,7 +43,10 @@ void AssetManager::Initialize(std::string name, AssetManagerFlags flags)
 
 void AssetManager::Render()
 {
-	ImGui::Begin(m_Name.c_str());
+	if (!m_AssetManager)
+		return;
+
+	ImGui::Begin(m_Name.c_str(), &m_AssetManager);
 	{
 		ImGui::TextWrapped(m_Path.c_str());
 		if (ImGui::Combo("Drive", &m_SelectedDrive, &m_DrivesVec[0], (int)m_DrivesVec.size()))
@@ -164,7 +167,8 @@ void AssetManager::RenderFileMenu(Asset asset)
 	}
 	if (ImGui::Button("Load Model", ImVec2(-1, 0)))
 	{
-		Graphics::Instance()->CreateModel(asset.m_Path.c_str(), "C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.vert", "C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.frag");
+		// TEMPORARY SOLUTION
+		Graphics::Instance()->CreateModel(asset.m_Path.c_str(), { "C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.vert", "C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.frag" });
 		GetFilesInPath();
 	}
 }

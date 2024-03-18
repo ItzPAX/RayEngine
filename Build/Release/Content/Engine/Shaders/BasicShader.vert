@@ -4,6 +4,7 @@ layout(std140, binding=0) uniform VertexData
 {
 	mat4 u_ModelViewProj;
 	mat4 u_Model;
+	mat4 u_Scaling;
 };
 
 layout(location = 0) in vec3 position;
@@ -18,7 +19,7 @@ out vec2 vertOutTexCoords;
 
 void main()
 {
-	gl_Position = u_ModelViewProj * vec4(position, 1);
+	gl_Position = u_Scaling * u_ModelViewProj * vec4(position, 1);
 	
 	vec3 T = normalize(vec3(u_Model * vec4(tangent,   0.0)));
 	vec3 B = normalize(vec3(u_Model * vec4(bitangent, 0.0)));

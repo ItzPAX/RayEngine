@@ -43,14 +43,7 @@ public:
 
 private:
 	VOID RenderElements(UINT32 scene, UI::CameraType type);
-	
-	VOID MakeWindowDockspace();
-	VOID RenderMainMenubar();
-	VOID RenderScene(UINT32 scene);
-	VOID RenderInfoMenu(UI::CameraType type);
-	VOID RenderLogMenu();
 
-#pragma region Primitives
 	enum BrowserType
 	{
 		BROWSER_VERTEX = 0,
@@ -58,11 +51,21 @@ private:
 		BROWSER_TEXTURE
 	};
 
+	VOID MakeWindowDockspace();
+	VOID RenderMainMenubar();
+	VOID RenderScene(UINT32 scene);
+	VOID RenderInfoMenu(UI::CameraType type);
+	VOID RenderLogMenu();
+
+	// Primitive
 	void RenderPrimitiveDescriptionEditor(PrimitiveDesc* pdesc, MaterialDesc* pmat);
 
 	template <typename T>
 	VOID RenderPrimitiveTreeView(std::string primitive, PRIMITIVE_TYPE type);
 	VOID RenderPrimitiveUpdateWindow();
+
+	VOID RenderPrimitiveCreationWindow();
+	VOID AddPrimitive(const PrimitiveDesc& desc, const MaterialDesc& material);
 
 	VOID RenderSpotLightTreeView();
 	VOID RenderDirectionalLightTreeView();
@@ -72,16 +75,31 @@ private:
 
 	VOID RenderPointLightCreationWindow();
 
-	VOID RenderPrimitiveCreationWindow();
-	VOID AddPrimitive(const PrimitiveDesc& desc, const MaterialDesc& material);
+	VOID RenderModelTreeView();
+	VOID RenderModelUpdateWindow();
+
+	VOID RenderMetricsWindow();
+	VOID RenderAboutWindow();
 
 	VOID InitFileBrowser();
 	VOID ManageFileBrowser(PrimitiveDesc& desc);
-#pragma endregion
 
 private:
 	bool m_Initialized = false;
 	bool m_SceneActive = false;
+
+	// window toggles
+	bool m_MetricsActive = false;
+	bool m_AboutActive = false;
+
+	bool m_PrimitiveCreation = true;
+	bool m_PrimitiveEditor = true;
+	bool m_ModelEditor = true;
+	bool m_LightCreation = true;
+	bool m_LightEditor = true;
+
+	bool m_Info = true;
+	bool m_Log = true;
 
 	PRIMITIVE_TYPE m_CurrentPrimitive;
 

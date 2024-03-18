@@ -3,7 +3,7 @@
 class RAY_API Texture
 {
 public:
-	Texture(const char* path, bool flip = true);
+	Texture(const char* path, const char* type, bool flip = true);
 	~Texture();
 
 	void Delete();

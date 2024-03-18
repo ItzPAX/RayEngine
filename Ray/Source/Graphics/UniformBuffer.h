@@ -4,6 +4,7 @@ struct RAY_API VertexData
 {
 	glm::mat4 u_ModelViewProj;
 	glm::mat4 u_Model;
+	glm::mat4 u_Scaling;
 };
 
 struct UniformBufferDesc

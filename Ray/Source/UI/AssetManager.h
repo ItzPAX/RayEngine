@@ -28,6 +28,8 @@ public:
 	void Initialize(std::string name, AssetManagerFlags);
 	void Render();
 
+	bool m_AssetManager = true;
+
 private:
 	void GetFilesInPath();
 	void RenderFileMenu(Asset asset);

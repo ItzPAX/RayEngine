@@ -41,13 +41,13 @@ public:
 	static UniformBufferPtr CreateUniformBuffer(const UniformBufferDesc& desc);
 	static FrameBufferPtr CreateFrameBuffer();
 
-	static TexturePtr CreateTexture(const char* path, bool flip = true);
+	static TexturePtr CreateTexture(const char* path, const char* type, bool flip = true);
 
 	static PrimitivePtr CreatePrimitive(PRIMITIVE_TYPE type, const PrimitiveDesc& desc, const MaterialDesc& material);
 
 	static PointLightPtr CreatePointLight(PointLight& pl);
 
-	static ModelPtr CreateModel(const char* path, const char* vertex, const char* fragment);
+	static ModelPtr CreateModel(const char* path, const ShaderProgramDesc& shader);
 public:
 	static void SetViewport(glm::vec2 innerrect);
 	static void SetVertexArrayObject(const VertexArrayObjectPtr& vao);

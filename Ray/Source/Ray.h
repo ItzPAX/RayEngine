@@ -25,6 +25,7 @@
 #include <fstream>
 #include <filesystem>
 #include <direct.h>
+#include <thread>
 
 // OpenGL libs
 #include <glad/glad_wgl.h>

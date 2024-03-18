@@ -80,6 +80,11 @@ VOID UI::RenderElements(UINT32 scene, UI::CameraType type)
 	RenderPrimitiveCreationWindow();
 	RenderPrimitiveUpdateWindow();
 	RenderLightUpdateWindow();
+	RenderModelUpdateWindow();
+
+	// MenuBar
+	RenderMetricsWindow();
+	RenderAboutWindow();
 
 	// our asset manager
 	m_AssetManager.Render();
@@ -117,9 +122,26 @@ VOID UI::RenderMainMenubar()
 	// menu bar
 	if (ImGui::BeginMainMenuBar())
 	{
-		static bool test;
-		ImGui::MenuItem("Test", "test", &test);
-		ImGui::EndMainMenuBar();
+		if (ImGui::BeginMenu("View"))
+		{
+			ImGui::MenuItem("Asset Manager", NULL, &m_AssetManager.m_AssetManager);
+			ImGui::MenuItem("Primitive Creation", NULL, &m_PrimitiveCreation);
+			ImGui::MenuItem("Primitive Editor", NULL, &m_PrimitiveEditor);
+			ImGui::MenuItem("Model Editor", NULL, &m_ModelEditor);
+			ImGui::MenuItem("Light Creation", NULL, &m_LightCreation);
+			ImGui::MenuItem("Light Editor", NULL, &m_LightEditor);
+			ImGui::MenuItem("Info", NULL, &m_Info);
+			ImGui::MenuItem("Log", NULL, &m_Log);
+			ImGui::EndMenu();
+		}
+
+		if (ImGui::BeginMenu("Tools"))
+		{
+			ImGui::MenuItem("Metrics/Debugger", NULL, &m_MetricsActive);
+			ImGui::Separator();
+			ImGui::MenuItem("About RayEngine", NULL, &m_AboutActive);
+			ImGui::EndMenu();
+		}
 	}
 }
 
@@ -150,10 +172,13 @@ inline void UI::RenderPrimitiveDescriptionEditor(PrimitiveDesc* pdesc, MaterialD
 
 VOID UI::RenderPrimitiveCreationWindow()
 {
+	if (!m_PrimitiveCreation)
+		return;
+
 	static PrimitiveDesc desc;
 	static MaterialDesc mat;
 
-	ImGui::Begin("Add Primitive");
+	ImGui::Begin("Add Primitive", &m_PrimitiveCreation);
 	{
 		ImGui::Combo("Primitive Type", (int*)&m_CurrentPrimitive, m_PrimitiveTypes, IM_ARRAYSIZE(m_PrimitiveTypes));
 		RenderPrimitiveDescriptionEditor(&desc, &mat);
@@ -209,6 +234,40 @@ VOID UI::AddPrimitive(const PrimitiveDesc& desc, const MaterialDesc& material)
 	PrimitivePtr prim = Graphics::Instance()->CreatePrimitive(m_CurrentPrimitive, desc, material);
 }
 
+VOID UI::RenderMetricsWindow()
+{
+	if (!m_MetricsActive)
+		return;
+	
+	auto io = ImGui::GetIO();
+
+	ImGui::Begin("Metrics/Debugger", &m_MetricsActive, ImGuiWindowFlags_NoDocking);
+	ImGui::Text("Engine Metrics");
+	ImGui::Text("Vertices this frame: %d", Graphics::Instance()->m_TrianglesThisFrame);
+	ImGui::Text("Draw calls this frame: %d", Graphics::Instance()->m_DrawCallsThisFrame);
+	ImGui::Separator();
+
+	ImGui::Text("Dear ImGui %s", ImGui::GetVersion());
+	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+	ImGui::Text("%d vertices, %d indices (%d triangles)", io.MetricsRenderVertices, io.MetricsRenderIndices, io.MetricsRenderIndices / 3);
+	ImGui::Text("%d visible windows, %d active allocations", io.MetricsRenderWindows, io.MetricsActiveAllocations);
+	ImGui::End();
+}
+
+VOID UI::RenderAboutWindow()
+{
+	if (!m_AboutActive)
+		return;
+
+	auto io = ImGui::GetIO();
+
+	ImGui::Begin("About", &m_AboutActive, ImGuiWindowFlags_NoDocking);
+	ImGui::Text("About RayEngine");
+	ImGui::Separator();
+	ImGui::TextWrapped("RayEngine is developed by ItzPAX and is a FOSS engine that uses the OpenGL 4.6 rendering pipeline\n");
+	ImGui::End();
+}
+
 template <typename T>
 inline VOID UI::RenderPrimitiveTreeView(std::string primitive, PRIMITIVE_TYPE type)
 {
@@ -238,7 +297,10 @@ inline VOID UI::RenderPrimitiveTreeView(std::string primitive, PRIMITIVE_TYPE ty
 
 VOID UI::RenderPrimitiveUpdateWindow()
 {
-	ImGui::Begin("Primitives");
+	if (!m_PrimitiveEditor)
+		return;
+
+	ImGui::Begin("Primitives", &m_PrimitiveEditor);
 	{
 		RenderPrimitiveTreeView<Cube>("Cube", PRIMITIVE_TYPE::PRIMITIVE_CUBE);
 		RenderPrimitiveTreeView<Pyramid>("Pyramid", PRIMITIVE_TYPE::PRIMITIVE_PYRAMID);
@@ -298,19 +360,31 @@ VOID UI::RenderPointLightTreeView()
 {
 	if (ImGui::CollapsingHeader("Point light(s)"))
 	{
+		int light = 0;
 		for (auto& pointlight_map : LightingManager::Instance().m_PointLights)
 		{
-			RenderPointLightEditor(pointlight_map.second);
+			std::string name = "PointLight" + std::to_string(light);
+			if (ImGui::TreeNode(name.c_str()))
+			{
+				RenderPointLightEditor(pointlight_map.second);
 
-			if (ImGui::Button("Delete"))
-				LightingManager::Instance().DeletePointLight(pointlight_map.second);
+				if (ImGui::Button("Delete"))
+					LightingManager::Instance().DeletePointLight(pointlight_map.second);
+
+				ImGui::TreePop();
+				ImGui::Separator();
+			}
+			light++;
 		}
 	}
 }
 
 VOID UI::RenderLightUpdateWindow()
 {
-	ImGui::Begin("Lights");
+	if (!m_LightEditor)
+		return;
+
+	ImGui::Begin("Lights", &m_LightEditor);
 	{
 		RenderSpotLightTreeView();
 		RenderDirectionalLightTreeView();
@@ -318,11 +392,55 @@ VOID UI::RenderLightUpdateWindow()
 	}
 	ImGui::End();
 }
+
+VOID UI::RenderModelTreeView()
+{
+	if (ImGui::CollapsingHeader("Model(s)"))
+	{
+		int model = 0;
+		for (auto& mptr_map : ModelContainer::Instance().m_Models)
+		{
+			std::string name = "Model" + std::to_string(model);
+			if (ImGui::TreeNode(name.c_str()))
+			{
+				ImGui::InputFloat3(("Position##" + name).c_str(), &mptr_map.second->m_Position.x);
+				ImGui::InputFloat3(("Rotation##" + name).c_str(), &mptr_map.second->m_Rotation.x);
+				ImGui::InputFloat(("Scale##" + name).c_str(), &mptr_map.second->m_Scale);
+
+				ImGui::Text("Model Info");
+				ImGui::Text("Meshes: %d", mptr_map.second->m_Meshes.size());
+				ImGui::Text("Unique Textures: %d", mptr_map.second->m_TexturesLoaded.size());
+
+				if (ImGui::Button("Delete"))
+					ModelContainer::Instance().Delete(mptr_map.second);
+
+				ImGui::TreePop();
+				ImGui::Separator();
+			}
+			model++;
+		}
+	}
+}
+
+VOID UI::RenderModelUpdateWindow()
+{
+	if (!m_ModelEditor)
+		return;
+
+	ImGui::Begin("Model", &m_ModelEditor);
+	{
+		RenderModelTreeView();
+	}
+	ImGui::End();
+}
 VOID UI::RenderPointLightCreationWindow()
 {
+	if (!m_LightCreation)
+		return;
+
 	static PointLight light;
 
-	ImGui::Begin("Add PointLight");
+	ImGui::Begin("Add PointLight", &m_LightCreation);
 	{
 		RenderPointLightEditor(light);
 		if (ImGui::Button("Add Light", ImVec2(-1, 0)))
@@ -334,6 +452,9 @@ VOID UI::RenderPointLightCreationWindow()
 
 VOID UI::RenderInfoMenu(UI::CameraType type)
 {
+	if (!m_Info)
+		return;
+
 	glm::vec3 pos(0.f); glm::vec2 view(0.f);
 	switch (type)
 	{
@@ -350,7 +471,7 @@ VOID UI::RenderInfoMenu(UI::CameraType type)
 		break;
 	}
 
-	ImGui::Begin("Info");
+	ImGui::Begin("Info", &m_Info);
 	ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::Text("Vertices this frame: %d", Graphics::Instance()->m_TrianglesThisFrame);
 	ImGui::Text("Draw calls this frame: %d", Graphics::Instance()->m_DrawCallsThisFrame);
@@ -384,9 +505,12 @@ VOID UI::RenderScene(UINT32 scene)
 
 VOID UI::RenderLogMenu()
 {
+	if (!m_Log)
+		return;
+
 	bool b = false;
 
-	ImGui::Begin("Logs");
+	ImGui::Begin("Logs", &m_Log);
 	{
 		ImGui::ListBoxHeader("##LogBox", ImVec2(-1,-1));
 		for (auto ws : Logger::Instance()->m_Logs)

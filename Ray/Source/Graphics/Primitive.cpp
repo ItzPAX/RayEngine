@@ -51,7 +51,7 @@ Primitive::Primitive(const PrimitiveDesc& desc, const MaterialDesc& material)
 
 	m_UniformBuffer = Graphics::Instance()->CreateUniformBuffer({ sizeof(VertexData) });
 
-	m_Texture = Graphics::Instance()->CreateTexture(m_Description.m_Texture);
+	m_Texture = Graphics::Instance()->CreateTexture(m_Description.m_Texture, "diffuse_texture");
 
 	m_Shader = Graphics::Instance()->CreateShaderProgram
 	({
@@ -68,7 +68,12 @@ void Primitive::Render(float dt)
 {
 	UpdatePrimitive(dt);
 
-	VertexData vdata = { FloatingCamera::GetFloatingCam().GetViewProj() * m_Model, m_Model};
+	glm::mat4 scaling_mat = glm::mat4(1.f, 0.f, 0.f, 0.f,
+		0.f, 1.f, 0.f, 0.f,
+		0.f, 0.f, 1.f, 0.f,
+		0.f, 0.f, 0.f, 1.f);
+
+	VertexData vdata = { FloatingCamera::GetFloatingCam().GetViewProj() * m_Model, m_Model, scaling_mat };
 	m_UniformBuffer->SetData(&vdata);
 
 	Graphics::Instance()->SetTexture(m_Texture);

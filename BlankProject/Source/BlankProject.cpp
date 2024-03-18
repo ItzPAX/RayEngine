@@ -40,6 +40,7 @@ public:
 		Update(deltatime, elapsed);
 
 		PrimitiveContainer::Instance().Render(deltatime);
+		ModelContainer::Instance().Render(deltatime);
 
 		Simulation::m_FrameBuffer->Unbind();
 
@@ -80,8 +81,6 @@ public:
 	{
 		LightingManager::Instance().m_SpotLight.m_Position = FloatingCamera::GetFloatingCam().Position();
 		LightingManager::Instance().m_SpotLight.m_Direction = FloatingCamera::GetFloatingCam().Front();
-
-		//model->Draw();
 	}
 
 	// Quit

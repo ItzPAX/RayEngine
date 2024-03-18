@@ -1,7 +1,7 @@
 #include "Ray.h"
 #include <stb_image/stb_image.h>
 
-Texture::Texture(const char* path, bool flip)
+Texture::Texture(const char* path, const char* type, bool flip)
 {
 	glGenTextures(1, &m_TextureID);
 
@@ -10,6 +10,7 @@ Texture::Texture(const char* path, bool flip)
 	m_Data = stbi_load(path, &m_Width, &m_Height, &m_Channels, 0);
 	if (m_Data)
 	{
+		m_Format = GL_RGB;
 		if (m_Channels == 1)
 			m_Format = GL_RED;
 		else if (m_Channels == 3)
@@ -21,8 +22,10 @@ Texture::Texture(const char* path, bool flip)
 		glTexImage2D(GL_TEXTURE_2D, 0, m_Format, m_Width, m_Height, 0, m_Format, GL_UNSIGNED_BYTE, m_Data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 
+		m_Type = type;
+
 		std::wstringstream ss;
-		ss << L"Texture->Created: " << path;
+		ss << L"Texture->Created: " << path << L" Channels: " << std::to_wstring(m_Channels) << L" Type: " << type;
 		Logger::PrintOGL3DInfo(ss.str().c_str());
 	}
 	else

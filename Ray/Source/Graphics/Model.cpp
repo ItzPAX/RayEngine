@@ -10,9 +10,16 @@ Model::Model(std::string path, const ShaderProgramDesc& shader)
 	LoadModel(path);
 }
 
-void Model::Draw()
+void Model::Draw(float dt)
 {
-	VertexData vdata = { FloatingCamera::GetFloatingCam().GetViewProj() * m_Model, m_Model };
+	UpdateModel(dt);
+
+	glm::mat4 scaling_mat = glm::mat4(m_Scale, 0.f, 0.f, 0.f,
+		0.f, m_Scale, 0.f, 0.f,
+		0.f, 0.f, m_Scale, 0.f,
+		0.f, 0.f, 0.f, 1.f);
+
+	VertexData vdata = { FloatingCamera::GetFloatingCam().GetViewProj() * m_Model, m_Model, scaling_mat };
 	m_UniformBuffer->SetData(&vdata);
 
 	Graphics::Instance()->SetShaderProgram(m_Shader);
@@ -124,15 +131,18 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 
 		std::vector<TexturePtr> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-
+		
 		std::vector<TexturePtr> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-
-		std::vector<TexturePtr> normalMaps = LoadMaterialTextures(material, aiTextureType_NORMALS, "texture_normal");
+		
+		// normals for whatever reason
+		std::vector<TexturePtr> normalMaps = LoadMaterialTextures(material, aiTextureType_DISPLACEMENT, "texture_normal");
+		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
+		normalMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
 		textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
 
-		std::vector<TexturePtr> roughnessMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE_ROUGHNESS, "texture_roughness");
-		textures.insert(textures.end(), roughnessMaps.begin(), roughnessMaps.end());
+		std::vector<TexturePtr> ambientMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_ambient");
+		textures.insert(textures.end(), ambientMaps.begin(), ambientMaps.end());
 	}
 
 	return Mesh(vertices, indices, textures);
@@ -163,11 +173,45 @@ std::vector<TexturePtr> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureTy
 		}
 		if (!skip)
 		{
-			TexturePtr tex = Graphics::Instance()->CreateTexture(material_path.c_str());
-			tex->m_Type = typeName;
+			TexturePtr tex = Graphics::Instance()->CreateTexture(material_path.c_str(), typeName.c_str(), false);
 			textures.push_back(tex);
 			m_TexturesLoaded.push_back(tex);
 		}
 	}
 	return textures;
+}
+
+void Model::UpdateModel(float dt)
+{
+	m_Model = glm::mat4(1.f);
+
+	m_Model = glm::translate(m_Model,m_Position);
+
+	m_Model = glm::rotate(m_Model, m_Rotation.x, glm::vec3(1, 0, 0));
+	m_Model = glm::rotate(m_Model, m_Rotation.y, glm::vec3(0, 1, 0));
+	m_Model = glm::rotate(m_Model, m_Rotation.z, glm::vec3(0, 0, 1));
+}
+
+void ModelContainer::Render(float dt)
+{
+	for (auto& mptr_map : m_Models)
+	{
+		mptr_map.second->Draw(dt);
+	}
+}
+
+ModelPtr ModelContainer::Add(const char* path, const ShaderProgramDesc& shader)
+{
+	Model m(path, shader);
+	m.m_Index = m_Models.size();
+	ModelPtr mptr = std::make_shared<Model>(m);
+
+	m_Models[mptr->m_Index] = mptr;
+
+	return mptr;
+}
+
+void ModelContainer::Delete(ModelPtr model)
+{
+	m_Models.erase(model->m_Index);
 }
