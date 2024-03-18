@@ -3375,7 +3375,7 @@ bool ImGui::TempInputScalar(const ImRect& bb, ImGuiID id, const char* label, ImG
 bool ImGui::InputScalar(const char* label, ImGuiDataType data_type, void* p_data, const void* p_step, const void* p_step_fast, const char* format, ImGuiInputTextFlags flags)
 {
     ImGuiWindow* window = GetCurrentWindow();
-    if (window->SkipItems)
+    if (window && window->SkipItems)
         return false;
 
     ImGuiContext& g = *GImGui;

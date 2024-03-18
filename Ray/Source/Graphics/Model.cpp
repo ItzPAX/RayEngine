@@ -143,6 +143,12 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 
 		std::vector<TexturePtr> ambientMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_ambient");
 		textures.insert(textures.end(), ambientMaps.begin(), ambientMaps.end());
+
+		for (int i = 0; i <= 21; i++)
+		{
+			std::vector<TexturePtr> ambientMaps = LoadMaterialTextures(material, (aiTextureType)i, std::to_string(i));
+			textures.insert(textures.end(), ambientMaps.begin(), ambientMaps.end());
+		}
 	}
 
 	return Mesh(vertices, indices, textures);

@@ -1,12 +1,10 @@
-﻿  Mesh.cpp
-C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Mesh.cpp(40,91): warning C4267: "Argument": Konvertierung von "size_t" nach "UINT32", Datenverlust möglich
-  Model.cpp
-C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Model.cpp(206,27): warning C4267: "=": Konvertierung von "size_t" nach "int", Datenverlust möglich
+﻿  Model.cpp
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Graphics\Model.cpp(212,27): warning C4267: "=": Konvertierung von "size_t" nach "int", Datenverlust möglich
      Bibliothek "C:\Users\Deniz\Desktop\RayEngine\\Build\Release\Ray.lib" und Objekt "C:\Users\Deniz\Desktop\RayEngine\\Build\Release\Ray.exp" werden erstellt.
   Code wird generiert.
-  8 of 5811 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  0 of 5811 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    82 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
   Ray.vcxproj -> C:\Users\Deniz\Desktop\RayEngine\Build\Release\Ray.dll
   Der Befehl "pwsh.exe" ist entweder falsch geschrieben oder
