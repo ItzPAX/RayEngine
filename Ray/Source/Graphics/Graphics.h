@@ -35,18 +35,12 @@ public:
 public:
 	static VertexArrayObjectPtr CreateVertexArrayObject(const VertexBufferDesc& vbDesc);
 	static VertexArrayObjectPtr CreateVertexArrayObject(const VertexBufferDesc& vbDesc, const IndexBufferDesc& ibDesc);
-
 	static ShaderProgramPtr CreateShaderProgram(const ShaderProgramDesc& desc);
-
 	static UniformBufferPtr CreateUniformBuffer(const UniformBufferDesc& desc);
-	static FrameBufferPtr CreateFrameBuffer();
-
+	static FrameBufferPtr CreateFrameBuffer(const FrameBufferDescription& fbdesc);
 	static TexturePtr CreateTexture(const char* path, const char* type, bool flip = true);
-
 	static PrimitivePtr CreatePrimitive(PRIMITIVE_TYPE type, const PrimitiveDesc& desc, const MaterialDesc& material);
-
 	static PointLightPtr CreatePointLight(PointLight& pl);
-
 	static ModelPtr CreateModel(const char* path, const ShaderProgramDesc& shader);
 public:
 	static void SetViewport(glm::vec2 innerrect);
@@ -56,6 +50,7 @@ public:
 	static void SetFaceCulling(const CullType& type);
 	static void SetWindingOrder(const WindingOrder& order);
 	static void SetTexture(const TexturePtr& texture);
+	static void SetBlending(const bool& state);
 
 public:
 	static void Clear(glm::vec4 col);

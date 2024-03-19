@@ -65,15 +65,13 @@ public:
 			0.09f,								// linear
 			0.032f								// quadratic
 		};
-
 		LightingManager::Instance().m_DirectionalLight = DirectionalLight{
 			glm::vec3(-0.2f, -1.0f, -0.3f),		// direction
 			glm::vec3(0.2f, 0.2f, 0.2f),		// ambient
 			glm::vec3(0.5f, 0.5f, 0.5f),		// diffuse
 			glm::vec3(1.0f, 1.0f, 1.0f),		// specular
 		};
-
-		//model = Graphics::Instance()->CreateModel("C:\\Users\\Deniz\\Downloads\\backpack\\backpack.obj", "C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.vert", "C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.frag");
+		Graphics::Instance()->SetBlending(true);
 	}
 
 	// Update

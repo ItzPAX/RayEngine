@@ -82,9 +82,9 @@ UniformBufferPtr Graphics::CreateUniformBuffer(const UniformBufferDesc& desc)
 	return std::make_shared<UniformBuffer>(desc);
 }
 
-FrameBufferPtr Graphics::CreateFrameBuffer()
+FrameBufferPtr Graphics::CreateFrameBuffer(const FrameBufferDescription& fbdesc)
 {
-	return std::make_shared<FrameBuffer>();
+	return std::make_shared<FrameBuffer>(fbdesc);
 }
 
 TexturePtr Graphics::CreateTexture(const char* path, const char* type, bool flip)
@@ -185,6 +185,17 @@ void Graphics::SetWindingOrder(const WindingOrder& order)
 void Graphics::SetTexture(const TexturePtr& texture)
 {
 	glBindTexture(GL_TEXTURE_2D, texture->GetTextureID());
+}
+
+void Graphics::SetBlending(const bool& state)
+{
+	if (state)
+	{
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+	}
+	else
+		glDisable(GL_BLEND);
 }
 
 void Graphics::DrawTriangles(const TriangleType& type, UINT32 vertexCount, UINT32 offset)

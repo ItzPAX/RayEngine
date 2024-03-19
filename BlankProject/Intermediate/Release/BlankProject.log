@@ -1,4 +1,11 @@
-﻿  imgui_widgets.cpp
+﻿  BlankProject.cpp
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244: "Argument": Konvertierung von "_Rep" in "float", möglicher Datenverlust
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:         with
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:         [
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:             _Rep=double
+C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:         ]
+  (Quelldatei „Source/BlankProject.cpp“ wird kompiliert)
+  
   Code wird generiert.
   Previous IPDB and IOBJ mismatch, fall back to full compilation.
   All 731 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
