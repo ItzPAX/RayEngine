@@ -33,12 +33,14 @@ void Mesh::Draw(ShaderProgramPtr shader)
         shader->SetInt(("u_Material." + name + number).c_str(), i);
         glBindTexture(GL_TEXTURE_2D, m_Textures[i]->GetTextureID());
     }
-    glActiveTexture(GL_TEXTURE0);
 
     // draw mesh
     glBindVertexArray(m_VAO);
     Graphics::Instance()->DrawIndexedTriangles(TriangleType::TRIANGLE_LIST, m_Indices.size());
     glBindVertexArray(0);
+
+    glActiveTexture(GL_TEXTURE0);
+
 }
 
 void Mesh::SetupMesh()

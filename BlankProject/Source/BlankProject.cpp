@@ -44,7 +44,7 @@ public:
 
 		Simulation::m_FrameBuffer->Unbind();
 
-		Simulation::Present(false);
+		Simulation::Present(true);
 	}
 
 	// Init
@@ -71,6 +71,21 @@ public:
 			glm::vec3(0.5f, 0.5f, 0.5f),		// diffuse
 			glm::vec3(1.0f, 1.0f, 1.0f),		// specular
 		};
+
+		PointLight pl;
+		pl.m_Position = glm::vec3(1, 1, 1);
+		pl.m_Ambient = glm::vec3(0.05f, 0.05f, 0.05f);
+		pl.m_Diffuse = glm::vec3(0.8f, 0.8f, 0.8f);
+		pl.m_Specular = glm::vec3(1.f, 1.f, 1.f);
+		pl.m_Constant = 1.f;
+		pl.m_Linear = 0.0014f;
+		pl.m_Quadratic = 0.000007f;
+
+		LightingManager::Instance().AddPointLight(pl);
+
+		pl.m_Position = glm::vec3(100, 1000, 0);
+		LightingManager::Instance().AddPointLight(pl);
+
 		Graphics::Instance()->SetBlending(true);
 	}
 

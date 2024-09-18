@@ -43,3 +43,5 @@
 *.ipdb
 *.pdb
 .vs/RayEngine/v17/DocumentLayout.json
+BlankProject/imgui.ini
+/.vs

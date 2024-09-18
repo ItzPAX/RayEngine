@@ -168,7 +168,7 @@ void AssetManager::RenderFileMenu(Asset asset)
 	if (ImGui::Button("Load Model", ImVec2(-1, 0)))
 	{
 		// TEMPORARY SOLUTION
-		Graphics::Instance()->CreateModel(asset.m_Path.c_str(), { "C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.vert", "C:/Users/Deniz/Desktop/RayEngine/Build/Release/Content/Engine/Shaders/BasicShader.frag" });
+		Graphics::Instance()->CreateModel(asset.m_Path.c_str(), { "D:\\MyProgramming\\C++\\RayEngine\\Build\\Release\\Content\\Engine\\Shaders\\1BasicShader.vert", "D:\\MyProgramming\\C++\\RayEngine\\Build\\Release\\Content\\Engine\\Shaders\\1BasicShader.frag" });
 		GetFilesInPath();
 	}
 }

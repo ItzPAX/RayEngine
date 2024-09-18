@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\Deniz\Desktop\RayEngine\Build\Release\Ray.dll</FullPath>
+      <FullPath>D:\MyProgramming\C++\RayEngine\Build\Release\Ray.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

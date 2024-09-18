@@ -1,11 +1,9 @@
 ﻿  BlankProject.cpp
-C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244: "Argument": Konvertierung von "_Rep" in "float", möglicher Datenverlust
-C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:         with
-C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:         [
-C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:             _Rep=double
-C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:         ]
-  (Quelldatei „Source/BlankProject.cpp“ wird kompiliert)
-  
+D:\MyProgramming\C++\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244: "Argument": Konvertierung von "_Rep" in "float", möglicher Datenverlust
+D:\MyProgramming\C++\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:         with
+D:\MyProgramming\C++\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:         [
+D:\MyProgramming\C++\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:             _Rep=double
+D:\MyProgramming\C++\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27): warning C4244:         ]
   glad.c
   glad_wgl.c
   Code wird generiert...
@@ -17,4 +15,4 @@ C:\Users\Deniz\Desktop\RayEngine\Ray\Source\Platform\Win32\w32WinEntry.h(55,27):
   imgui_tables.cpp
   imgui_widgets.cpp
   Code wird generiert...
-LINK : fatal error LNK1104: Datei "C:\Users\Deniz\Desktop\RayEngine\Build\Debug\Ray.lib" kann nicht geöffnet werden.
+LINK : fatal error LNK1104: Datei "D:\MyProgramming\C++\RayEngine\Build\Debug\Ray.lib" kann nicht geöffnet werden.

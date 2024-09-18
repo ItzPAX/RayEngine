@@ -76,4 +76,5 @@ public:
 	std::unordered_map<int, PointLight> m_PointLights;
 
 private:
+	std::vector<PointLight> m_ContiguousPointLights; // Contiguous buffer for shader mapping | DO NOT USE
 };
