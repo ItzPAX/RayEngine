@@ -45,3 +45,5 @@
 .vs/RayEngine/v17/DocumentLayout.json
 BlankProject/imgui.ini
 /.vs
+/Ray/Intermediate
+/BlankProject/Intermediate
