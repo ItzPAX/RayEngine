@@ -15,7 +15,7 @@ and many more features that make it a powerful 3d rendering engine.
 
 ## Limitations
 
-- Limited amount of point light sources (128)
+- Limited amount of point light sources (64)
 
 ## Tech
 
