@@ -41,8 +41,6 @@ Texture::Texture(const char* path, const char* type, bool flip)
 
 Texture::~Texture()
 {
-	if (!m_Data)
-		return;
 	stbi_image_free(m_Data);
 	glDeleteTextures(1, &m_TextureID);
 }

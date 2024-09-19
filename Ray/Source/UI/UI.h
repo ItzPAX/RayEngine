@@ -78,6 +78,8 @@ private:
 	VOID RenderModelTreeView();
 	VOID RenderModelUpdateWindow();
 
+	VOID RenderSceneTreeView();
+
 	VOID RenderMetricsWindow();
 	VOID RenderAboutWindow();
 

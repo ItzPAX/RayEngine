@@ -16,9 +16,11 @@ public:
 	SceneContainer(SceneContainer const&) = delete;
 	void operator=(SceneContainer const&) = delete;
 
+public:
+	std::unordered_map<STRING, ScenePtr> m_AllScenes;
+
 private:
 	ScenePtr m_ActiveScene;
-	std::unordered_map<STRING, ScenePtr> m_AllScenes;
 
 public:
 	ScenePtr GetActiveScene();

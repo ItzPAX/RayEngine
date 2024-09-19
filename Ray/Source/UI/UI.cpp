@@ -76,6 +76,7 @@ VOID UI::RenderElements(UINT32 scene, UI::CameraType type)
 	RenderLogMenu();
 
 	// API for graphics engine
+	RenderSceneTreeView();
 	RenderPointLightCreationWindow();
 	RenderPrimitiveCreationWindow();
 	RenderPrimitiveUpdateWindow();
@@ -436,6 +437,30 @@ VOID UI::RenderModelUpdateWindow()
 	}
 	ImGui::End();
 }
+
+VOID UI::RenderSceneTreeView()
+{
+	if (ImGui::Begin("Scene Overview"))
+	{
+		if (ImGui::CollapsingHeader("Scene(s)"))
+		{
+			for (auto& scene_map : SceneContainer::Instance().m_AllScenes)
+			{
+				if (ImGui::TreeNode(scene_map.first.c_str()))
+				{
+					if (ImGui::Button("Set Active"))
+						SceneContainer::Instance().SetActiveScene(scene_map.second);
+					if (ImGui::Button("Delete"))
+						SceneContainer::Instance().RemoveScene(scene_map.second);
+
+					ImGui::TreePop();
+					ImGui::Separator();
+				}
+			}
+		}
+	}
+}
+
 VOID UI::RenderPointLightCreationWindow()
 {
 	if (!m_LightCreation)
