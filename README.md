@@ -13,6 +13,10 @@ and many more features that make it a powerful 3d rendering engine.
 - Runtime object manipulation and creation
 - Full customizability over how the engine runs
 
+## Limitations
+
+- Limited amount of point light sources (64)
+
 ## Tech
 
 RayEngine relies on some 3rd party libraries to work:
