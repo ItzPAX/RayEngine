@@ -40,20 +40,6 @@ private:
 class RAY_API ModelContainer
 {
 public:
-    static ModelContainer& Instance()
-    {
-        static ModelContainer instance;	   // Guaranteed to be destroyed.
-        // Instantiated on first use.
-        return instance;
-    }
-private:
-    ModelContainer() {}                    // Constructor? (the {} brackets) are needed here.
-
-public:
-    ModelContainer(ModelContainer const&) = delete;
-    void operator=(ModelContainer const&) = delete;
-
-public:
     void Render(float dt);
     ModelPtr Add(const char* path, const ShaderProgramDesc& shader);
     void Delete(ModelPtr model);

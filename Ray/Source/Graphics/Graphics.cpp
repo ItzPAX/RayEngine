@@ -94,17 +94,39 @@ TexturePtr Graphics::CreateTexture(const char* path, const char* type, bool flip
 
 PrimitivePtr Graphics::CreatePrimitive(PRIMITIVE_TYPE type, const PrimitiveDesc& desc, const MaterialDesc& material)
 {
-	return PrimitiveContainer::Instance().Add(type, desc, material);
+	return SceneContainer::Instance().GetActiveScene()->GetPrimitiveContainer()->Add(type, desc, material);
 }
 
 PointLightPtr Graphics::CreatePointLight(PointLight& pl)
 {
-	return LightingManager::Instance().AddPointLight(pl);
+	return SceneContainer::Instance().GetActiveScene()->GetLightingManager()->AddPointLight(pl);
 }
 
 ModelPtr Graphics::CreateModel(const char* path, const ShaderProgramDesc& shader)
 {
-	return ModelContainer::Instance().Add(path, shader);
+	return SceneContainer::Instance().GetActiveScene()->GetModelContainer()->Add(path, shader);
+}
+
+LightingManagerPtr Graphics::CreateLightingManager()
+{
+	return std::make_shared<LightingManager>();
+}
+
+ModelContainerPtr Graphics::CreateModelContainer()
+{
+	return std::make_shared<ModelContainer>();
+}
+
+PrimitiveContainerPtr Graphics::CreatePrimitiveContainer()
+{
+	return std::make_shared<PrimitiveContainer>();
+}
+
+ScenePtr Graphics::CreateScene(STRING name)
+{
+	ScenePtr scene = std::make_shared<Scene>(name);
+	SceneContainer::Instance().AddScene(scene);
+	return scene;
 }
 
 void Graphics::Clear(glm::vec4 col)

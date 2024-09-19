@@ -120,20 +120,6 @@ struct PrimitiveRenderData
 class RAY_API PrimitiveContainer
 {
 public:
-	static PrimitiveContainer& Instance()
-	{
-		static PrimitiveContainer instance;	   // Guaranteed to be destroyed.
-		// Instantiated on first use.
-		return instance;
-	}
-private:
-	PrimitiveContainer() {}                    // Constructor? (the {} brackets) are needed here.
-
-public:
-	PrimitiveContainer(PrimitiveContainer const&) = delete;
-	void operator=(PrimitiveContainer const&) = delete;
-
-public:
 	void Render(float dt);
 
 	std::shared_ptr<PrimitiveRenderData> Add(PRIMITIVE_TYPE type, const PrimitiveDesc& desc, const MaterialDesc& material);

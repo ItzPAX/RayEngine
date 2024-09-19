@@ -42,6 +42,10 @@ public:
 	static PrimitivePtr CreatePrimitive(PRIMITIVE_TYPE type, const PrimitiveDesc& desc, const MaterialDesc& material);
 	static PointLightPtr CreatePointLight(PointLight& pl);
 	static ModelPtr CreateModel(const char* path, const ShaderProgramDesc& shader);
+	static LightingManagerPtr CreateLightingManager();
+	static ModelContainerPtr CreateModelContainer();
+	static PrimitiveContainerPtr CreatePrimitiveContainer();
+	static ScenePtr CreateScene(STRING name);
 public:
 	static void SetViewport(glm::vec2 innerrect);
 	static void SetVertexArrayObject(const VertexArrayObjectPtr& vao);
@@ -51,7 +55,6 @@ public:
 	static void SetWindingOrder(const WindingOrder& order);
 	static void SetTexture(const TexturePtr& texture);
 	static void SetBlending(const bool& state);
-
 public:
 	static void Clear(glm::vec4 col);
 	static void Clear(glm::vec4 col, bool enableGLDepth, bool clearImGuiFrame);

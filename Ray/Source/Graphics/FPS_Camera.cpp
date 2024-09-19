@@ -45,7 +45,10 @@ void FPSCamera::Think(glm::vec2* mousevel, float delta)
 		MoveSideways(delta);
 
 
-	if ((sceneactive && GetAsyncKeyState(VK_RBUTTON)) || Engine::GetMode() != EDITOR)
+	// TODO:
+	// Come up with a way to make camera usable when not in editor mode
+
+	if ((sceneactive && GetAsyncKeyState(VK_RBUTTON))/* || Engine::GetMode() != EDITOR*/)
 	{
 		if (!m_ChangedCursorVis)
 		{

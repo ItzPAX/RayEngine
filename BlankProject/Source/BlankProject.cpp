@@ -26,8 +26,8 @@ public:
 		Graphics::Instance()->Clear(glm::vec4(0.f, 0.f, 0.f, 1.f), true, false);
 		FloatingCamera::GetFloatingCam().Think(MouseSpeed(), deltatime);
 
-		UI::Instance().RenderUI(m_FrameBuffer->Textures(), UI::CameraType::CAMERA_FLOATING);
-		Simulation::m_FrameBuffer->Bind();
+		UI::Instance().RenderUI(SceneContainer::Instance().GetActiveScene()->GetFrameBuffer()->Textures(), UI::CameraType::CAMERA_FLOATING);
+		SceneContainer::Instance().GetActiveScene()->GetFrameBuffer()->Bind();
 
 		Graphics::Instance()->Clear(glm::vec4(0.f, 0.f, 0.f, 1.f), true, false);
 
@@ -39,10 +39,10 @@ public:
 
 		Update(deltatime, elapsed);
 
-		PrimitiveContainer::Instance().Render(deltatime);
-		ModelContainer::Instance().Render(deltatime);
+		SceneContainer::Instance().GetActiveScene()->GetPrimitiveContainer()->Render(deltatime);
+		SceneContainer::Instance().GetActiveScene()->GetModelContainer()->Render(deltatime);
 
-		Simulation::m_FrameBuffer->Unbind();
+		SceneContainer::Instance().GetActiveScene()->GetFrameBuffer()->Unbind();
 
 		Simulation::Present(true);
 	}
@@ -53,7 +53,7 @@ public:
 
 	VOID Initialize()
 	{
-		LightingManager::Instance().m_SpotLight = SpotLight{
+		SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight = SpotLight{
 			glm::vec3(1.f, 1.f, 1.f),			// position
 			glm::vec3(1.f, 1.f, 1.f),			// direction
 			glm::vec3(0.2f, 0.2f, 0.2f),		// ambient
@@ -65,7 +65,7 @@ public:
 			0.0014f,								// linear
 			0.000007f								// quadratic
 		};
-		LightingManager::Instance().m_DirectionalLight = DirectionalLight{
+		SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_DirectionalLight = DirectionalLight{
 			glm::vec3(-0.2f, -1.0f, -0.3f),		// direction
 			glm::vec3(0.2f, 0.2f, 0.2f),		// ambient
 			glm::vec3(0.5f, 0.5f, 0.5f),		// diffuse
@@ -80,9 +80,9 @@ public:
 		pl.m_Constant = 1.f;
 		pl.m_Linear = 0.0014f;
 		pl.m_Quadratic = 0.000007f;
-		LightingManager::Instance().AddPointLight(pl);
+		SceneContainer::Instance().GetActiveScene()->GetLightingManager()->AddPointLight(pl);
 		pl.m_Position = glm::vec3(100, 1000, 0);
-		LightingManager::Instance().AddPointLight(pl);
+		SceneContainer::Instance().GetActiveScene()->GetLightingManager()->AddPointLight(pl);
 
 		Graphics::Instance()->SetBlending(true);
 	}
@@ -90,8 +90,8 @@ public:
 	// Update
 	VOID Update(float deltatime, float elapsedtime)
 	{
-		LightingManager::Instance().m_SpotLight.m_Position = FloatingCamera::GetFloatingCam().Position();
-		LightingManager::Instance().m_SpotLight.m_Direction = FloatingCamera::GetFloatingCam().Front();
+		SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Position = FloatingCamera::GetFloatingCam().Position();
+		SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Direction = FloatingCamera::GetFloatingCam().Front();
 	}
 
 	// Quit

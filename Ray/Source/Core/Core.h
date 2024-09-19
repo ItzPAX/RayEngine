@@ -37,6 +37,9 @@
 #include "Graphics/Model.h"
 #include "Graphics/Graphics.h"
 
+// Scene
+#include "Engine/Scene.h"
+
 // UI
 #include "UI/UIDefinitions.h"
 #include "UI/AssetManager.h"

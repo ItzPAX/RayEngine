@@ -148,6 +148,7 @@
     <ClCompile Include="Source\Core\CoreMinimal.cpp" />
     <ClCompile Include="Source\Core\PerGameSettings.cpp" />
     <ClCompile Include="Source\Engine\REngine.cpp" />
+    <ClCompile Include="Source\Engine\Scene.cpp" />
     <ClCompile Include="Source\Engine\Simulation.cpp" />
     <ClCompile Include="Source\Engine\Splashscreen.cpp" />
     <ClCompile Include="Source\Graphics\Camera.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Source\Core\CoreMinimal.h" />
     <ClInclude Include="Source\Core\PerGameSettings.h" />
     <ClInclude Include="Source\Engine\REngine.h" />
+    <ClInclude Include="Source\Engine\Scene.h" />
     <ClInclude Include="Source\Engine\Simulation.h" />
     <ClInclude Include="Source\Engine\Splashscreen.h" />
     <ClInclude Include="Source\Graphics\Camera.h" />
@@ -211,7 +213,6 @@
     <ClInclude Include="Source\Graphics\Texture.h" />
     <ClInclude Include="Source\Graphics\UniformBuffer.h" />
     <ClInclude Include="Source\Graphics\VAO.h" />
-    <ClInclude Include="Source\Platform\Win32\w32Data.h" />
     <ClInclude Include="Source\Platform\Win32\w32IApplication.h" />
     <ClInclude Include="Source\Platform\Win32\w32SubObject.h" />
     <ClInclude Include="Source\Platform\Win32\w32Win32Utils.h" />

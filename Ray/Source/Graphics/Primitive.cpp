@@ -39,7 +39,7 @@ void Primitive::UpdatePrimitive(float dt)
 
 void Primitive::Delete()
 {
-	PrimitiveContainer::Instance().m_Primitives.erase(m_Index);
+	SceneContainer::Instance().GetActiveScene()->GetPrimitiveContainer()->m_Primitives.erase(m_Index);
 }
 
 Primitive::Primitive(const PrimitiveDesc& desc, const MaterialDesc& material)
@@ -61,7 +61,7 @@ Primitive::Primitive(const PrimitiveDesc& desc, const MaterialDesc& material)
 
 	m_Shader->SetUniformBufferSlot("VertexData", 0);
 
-	m_Index = PrimitiveContainer::Instance().m_Primitives.size();
+	m_Index = SceneContainer::Instance().GetActiveScene()->GetPrimitiveContainer()->m_Primitives.size();
 }
 
 void Primitive::Render(float dt)
@@ -81,7 +81,7 @@ void Primitive::Render(float dt)
 		
 	Graphics::Instance()->SetShaderProgram(m_Shader);
 	Graphics::Instance()->SetUniformBuffer(m_UniformBuffer, 0);
-	LightingManager::Instance().ManageBasicLighting(m_Shader, m_Description.m_ObjectColor, m_Material);
+	SceneContainer::Instance().GetActiveScene()->GetLightingManager()->ManageBasicLighting(m_Shader, m_Description.m_ObjectColor, m_Material);
 }
 
 glm::vec3 Primitive::GetTranslationScale()

@@ -108,7 +108,7 @@ VOID UI::MakeWindowDockspace()
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-	ImGui::Begin("DockSpace Demo", 0, window_flags);
+	ImGui::Begin("DD", 0, window_flags);
 	ImGui::PopStyleVar(3);
 
 	ImGuiID dockspace_id = ImGui::GetID("MyDockspace");
@@ -274,7 +274,7 @@ inline VOID UI::RenderPrimitiveTreeView(std::string primitive, PRIMITIVE_TYPE ty
 	if (ImGui::CollapsingHeader((primitive + "(s)").c_str()))
 	{
 		int primcount = 0;
-		for (auto& entry : PrimitiveContainer::Instance().m_Primitives)
+		for (auto& entry : SceneContainer::Instance().GetActiveScene()->GetPrimitiveContainer()->m_Primitives)
 		{
 			auto& e = entry.second;
 			if (e.m_Type != type)
@@ -316,18 +316,18 @@ VOID UI::RenderSpotLightTreeView()
 {
 	if (ImGui::CollapsingHeader("Spotlight"))
 	{
-		ImGui::InputFloat3("Position##Spotlight", &LightingManager::Instance().m_SpotLight.m_Position.x);
-		ImGui::InputFloat3("Direction##Spotlight", &LightingManager::Instance().m_SpotLight.m_Direction.x);
-		ImGui::InputFloat("Outer cut off##Spotlight", &LightingManager::Instance().m_SpotLight.m_OuterCutOff);
-		ImGui::InputFloat("Inner cut off##Spotlight", &LightingManager::Instance().m_SpotLight.m_InnerCutOff);
+		ImGui::InputFloat3("Position##Spotlight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Position.x);
+		ImGui::InputFloat3("Direction##Spotlight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Direction.x);
+		ImGui::InputFloat("Outer cut off##Spotlight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_OuterCutOff);
+		ImGui::InputFloat("Inner cut off##Spotlight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_InnerCutOff);
 
-		ImGui::ColorEdit3("Ambient##Spotlight", &LightingManager::Instance().m_SpotLight.m_Ambient[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
-		ImGui::ColorEdit3("Diffuse##Spotlight", &LightingManager::Instance().m_SpotLight.m_Diffuse[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
-		ImGui::ColorEdit3("Specular##Spotlight", &LightingManager::Instance().m_SpotLight.m_Specular[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+		ImGui::ColorEdit3("Ambient##Spotlight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Ambient[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+		ImGui::ColorEdit3("Diffuse##Spotlight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Diffuse[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+		ImGui::ColorEdit3("Specular##Spotlight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Specular[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
 
-		ImGui::InputFloat("Constant##Spotlight", &LightingManager::Instance().m_SpotLight.m_Constant);
-		ImGui::InputFloat("Linear##Spotlight", &LightingManager::Instance().m_SpotLight.m_Linear);
-		ImGui::InputFloat("Quadratic##Spotlight", &LightingManager::Instance().m_SpotLight.m_Quadratic);
+		ImGui::InputFloat("Constant##Spotlight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Constant);
+		ImGui::InputFloat("Linear##Spotlight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Linear);
+		ImGui::InputFloat("Quadratic##Spotlight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Quadratic);
 
 	}
 }
@@ -335,11 +335,11 @@ VOID UI::RenderDirectionalLightTreeView()
 {
 	if (ImGui::CollapsingHeader("Directional light"))
 	{
-		ImGui::InputFloat3("Direction##DirectionalLight", &LightingManager::Instance().m_DirectionalLight.m_Direction.x);
+		ImGui::InputFloat3("Direction##DirectionalLight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_DirectionalLight.m_Direction.x);
 
-		ImGui::ColorEdit3("Ambient##DirectionalLight", &LightingManager::Instance().m_DirectionalLight.m_Ambient[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
-		ImGui::ColorEdit3("Diffuse##DirectionalLight", &LightingManager::Instance().m_DirectionalLight.m_Diffuse[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
-		ImGui::ColorEdit3("Specular##DirectionalLight", &LightingManager::Instance().m_DirectionalLight.m_Specular[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+		ImGui::ColorEdit3("Ambient##DirectionalLight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_DirectionalLight.m_Ambient[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+		ImGui::ColorEdit3("Diffuse##DirectionalLight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_DirectionalLight.m_Diffuse[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
+		ImGui::ColorEdit3("Specular##DirectionalLight", &SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_DirectionalLight.m_Specular[0], ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_NoInputs);
 	}
 }
 
@@ -361,7 +361,7 @@ VOID UI::RenderPointLightTreeView()
 	if (ImGui::CollapsingHeader("Point light(s)"))
 	{
 		int light = 0;
-		for (auto& pointlight_map : LightingManager::Instance().m_PointLights)
+		for (auto& pointlight_map : SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_PointLights)
 		{
 			std::string name = "PointLight" + std::to_string(light);
 			if (ImGui::TreeNode(name.c_str()))
@@ -369,7 +369,7 @@ VOID UI::RenderPointLightTreeView()
 				RenderPointLightEditor(pointlight_map.second);
 
 				if (ImGui::Button("Delete"))
-					LightingManager::Instance().DeletePointLight(pointlight_map.second);
+					SceneContainer::Instance().GetActiveScene()->GetLightingManager()->DeletePointLight(pointlight_map.second);
 
 				ImGui::TreePop();
 				ImGui::Separator();
@@ -398,7 +398,7 @@ VOID UI::RenderModelTreeView()
 	if (ImGui::CollapsingHeader("Model(s)"))
 	{
 		int model = 0;
-		for (auto& mptr_map : ModelContainer::Instance().m_Models)
+		for (auto& mptr_map : SceneContainer::Instance().GetActiveScene()->GetModelContainer()->m_Models)
 		{
 			std::string name = "Model" + std::to_string(model);
 			if (ImGui::TreeNode(name.c_str()))
@@ -413,7 +413,7 @@ VOID UI::RenderModelTreeView()
 
 				if (ImGui::Button("Delete"))
 				{
-					ModelContainer::Instance().Delete(mptr_map.second);
+					SceneContainer::Instance().GetActiveScene()->GetModelContainer()->Delete(mptr_map.second);
 					break;
 				}
 
@@ -490,7 +490,7 @@ VOID UI::RenderInfoMenu(UI::CameraType type)
 VOID UI::RenderScene(UINT32 scene)
 {
 	// our scene window
-	ImGui::Begin("Scene", 0);
+	ImGui::Begin(SceneContainer::Instance().GetActiveScene()->GetName().c_str(), 0);
 	{
 		m_SceneActive = ImGui::IsWindowFocused();
 

@@ -2,7 +2,7 @@
 #include <unordered_map>
 
 // if you change this change it in the fragment shader aswell
-#define MAX_POINT_LIGHTS 256
+#define MAX_POINT_LIGHTS 128
 
 struct RAY_API DirectionalLight
 {
@@ -52,20 +52,6 @@ struct RAY_API MaterialDesc
 
 class RAY_API LightingManager
 {
-public:
-	static LightingManager& Instance()
-	{
-		static LightingManager instance; // Guaranteed to be destroyed.
-		// Instantiated on first use.
-		return instance;
-	}
-private:
-	LightingManager() {}                    // Constructor? (the {} brackets) are needed here.
-
-public:
-	LightingManager(LightingManager const&) = delete;
-	void operator=(LightingManager const&) = delete;
-
 public:
 	void ManageBasicLighting(ShaderProgramPtr shader, glm::vec3 objectcolor, const MaterialDesc& material);
 	PointLightPtr AddPointLight(PointLight& light);

@@ -38,7 +38,8 @@ namespace Ray {
 		// set our viewport
 		Graphics::Instance()->SetViewport(GetInnerSize());
 
-		m_FrameBuffer = Graphics::Instance()->CreateFrameBuffer(FrameBufferDescription());
+		ScenePtr mainscene = Graphics::Instance()->CreateScene("MainScene");
+		SceneContainer::Instance().SetActiveScene("MainScene");
 
 		// register mouse device for accurate input
 		RAWINPUTDEVICE rid;

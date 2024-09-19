@@ -23,3 +23,15 @@ typedef std::shared_ptr<PointLight> PointLightPtr;
 
 class Model;
 typedef std::shared_ptr<Model> ModelPtr;
+
+class LightingManager;
+typedef std::shared_ptr<LightingManager> LightingManagerPtr;
+
+class ModelContainer;
+typedef std::shared_ptr<ModelContainer> ModelContainerPtr;
+
+class PrimitiveContainer;
+typedef std::shared_ptr<PrimitiveContainer> PrimitiveContainerPtr;
+
+class Scene;
+typedef std::shared_ptr<Scene> ScenePtr;

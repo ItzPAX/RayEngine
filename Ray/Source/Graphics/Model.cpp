@@ -25,7 +25,7 @@ void Model::Draw(float dt)
 	Graphics::Instance()->SetShaderProgram(m_Shader);
 	Graphics::Instance()->SetUniformBuffer(m_UniformBuffer, 0);
 
-	LightingManager::Instance().ManageBasicLighting(m_Shader, glm::vec3(1.f), Materials::debug);
+	SceneContainer::Instance().GetActiveScene()->GetLightingManager()->ManageBasicLighting(m_Shader, glm::vec3(1.f), Materials::debug);
 
 	for (auto& mesh : m_Meshes)
 	{

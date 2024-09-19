@@ -12,24 +12,24 @@ void LightingManager::ManageBasicLighting(ShaderProgramPtr shader, glm::vec3 obj
 	shader->SetFloat("u_Material.shininess", 32.0f);
 
 	// directional light
-	shader->SetVec3("u_DirectionalLight.m_Direction", LightingManager::Instance().m_DirectionalLight.m_Direction);
-	shader->SetVec3("u_DirectionalLight.m_Ambient", LightingManager::Instance().m_DirectionalLight.m_Ambient);
-	shader->SetVec3("u_DirectionalLight.m_Diffuse", LightingManager::Instance().m_DirectionalLight.m_Diffuse);
-	shader->SetVec3("u_DirectionalLight.m_Specular", LightingManager::Instance().m_DirectionalLight.m_Specular);
+	shader->SetVec3("u_DirectionalLight.m_Direction", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_DirectionalLight.m_Direction);
+	shader->SetVec3("u_DirectionalLight.m_Ambient", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_DirectionalLight.m_Ambient);
+	shader->SetVec3("u_DirectionalLight.m_Diffuse", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_DirectionalLight.m_Diffuse);
+	shader->SetVec3("u_DirectionalLight.m_Specular", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_DirectionalLight.m_Specular);
 
 	// spotlight light
-	shader->SetVec3("u_SpotLight.m_Position", LightingManager::Instance().m_SpotLight.m_Position);
-	shader->SetVec3("u_SpotLight.m_Direction", LightingManager::Instance().m_SpotLight.m_Direction);
-	shader->SetVec3("u_SpotLight.m_Ambient", LightingManager::Instance().m_SpotLight.m_Ambient);
-	shader->SetVec3("u_SpotLight.m_Diffuse", LightingManager::Instance().m_SpotLight.m_Diffuse);
-	shader->SetVec3("u_SpotLight.m_Specular", LightingManager::Instance().m_SpotLight.m_Specular);
+	shader->SetVec3("u_SpotLight.m_Position", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Position);
+	shader->SetVec3("u_SpotLight.m_Direction", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Direction);
+	shader->SetVec3("u_SpotLight.m_Ambient", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Ambient);
+	shader->SetVec3("u_SpotLight.m_Diffuse", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Diffuse);
+	shader->SetVec3("u_SpotLight.m_Specular", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Specular);
 
-	shader->SetFloat("u_SpotLight.m_OuterCutOff", LightingManager::Instance().m_SpotLight.m_OuterCutOff);
-	shader->SetFloat("u_SpotLight.m_InnerCutOff", LightingManager::Instance().m_SpotLight.m_InnerCutOff);
+	shader->SetFloat("u_SpotLight.m_OuterCutOff", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_OuterCutOff);
+	shader->SetFloat("u_SpotLight.m_InnerCutOff", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_InnerCutOff);
 
-	shader->SetFloat("u_SpotLight.m_Constant", LightingManager::Instance().m_SpotLight.m_Constant);
-	shader->SetFloat("u_SpotLight.m_Linear", LightingManager::Instance().m_SpotLight.m_Linear);
-	shader->SetFloat("u_SpotLight.m_Quadratic", LightingManager::Instance().m_SpotLight.m_Quadratic);
+	shader->SetFloat("u_SpotLight.m_Constant", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Constant);
+	shader->SetFloat("u_SpotLight.m_Linear", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Linear);
+	shader->SetFloat("u_SpotLight.m_Quadratic", SceneContainer::Instance().GetActiveScene()->GetLightingManager()->m_SpotLight.m_Quadratic);
 
 	// point lights
 	shader->SetInt("u_PointLightAmount", m_PointLights.size());

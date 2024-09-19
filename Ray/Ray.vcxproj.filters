@@ -229,6 +229,9 @@
     <ClCompile Include="Source\Graphics\Model.cpp">
       <Filter>Source\Graphics\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Engine\Scene.cpp">
+      <Filter>Source\Engine\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\PerGameSettings.h">
@@ -366,9 +369,6 @@
     <ClInclude Include="Source\Graphics\LightingManager.h">
       <Filter>Source\Graphics\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Platform\Win32\w32Data.h">
-      <Filter>Source\Platform\Win32\Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Graphics\Materials.h">
       <Filter>Source\Graphics\Public</Filter>
     </ClInclude>
@@ -377,6 +377,9 @@
     </ClInclude>
     <ClInclude Include="Source\Graphics\Model.h">
       <Filter>Source\Graphics\Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Engine\Scene.h">
+      <Filter>Source\Engine\Classes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
