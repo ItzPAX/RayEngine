@@ -74,7 +74,7 @@ vec3 CalcDirLight(DirectionalLight light, vec3 normal, vec3 viewDir)
     vec3 reflectDir = reflect(-lightDir, normal);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), u_Material.shininess);
     // combine results
-    vec3 ambient  = light.m_Ambient * vec3(texture(u_Material.texture_diffuse1, vertOutTexCoords)) * vec3(texture(u_Material.texture_ambient1, vertOutTexCoords));
+    vec3 ambient  = light.m_Ambient * vec3(texture(u_Material.texture_ambient1, vertOutTexCoords));// * vec3(texture(u_Material.texture_ambient1, vertOutTexCoords));
     vec3 diffuse  = light.m_Diffuse * diff * vec3(texture(u_Material.texture_diffuse1, vertOutTexCoords));
     vec3 specular = light.m_Specular * spec * vec3(texture(u_Material.texture_specular1, vertOutTexCoords));
 	
@@ -97,7 +97,7 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
     float attenuation = 1.0 / (light.m_Constant + light.m_Linear * distance + light.m_Quadratic * (distance * distance));    
 	
     // combine results
-    vec3 ambient  = light.m_Ambient * vec3(texture(u_Material.texture_diffuse1, vertOutTexCoords)) * vec3(texture(u_Material.texture_ambient1, vertOutTexCoords));
+    vec3 ambient  = light.m_Ambient * vec3(texture(u_Material.texture_ambient1, vertOutTexCoords));// * vec3(texture(u_Material.texture_ambient1, vertOutTexCoords));
     vec3 diffuse  = light.m_Diffuse * diff * vec3(texture(u_Material.texture_diffuse1, vertOutTexCoords));
     vec3 specular = light.m_Specular * spec * vec3(texture(u_Material.texture_specular1, vertOutTexCoords));
 	
@@ -121,7 +121,7 @@ vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
     float attenuation = 1.0 / (light.m_Constant + light.m_Linear * distance + light.m_Quadratic * (distance * distance)); 
 	
     // combine results
-    vec3 ambient  = light.m_Ambient * vec3(texture(u_Material.texture_diffuse1, vertOutTexCoords)) * vec3(texture(u_Material.texture_ambient1, vertOutTexCoords));
+    vec3 ambient  = light.m_Ambient * vec3(texture(u_Material.texture_ambient1, vertOutTexCoords));// * vec3(texture(u_Material.texture_ambient1, vertOutTexCoords));
     vec3 diffuse  = light.m_Diffuse * diff * vec3(texture(u_Material.texture_diffuse1, vertOutTexCoords));
     vec3 specular = light.m_Specular * spec * vec3(texture(u_Material.texture_specular1, vertOutTexCoords));
 	

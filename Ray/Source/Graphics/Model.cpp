@@ -193,9 +193,9 @@ void Model::UpdateModel(float dt)
 
 	m_Model = glm::translate(m_Model,m_Position);
 
-	m_Model = glm::rotate(m_Model, m_Rotation.x, glm::vec3(1, 0, 0));
-	m_Model = glm::rotate(m_Model, m_Rotation.y, glm::vec3(0, 1, 0));
-	m_Model = glm::rotate(m_Model, m_Rotation.z, glm::vec3(0, 0, 1));
+	m_Model = glm::rotate(m_Model, glm::degrees(m_Rotation.x), glm::vec3(1, 0, 0));
+	m_Model = glm::rotate(m_Model, glm::degrees(m_Rotation.y), glm::vec3(0, 1, 0));
+	m_Model = glm::rotate(m_Model, glm::degrees(m_Rotation.z), glm::vec3(0, 0, 1));
 }
 
 void ModelContainer::Render(float dt)

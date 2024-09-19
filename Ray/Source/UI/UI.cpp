@@ -412,7 +412,10 @@ VOID UI::RenderModelTreeView()
 				ImGui::Text("Unique Textures: %d", mptr_map.second->m_TexturesLoaded.size());
 
 				if (ImGui::Button("Delete"))
+				{
 					ModelContainer::Instance().Delete(mptr_map.second);
+					break;
+				}
 
 				ImGui::TreePop();
 				ImGui::Separator();

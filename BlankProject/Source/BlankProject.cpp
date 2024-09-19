@@ -62,8 +62,8 @@ public:
 			glm::cos(glm::radians(17.5f)),		// outer cutoff
 			glm::cos(glm::radians(12.5f)),		// inner cutoff
 			1.f,								// constant
-			0.09f,								// linear
-			0.032f								// quadratic
+			0.0014f,								// linear
+			0.000007f								// quadratic
 		};
 		LightingManager::Instance().m_DirectionalLight = DirectionalLight{
 			glm::vec3(-0.2f, -1.0f, -0.3f),		// direction
@@ -80,9 +80,7 @@ public:
 		pl.m_Constant = 1.f;
 		pl.m_Linear = 0.0014f;
 		pl.m_Quadratic = 0.000007f;
-
 		LightingManager::Instance().AddPointLight(pl);
-
 		pl.m_Position = glm::vec3(100, 1000, 0);
 		LightingManager::Instance().AddPointLight(pl);
 
