@@ -9,6 +9,7 @@ public:
     Model() = default;
     Model(std::string path, const ShaderProgramDesc& shader);
     void Draw(float dt);
+    void DeleteModel();
 
 public:
     glm::vec3 m_Position;

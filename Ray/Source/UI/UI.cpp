@@ -287,7 +287,10 @@ inline VOID UI::RenderPrimitiveTreeView(std::string primitive, PRIMITIVE_TYPE ty
 			{
 				RenderPrimitiveDescriptionEditor(c->GetDescription(), c->GetMaterial());
 				if (ImGui::Button("Delete"))
+				{
 					c->Delete();
+					break;
+				}
 				ImGui::TreePop();
 				ImGui::Separator();
 			}
@@ -370,7 +373,10 @@ VOID UI::RenderPointLightTreeView()
 				RenderPointLightEditor(pointlight_map.second);
 
 				if (ImGui::Button("Delete"))
+				{
 					SceneContainer::Instance().GetActiveScene()->GetLightingManager()->DeletePointLight(pointlight_map.second);
+					break;
+				}
 
 				ImGui::TreePop();
 				ImGui::Separator();
@@ -451,7 +457,16 @@ VOID UI::RenderSceneTreeView()
 					if (ImGui::Button("Set Active"))
 						SceneContainer::Instance().SetActiveScene(scene_map.second);
 					if (ImGui::Button("Delete"))
+					{
 						SceneContainer::Instance().RemoveScene(scene_map.second);
+
+						if (!SceneContainer::Instance().m_AllScenes.empty())
+							SceneContainer::Instance().SetActiveScene(SceneContainer::Instance().m_AllScenes.begin()->second);
+						else
+							SceneContainer::Instance().SetActiveScene("NO_SCENE");
+
+						break;
+					}
 
 					ImGui::TreePop();
 					ImGui::Separator();

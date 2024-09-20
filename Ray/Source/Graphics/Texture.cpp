@@ -41,7 +41,8 @@ Texture::Texture(const char* path, const char* type, bool flip)
 
 Texture::~Texture()
 {
-	stbi_image_free(m_Data);
+	/*TODO TODO Fix crash here*/
+	//stbi_image_free(m_Data);
 	glDeleteTextures(1, &m_TextureID);
 }
 
@@ -57,7 +58,8 @@ void Texture::SetFiltering(UINT32 mode)
 
 void Texture::Delete()
 {
-	stbi_image_free(m_Data);
+	/*TODO TODO Fix crash here*/
+	//stbi_image_free(m_Data);
 	glDeleteTextures(1, &m_TextureID);
 }
 

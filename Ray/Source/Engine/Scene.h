@@ -46,6 +46,8 @@ private:
 	ModelContainerPtr m_Models;
 	PrimitiveContainerPtr m_Primitives;
 
+	float m_SceneElapsedTime;
+
 	STRING m_Name;
 	bool m_ValidScene;
 
@@ -63,6 +65,12 @@ public:
 	ModelContainerPtr GetModelContainer();
 	PrimitiveContainerPtr GetPrimitiveContainer();
 
+	float GetSceneElapsedTime();
+
+	void ClearScene();
+
 public:
 	bool IsValid();
+
+	void Render(float delta);
 };

@@ -198,6 +198,17 @@ void Model::UpdateModel(float dt)
 	m_Model = glm::rotate(m_Model, glm::degrees(m_Rotation.z), glm::vec3(0, 0, 1));
 }
 
+void Model::DeleteModel()
+{
+	for (auto texture : m_TexturesLoaded)
+	{
+		texture->Delete();
+	}
+
+	m_TexturesLoaded.clear();
+	m_Meshes.clear();
+}
+
 void ModelContainer::Render(float dt)
 {
 	for (auto& mptr_map : m_Models)
@@ -219,5 +230,6 @@ ModelPtr ModelContainer::Add(const char* path, const ShaderProgramDesc& shader)
 
 void ModelContainer::Delete(ModelPtr model)
 {
+	model->DeleteModel();
 	m_Models.erase(model->m_Index);
 }
